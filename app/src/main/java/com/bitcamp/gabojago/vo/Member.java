@@ -1,8 +1,9 @@
 package com.bitcamp.gabojago.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Member {
+public class Member implements Serializable {
 
   private String id;
   private String password;

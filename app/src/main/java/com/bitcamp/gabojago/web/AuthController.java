@@ -61,5 +61,10 @@ public class AuthController {
     return mv;
   }
 
+  @GetMapping("logout")
+  public String logout(HttpSession httpSession) throws Exception {
+    httpSession.invalidate();
+    return "redirect:../";
+  }
 
 }
