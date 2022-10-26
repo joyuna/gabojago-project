@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,7 @@
     <title>가보자GO</title>
     <meta name="description" content="초기 메인페이지">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main-modal.css">
     <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="./script/jquery-3.6.0.js"></script>
@@ -14,6 +15,41 @@
   </head>
 
   <body class="pt-5"> <!-- body 이름 바꿈 -->
+
+
+
+    <div class="modal">
+      <div class="modal_body">
+
+        <form action="signup" method="post">
+          <p class="signuptxt">회원가입</p>
+
+          <p>아이디</p>
+          <input type="text" placeholder="아이디를 입력해주세요."><p>중복확인</p>
+          <p>비밀번호</p>
+          <input type="password" placeholder="비밀번호를 입력해주세요. 숫자, 영문 혼합 8자리 이상">
+          <p>비밀번호확인</p>
+          <input type="password" placeholder="비밀번호를 다시 입력해주세요.">
+          <p>이름</p>
+          <input type="text" placeholder="이름을 입력해주세요.">
+          <p>휴대폰번호</p>
+          <input type="tel" placeholder="휴대폰번호를 입력해주세요.">
+          <p>닉네임</p>
+          <input type="text" placeholder="닉네임을 입력해주세요.">
+          
+          <button>회원가입</button>
+ 
+          <p>이미 계정이 있으신가요?</p>
+          <a href="./">로그인</a>
+
+        </form>
+      
+
+      </div>
+    </div>
+
+
+
     <div class="bgimage">
 
   	<!-- Navigation -->
@@ -29,14 +65,14 @@
                     <li class="nav-item"><a class="nav-link" href="#">코스추천</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">전시회</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">고객지원</a></li>
-                    <li class="nav-item" data-th-if="${session.loginMember != null}">
+                    <li class="nav-item" th:if="${session.loginMember != null}">
                         <a class="nav-link" href="auth/logout"
-                           data-th-text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
+                           th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
                     </li>
-                    <li class="nav-item" data-th-if="${session.loginMember == null}">
+                    <li class="nav-item" th:if="${session.loginMember == null}">
                         <a class="nav-link" href="auth/form">로그인</a>
 <!--                    <li class="nav-item"><a class="nav-link" href="auth/form">로그인</a></li>-->
-                    <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link btn-open-popup" href="#">회원가입</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">
                         <img src="./images/mypage.png" width="90%" height="25"></a></li>
   
@@ -81,7 +117,7 @@
     </div>
 
 <div class ="like" style="border: 1px solid black; width: 95%; "> 
-  <ui> 
+  <ul>
      <a href="#"><img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" width="300px" 
     style="padding: 10px; "> 
     게시글 제목
@@ -93,10 +129,10 @@
         style="padding: 10px; "> 
         게시글 제목
 
-</ui>
+</ul>
 </div>
 <div class ="ㅊ" style="border: 1px solid black;"> 
-  <ui> 
+  <ul>
      <a href="#"><img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" width="300px"
     style="padding: 10px;"> 
     게시글 제목
@@ -107,7 +143,7 @@
         style="padding: 10px;"> 게시글 제목</a>
 
 
-</ui>
+</ul>
 </div>
 
       <!-- Footer-->
@@ -115,5 +151,56 @@
           <div class="container"><p class="m-0 text-center text-white">Copyright &copy;가보자GO</p></div>
       </footer>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    const body = document.querySelector('body');
+    const modal = document.querySelector('.modal');
+    const btnOpenPopup = document.querySelector('.btn-open-popup');
+
+    btnOpenPopup.addEventListener('click', () => {
+      modal.classList.toggle('show');
+
+      if (modal.classList.contains('show')) {
+        body.style.overflow = 'hidden';
+      }
+    });
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.classList.toggle('show');
+
+        if (!modal.classList.contains('show')) {
+          body.style.overflow = 'auto';
+        }
+      }
+    });
+  </script>
+
   </body>
 </html>
