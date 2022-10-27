@@ -22,10 +22,10 @@ public class AuthController {
   @Autowired
   MemberService memberService;
 
-  @GetMapping("form")
+  @GetMapping("register")
   public String form(@CookieValue(name = "id", defaultValue="") String id, Model model) throws Exception {
     model.addAttribute("id", id);
-    return "auth/form";
+    return "auth/register";
   }
 
   @PostMapping("login")
@@ -45,6 +45,8 @@ public class AuthController {
     // 클라이언트에게 쿠키 보내기
     // - 쿠키 데이터는 문자열만 가능
     Cookie cookie = new Cookie("id", id); // 클라이언트 쪽에 저장할 쿠키 생성
+
+    cookie.setPath("/app");
 
     if (saveEmail == null) {
       cookie.setMaxAge(0); // 클라이언트에게 해당 이름의 쿠키를 지우라고 명령한다.
