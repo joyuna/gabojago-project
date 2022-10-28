@@ -28,6 +28,11 @@ public class AuthController {
     return "auth/register";
   }
 
+  @GetMapping("loginfail")
+  public void loginfail() {
+//    return "redirect:/";
+  }
+
   @PostMapping("login")
   public ModelAndView login(
           String id,
