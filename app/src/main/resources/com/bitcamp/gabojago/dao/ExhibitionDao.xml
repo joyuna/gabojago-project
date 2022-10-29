@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gabojago.dao.ExhibitionDao">
+
+    <!-- 자바 객체의 프로퍼티와 컬럼 이름을 연결 -->
+    <resultMap type="exhibition" id="exhibitionMap">
+        <result column="EXNO" property="exno"/>
+        <result column="EXNAME" property="exname"/>
+        <result column="CONT" property="cont"/>
+        <result column="WDATE" property="wdate"/>
+        <result column="PLNO" property="plno"/>
+        <result column="STDATE" property="stdate"/>
+        <result column="EDDATE" property="eddate"/>
+        <result column="PRICE" property="price"/>
+    </resultMap>
+
+
+    <select id="exhibitionList" resultMap="exhibitionMap">
+        select
+        jexhb.EXNO, -- 전시회번호
+        jexhb.EXNAME, -- 전시회제목
+        jexhb.STDATE, -- 시작일
+        jexhb.EDDATE, -- 종료일
+        jexhbf.EXFNO, -- 전시회게시글첨부파일번호
+        jexhbf.PATH -- 전시회게시글첨부파일경로
+        from
+        jang_exhibition jexhb
+        left join
+        jang_exhibition_file jexhbf
+        on
+        jexhb.EXNO = jexhbf.EXNO;
+
+        <!--  where
+          (jexhb.STDATE  <![CDATA[<]]> CURDATE()) and (jexhb.EDDATE <![CDATA[>]]> CURDATE())-->
+
+    </select>
+
+<!-- 상세보기-->
+    <select id="exhibitionSelect"  resultMap="exhibitionMap">
+    select
+    jexhb.*, -- 전시회-전부
+    jso.PLNO, -- 장소-장소번호
+    jso.PLNAME, -- 장소-장소명
+    jso.QCALL, -- 장소-문의번호
+    jso.BASICAD, -- 장소-기본주소
+    jso.DETAILAD, -- 장소-상세주소
+    jexhbrv.*, -- 전시회한줄리뷰-전부
+    jexhbf.EXFNO, -- 전시회게시글첨부파일번호
+    jexhbf.PATH -- 전시회게시글첨부파일경로
+    from
+    jang_exhibition jexhb
+    join
+    jang_exhibition_file jexhbf
+    on
+    jexhb.EXNO = jexhbf.EXNO
+    join
+    jang_so jso
+    on
+    jexhb.PLNO = jso.PLNO
+    left outer join
+    jang_exhibition_review jexhbrv
+    on
+    jexhb.EXNO = jexhbrv.EXNO
+    where
+    jexhb.EXNO=#{value}
+    </select>
+
+    <insert id="exhibitionInsert"  parameterType="exhibition"
+            useGeneratedKeys="true" keyColumn="exno" keyProperty="exno">
+
+        INSERT INTO jangdb.jang_exhibition (exname, cont, plno, stdate, eddate, price)
+        values (#{exname}, #{cont}, -1, #{stdate}, #{eddate}, #{price})
+
+    </insert>
+
+
+
+</mapper>

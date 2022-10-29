@@ -13,19 +13,19 @@
 <body>
 
 
-<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+<form action="join" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
 
 
   <h2>회원가입</h2>
 
   <div class="textForm">
-    <input name="loginId" type="text" class="id" placeholder="아이디">
+    <input name="id" type="text" class="id" placeholder="아이디">
   </div>
   <div class="textForm">
-    <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+    <input name="password" type="password" class="pw" placeholder="비밀번호">
   </div>
   <div class="textForm">
-    <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+    <input name="passwordConfirm" type="password" class="pw" placeholder="비밀번호 확인">
   </div>
   <div class="textForm">
     <input name="name" type="password" class="name" placeholder="이름">
@@ -34,13 +34,37 @@
     <input name="email" type="text" class="email" placeholder="이메일">
   </div>
   <div class="textForm">
-    <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+    <input name="nickName" type="text" class="nickname" placeholder="닉네임">
   </div>
   <div class="textForm">
-    <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
+    <input name="phoneNo" type="text" class="cellphoneNo" placeholder="전화번호">
   </div>
   <input type="submit" class="btn" value="J O I N"/>
 </form>
+
+
+
+
+
+
+<script>
+
+	function passConfirm() {
+		var password = document.querySelector('.pw[name='password']');					//비밀번호
+		var passwordConfirm = document.querySelector('.pw[name='passwordConfirm']'); //비밀번호 확인 값
+		var confrimMsg = document.getElementById('confirmMsg');				//확인 메세지
+		var correctColor = "#00ff00";	//맞았을 때 출력되는 색깔.
+		var wrongColor ="#ff0000";	//틀렸을 때 출력되는 색깔
+
+		if(password.value == passwordConfirm.value){           //password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
+			confirmMsg.style.color = correctColor;/* span 태그의 ID(confirmMsg) 사용  */
+			confirmMsg.innerHTML ="비밀번호 일치";/* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
+		}else{
+			confirmMsg.style.color = wrongColor;
+			confirmMsg.innerHTML ="비밀번호 불일치";
+		}
+	}
+</script>
 
 
 </body>

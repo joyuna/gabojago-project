@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gabojago.dao.ExhibitionReviewDao">
+
+    <!-- 자바 객체의 프로퍼티와 컬럼 이름을 연결 -->
+    <resultMap type="exhibitionreview" id="exhibitionReviewMap">
+        <result column="RVNO" property="rvno"/>
+        <result column="CONT" property="cont"/>
+        <result column="WDATE" property="wdate"/>
+        <result column="ID" property="id"/>
+        <result column="EXNO" property="exno"/>
+    </resultMap>
+
+
+    <select id="exhibitionReviewList" resultMap="exhibitionReviewMap">
+        select
+        * from jang_exhibition_review;
+
+
+    </select>
+
+
+
+
+</mapper>

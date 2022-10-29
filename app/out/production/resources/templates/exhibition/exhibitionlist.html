@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>exhibition</title>
+<style>
+tr:hover {
+  background-color: navy;
+  color: white;
+}
+</style>
+</head>
+<body>
+  <h1>전시회</h1>
+  <a href='form'>새 글</a>
+  <table border='1'>
+    <tr>
+      <th>번호</th>
+      <th>제목</th>
+      <th>시작일</th>
+      <th>종료일</th>
+
+
+  <!-- 첨부파일 후에 추가-->
+
+    </tr>
+
+    <tr data-th-each="exhibition : ${exhibitions}">
+      <td data-th-text="${exhibition.exno}">100</td>
+
+      <td>
+        <a href='detail?exno=1'
+           data-th-href="@{detail(exno=${exhibition.exno})}"
+           data-th-text="${exhibition.exname == ''} ? '(제목없음)' : ${exhibition.exname}">제목</a>
+      </td>
+      <td data-th-text="${exhibition.stdate}">2022-1-1</td>
+      <td data-th-text="${exhibition.eddate}">2022-1-1</td>
+
+    </tr>
+  </table>
+  <p><a href='../'>메인</a></p>
+
+
+</body>
+</html>
+
+
+
+    
