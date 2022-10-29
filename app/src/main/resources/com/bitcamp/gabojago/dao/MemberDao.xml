@@ -36,4 +36,13 @@
             ID=#{id} and PWD=sha2(#{password},256)
     </select>
 
+    <select id="findById" resultMap="memberMap">
+        select
+            ID
+        from
+            jang_member
+        where
+            ID=#{id}
+    </select>
+
 </mapper>

@@ -1,160 +1,94 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-<style> 
-* {
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
-
-}
-body {
-  background-image:#34495e;
-}
-.joinForm {
-  position:absolute;
-  width:400px;
-  height:400px;
-  padding: 30px, 20px;
-  background-color:#FFFFFF;
-  text-align:center;
-  top:40%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  border-radius: 15px;
-}
-
-.joinForm h2 {
-  text-align: center;
-  margin: 30px;
-}
-
-.textForm {
-  border-bottom: 2px solid #adadad;
-  margin: 30px;
-  padding: 10px 10px;
-}
-
-
-.id {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.pw {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.name {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.email {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.nickname {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.cellphoneNo {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.btn {
-  position:relative;
-  left:40%;
-  transform: translateX(-50%);
-  margin-bottom: 40px;
-  width:80%;
-  height:40px;
-  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-  background-position: left;
-  background-size: 200%;
-  color:white;
-  font-weight: bold;
-  border:none;
-  cursor:pointer;
-  transition: 0.4s;
-  display:inline;
-}
-
-.btn:hover {
-  background-position: right;
-}</style>
-
-
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>가보자GO</title>
+  <meta name="description" content="회원가입 정보기입 페이지"/>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="../css/main-base.css"/>
+  <link rel="stylesheet" href="../css/auth/register.css"/>
 
 </head>
 <body>
 
 
-  <form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
-                                                                                               
+  <form action="join" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+
+
     <h2>회원가입</h2>
+
     <div class="textForm">
-      <input name="loginId" type="text" class="id" placeholder="아이디">
-      </input>
+      <input name="id" type="text" class="id" placeholder="아이디">
     </div>
+    <p id="idCheckBox" style="display: block;">아이디체크중</p>
     <div class="textForm">
-      <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
-    </div>
-     <div class="textForm">
-      <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+      <input id="password" name="password" type="password" class="pw" placeholder="비밀번호">
     </div>
     <div class="textForm">
-      <input name="name" type="password" class="name" placeholder="이름">
+      <input  id="passwordConfirm" name="passwordConfirm" type="password" class="pw" placeholder="비밀번호 확인">
     </div>
-     <div class="textForm">
+    <div class="textForm">
+      <input name="name" type="text" class="name" placeholder="이름">
+    </div>
+    <div class="textForm">
       <input name="email" type="text" class="email" placeholder="이메일">
     </div>
     <div class="textForm">
-      <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+      <input name="nickName" type="text" class="nickname" placeholder="닉네임">
     </div>
     <div class="textForm">
-      <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
+      <input name="phoneNo" type="text" class="cellphoneNo" placeholder="전화번호">
     </div>
     <input type="submit" class="btn" value="J O I N"/>
   </form>
+
+  <!-- 비밀번호 확인 script -->
+  <script>
+    var password = document.getElementById("password")
+      ,confirm_password = document.getElementById("passwordConfirm");
+
+    function validatePassword() {
+      if(password.value != passwordConfirm.value) {
+        // 만일 두 인풋 필드값이 같지 않을 경우
+        // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
+        passwordConfirm.setCustomValidity("Passwords Don't Match");
+      }
+      else {
+        // 만일 두 인풋 필드값이 같을 경우
+        // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
+        // 따라서 빈값을 주어 submit 처리되게 한다
+        passwordConfirm.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    passwordConfirm.onkeyup = validatePassword;
+  </script>
+
+  <!-- 아이디 중복 확인 script -->
+  <script>
+      $(".id").blur(function () {
+      var id = $("input.id").val();
+      var idCheckBox = document.getElementById("idCheckBox");
+
+      $.ajax({
+        type: "POST",
+        url: "../event/idCheck",
+        data: { id: id},
+        success: function (result) {
+          if(result == "true") {
+            idCheckBox.innerHTML = "멋진 아이디에요!";
+          } else if (result == "false") {
+            idCheckBox.innerHTML = "같은 아이디가 이미 사용중이에요.";
+          }
+        },
+      });
+    });
+
+  </script>
+
+
 </body>
 </html>

@@ -15,4 +15,9 @@ public class DefaultMemberService implements MemberService {
   public Member get(String id, String password) throws Exception {
     return memberDao.findByIdPassword(id, password);
   }
+
+  @Override
+  public Member idCheck(String id) throws Exception {
+    return memberDao.findById(id);
+  }
 }
