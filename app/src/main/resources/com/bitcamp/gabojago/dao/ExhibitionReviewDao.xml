@@ -16,7 +16,18 @@
 
     <select id="exhibitionReviewList" resultMap="exhibitionReviewMap">
         select
-        * from jang_exhibition_review;
+        *
+        from jang_exhibition_review
+        ;
+        <!--select
+   jang_exhibition_review.*
+   from jang_exhibition_review
+   left join
+   jang_exhibition
+   on
+   jang_exhibition_review .EXNO = jang_exhibition.EXNO
+   where
+   jang_exhibition.EXNO= #{value};-->
 
 
     </select>

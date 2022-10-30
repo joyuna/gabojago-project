@@ -48,11 +48,14 @@
     </tr>
 
     <tr>
-      <th>내용</th><td><textarea name='content' ></textarea></td>
+      <th>내용</th><td><textarea name='cont' ></textarea></td>
     </tr>
 
   </table>
 
+
+
+<!--
 <table>
   <tr>
     <th>리뷰번호</th>
@@ -77,10 +80,8 @@
 
     <td data-th-text="${exhibitionReview.wdate}">2022-1-1</td>
   </tr>
+</table>-->
 
-
-
-</table>
 
 
     <!--    <tr>
@@ -106,17 +107,22 @@
 
 
   <p>
-    <button type='submit'>변경</button>
+    <a href='updateform?exno=1'
+       data-th-href="@{updateform(exno=${exhibition.exno})}">변경</a>
+
     <a href='delete?exno=1'
        data-th-href="@{delete(exno=${exhibition.exno})}">삭제</a>
-    <a href='list'>목록</a>
+    <a href='exhibitionlist'>목록</a>
   </p>
 </form>
 
 <script>
   $(document).ready(function() {
-    $('textarea[name=content]').html('[[${exhibition.cont}]]')
-    $('textarea[name=content]').summernote({height: 200});
+    $('textarea[name=cont]').html('[[${exhibition.cont}]]')
+    $('textarea[name=cont]').summernote({height: 200});
+
+    $('textarea[name=cont]').summernote({toolbar:false});
+    $('textarea[name=cont]').summernote('disable');
   });
 </script>
 

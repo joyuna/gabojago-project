@@ -33,11 +33,16 @@
     </tr>
 
     <tr>
-      <th>시작날짜</th><td data-th-text="${exhibition.stdate}">2022-1-1</td>
+      <th>시작날짜</th><td> <input name='stdate' type='text'
+                               value='2022-11-22'
+                               data-th-text="${exhibition.stdate}"
+                               size='60'></td>
     </tr>
 
     <tr>
-      <th>종료날짜</th><td data-th-text="${exhibition.eddate}">2022-1-1</td>
+      <th>종료날짜</th><td> <input name='eddate' type='text'
+                               value='2022-11-22'
+                               data-th-text="${exhibition.eddate}">2022-1-1</td>
     </tr>
 
     <tr>
@@ -55,7 +60,8 @@
 
 
 
-<!--<table>
+<!--
+<table>
   <tr>
     <th>리뷰번호</th>
     <th>아이디</th>
@@ -106,9 +112,7 @@
 
 
   <p>
-    <a href='updateform?exno=1'
-       data-th-href="@{updateform(exno=${exhibition.exno})}">변경</a>
-
+    <button type='submit'>변경</button>
     <a href='delete?exno=1'
        data-th-href="@{delete(exno=${exhibition.exno})}">삭제</a>
     <a href='exhibitionlist'>목록</a>
@@ -120,8 +124,10 @@
     $('textarea[name=cont]').html('[[${exhibition.cont}]]')
     $('textarea[name=cont]').summernote({height: 200});
 
-    $('textarea[name=cont]').summernote({toolbar:false});
-    $('textarea[name=cont]').summernote('disable');
+/*    $('textarea[name=content]').summernote({toolbar:false});
+    $('textarea[name=content]').summernote('disable');
+    읽기 전용
+    */
   });
 </script>
 

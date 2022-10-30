@@ -13,5 +13,8 @@ public interface ExhibitionDao {
 
   int exhibitionInsert(Exhibition exhibition);
 
+  int delete(int exno);
+
+  int update(Exhibition exhibition);
 
 }

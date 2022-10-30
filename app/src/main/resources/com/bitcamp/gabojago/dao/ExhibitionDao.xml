@@ -14,7 +14,12 @@
         <result column="STDATE" property="stdate"/>
         <result column="EDDATE" property="eddate"/>
         <result column="PRICE" property="price"/>
+
+
     </resultMap>
+
+
+
 
 
     <select id="exhibitionList" resultMap="exhibitionMap">
@@ -39,32 +44,11 @@
 
 <!-- 상세보기-->
     <select id="exhibitionSelect"  resultMap="exhibitionMap">
-    select
-    jexhb.*, -- 전시회-전부
-    jso.PLNO, -- 장소-장소번호
-    jso.PLNAME, -- 장소-장소명
-    jso.QCALL, -- 장소-문의번호
-    jso.BASICAD, -- 장소-기본주소
-    jso.DETAILAD, -- 장소-상세주소
-    jexhbrv.*, -- 전시회한줄리뷰-전부
-    jexhbf.EXFNO, -- 전시회게시글첨부파일번호
-    jexhbf.PATH -- 전시회게시글첨부파일경로
-    from
-    jang_exhibition jexhb
-    join
-    jang_exhibition_file jexhbf
-    on
-    jexhb.EXNO = jexhbf.EXNO
-    join
-    jang_so jso
-    on
-    jexhb.PLNO = jso.PLNO
-    left outer join
-    jang_exhibition_review jexhbrv
-    on
-    jexhb.EXNO = jexhbrv.EXNO
-    where
-    jexhb.EXNO=#{value}
+        select  * from jang_exhibition
+        left join jang_exhibition_file on jang_exhibition.EXNO = jang_exhibition_file.EXNO
+        left join jang_exhibition_review on jang_exhibition.EXNO = jang_exhibition_review.EXNO
+        left join jang_so on jang_exhibition.PLNO = jang_so.PLNO
+        where jang_exhibition.EXNO=#{value};
     </select>
 
     <insert id="exhibitionInsert"  parameterType="exhibition"
@@ -74,6 +58,23 @@
         values (#{exname}, #{cont}, -1, #{stdate}, #{eddate}, #{price})
 
     </insert>
+
+    <delete id="delete">
+        delete from jang_exhibition
+        where jang_exhibition.EXNO=#{value}
+
+<!--  리뷰 달려있으면 삭제 못함 -->
+
+    </delete>
+
+
+    <update id="update" parameterType="exhibition">
+        update jang_exhibition set
+        EXNAME= #{exname}, CONT= #{cont},
+       STDATE= #{stdate}, EDDATE= #{eddate},
+        PRICE= #{price}
+        where jang_exhibition.EXNO= #{exno}
+    </update>
 
 
 

@@ -13,4 +13,11 @@ public interface ExhibitionService {
 
   void insert(Exhibition exhibition) throws Exception;
 
+  boolean delete(int exno) throws Exception;
+
+  boolean update(Exhibition exhibition) throws Exception;
+
+  Exhibition get (int exno) throws Exception;
+
+
 }

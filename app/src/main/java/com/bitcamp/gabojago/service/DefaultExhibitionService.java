@@ -13,6 +13,7 @@ public class DefaultExhibitionService implements ExhibitionService  {
   @Autowired
   ExhibitionDao exhibitionDao;
 
+  @Override
   public List<Exhibition> exhibitionList() throws Exception {
     return exhibitionDao.exhibitionList();
   }
@@ -30,10 +31,36 @@ public class DefaultExhibitionService implements ExhibitionService  {
     }
 
     // 2) 첨부파일 등록 나중에 생성
-  /*  if (exhibition.getAttachedFiles().size() > 0) {
-      exhibitionDao.insertFiles(exhibition);
-    }*/
 
   }
-}
 
+  @Transactional
+  @Override
+  public boolean delete(int exno) throws Exception {
+    // 1) 첨부파일 삭제
+    // 2) 리뷰 삭제
+
+    // 3) 게시글 삭제
+    return exhibitionDao.delete(exno) > 0;
+
+  }
+
+  @Transactional
+  @Override
+  public boolean update(Exhibition exhibition) throws Exception {
+    // 1) 게시글 변경
+    if(exhibitionDao.update(exhibition) == 0) {
+      return false;
+    }
+    //2) 첨부파일 등록
+
+
+    return true;
+  }
+
+  @Override
+  public Exhibition get(int exno) throws Exception {
+    return exhibitionDao.exhibitionSelect(exno);
+  }
+
+}

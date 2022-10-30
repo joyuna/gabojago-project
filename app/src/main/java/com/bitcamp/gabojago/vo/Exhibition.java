@@ -14,7 +14,7 @@ public class Exhibition {
   private Date eddate; // 종료일
   private int price; // 가격
 
-
+// 첨부파일 정보를 저장할 필드
 
 
   public int getExno() {
@@ -80,7 +80,6 @@ public class Exhibition {
   public void setPrice(int price) {
     this.price = price;
   }
-
 
 
   @Override
