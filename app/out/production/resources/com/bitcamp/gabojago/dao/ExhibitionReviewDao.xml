@@ -15,24 +15,27 @@
 
 
     <select id="exhibitionReviewList" resultMap="exhibitionReviewMap">
-        select
+   <!--     select
         *
         from jang_exhibition_review
-        ;
-        <!--select
+        ;-->
+        select
    jang_exhibition_review.*
    from jang_exhibition_review
    left join
    jang_exhibition
    on
-   jang_exhibition_review .EXNO = jang_exhibition.EXNO
+   jang_exhibition_review.EXNO = jang_exhibition.EXNO
    where
-   jang_exhibition.EXNO= #{value};-->
+   jang_exhibition.EXNO= #{exno};
 
 
     </select>
 
+<!--게시글 단위 삭제
+게시글이랑
 
+    리뷰단위 삭제-->
 
 
 </mapper>

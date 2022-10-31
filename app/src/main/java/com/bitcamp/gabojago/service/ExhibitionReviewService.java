@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ExhibitionReviewService {
 
-  List<ExhibitionReview> exhibitionReviewList() throws Exception;
+  List<ExhibitionReview> exhibitionReviewList(int exno) throws Exception;
 
 
 }

@@ -60,8 +60,16 @@
     </insert>
 
     <delete id="delete">
+        delete from jang_exhibition_file
+        where jang_exhibition_file.EXNO=#{value};
+        delete from jang_exhibition_review
+        where jang_exhibition_review.EXNO=#{value};
+        delete from jang_ticket
+        where jang_ticket.EXNO=#{value};
+        delete from jang_baguni
+        where jang_baguni.EXNO=#{value};
         delete from jang_exhibition
-        where jang_exhibition.EXNO=#{value}
+        where jang_exhibition.EXNO=#{value};
 
 <!--  리뷰 달려있으면 삭제 못함 -->
 

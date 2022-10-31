@@ -22,9 +22,9 @@ public class ExhibitionReviewController {
 ExhibitionReviewService exhibitionReviewService;
 
   @ResponseBody  //데이터 전달 빠르게 확인 가능
-  @RequestMapping("review-select-list")
-  public List<ExhibitionReview> exhibitionReviewList() throws Exception{
-    return exhibitionReviewService.exhibitionReviewList();
+  @RequestMapping("review-select-list/{exno}")
+  public List<ExhibitionReview> exhibitionReviewList(@PathVariable("exno") int exno) throws Exception{
+    return exhibitionReviewService.exhibitionReviewList(exno);
   }
 
 

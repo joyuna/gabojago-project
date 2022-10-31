@@ -12,8 +12,8 @@ public class DefaultExhibitionReviewService implements ExhibitionReviewService {
   @Autowired
   ExhibitionReviewDao exhibitionReviewDao;
 
-  public List<ExhibitionReview> exhibitionReviewList() throws Exception {
-    return exhibitionReviewDao.exhibitionReviewList();
+  public List<ExhibitionReview> exhibitionReviewList(int exno) throws Exception {
+    return exhibitionReviewDao.exhibitionReviewList(exno);
   }
 
 }

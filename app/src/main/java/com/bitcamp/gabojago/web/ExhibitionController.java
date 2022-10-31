@@ -42,7 +42,7 @@ public class ExhibitionController {
   @GetMapping("detail")
   public void detail(int exno, Model model) throws Exception {
     model.addAttribute("exhibition", exhibitionService.exhibitionSelect(exno));
-    model.addAttribute("exhibitionReviews", exhibitionReviewService.exhibitionReviewList());
+    model.addAttribute("exhibitionReviews", exhibitionReviewService.exhibitionReviewList(exno));
   } // 강사님 보드는 map 사용
 
   @GetMapping("form")
@@ -78,7 +78,6 @@ public String delete(int exno, HttpSession session) throws Exception {
   @GetMapping("updateform")
   public void update(int exno, Model model) throws Exception{
     model.addAttribute("exhibition", exhibitionService.exhibitionSelect(exno));
-    model.addAttribute("exhibitionReviews", exhibitionReviewService.exhibitionReviewList());
   }
 
 @PostMapping("update")
