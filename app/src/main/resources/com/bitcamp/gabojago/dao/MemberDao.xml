@@ -36,4 +36,9 @@
             ID=#{id} and PWD=sha2(#{password},256)
     </select>
 
+    <insert id="insertMember" parameterType="Member">
+        insert into jang_member(ID, PWD, NNAME, NAME, EMAIL, PNUM)
+            values(#{id}, sha2(#{password},256), #{nickName}, #{name}, #{email}, #{phoneNo})
+    </insert>
+
 </mapper>

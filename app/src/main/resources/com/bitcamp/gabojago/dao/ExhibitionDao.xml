@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gabojago.dao.ExhibitionDao">
+
+    <!-- 자바 객체의 프로퍼티와 컬럼 이름을 연결 -->
+    <resultMap type="exhibition" id="exhibitionMap">
+        <result column="EXNO" property="exno"/>
+        <result column="EXNAME" property="exname"/>
+        <result column="CONT" property="cont"/>
+        <result column="WDATE" property="wdate"/>
+        <result column="PLNO" property="plno"/>
+        <result column="STDATE" property="stdate"/>
+        <result column="EDDATE" property="eddate"/>
+        <result column="PRICE" property="price"/>
+
+
+    </resultMap>
+
+
+
+
+
+    <select id="exhibitionList" resultMap="exhibitionMap">
+        select
+        jexhb.EXNO, -- 전시회번호
+        jexhb.EXNAME, -- 전시회제목
+        jexhb.STDATE, -- 시작일
+        jexhb.EDDATE, -- 종료일
+        jexhbf.EXFNO, -- 전시회게시글첨부파일번호
+        jexhbf.PATH -- 전시회게시글첨부파일경로
+        from
+        jang_exhibition jexhb
+        left join
+        jang_exhibition_file jexhbf
+        on
+        jexhb.EXNO = jexhbf.EXNO;
+
+        <!--  where
+          (jexhb.STDATE  <![CDATA[<]]> CURDATE()) and (jexhb.EDDATE <![CDATA[>]]> CURDATE())-->
+
+    </select>
+
+<!-- 상세보기-->
+    <select id="exhibitionSelect"  resultMap="exhibitionMap">
+        select  * from jang_exhibition
+        left join jang_exhibition_file on jang_exhibition.EXNO = jang_exhibition_file.EXNO
+        left join jang_exhibition_review on jang_exhibition.EXNO = jang_exhibition_review.EXNO
+        left join jang_so on jang_exhibition.PLNO = jang_so.PLNO
+        where jang_exhibition.EXNO=#{value};
+    </select>
+
+    <insert id="exhibitionInsert"  parameterType="exhibition"
+            useGeneratedKeys="true" keyColumn="exno" keyProperty="exno">
+
+        INSERT INTO jangdb.jang_exhibition (exname, cont, plno, stdate, eddate, price)
+        values (#{exname}, #{cont}, -1, #{stdate}, #{eddate}, #{price})
+
+    </insert>
+
+    <delete id="delete">
+        delete from jang_exhibition_file
+        where jang_exhibition_file.EXNO=#{value};
+        delete from jang_exhibition_review
+        where jang_exhibition_review.EXNO=#{value};
+        delete from jang_ticket
+        where jang_ticket.EXNO=#{value};
+        delete from jang_baguni
+        where jang_baguni.EXNO=#{value};
+        delete from jang_exhibition
+        where jang_exhibition.EXNO=#{value};
+
+<!--  리뷰 달려있으면 삭제 못함 -->
+
+    </delete>
+
+
+    <update id="update" parameterType="exhibition">
+        update jang_exhibition set
+        EXNAME= #{exname}, CONT= #{cont},
+       STDATE= #{stdate}, EDDATE= #{eddate},
+        PRICE= #{price}
+        where jang_exhibition.EXNO= #{exno}
+    </update>
+
+
+
+</mapper>
