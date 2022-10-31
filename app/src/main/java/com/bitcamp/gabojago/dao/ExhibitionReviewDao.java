@@ -8,6 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface ExhibitionReviewDao {
+  // 리뷰 조회
   List<ExhibitionReview> exhibitionReviewList(int exno);
+
+
+  // 리뷰 입력
+int exhibitionReviewInsert(ExhibitionReview exhibitionReview);
 
 }

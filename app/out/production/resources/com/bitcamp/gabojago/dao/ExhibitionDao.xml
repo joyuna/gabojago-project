@@ -45,9 +45,7 @@
 <!-- 상세보기-->
     <select id="exhibitionSelect"  resultMap="exhibitionMap">
         select  * from jang_exhibition
-        left join jang_exhibition_file on jang_exhibition.EXNO = jang_exhibition_file.EXNO
-        left join jang_exhibition_review on jang_exhibition.EXNO = jang_exhibition_review.EXNO
-        left join jang_so on jang_exhibition.PLNO = jang_so.PLNO
+
         where jang_exhibition.EXNO=#{value};
     </select>
 
@@ -60,16 +58,19 @@
     </insert>
 
     <delete id="delete">
-        delete from jang_exhibition_file
-        where jang_exhibition_file.EXNO=#{value};
+       <!-- delete from jang_exhibition_file
+        where jang_exhibition_file.EXNO=#{value};-->
+
         delete from jang_exhibition_review
         where jang_exhibition_review.EXNO=#{value};
-        delete from jang_ticket
+
+     <!--   delete from jang_ticket
         where jang_ticket.EXNO=#{value};
         delete from jang_baguni
-        where jang_baguni.EXNO=#{value};
+        where jang_baguni.EXNO=#{value};-->
         delete from jang_exhibition
         where jang_exhibition.EXNO=#{value};
+
 
 <!--  리뷰 달려있으면 삭제 못함 -->
 

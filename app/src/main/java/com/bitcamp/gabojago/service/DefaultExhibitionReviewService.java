@@ -4,6 +4,7 @@ import com.bitcamp.gabojago.dao.ExhibitionReviewDao;
 import com.bitcamp.gabojago.vo.ExhibitionReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,8 +13,17 @@ public class DefaultExhibitionReviewService implements ExhibitionReviewService {
   @Autowired
   ExhibitionReviewDao exhibitionReviewDao;
 
+
   public List<ExhibitionReview> exhibitionReviewList(int exno) throws Exception {
     return exhibitionReviewDao.exhibitionReviewList(exno);
   }
 
+
+  @Transactional
+  @Override
+  public void exhibitionReviewInsert(ExhibitionReview exhibitionReview) throws Exception {
+    if (exhibitionReviewDao.exhibitionReviewInsert(exhibitionReview) ==0){
+      throw new Exception("댓글 등록 실패!");
+    }
+  }
 }

@@ -55,34 +55,6 @@
 
 
 
-<table>
-  <tr>
-    <th>리뷰번호</th>
-    <th>아이디</th>
-    <th>내용</th>
-    <th>작성일</th>
-  </tr>
-
-  <tr data-th-each="exhibitionReview : ${exhibitionReviews}">
-    <td><input name='rvno' type='number'
-                          value='1'
-                          data-th-value="${exhibitionReview.rvno}"
-                          readonly></td>
-
-    <td data-th-text="${exhibitionReview.id}">홍길동</td>
-
-    <td data-th-text="${exhibitionReview.cont == ''} ? '(제목없음)' : ${exhibitionReview.cont}">
-      <input name='cont' type='text'
-             value='ㅎ'
-             data-th-value="${exhibitionReview.cont}"
-             readonly></td>
-
-    <td data-th-text="${exhibitionReview.wdate}">2022-1-1</td>
-  </tr>
-</table>
-
-
-
     <!--    <tr>
           <th>첨부파일</th>
           <td>
@@ -115,6 +87,70 @@
   </p>
 </form>
 
+
+
+<table>
+  <form  method="post" action="add">
+  <tr>
+    <th>리뷰번호</th>
+    <th>아이디</th>
+    <th>내용</th>
+    <th>작성일</th>
+
+  </tr>
+
+  <tr data-th-each="exhibitionReview : ${exhibitionReviews}">
+    <td><input name='rvno' type='number'
+               value='1'
+               data-th-value="${exhibitionReview.rvno}"
+               readonly></td>
+
+    <td data-th-text="${exhibitionReview.id}">홍길동</td>
+
+    <td data-th-text="${exhibitionReview.cont == ''} ? '(제목없음)' : ${exhibitionReview.cont}">
+      <input name='cont' type='text'
+             value='ㅎ'
+             data-th-value="${exhibitionReview.cont}"
+             readonly></td>
+
+    <td data-th-text="${exhibitionReview.wdate}">2022-1-1</td>
+
+
+  <a href='delete?rvno=1'
+     data-th-href="@{delete(rvno=${exhibitionReview.rvno})}">댓글 삭제</a>
+
+   <!-- <tr th:each="exhibitionReview: ${exhibitionReviews}">
+      <td th:text="${exhibitionReview.rvno}"></td>
+      <td th:text="${exhibitionReview.id}"></td>
+      <td th:text="${exhibitionReview.cont}"></td>
+      <td th:text="${exhibitionReview.wdate}"></td>
+
+      <td><input class="btn btn-danger" type="button" th:if="(${#strings.equals(session['loginEmail'],'admin')})
+        or (${session.loginEmail}==${exhibitionReview.id})"
+                 th:onclick="deleteById([[${exhibitionReview.id}]])"
+                 value="댓글 삭제"></td>-->
+
+    </tr>
+
+
+  </tr>
+  </form>
+
+  <form action='../exhibition-review/add' method="post" enctype="multipart/form-data">
+
+    <b> 리뷰 작성</b>
+    <p><label>작성자</label> <input type="text" name="id"></p>
+    <p><label>내용</label> <input type='text' name='cont' size='60'> </p>
+    <input type='hidden' name='exno' data-th-value="${exhibition.exno}">
+    <p><button type='submit'>리뷰 저장</button></p>
+
+
+  </form>
+
+</table>
+
+
+
 <script>
   $(document).ready(function() {
     $('textarea[name=cont]').html('[[${exhibition.cont}]]')
@@ -123,6 +159,9 @@
     $('textarea[name=cont]').summernote({toolbar:false});
     $('textarea[name=cont]').summernote('disable');
   });
+
+
+
 </script>
 
 

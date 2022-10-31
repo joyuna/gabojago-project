@@ -32,6 +32,19 @@
 
     </select>
 
+
+
+
+
+    <insert id="exhibitionReviewInsert"  parameterType="exhibitionreview" >
+           <!-- useGeneratedKeys="true" keyColumn="rvno" keyProperty="rvno"-->
+
+        INSERT INTO jang_exhibition_review (cont, id, exno)
+        values (#{cont}, #{id},  #{exno})
+
+    </insert>
+
+
 <!--게시글 단위 삭제
 게시글이랑
 

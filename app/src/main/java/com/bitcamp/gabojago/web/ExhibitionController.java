@@ -43,6 +43,8 @@ public class ExhibitionController {
   public void detail(int exno, Model model) throws Exception {
     model.addAttribute("exhibition", exhibitionService.exhibitionSelect(exno));
     model.addAttribute("exhibitionReviews", exhibitionReviewService.exhibitionReviewList(exno));
+
+
   } // 강사님 보드는 map 사용
 
   @GetMapping("form")

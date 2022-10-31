@@ -9,5 +9,9 @@ public interface ExhibitionReviewService {
 
   List<ExhibitionReview> exhibitionReviewList(int exno) throws Exception;
 
+void exhibitionReviewInsert(ExhibitionReview exhibitionReview) throws Exception;
+
+
+
 
 }
