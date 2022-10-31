@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MemberDao {
 
-
+   int insertMember(Member member);
    
    Member findByIdPassword(
           @Param("id") String id,
