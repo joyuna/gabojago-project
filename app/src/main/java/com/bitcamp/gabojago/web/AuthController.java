@@ -28,13 +28,12 @@ public class AuthController {
   }
 
   @PostMapping("join")
-  public ModelAndView join(String email, String phoneNo, Member member) throws Exception {
+  public String join(String email, String phoneNo, Member member, Model model) throws Exception {
       if(memberService.join(email, phoneNo, member)) {
-        return new ModelAndView("/auth/joinResult");
+        return "/auth/joinResult";
     } else {
-        ModelAndView mv = new ModelAndView("redirect:register");
-        mv.addObject("checkResult", "false");
-        return mv;
+        model.addAttribute("checkResult", "false");
+        return "/auth/register";
     }
   }
 

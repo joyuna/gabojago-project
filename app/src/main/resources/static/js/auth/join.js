@@ -88,7 +88,7 @@ passwordConfirm.onkeyup = validatePassword;
       if(result == "true") {
         document.getElementById("joinForm").submit();
       } else if (result == "false") {
-        alert("옳바른 정보를 입력해주세요.");
+        alert("올바른 정보를 입력해주세요.");
         window.location.reload();
       }
     },
