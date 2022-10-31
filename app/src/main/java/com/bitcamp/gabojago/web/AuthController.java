@@ -23,14 +23,23 @@ public class AuthController {
   MemberService memberService;
 
   @GetMapping("register")
-  public String form(@CookieValue(name = "id", defaultValue="") String id, Model model) throws Exception {
+  public void register(@CookieValue(name = "id", defaultValue="") String id, Model model) throws Exception {
     model.addAttribute("id", id);
-    return "auth/register";
+  }
+
+  @PostMapping("join")
+  public ModelAndView join(String email, String phoneNo, Member member) throws Exception {
+      if(memberService.join(email, phoneNo, member)) {
+        return new ModelAndView("/auth/joinResult");
+    } else {
+        ModelAndView mv = new ModelAndView("redirect:register");
+        mv.addObject("checkResult", "false");
+        return mv;
+    }
   }
 
   @GetMapping("loginfail")
   public void loginfail() {
-//    return "redirect:/";
   }
 
   @PostMapping("login")

@@ -8,9 +8,17 @@ import org.apache.ibatis.annotations.Param;
 public interface MemberDao {
 
    Member findById(String id);
-   
+
+   Member findByNickName(String nickName);
+
    Member findByIdPassword(
           @Param("id") String id,
           @Param("password") String password);
+
+  Member findByEmail(String email);
+
+  Member findByPhoneNo(String phoneNo);
+
+  int join(Member member);
 
 }

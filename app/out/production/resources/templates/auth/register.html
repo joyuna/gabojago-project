@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>가보자GO</title>
   <meta name="description" content="회원가입 정보기입 페이지"/>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <link rel="stylesheet" href="../css/main-base.css"/>
   <link rel="stylesheet" href="../css/auth/register.css"/>
 
@@ -14,15 +13,15 @@
 <body>
 
 
-  <form action="join" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+  <form id="join_Form" action="join" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
 
 
     <h2>회원가입</h2>
 
     <div class="textForm">
-      <input name="id" type="text" class="id" placeholder="아이디">
+      <input id="idBox" name="id" type="text" class="id" placeholder="아이디">
     </div>
-    <p id="idCheckBox" style="display: block;">아이디체크중</p>
+    <span id="idCheckBox" style="display: block; position: absolute; left: 8.2%; top: 19.4%; font-size: 13px;"></span>
     <div class="textForm">
       <input id="password" name="password" type="password" class="pw" placeholder="비밀번호">
     </div>
@@ -30,65 +29,28 @@
       <input  id="passwordConfirm" name="passwordConfirm" type="password" class="pw" placeholder="비밀번호 확인">
     </div>
     <div class="textForm">
-      <input name="name" type="password" class="name" placeholder="이름">
+      <input name="name" type="text" class="name" placeholder="이름">
     </div>
     <div class="textForm">
       <input name="email" type="text" class="email" placeholder="이메일">
     </div>
     <div class="textForm">
-      <input name="nickName" type="text" class="nickname" placeholder="닉네임">
+      <input id="nickNameBox" name="nickName" type="text" class="nickName" placeholder="별명">
     </div>
+    <span id="nickNameCheckBox" style="display: block; position: absolute; left: 8.2%; top: 74%; font-size: 13px;"></span>
     <div class="textForm">
       <input name="phoneNo" type="text" class="cellphoneNo" placeholder="전화번호">
     </div>
-    <input type="submit" class="btn" value="J O I N"/>
+    <input id="submitBtn" type="submit" class="btn" value="J O I N"/>
   </form>
 
-  <!-- 비밀번호 확인 script -->
-  <script>
-    var password = document.getElementById("password")
-      ,confirm_password = document.getElementById("passwordConfirm");
-
-    function validatePassword() {
-      if(password.value != passwordConfirm.value) {
-        // 만일 두 인풋 필드값이 같지 않을 경우
-        // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
-        passwordConfirm.setCustomValidity("Passwords Don't Match");
-      }
-      else {
-        // 만일 두 인풋 필드값이 같을 경우
-        // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
-        // 따라서 빈값을 주어 submit 처리되게 한다
-        passwordConfirm.setCustomValidity('');
-      }
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="../js/auth/join.js"></script>
+  <script th:inline="javascript">
+    var checkResult = /*[[${checkResult}]]*/;
+    if (checkResult != null) {
+    alert("이미 가입하신 이메일 또는 전화번호가 있습니다.");
     }
-
-    password.onchange = validatePassword;
-    passwordConfirm.onkeyup = validatePassword;
   </script>
-
-  <!-- 아이디 중복 확인 script -->
-  <script>
-      $(".id").blur(function () {
-      var id = $("input.id").val();
-      var idCheckBox = document.getElementById("idCheckBox");
-
-      $.ajax({
-        type: "POST",
-        url: "../event/idCheck",
-        data: { id: id},
-        success: function (result) {
-          if(result == "true") {
-            idCheckBox.innerHTML = "멋진 아이디에요!";
-          } else if (result == "false") {
-            idCheckBox.innerHTML = "같은 아이디가 이미 사용중이에요.";
-          }
-        },
-      });
-    });
-
-  </script>
-
-
 </body>
 </html>

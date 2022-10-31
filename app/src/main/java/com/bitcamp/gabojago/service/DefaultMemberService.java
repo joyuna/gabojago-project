@@ -7,9 +7,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DefaultMemberService implements MemberService {
-
   @Autowired
   MemberDao memberDao;
+
+  @Override
+  public Member idCheck(String id) throws Exception {
+    return memberDao.findById(id);
+  }
+
+  @Override
+  public Member nickNameCheck(String nickName) throws Exception {
+    return memberDao.findByNickName(nickName);
+  }
 
   @Override
   public Member get(String id, String password) throws Exception {
@@ -17,7 +26,13 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
-  public Member idCheck(String id) throws Exception {
-    return memberDao.findById(id);
+  public boolean join(String email, String phoneNo, Member member) throws Exception {
+    if(memberDao.findByEmail(email) != null || memberDao.findByPhoneNo(phoneNo) != null) {
+      return false;
+    } else {
+      memberDao.join(member);
+      return true;
+    }
   }
+
 }
