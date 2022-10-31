@@ -15,4 +15,9 @@ public class DefaultMemberService implements MemberService {
   public Member get(String id, String password) throws Exception {
     return memberDao.findByIdPassword(id, password);
   }
+
+  public int add(Member member) throws Exception {
+    return memberDao.insertMember(member);
+  }
+
 }
