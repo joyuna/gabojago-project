@@ -39,12 +39,12 @@ public class JangSoReview {
     this.recno = recno;
   }
 
-  public List<JangSo> getJangSos() {
-    return jangSos;
+  public JangSo getJangSo() {
+    return jangSo;
   }
 
-  public void setJangSos(List<JangSo> jangSos) {
-    this.jangSos = jangSos;
+  public void setJangSo(JangSo jangSo) {
+    this.jangSo = jangSo;
   }
 
   public List<RecAttachedFile> getAttachedFiles() {
@@ -61,7 +61,7 @@ public class JangSoReview {
             "prvno=" + prvno +
             ", cont='" + cont + '\'' +
             ", recno=" + recno +
-            ", jangSos=" + jangSos +
+            ", jangSo=" + jangSo +
             ", attachedFiles=" + attachedFiles +
             '}';
   }
