@@ -26,4 +26,19 @@ public class DefaultExhibitionReviewService implements ExhibitionReviewService {
       throw new Exception("댓글 등록 실패!");
     }
   }
+
+  @Transactional
+  @Override
+  public boolean exhibitionReviewDelete(int rvno) throws Exception {
+    return exhibitionReviewDao.exhibitionReviewDelete(rvno) >0;
+  }
+
+
+  @Override
+  public boolean exhibitionReviewUpdate(ExhibitionReview exhibitionReview) throws Exception {
+    if(exhibitionReviewDao.exhibitionReviewUpdate(exhibitionReview) == 0 ){
+  return false;
+}
+    return true;
+  }
 }

@@ -15,4 +15,9 @@ public interface ExhibitionReviewDao {
   // 리뷰 입력
 int exhibitionReviewInsert(ExhibitionReview exhibitionReview);
 
+  int exhibitionReviewDelete(int rvno);
+
+int exhibitionReviewUpdate(ExhibitionReview exhibitionReview);
+
+
 }

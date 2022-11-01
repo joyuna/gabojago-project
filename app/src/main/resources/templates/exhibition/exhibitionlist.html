@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+
+
+
+
+<head >
 <meta charset="UTF-8">
 <title>exhibition</title>
 <style>
@@ -9,8 +13,73 @@ tr:hover {
   color: white;
 }
 </style>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
 </head>
-<body>
+
+<!-- Navigation 사실상의 header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/app">가보자GO</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/etc"
+          >홈
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">코스추천</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="exhibition/exhibitionlist">전시회</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">고객지원</a>
+        </li>
+        <li class="nav-item" th:if="${session.loginMember != null}">
+          <a
+              class="nav-link"
+              href="auth/logout"
+              th:text="${session.loginMember.name}+'(로그아웃)'"
+          >홍길동(로그아웃)</a
+          >
+        </li>
+        <li class="nav-item" th:if="${session.loginMember == null}">
+          <span class="nav-link btn-open-popup">로그인</span>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="auth/register">회원가입</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <img src="./images/mypage.png" width="90%" height="25"
+            /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Header-->
+<header class="bg-dark py-4">
+
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">전시회</h1>
+      <p class="lead fw-normal text-white-50 mb-0">광고</p>
+    </div>
+  </div>
+
+</header>
+
+
+<body class="pt-5">
   <h1>전시회</h1>
   <a href='form'>새 글</a>
   <table border='1'>
@@ -40,6 +109,27 @@ tr:hover {
   </table>
   <p><a href='../'>메인</a></p>
 
+
+  <!-- Footer-->
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy;가보자GO</p>
+    </div>
+  </footer>
+
+  <style>
+    footer {
+      /* footer를 aside위에 올리기 위해 사용(부유객체) */
+      position: relative;
+      height: 60px;
+      width: 100%;
+      padding: 0 25px;
+      line-height: 60px;
+      color: white;
+      border-top: 1px solid #dee5e7;
+      background-color: #343A40;
+    }
+  </style>
 
 </body>
 </html>

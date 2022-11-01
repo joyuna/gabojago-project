@@ -33,4 +33,28 @@ ExhibitionReviewService exhibitionReviewService;
     return "redirect:../exhibition/detail?exno="+exhibitionReview.getExno();
   }
 
+  @GetMapping("delete")
+  public String exhibitionReviewDelete(int rvno, HttpSession session, ExhibitionReview exhibitionReview) throws Exception {
+    //  checkOwner(no, session);
+    if(!exhibitionReviewService.exhibitionReviewDelete(rvno)) {
+      throw new Exception("리뷰를 삭제 할 수 없습니다.");
+    }
+
+    return "redirect:../exhibition/exhibitionlist";
+  }
+
+  @PostMapping("update")
+  public String update(ExhibitionReview exhibitionReview, HttpSession session) throws Exception{
+
+//  checkOwner(board.getNo(), session);
+
+    if(!exhibitionReviewService.exhibitionReviewUpdate(exhibitionReview)){
+      throw new Exception("리뷰를 변경 할 수 없습니다!");
+    }
+    return "redirect:../exhibition/exhibitionlist";
+  }
+
+
+
+
 }
