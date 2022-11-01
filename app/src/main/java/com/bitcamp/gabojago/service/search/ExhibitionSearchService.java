@@ -2,32 +2,32 @@ package com.bitcamp.gabojago.service.search;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.management.BadStringOperationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bitcamp.gabojago.dao.search.ExhibitionSearchDAO;
-import com.bitcamp.gabojago.vo.Exhibition;
 
 @Service
-public class ExhibitionSearchService implements SearchService<Exhibition>{
+public class ExhibitionSearchService implements DetailSearchService{
 
   @Autowired
   ExhibitionSearchDAO searchDAO;
   
   @Override
-  public List<Exhibition> getResult(String searchType, String keyword) throws BadStringOperationException {
+  public List<Map<String, String>> getDetailResult(String searchType, String keyword) throws BadStringOperationException {
     switch(searchType) {
       case "title":
-        return searchDAO.exhibitionResultByTitle(keyword);
+        return searchDAO.detailResultByTitle(keyword);
         
       case "content":
-        return searchDAO.exhibitionResultByContent(keyword);
+        return searchDAO.detailResultByContent(keyword);
         
       case "titleWithContent":
-        return searchDAO.exhibitionResultByTitleWithContent(keyword);
+        return searchDAO.detailResultByTitleWithContent(keyword);
         
       case "review":
-        return searchDAO.exhibitionResultByReview(keyword);
+        return searchDAO.detailResultByReview(keyword);
         
     }
     
@@ -35,13 +35,13 @@ public class ExhibitionSearchService implements SearchService<Exhibition>{
   }
   
   @Override
-  public List<Exhibition> getResultByBetweenDates(Date startDate, Date endDate,
+  public List<Map<String, String>> getDetailResultByBetweenDates(Date startDate, Date endDate,
       String keyword) {
     if (startDate.compareTo(endDate) > 0) {
       throw new IllegalArgumentException(
         "종료시간(" + endDate + ") 가 시작시간(" + startDate + ")보다 빠를 수 없습니다.");
     }
     
-    return searchDAO.exhibitionResultByDate(startDate, endDate, keyword);
+    return searchDAO.detailResultByDate(startDate, endDate, keyword);
   }
 }
