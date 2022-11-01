@@ -1,14 +1,14 @@
 package com.bitcamp.gabojago.vo;
 
-public class AttachedFile {
+public class RecAttachedFile {
   private int recofno; // 장소후기첨부파일번호
   private int prvno; // 장소후기번호
   private String filepath; // 파일경로
   private String fname; // 파일이름
 
-  public AttachedFile() {}
+  public RecAttachedFile() {}
 
-  public AttachedFile(String filepath) {
+  public RecAttachedFile(String filepath) {
     this.filepath = filepath;
   }
 

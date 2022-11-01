@@ -1,6 +1,5 @@
 package com.bitcamp.gabojago.vo;
 
-import java.sql.Date;
 import java.util.List;
 
 public class JangSoReview {
@@ -8,11 +7,13 @@ public class JangSoReview {
   private int prvno; // 장소후기번호
   private String cont; // 내용
   private int recno; // 코스추천글번호
-  private int plno; // 장소번호
+//  private int plno; // 장소번호
+
+  private List<JangSo> jangSos; // 장소 목록들
 
 
   // 첨부파일 정보를 저장할 필드
-  private List<AttachedFile> attachedFiles;
+  private List<RecAttachedFile> attachedFiles;
 
   public int getPrvno() {
     return prvno;
@@ -38,19 +39,19 @@ public class JangSoReview {
     this.recno = recno;
   }
 
-  public int getPlno() {
-    return plno;
+  public List<JangSo> getJangSos() {
+    return jangSos;
   }
 
-  public void setPlno(int plno) {
-    this.plno = plno;
+  public void setJangSos(List<JangSo> jangSos) {
+    this.jangSos = jangSos;
   }
 
-  public List<AttachedFile> getAttachedFiles() {
+  public List<RecAttachedFile> getAttachedFiles() {
     return attachedFiles;
   }
 
-  public void setAttachedFiles(List<AttachedFile> attachedFiles) {
+  public void setAttachedFiles(List<RecAttachedFile> attachedFiles) {
     this.attachedFiles = attachedFiles;
   }
 
@@ -60,7 +61,7 @@ public class JangSoReview {
             "prvno=" + prvno +
             ", cont='" + cont + '\'' +
             ", recno=" + recno +
-            ", plno=" + plno +
+            ", jangSos=" + jangSos +
             ", attachedFiles=" + attachedFiles +
             '}';
   }
