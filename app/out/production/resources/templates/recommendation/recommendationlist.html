@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>recommendation</title>
+<style>
+tr:hover {
+  background-color: navy;
+  color: white;
+}
+</style>
+</head>
+<body>
+  <h1>코스추천글</h1>
+  <a href='form'>새 글</a>
+  <table border='1'>
+    <tr>
+      <th>번호</th>
+      <th>제목</th>
+<!--      <th>시작일</th>-->
+<!--      <th>종료일</th>-->
+
+
+  <!-- 첨부파일 후에 추가-->
+
+    </tr>
+
+    <tr data-th-each="recommendation : ${recommendation}">
+      <td data-th-text="${recommendation.recno}">100</td>
+
+      <td>
+        <a href='detail?recno=1'
+           data-th-href="@{detail(recno=${recommendation.recno})}"
+           data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}">제목</a>
+      </td>
+<!--      <td data-th-text="${recommendation.stdate}">2022-1-1</td>-->
+<!--      <td data-th-text="${recommendation.eddate}">2022-1-1</td>-->
+
+    </tr>
+  </table>
+  <p><a href='../'>메인</a></p>
+
+
+</body>
+</html>
+
+
+
+    
