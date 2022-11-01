@@ -9,7 +9,7 @@ public class JangSoReview {
   private int recno; // 코스추천글번호
 //  private int plno; // 장소번호
 
-  private List<JangSo> jangSos; // 장소 목록들
+  private JangSo jangSo; // 장소 목록들
 
 
   // 첨부파일 정보를 저장할 필드
