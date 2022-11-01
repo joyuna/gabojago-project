@@ -6,7 +6,7 @@
 
     <!-- 자바 객체의 프로퍼티와 컬럼 이름을 연결 -->
     <resultMap type="recommendation" id="recommendationMap">
-        <result column="RECNO" property="exno"/>
+        <result column="RECONO" property="recono"/>
         <result column="TITLE" property="title"/>
         <result column="CNT" property="cnt"/>
         <result column="WDATE" property="wdate"/>
@@ -19,17 +19,11 @@
         <result column="TPNO" property="tpno"/>
     </resultMap>
 
-    <select id="recommendationlist" resultMap="recommendationMap">
+    <select id="recommendationList" resultMap="recommendationMap">
         select
-        src.*,
-        (select
-            count(*)
-            from jang_like sli
-            where sli.RECONO = src.RECONO
-        )like_count
-        from jang_so_recommendation src
-        left outer join jang_like lik on src.RECONO = lik.RECONO
-        order by like_count desc;
+            recono, title
+        from
+            jang_so_recommendation
 
         <!--  where
           (jexhb.STDATE  <![CDATA[<]]> CURDATE()) and (jexhb.EDDATE <![CDATA[>]]> CURDATE())-->

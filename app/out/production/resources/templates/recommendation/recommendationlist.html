@@ -12,7 +12,7 @@ tr:hover {
 </head>
 <body>
   <h1>코스추천글</h1>
-  <a href='form'>새 글</a>
+<!--  <a href='form'>새 글</a>-->
   <table border='1'>
     <tr>
       <th>번호</th>
@@ -25,7 +25,7 @@ tr:hover {
 
     </tr>
 
-    <tr data-th-each="recommendation : ${recommendation}">
+    <tr data-th-each="recommendation : ${recommendations}">
       <td data-th-text="${recommendation.recno}">100</td>
 
       <td>

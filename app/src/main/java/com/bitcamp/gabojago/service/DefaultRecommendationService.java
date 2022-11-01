@@ -26,7 +26,7 @@ public class DefaultRecommendationService implements RecommendationService  {
   }
 
   @Override
-  public List<Recommendation> list() throws Exception {
+  public List<Recommendation> recommendationList() throws Exception {
     return recommendationDao.recommendationList();
   }
 

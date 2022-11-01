@@ -1,29 +1,13 @@
 package com.bitcamp.gabojago.web;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
-import com.bitcamp.gabojago.service.JangSoReviewService;
 import com.bitcamp.gabojago.service.RecommendationService;
-import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.Member;
-import com.bitcamp.gabojago.vo.Recommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/recommendation/")
@@ -93,7 +77,7 @@ public class RecommendationController {
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
-    model.addAttribute("recommendations", recommendationService.list());
+    model.addAttribute("recommendations", recommendationService.recommendationList());
   }
 
 //  @GetMapping("detail")

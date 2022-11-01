@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Recommendation {
 
-  private int recno; // 코스추천글번호
+  private int recono; // 코스추천글번호
   //private String id; // 아이디
   private String title; // 코스추천글제목
   private Date wdate; // 코스추천글 등록일
@@ -22,12 +22,12 @@ public class Recommendation {
   private List<JangSoReview> jangSoReviews;
 
 
-  public int getRecno() {
-    return recno;
+  public int getRecono() {
+    return recono;
   }
 
-  public void setRecno(int recno) {
-    this.recno = recno;
+  public void setRecono(int recono) {
+    this.recono = recono;
   }
 
   public String getTitle() {
@@ -129,7 +129,7 @@ public class Recommendation {
   @Override
   public String toString() {
     return "Recommendation{" +
-            "recno=" + recno +
+            "recno=" + recono +
             ", title='" + title + '\'' +
             ", wdate=" + wdate +
             ", cnt=" + cnt +

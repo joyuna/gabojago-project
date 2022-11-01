@@ -1,6 +1,5 @@
 package com.bitcamp.gabojago.service;
 
-import com.bitcamp.gabojago.vo.Exhibition;
 import com.bitcamp.gabojago.vo.Recommendation;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface RecommendationService {
 
   //boolean delete(int no) throws Exception;
 
-  List<Recommendation> list() throws Exception;
+  List<Recommendation> recommendationList() throws Exception;
 
   //AttachedFile getAttachedFile(int fileNo) throws Exception;
 
