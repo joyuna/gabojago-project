@@ -1,11 +1,12 @@
 package com.bitcamp.gabojago.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Recommendation {
 
   private int recno; // 코스추천글번호
-  private String id; // 아이디
+  //private String id; // 아이디
   private String title; // 코스추천글제목
   private Date wdate; // 코스추천글 등록일
   private int cnt; // 조회수
@@ -17,7 +18,7 @@ public class Recommendation {
   private boolean solo; // 혼자여행추천
   private int tpno; // 이동수단번호
 
-// 첨부파일 정보를 저장할 필드
+  private Member writer; // 글쓴 회원정보
 
 
   public int getRecno() {
@@ -108,6 +109,14 @@ public class Recommendation {
     this.tpno = tpno;
   }
 
+  public Member getWriter() {
+    return writer;
+  }
+
+  public void setWriter(Member writer) {
+    this.writer = writer;
+  }
+
   @Override
   public String toString() {
     return "Recommendation{" +
@@ -122,6 +131,7 @@ public class Recommendation {
             ", fmly=" + fmly +
             ", solo=" + solo +
             ", tpno=" + tpno +
+            ", writer=" + writer +
             '}';
   }
 }
