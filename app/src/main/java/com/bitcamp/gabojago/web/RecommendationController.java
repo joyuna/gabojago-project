@@ -75,7 +75,7 @@ public class RecommendationController {
 //    return attachedFiles;
 //  }
 
-  @GetMapping("list")
+  @GetMapping("recommendationList")
   public void list(Model model) throws Exception {
     model.addAttribute("recommendations", recommendationService.recommendationList());
   }
