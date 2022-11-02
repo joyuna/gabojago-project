@@ -110,6 +110,8 @@ passwordConfirm.onkeyup = validatePassword;
 // 이메일 인증 코드 발송
   var doSend = function () {
   var address = $("input.email").val();
+  document.getElementById("emailCodeBox").innerHTML = "이메일을 확인 중입니다.";
+  document.getElementById("emailCodeBox").style.color = "black";
   window.cemail = 0;
 
   $.ajax({
@@ -117,8 +119,14 @@ passwordConfirm.onkeyup = validatePassword;
     url: "../mail/emailCode",
     data: { address: address},
     success: function (result) {
-      document.getElementById("emailCodeBox").innerHTML = "이메일이 발송되었습니다.";
-      code = result;
+      if (result == "false") {
+        document.getElementById("emailCodeBox").innerHTML = "이미 가입된 이메일입니다.";
+        document.getElementById("emailCodeBox").style.color = "red";
+      } else {
+        document.getElementById("emailCodeBox").innerHTML = "이메일이 발송되었습니다.";
+        document.getElementById("emailCodeBox").style.color = "green";
+        code = result;
+      }
     },
   });
 };

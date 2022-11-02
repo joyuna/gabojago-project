@@ -40,4 +40,9 @@ public class DefaultMemberService implements MemberService {
     return memberDao.findByPhoneNo(phoneNo);
   }
 
+  @Override
+  public Member emailCheck(String email) throws Exception {
+    return memberDao.findByEmail(email);
+  }
+
 }

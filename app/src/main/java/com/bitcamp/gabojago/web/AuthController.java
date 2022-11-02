@@ -76,20 +76,6 @@ public class AuthController {
   @ResponseBody
   @PostMapping("lastCheck")
   public String lastCheck(String finalCheck) throws Exception {
-//    String idFilter = "^[a-z0-9]*$";
-//    Member idResult = memberService.idCheck(id);
-//
-//    String nickNameFilter = "^[A-Za-z0-9가-힣]*$";
-//    Member nickNameResult = memberService.nickNameCheck(nickName);
-//
-//    if (
-//        inputCheck(id, idResult, idFilter).equals("true") &&
-//            inputCheck(nickName, nickNameResult, nickNameFilter).equals("true")
-//    ) {
-//      return "true";
-//    } else {
-//      return "false";
-//    }
     if (finalCheck.equals("1")) {
       return "true";
     } else {
