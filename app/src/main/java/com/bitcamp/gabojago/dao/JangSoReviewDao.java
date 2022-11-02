@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface JangSoReviewDao {
-  //JangSo jangso(); // 나중에 날짜 받기
+//  JangSo jangSo(int recono);
 
   List<JangSoReview> jangSoReviewList(int recono);
 

@@ -1,8 +1,8 @@
 package com.bitcamp.gabojago.service;
 
+import com.bitcamp.gabojago.vo.JangSo;
 import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.RecAttachedFile;
-import com.bitcamp.gabojago.vo.Recommendation;
+import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 
 import java.util.List;
 
@@ -17,9 +17,11 @@ public interface JangSoReviewService {
 
   //boolean delete(int no) throws Exception;
 
-  List<JangSoReview> jangSoReviewList(int recoNo) throws Exception;
+  List<JangSoReview> jangSoReviewList(int recono) throws Exception;
 
-  RecAttachedFile getAttachedFile(int fileNo) throws Exception;
+//  JangSo jangSo (int recono) throws Exception;
+
+  JangSoReviewAttachedFile getAttachedFile(int fileNo) throws Exception;
 
   boolean deleteAttachedFile(int fileNo) throws Exception;
 

@@ -19,7 +19,7 @@ public class Recommendation {
   private int tpno; // 이동수단번호
 
   private Member writer; // 글쓴 회원정보
-  private List<JangSoReview> jangSoReviews;
+  //private List<JangSoReview> jangSoReviews;
 
 
   public int getRecono() {
@@ -118,13 +118,13 @@ public class Recommendation {
     this.writer = writer;
   }
 
-  public List<JangSoReview> getJangSoReviews() {
-    return jangSoReviews;
-  }
-
-  public void setJangSoReviews(List<JangSoReview> jangSoReviews) {
-    this.jangSoReviews = jangSoReviews;
-  }
+//  public List<JangSoReview> getJangSoReviews() {
+//    return jangSoReviews;
+//  }
+//
+//  public void setJangSoReviews(List<JangSoReview> jangSoReviews) {
+//    this.jangSoReviews = jangSoReviews;
+//  }
 
   @Override
   public String toString() {
@@ -141,7 +141,7 @@ public class Recommendation {
             ", solo=" + solo +
             ", tpno=" + tpno +
             ", writer=" + writer +
-            ", jangSoReviews=" + jangSoReviews +
+            //", jangSoReviews=" + jangSoReviews +
             '}';
   }
 }

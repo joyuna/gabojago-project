@@ -89,6 +89,7 @@ public class RecommendationController {
   @GetMapping("jangSoReviewList")
   public void jangSoReviewList(int recono, Model model) throws Exception {
     model.addAttribute("jangSoReviews", jangSoReviewService.jangSoReviewList(recono));
+//    model.addAttribute("jangSos", jangSoReviewService.jangSo(recono));
   }
 
 //  @GetMapping("detail")

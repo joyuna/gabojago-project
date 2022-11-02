@@ -9,16 +9,19 @@
         <result column="PRVNO" property="prvno"/>
         <result column="CONT" property="cont"/>
         <result column="RECONO" property="recono"/>
+        <result column="PLNO" property="plno"/>
+        <result column="PLNAME" property="plname"/>
 <!--        <result column="JANGSO" property="jangSo"/>-->
     </resultMap>
 
     <select id="jangSoReviewList" resultMap="jangSoReviewMap">
         select
-            cont
+            jsr.cont, jsr.plno, js.plname
         from
-            jang_so_review
+            jang_so_review jsr, jang_so js
         where
-            recono = #{value}
+            jsr.recono = #{value}
+            and jsr.plno = js.plno
     </select> <!-- 나중에 장소 테이블 추가해야함 -->
 
 <!-- 상세보기-->

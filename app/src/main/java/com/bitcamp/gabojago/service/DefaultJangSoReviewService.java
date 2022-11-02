@@ -2,8 +2,9 @@
 package com.bitcamp.gabojago.service;
 
 import com.bitcamp.gabojago.dao.JangSoReviewDao;
+import com.bitcamp.gabojago.vo.JangSo;
 import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.RecAttachedFile;
+import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,13 @@ public class DefaultJangSoReviewService implements JangSoReviewService  {
     return jangSoReviewDao.jangSoReviewList(recono);
   }
 
+//  @Override
+//  public JangSo jangSo(int recono) throws Exception {
+//    return jangSoReviewDao.jangSo(recono);
+//  }
+
   @Override
-  public RecAttachedFile getAttachedFile(int fileNo) throws Exception {
+  public JangSoReviewAttachedFile getAttachedFile(int fileNo) throws Exception {
     return null;
   }
 
