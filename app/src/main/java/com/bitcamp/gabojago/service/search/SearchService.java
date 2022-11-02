@@ -1,19 +1,19 @@
 package com.bitcamp.gabojago.service.search;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.management.BadStringOperationException;
 
-public interface SearchService {
+public interface SearchService<T> {
   
-  List<Map<String, String>> getResult(String searchType, String keyword) throws BadStringOperationException;
- 
-  default List<Map<String, String>> getResultByBetweenDates(Date startDate, Date endDate, String keyword){
-    throw new UnsupportedOperationException();
+  List<T> getResult(String searchType, String keyword) throws BadStringOperationException;
+  
+  default List<T> getResultByDates(Date date){
+    return Collections.emptyList();
   }
   
-  default List<Map<String, String>> getResultByStars(int star, String keyword){
-    throw new UnsupportedOperationException();
+  default List<T> getResultByStars(int star, String keyword){
+    return Collections.emptyList();
   }
 }

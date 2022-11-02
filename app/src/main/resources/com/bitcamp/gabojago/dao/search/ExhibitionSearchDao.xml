@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gabojago.dao.ExhibitionDao">
+
+    <!-- 자바 객체의 프로퍼티와 컬럼 이름을 연결 -->
+    <resultMap type="exhibition" id="exhibitionMap">
+        <result column="EXNO" property="exno"/>
+        <result column="EXNAME" property="exname"/>
+        <result column="CONT" property="cont"/>
+        <result column="WDATE" property="wdate"/>
+        <result column="PLNO" property="plno"/>
+        <result column="STDATE" property="stdate"/>
+        <result column="EDDATE" property="eddate"/>
+        <result column="PRICE" property="price"/>
+    </resultMap>
+</mapper>
+
+-- detailResultByTitle
+SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+ON ex.EXNO = ex_file.EXNO
+-- LIKE 절의 와일드카드 타입이 최상단 위치 시, Full Table Scan
+-- 최적화 가능 여부?
+WHERE ex.EXNAME LIKE '%keyword%';
+
+-- detailResultByContent
+SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+ON ex.EXNO = ex_file.EXNO
+WHERE ex.CONT LIKE '%keyword%';
+
+-- detailResultByTitleWithContent
+SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+ON ex.EXNO = ex_file.EXNO
+WHERE ex.EXNAME LIKE '%keyword%' OR ex.CONT LIKE '%keyword%';
+
+-- detailResultByDate
+SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+ON ex.EXNO = ex_file.EXNO
+-- BETWEEN vs DATE_ADD
+WHERE DATE('date') BETWEEN ex.STDATE AND ex.EDDATE; 
+
+-- resultByID
+SELECT review.ID, review.CONT, review.WDATE
+FROM jang_exhibition_review AS review
+-- ID는 정확히 일치해야 한다.
+WHERE review.ID IN('keyword');
+
+-- resultByDate
+
+-- resultByContent
