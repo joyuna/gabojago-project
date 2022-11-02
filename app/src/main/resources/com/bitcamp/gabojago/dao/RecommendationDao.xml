@@ -24,10 +24,6 @@
             recono, title, wdate
         from
             jang_so_recommendation
-
-        <!--  where
-          (jexhb.STDATE  <![CDATA[<]]> CURDATE()) and (jexhb.EDDATE <![CDATA[>]]> CURDATE())-->
-
     </select>
 
 <!-- 상세보기-->

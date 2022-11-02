@@ -80,6 +80,11 @@ public class RecommendationController {
     model.addAttribute("recommendations", recommendationService.recommendationList());
   }
 
+  @GetMapping("testrecom")
+  public void test() {
+
+  }
+
 //  @GetMapping("detail")
 //  public Map detail(int no) throws Exception {
 //    Board board = boardService.get(no);
