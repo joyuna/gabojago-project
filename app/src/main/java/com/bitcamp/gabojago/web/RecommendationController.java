@@ -2,6 +2,7 @@ package com.bitcamp.gabojago.web;
 
 import javax.servlet.ServletContext;
 
+import com.bitcamp.gabojago.service.JangSoReviewService;
 import com.bitcamp.gabojago.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,8 @@ public class RecommendationController {
   ServletContext sc;
   @Autowired
   RecommendationService recommendationService;
-  //@Autowired
-  //JangSoReviewService jangSoReviewService;
+  @Autowired
+  JangSoReviewService jangSoReviewService;
 
   public RecommendationController() {
     System.out.println("RecommendationController() 호출됨!");
@@ -76,13 +77,18 @@ public class RecommendationController {
 //  }
 
   @GetMapping("recommendationList")
-  public void list(Model model) throws Exception {
+  public void recommendationList(Model model) throws Exception {
     model.addAttribute("recommendations", recommendationService.recommendationList());
   }
 
   @GetMapping("testrecom")
   public void test() {
 
+  }
+
+  @GetMapping("jangSoReviewList")
+  public void jangSoReviewList(int recono, Model model) throws Exception {
+    model.addAttribute("jangSoReviews", jangSoReviewService.jangSoReviewList(recono));
   }
 
 //  @GetMapping("detail")

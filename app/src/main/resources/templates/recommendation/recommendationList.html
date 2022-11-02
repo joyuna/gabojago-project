@@ -26,8 +26,8 @@ tr:hover {
     <tr data-th-each="recommendation : ${recommendations}">
       <td data-th-text="${recommendation.recono}">100</td>
       <td>
-        <a href='detail?recno=1'
-           data-th-href="@{detail(no=${recommendation.recono})}"
+        <a href='jangSoReviewList?recono=1'
+           data-th-href="@{jangSoReviewList(recono=${recommendation.recono})}"
            data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}">제목</a>
       </td>
 <!--      <td data-th-text="${recommendation.viewCount}">17</td>-->

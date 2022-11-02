@@ -10,11 +10,11 @@ import java.util.List;
 public interface RecommendationDao {
   List<Recommendation> recommendationList(); // 나중에 날짜 받기
 
-  Recommendation recommendationSelect(int recno);
+  Recommendation recommendationSelect(int recono);
 
   int exhibitionInsert(Recommendation recommendation);
 
-  int delete(int recno);
+  int delete(int recono);
 
   int update(Recommendation recommendation);
 

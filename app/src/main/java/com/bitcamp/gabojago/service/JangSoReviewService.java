@@ -1,5 +1,6 @@
 package com.bitcamp.gabojago.service;
 
+import com.bitcamp.gabojago.vo.JangSoReview;
 import com.bitcamp.gabojago.vo.RecAttachedFile;
 import com.bitcamp.gabojago.vo.Recommendation;
 
@@ -16,7 +17,7 @@ public interface JangSoReviewService {
 
   //boolean delete(int no) throws Exception;
 
-  //List<Recommendation> list() throws Exception;
+  List<JangSoReview> jangSoReviewList(int recoNo) throws Exception;
 
   RecAttachedFile getAttachedFile(int fileNo) throws Exception;
 
