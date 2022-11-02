@@ -35,4 +35,9 @@ public class DefaultMemberService implements MemberService {
     }
   }
 
+  @Override
+  public Member phoneNoCheck(String phoneNo) throws Exception {
+    return memberDao.findByPhoneNo(phoneNo);
+  }
+
 }
