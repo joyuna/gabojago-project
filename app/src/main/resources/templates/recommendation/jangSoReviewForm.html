@@ -1,63 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>gabojago 코스추천_입력페이지</title>
-  <style>
-    .search {
-      position: relative;
-      width: 300px;
-    }
-
-    .search>input {
-      width: 100%;
-      border: 1px solid #bbb;
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-
-    .search>img {
-      position : absolute;
-      width: 17px;
-      top: 10px;
-      right: 12px;
-      margin: 0;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>가보자GO 코스추천_입력페이지</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<h1>코스추천_입력페이지</h1>
+  <h1>코스추천_입력페이지</h1>
 
-<form action='add' method="post" enctype="multipart/form-data">
+  <form action='jangSoReviewAdd' method="post" enctype="multipart/form-data">
 
-  <p>
-    <button type='submit'>저장</button>
-    <a href='recommendationList'>취소</a>
-  </p>
+    <input name='title' type='text' size='60' placeholder="한줄에 사로잡는 제목">
 
-  <td><input name='title' type='text' size='60' palceholder="한줄에 사로잡는 제목"></td>
+    <br>
+    <br>
 
-  <div class="search">
-    <input type="text" placeholder="다녀온 장소의 이름을 입력해주세요.">
-    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-  </div>
+    <select name="구 선택">
+      <option value="강남구">강남구</option>
+      <option value="노원구">노원구</option>
+      <option value="동작구">동작구</option>
+      <option value="마포구">마포구</option>
+      <option value="영등포구">영등포구</option>
+    </select>
 
-<table border='1'>
+    <br>
+    <br>
 
-  <tr>
-    <th>사진</th><td><img src="https://via.placeholder.com/150"></td>
-    <th>내용</th><td><textarea name='cont' rows='10' cols='40'></textarea></td>
-  </tr>
+    <input type="text" placeholder="입력하실 장소의 주소를 검색해주세요" size="60">
+    <button>검색</button>
 
-<!--  <tr>-->
-<!--    <th>첨부파일</th><td><input name='files' type="file" multiple></td>-->
-<!--  </tr>-->
-</table>
+    <br>
+    <br>
 
-</form>
+    <button id="add-form-btn" class="add-form-btn" type="button">추가</button>
 
-  <button type='submit'>추가</button>
+    <div id="total-form-div" style="border: solid;">
+      <form id="total-form" action="lastsubmit">
+        <div class="copied-form" style="border: solid; color: red;">
+          <input name="files" type="file" multiple>
+          <input name="cont" type="text" placeholder="해당 장소에 대하여 설명을 적어주세요" size="100">
+        </div>
+      </form>
+    </div>
+
+    <p>
+      <button id="add-jang-so-review-btn" type='submit'>저장</button>
+      <a href='recommendationList'>취소</a>
+    </p>
+  </form>
+
+
+
+
+  <script>
+    document.getElementById("add-form-btn").onclick = () => {
+      var tot = document.getElementById("total-form");
+      var origin = tot.innerHTML;
+      tot.innerHTML = origin + `      <div class="copied-form" style="border: solid; color: red;">
+      <input type="file" multiple>
+      <input type="text" placeholder="해당 장소에 대하여 설명을 적어주세요" size="100">
+    </div>`;
+    };
+
+  </script>
+
+
 
 </body>
 </html>
