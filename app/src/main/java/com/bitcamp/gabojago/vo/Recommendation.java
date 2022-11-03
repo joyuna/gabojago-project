@@ -20,7 +20,7 @@ public class Recommendation {
 
   private Member writer; // 글쓴 회원정보
   //private List<JangSoReview> jangSoReviews;
-
+  private JangSoReview jangSoReview;
 
   public int getRecono() {
     return recono;
@@ -118,18 +118,18 @@ public class Recommendation {
     this.writer = writer;
   }
 
-//  public List<JangSoReview> getJangSoReviews() {
-//    return jangSoReviews;
-//  }
-//
-//  public void setJangSoReviews(List<JangSoReview> jangSoReviews) {
-//    this.jangSoReviews = jangSoReviews;
-//  }
+  public JangSoReview getJangSoReview() {
+    return jangSoReview;
+  }
+
+  public void setJangSoReview(JangSoReview jangSoReview) {
+    this.jangSoReview = jangSoReview;
+  }
 
   @Override
   public String toString() {
     return "Recommendation{" +
-            "recno=" + recono +
+            "recono=" + recono +
             ", title='" + title + '\'' +
             ", wdate=" + wdate +
             ", cnt=" + cnt +
@@ -141,7 +141,7 @@ public class Recommendation {
             ", solo=" + solo +
             ", tpno=" + tpno +
             ", writer=" + writer +
-            //", jangSoReviews=" + jangSoReviews +
+            ", jangSoReview=" + jangSoReview +
             '}';
   }
 }

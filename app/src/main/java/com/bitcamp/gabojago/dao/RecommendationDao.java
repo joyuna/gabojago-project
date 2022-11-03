@@ -1,6 +1,7 @@
 package com.bitcamp.gabojago.dao;
 
 import com.bitcamp.gabojago.vo.Exhibition;
+import com.bitcamp.gabojago.vo.JangSoReview;
 import com.bitcamp.gabojago.vo.Recommendation;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,10 +13,10 @@ public interface RecommendationDao {
 
   Recommendation recommendationSelect(int recono);
 
-  int exhibitionInsert(Recommendation recommendation);
+  int janSoReviewAdd(JangSoReview jangSoReview);
 
-  int delete(int recono);
+//  int delete(int recono);
 
-  int update(Recommendation recommendation);
+//  int update(Recommendation recommendation);
 
 }

@@ -1,13 +1,16 @@
 package com.bitcamp.gabojago.service;
 
+import com.bitcamp.gabojago.vo.JangSoReview;
 import com.bitcamp.gabojago.vo.Recommendation;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
 public interface RecommendationService {
 
-  void add(Recommendation recommendation) throws Exception;
+  void add(JangSoReview jangSoReview) throws Exception;
 
   boolean update(Recommendation recommendation) throws Exception;
 

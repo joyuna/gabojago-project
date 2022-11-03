@@ -17,7 +17,18 @@
         <result column="FMLY" property="fmly"/>
         <result column="SOLO" property="solo"/>
         <result column="TPNO" property="tpno"/>
+
+        <collection property="jangSoReview" javaType="jangSoReview">
+            <id column="PRVNO" property="prvno"/>
+            <result column="CONT" property="cont"/>
+        </collection>
+
+<!--        <collection property="jangSo" javaType="jangSo">-->
+<!--            <id column="PLNO" property="plno"/>-->
+<!--            <result column="PLNAME" property="plname"/>-->
+<!--        </collection>-->
     </resultMap>
+
 
     <select id="recommendationList" resultMap="recommendationMap">
         select
@@ -25,6 +36,14 @@
         from
             jang_so_recommendation
     </select>
+
+    <insert id="janSoReviewAdd" parameterType="jangSoReview">
+        insert into jang_so_recommendation(id, title, wdate, cnt, act, frd, cple, fmly, solo, tpno)
+        values('user8', #{title} , '2022-11-03', 9, ture, true, true, true, true, 1);
+
+        insert into jang_so_review(cont, recono, plno)
+        values(#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2);
+    </insert>
 
 <!-- 상세보기-->
 <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->

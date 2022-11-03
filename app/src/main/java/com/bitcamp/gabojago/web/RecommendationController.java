@@ -1,14 +1,29 @@
 package com.bitcamp.gabojago.web;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.bitcamp.gabojago.service.JangSoReviewService;
 import com.bitcamp.gabojago.service.RecommendationService;
+import com.bitcamp.gabojago.vo.JangSoReview;
+import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
+import com.bitcamp.gabojago.vo.Member;
+import com.bitcamp.gabojago.vo.Recommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/recommendation/")
@@ -25,27 +40,21 @@ public class RecommendationController {
   }
 
   // InternalResourceViewResolver 사용 후:
-//  @GetMapping("form")
-//  public void form() throws Exception {
-//  }
+  @GetMapping("jangSoReviewForm")
+  public void form() throws Exception {
+  }
 
-//  @PostMapping("add")
-//  public String add(
-//      JangSoReview jangSoReview, Recommendation recommendation
-//      MultipartFile[] files,
-//      HttpSession session) throws Exception {
-//
-//    jangSoReview.setAttachedFiles(saveAttachedFiles(files));
-//    recommendation.setWriter((Member) session.getAttribute("loginMember"));
-//
-//    boardService.add(board);
-//    return "redirect:list";
-//  }
+  @PostMapping("jangSoReviewAdd")
+  public String add(
+          JangSoReview jangSoReview, Recommendation recommendation) throws Exception {
+    recommendationService.add(jangSoReview);
+    return "redirect:recommendationList";
+  }
 
-//  private List<AttachedFile> saveAttachedFiles(Part[] files)
+//  private List<JangSoReviewAttachedFile> saveAttachedFiles(Part[] files)
 //      throws IOException, ServletException {
-//    List<AttachedFile> attachedFiles = new ArrayList<>();
-//    String dirPath = sc.getRealPath("/board/files");
+//    List<JangSoReviewAttachedFile> attachedFiles = new ArrayList<>();
+//    String dirPath = sc.getRealPath("/jangSoReview/files");
 //
 //    for (Part part : files) {
 //      if (part.getSize() == 0) {
@@ -54,15 +63,15 @@ public class RecommendationController {
 //
 //      String filename = UUID.randomUUID().toString();
 //      part.write(dirPath + "/" + filename);
-//      attachedFiles.add(new AttachedFile(filename));
+//      attachedFiles.add(new JangSoReviewAttachedFile(filename));
 //    }
 //    return attachedFiles;
 //  }
-
-//  private List<AttachedFile> saveAttachedFiles(MultipartFile[] files)
+//
+//  private List<JangSoReviewAttachedFile> saveAttachedFiles(MultipartFile[] files)
 //      throws IOException, ServletException {
-//    List<AttachedFile> attachedFiles = new ArrayList<>();
-//    String dirPath = sc.getRealPath("/board/files");
+//    List<JangSoReviewAttachedFile> attachedFiles = new ArrayList<>();
+//    String dirPath = sc.getRealPath("/jangSoReview/files");
 //
 //    for (MultipartFile part : files) {
 //      if (part.isEmpty()) {
@@ -71,7 +80,7 @@ public class RecommendationController {
 //
 //      String filename = UUID.randomUUID().toString();
 //      part.transferTo(new File(dirPath + "/" + filename));
-//      attachedFiles.add(new AttachedFile(filename));
+//      attachedFiles.add(new JangSoReviewAttachedFile(filename));
 //    }
 //    return attachedFiles;
 //  }
@@ -91,6 +100,7 @@ public class RecommendationController {
     model.addAttribute("jangSoReviews", jangSoReviewService.jangSoReviewList(recono));
 //    model.addAttribute("jangSos", jangSoReviewService.jangSo(recono));
   }
+
 
 //  @GetMapping("detail")
 //  public Map detail(int no) throws Exception {
