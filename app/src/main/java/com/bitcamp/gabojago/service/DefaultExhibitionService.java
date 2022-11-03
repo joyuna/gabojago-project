@@ -1,7 +1,9 @@
 package com.bitcamp.gabojago.service;
 
 import com.bitcamp.gabojago.dao.ExhibitionDao;
+import com.bitcamp.gabojago.dao.ExhibitionReviewDao;
 import com.bitcamp.gabojago.vo.Exhibition;
+import com.bitcamp.gabojago.vo.ExhibitionFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,9 @@ import java.util.List;
 public class DefaultExhibitionService implements ExhibitionService  {
   @Autowired
   ExhibitionDao exhibitionDao;
+
+  @Autowired
+  ExhibitionReviewDao exhibitionReviewDao;
 
   @Override
   public List<Exhibition> exhibitionList() throws Exception {
@@ -29,16 +34,20 @@ public class DefaultExhibitionService implements ExhibitionService  {
     if (exhibitionDao.exhibitionInsert(exhibition) == 0) {
       throw new Exception("게시글 등록 실패!");
     }
-
     // 2) 첨부파일 등록 나중에 생성
-
+if (exhibition.getExhibitionFiles().size()>0){
+  exhibitionDao.insertFiles(exhibition);
+}
   }
 
   @Transactional
   @Override
   public boolean delete(int exno) throws Exception {
     // 1) 첨부파일 삭제
+    exhibitionDao.deleteFiles(exno);
+
     // 2) 리뷰 삭제
+    exhibitionReviewDao.exhibitionReviewDelete(exno); // 테스트 필요
 
     // 3) 게시글 삭제
     return exhibitionDao.delete(exno) > 0;
@@ -53,8 +62,9 @@ public class DefaultExhibitionService implements ExhibitionService  {
       return false;
     }
     //2) 첨부파일 등록
-
-
+    if(exhibition.getExhibitionFiles().size()>0){
+      exhibitionDao.insertFiles(exhibition);
+    }
     return true;
   }
 
@@ -63,4 +73,14 @@ public class DefaultExhibitionService implements ExhibitionService  {
     return exhibitionDao.exhibitionSelect(exno);
   }
 
+
+  @Override
+  public ExhibitionFile getExhibitionFile(int exfno) throws Exception {
+    return exhibitionDao.findFileByNo(exfno);
+  }
+
+  @Override
+  public boolean deleteExhibitionFile(int exfno) throws Exception {
+    return exhibitionDao.deleteFile(exfno) > 0;
+  }
 }

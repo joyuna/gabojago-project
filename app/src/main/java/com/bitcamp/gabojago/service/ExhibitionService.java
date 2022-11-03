@@ -1,6 +1,7 @@
 package com.bitcamp.gabojago.service;
 
 import com.bitcamp.gabojago.vo.Exhibition;
+import com.bitcamp.gabojago.vo.ExhibitionFile;
 
 import java.util.List;
 
@@ -18,6 +19,11 @@ public interface ExhibitionService {
   boolean update(Exhibition exhibition) throws Exception;
 
   Exhibition get (int exno) throws Exception;
+
+  // 첨부파일
+ExhibitionFile getExhibitionFile(int exfno) throws Exception;
+
+boolean deleteExhibitionFile(int exfno) throws Exception;
 
 
 }

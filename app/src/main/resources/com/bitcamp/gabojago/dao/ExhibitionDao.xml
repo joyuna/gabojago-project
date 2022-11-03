@@ -15,10 +15,20 @@
         <result column="EDDATE" property="eddate"/>
         <result column="PRICE" property="price"/>
 
-
+        <!-- 조인 결과에서 같은 게시글에 대해 여러 개의 첨부 파일 데이터를 담을 경우 -->
+        <collection property="exhibitionFiles" ofType="exhibitionFile">
+            <id column="exfno" property="exfno"/>
+            <result column="path" property="path"/>
+            <result column="fname" property="fname"/>
+        </collection>
     </resultMap>
 
-
+    <resultMap type="exhibitionFile" id="exhibitionFileMap">
+        <id column="exfno" property="exfno"/>
+        <result column="path" property="path"/>
+        <result column="fname" property="fname"/>
+        <result column="exno" property="exno"/>
+    </resultMap>
 
 
 
@@ -80,6 +90,59 @@
         PRICE= #{price}
         where jang_exhibition.EXNO= #{exno}
     </update>
+
+
+
+    <!-- 첨부파일 -->
+
+    <select id="findFilesByExhibition" resultMap="exhibitionFileMap">
+        select
+        exfno,
+        path,
+        exno,
+        fname
+        from
+        jang_exhibition_file
+        where
+        exno = #{exno}
+    </select>
+
+    <insert id="insertFiles" parameterType="exhibition">
+        insert into jang_exhibition_file(path,fname,exno)
+        values
+        <foreach collection="exhibitionFiles" item="file" separator=",">
+            (#{file.path,fname},#{exno})
+        </foreach>
+    </insert>
+
+
+    <delete id="deleteFiles">
+        delete from jang_exhibition_file
+        where exno= #{value}
+    </delete>
+
+<!--    <delete id="deleteFilesByMemberBoards">
+        delete from  jang_exhibition_file
+        where exno in (select bno from app_board where mno = #{value})
+    </delete>-->
+
+    <delete id="deleteFile">
+        delete from jang_exhibition_file
+        where exfno=#{value};
+    </delete>
+
+    <select id="findFileByNo" resultMap="exhibitionFileMap">
+        select
+        exfno,
+        path,
+        exno,
+        fname
+        from
+        jang_exhibition_file
+        where
+        exno = #{value};
+    </select>
+
 
 
 

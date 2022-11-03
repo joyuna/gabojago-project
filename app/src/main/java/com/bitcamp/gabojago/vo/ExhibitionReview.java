@@ -10,6 +10,9 @@ public class ExhibitionReview {
   private String id; // 아이디
   private int exno; // 전시회 번호
 
+
+
+
   public int getRvno() {
     return rvno;
   }

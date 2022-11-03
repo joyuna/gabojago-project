@@ -15,6 +15,7 @@ public class Exhibition {
   private int price; // 가격
 
 // 첨부파일 정보를 저장할 필드
+private List<ExhibitionFile> exhibitionFiles;
 
 
   public int getExno() {
@@ -81,6 +82,13 @@ public class Exhibition {
     this.price = price;
   }
 
+  public List<ExhibitionFile> getExhibitionFiles() {
+    return exhibitionFiles;
+  }
+
+  public void setExhibitionFiles(List<ExhibitionFile> exhibitionFiles) {
+    this.exhibitionFiles = exhibitionFiles;
+  }
 
   @Override
   public String toString() {

@@ -60,6 +60,10 @@
 
 
 
+
+
+
+
 <!--
 <table>
   <tr>
@@ -89,23 +93,22 @@
 
 
 
-    <!--    <tr>
-          <th>첨부파일</th>
-          <td>
-            <ul>
-              <li data-th-each="file : ${exhibition.attachedFiles}">
-                <a href="files/test.gif"
-                   data-th-href="@{files/{path}(path=${file.filepath})}"
-                   data-th-text="${file.filepath}">test.gif</a>
+  <tr>
+    <th>첨부파일</th>
+    <td>
+      <ul>
+        <li data-th-each="file : ${exhibition.exhibitionFiles}">
+          <a href="files/test.gif"
+             data-th-href="@{files/{path}(path=${file.path})}"
+             data-th-text="${file.path}">test.gif</a>
 
-                [<a href="fileDelete?no=1"
-                    data-th-href="@{fileDelete(no=${file.no})}">삭제</a>]
-              </li>
-            </ul>
-            파일 추가: <input name='files' type="file" multiple>
-          </td>
-        </tr>
-       첨부파일 나중에 작성  -->
+          [<a href="fileDelete?exfno=1"
+              data-th-href="@{fileDelete(no=${file.exfno})}">삭제</a>]
+        </li>
+      </ul>
+      파일 추가: <input name='files' type="file" multiple>
+    </td>
+  </tr>
 
 
 
@@ -117,17 +120,35 @@
        data-th-href="@{delete(exno=${exhibition.exno})}">삭제</a>
     <a href='exhibitionlist'>목록</a>
   </p>
+
+
+  <!-- Footer-->
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy;가보자GO</p>
+    </div>
+  </footer>
+
+  <style>
+    footer {
+      /* footer를 aside위에 올리기 위해 사용(부유객체) */
+      position: relative;
+      height: 60px;
+      width: 100%;
+      padding: 0 25px;
+      line-height: 60px;
+      color: white;
+      border-top: 1px solid #dee5e7;
+      background-color: #343A40;
+    }
+  </style>
+
 </form>
 
 <script>
   $(document).ready(function() {
     $('textarea[name=cont]').html('[[${exhibition.cont}]]')
-    $('textarea[name=cont]').summernote({height: 200});
-
-/*    $('textarea[name=content]').summernote({toolbar:false});
-    $('textarea[name=content]').summernote('disable');
-    읽기 전용
-    */
+    $('textarea[name=cont]').summernote({height: 400});
   });
 </script>
 
