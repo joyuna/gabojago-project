@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RecommendationService {
 
-  void add(JangSoReview jangSoReview) throws Exception;
+  void recommendationAdd(Recommendation recommendation) throws Exception;
 
   boolean update(Recommendation recommendation) throws Exception;
 

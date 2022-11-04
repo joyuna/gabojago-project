@@ -13,6 +13,7 @@ import com.bitcamp.gabojago.vo.Member;
 import com.bitcamp.gabojago.vo.Recommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,10 +45,12 @@ public class RecommendationController {
   public void form() throws Exception {
   }
 
-  @PostMapping("jangSoReviewAdd")
+  @Transactional
+  @PostMapping("recommendationAdd")
   public String add(
           JangSoReview jangSoReview, Recommendation recommendation) throws Exception {
-    recommendationService.add(jangSoReview);
+    recommendationService.recommendationAdd(recommendation);
+    jangSoReviewService.jangSoReviewAdd(jangSoReview);
     return "redirect:recommendationList";
   }
 

@@ -15,6 +15,12 @@ public class DefaultJangSoReviewService implements JangSoReviewService  {
 
   @Autowired
   JangSoReviewDao jangSoReviewDao;
+
+  @Override
+  public int jangSoReviewAdd(JangSoReview jangSoReview) throws Exception {
+    return jangSoReviewDao.jangSoReviewAdd(jangSoReview);
+  }
+
   @Override
   public List<JangSoReview> jangSoReviewList(int recono) throws Exception {
     return jangSoReviewDao.jangSoReviewList(recono);

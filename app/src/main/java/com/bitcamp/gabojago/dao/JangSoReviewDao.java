@@ -13,6 +13,8 @@ public interface JangSoReviewDao {
 
   List<JangSoReview> jangSoReviewList(int recono);
 
+  int jangSoReviewAdd(JangSoReview jangSoReview);
+
   //Recommendation recommendationSelect(int recono);
 
   //int exhibitionInsert(Recommendation recommendation);

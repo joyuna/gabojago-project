@@ -37,14 +37,9 @@
         jang_so_recommendation
     </select>
 
-    <insert id="jangSoReviewAdd" parameterType="recommendation">
+    <insert id="recommendationAdd" parameterType="recommendation">
         insert into jang_so_recommendation(id, title, wdate, cnt, act, frd, cple, fmly, solo, tpno)
         values('user8', #{title} , '2022-11-03', 9, true, true, true, true, true, 1)
-    </insert>
-    <insert id="jangSoReviewAdd2" parameterType="jangSoReview">
-
-        <!--        insert into jang_so_review(cont, recono, plno)-->
-        <!--        values(#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2)-->
     </insert>
 
     <!-- 상세보기-->

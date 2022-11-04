@@ -9,17 +9,9 @@ import java.util.List;
 
 public interface JangSoReviewService {
 
-  //void add(Recommendation recommendation) throws Exception;
-
-  //boolean update(Recommendation recommendation) throws Exception;
-
-  //Recommendation get(int no) throws Exception;
-
-  //boolean delete(int no) throws Exception;
+  int jangSoReviewAdd(JangSoReview jangSoReview) throws Exception;
 
   List<JangSoReview> jangSoReviewList(int recono) throws Exception;
-
-//  JangSo jangSo (int recono) throws Exception;
 
   JangSoReviewAttachedFile getAttachedFile(int fileNo) throws Exception;
 
