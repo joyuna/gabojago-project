@@ -98,19 +98,6 @@ public class AuthController {
   public void loginfail() {
   }
 
-  @PostMapping("join")
-  public String join(
-          String id,
-          String loginPw,
-          String loginPwConfirm,
-          String name,
-          String email,
-          String nickname,
-          String cellphoneNo
-          ) {
-    return "";
-  }
-
   @PostMapping("login")
   public ModelAndView login(
           String id,
