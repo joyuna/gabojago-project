@@ -12,7 +12,7 @@ public class ExhibitionFile {
 public ExhibitionFile(){}
 
   public ExhibitionFile(String fname, String path){
-
+  this.fname=fname;
   this.path = path;
   }
 

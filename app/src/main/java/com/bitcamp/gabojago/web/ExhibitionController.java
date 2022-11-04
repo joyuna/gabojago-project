@@ -58,14 +58,15 @@ public class ExhibitionController {
   private List<ExhibitionFile> saveExhibitionFiles(MultipartFile[] files)
       throws IOException, ServletException {
     List<ExhibitionFile> exhibitionFiles = new ArrayList<>();
-
+///src/main/webapp/board/files
      String path = servletContext.getRealPath("/board/files");
-
+    System.out.println("호출:" + path);
     for (MultipartFile part : files) {
       if (part.isEmpty()) {
         continue;
       }
-
+// 다운로드 컨트롤러 준비
+      // 외부 파일 다운로드
       String fname = UUID.randomUUID().toString();
       part.transferTo(new File(path + "/" + fname));
       exhibitionFiles.add(new ExhibitionFile(fname));
