@@ -2,54 +2,89 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bitcamp.gabojago.dao.ExhibitionDao">
+<mapper namespace="com.bitcamp.gabojago.dao.search.ExhibitionSearchDAO">
 
-    <!-- 자바 객체의 프로퍼티와 컬럼 이름을 연결 -->
-    <resultMap type="exhibition" id="exhibitionMap">
-        <result column="EXNO" property="exno"/>
-        <result column="EXNAME" property="exname"/>
-        <result column="CONT" property="cont"/>
-        <result column="WDATE" property="wdate"/>
-        <result column="PLNO" property="plno"/>
-        <result column="STDATE" property="stdate"/>
-        <result column="EDDATE" property="eddate"/>
-        <result column="PRICE" property="price"/>
-    </resultMap>
+    
+    <!-- 제목으로 검색-->
+    <select id="detailResultByTitle" resultType="hashMap">
+      SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+      FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+      ON ex.EXNO = ex_file.EXNO
+      WHERE
+        <trim prefixOverrides="OR">
+          <foreach item="keyword" collection="array">
+              <trim prefix="OR">
+              <!-- 1. mybatis bind 사용 하여 CONCAT 함수 제거 예정
+                   2. LIKE 절의 와일드카드 타입이 최상단 위치 하면 Full Table Scan 하는데 이거 최적화 가능?-->
+                  ex.EXNAME LIKE CONCAT('%',#{keyword},'%')
+              </trim>
+          </foreach>
+          ;
+        </trim>
+    </select>
+
+    <!-- 내용으로 검색-->    
+    <select id="detailResultByContent" resultType="hashMap">
+      SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+      FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+      ON ex.EXNO = ex_file.EXNO
+      WHERE
+        <trim prefixOverrides="OR">
+          <foreach item="keyword" collection="array">
+              <trim prefix="OR">
+                  ex.CONT LIKE CONCAT('%',#{keyword},'%')
+              </trim>
+          </foreach>
+          ;
+        </trim>
+    </select>
+    
+    <!-- 제목 + 내용으로 검색-->
+    <select id="detailResultByTitleWithContent" resultType="hashMap">
+      SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+      FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+      ON ex.EXNO = ex_file.EXNO
+      WHERE
+        <trim prefixOverrides="OR">
+          <foreach item="keyword" collection="array">
+              <trim prefix="OR">
+                  ex.EXNAME LIKE CONCAT('%',#{keyword},'%')
+              </trim>
+          </foreach>
+          
+          <foreach item="keyword" collection="array">
+              <trim prefix="OR">
+                  ex.CONT LIKE CONCAT('%',#{keyword},'%')
+              </trim>
+          </foreach>
+          ;
+        </trim>
+    </select>
+    
+    <!-- 날짜로 검색 (미구현)
+    <select id="쓰지마" resultType="hashMap">
+      SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
+      FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
+      ON ex.EXNO = ex_file.EXNO
+      WHERE
+        <trim prefixOverrides="OR">
+          <foreach item="keyword" collection="array">
+              <trim prefix="OR">
+                  ex.EXNAME LIKE CONCAT('%',#{keyword},'%')
+              </trim>
+          </foreach>
+          
+          <foreach item="keyword" collection="array">
+              <trim prefix="OR">
+                  ex.CONT LIKE CONCAT('%',#{keyword},'%')
+              </trim>
+          </foreach>
+          ;
+        </trim>
+    </select>
+    -->
+    
+    
 </mapper>
 
--- detailResultByTitle
-SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
-FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
-ON ex.EXNO = ex_file.EXNO
--- LIKE 절의 와일드카드 타입이 최상단 위치 시, Full Table Scan
--- 최적화 가능 여부?
-WHERE ex.EXNAME LIKE '%keyword%';
 
--- detailResultByContent
-SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
-FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
-ON ex.EXNO = ex_file.EXNO
-WHERE ex.CONT LIKE '%keyword%';
-
--- detailResultByTitleWithContent
-SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
-FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
-ON ex.EXNO = ex_file.EXNO
-WHERE ex.EXNAME LIKE '%keyword%' OR ex.CONT LIKE '%keyword%';
-
--- detailResultByDate
-SELECT ex.EXNAME, ex.CONT, ex.STDATE, ex.EDDATE, ex.PRICE, ex_file.PATH
-FROM jang_exhibition AS ex INNER JOIN jang_exhibition_file AS ex_file
-ON ex.EXNO = ex_file.EXNO
--- BETWEEN vs DATE_ADD
-WHERE DATE('date') BETWEEN ex.STDATE AND ex.EDDATE; 
-
--- resultByID
-SELECT review.ID, review.CONT, review.WDATE
-FROM jang_exhibition_review AS review
--- ID는 정확히 일치해야 한다.
-WHERE review.ID IN('keyword');
-
--- resultByDate
-
--- resultByContent

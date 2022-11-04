@@ -7,32 +7,33 @@ import javax.management.BadStringOperationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bitcamp.gabojago.dao.search.ExhibitionSearchDAO;
-import com.bitcamp.gabojago.service.search.AbstractDetailSearchService;
+import com.bitcamp.gabojago.service.search.DetailSearchService;
 
 @Service
-public class ExhibitionSearchService extends AbstractDetailSearchService{
+public class ExhibitionSearchService implements DetailSearchService<ExhibitionSearchType>{
   
   @Autowired
   ExhibitionSearchDAO searchDAO;
   
   @Override
-  public List<Map<String, String>> getDetailResult(String type, String keyword) throws BadStringOperationException {
+  public List<Map<String, String>> getDetailResultByDates(Date date) {
+    return searchDAO.detailResultByDate(date);
+  }
+
+  @Override
+  public List<Map<String, String>> getDetailResult(ExhibitionSearchType type,
+      String keyword) throws BadStringOperationException {
     for(ExhibitionSearchType searchType : ExhibitionSearchType.values()) {
-      if(searchType.getType().equals(type)) {
+      if(searchType.equals(type)) {
         return searchType.execute(searchDAO, parseKeyword(keyword));
       }
     }
+
     throw new BadStringOperationException(keyword + " -> 사용할 수 없는 검색 조건입니다. 사용 가능 조건{"
-        + ExhibitionSearchType.TITLE.getType() + ", "
-        + ExhibitionSearchType.CONTENT.getType() + ", "
-        + ExhibitionSearchType.TITLE_WITH_CONTENT.getType() + ", "
-        + ExhibitionSearchType.DATE.getType()
+        + ExhibitionSearchType.TITLE.toString() + ", "
+        + ExhibitionSearchType.CONTENT.toString() + ", "
+        + ExhibitionSearchType.TITLE_WITH_CONTENT.toString() + ", "
+        + ExhibitionSearchType.DATE.toString()
         + "}");
-  }
-  
-  
-  @Override
-  public List<Map<String, String>> getDetailResultByDates(Date date) {
-    return searchDAO.detailResultByDate(date);
   }
 }

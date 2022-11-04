@@ -5,15 +5,19 @@ import java.util.Date;
 import java.util.List;
 import javax.management.BadStringOperationException;
 
-public interface SearchService<T> {
+public interface SearchService<T extends Enum<T>, V> {
   
-  List<T> getResult(String searchType, String keyword) throws BadStringOperationException;
+  List<V> getDetailResult(T type, String keyword) throws BadStringOperationException; 
   
-  default List<T> getResultByDates(Date date){
+  default List<V> getResultByDates(Date date){
     return Collections.emptyList();
   }
   
-  default List<T> getResultByStars(int star, String keyword){
+  default List<V> getResultByStars(int star, String keyword){
     return Collections.emptyList();
+  }
+  
+  default String[] parseKeyword(String keyword) {
+    return keyword.split(" ");
   }
 }
