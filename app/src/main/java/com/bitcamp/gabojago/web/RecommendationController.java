@@ -50,7 +50,6 @@ public class RecommendationController {
   public String add(
           JangSoReview jangSoReview, Recommendation recommendation, Model model) throws Exception {
     recommendationService.recommendationAdd(recommendation);
-    model.addAttribute("recommendation", recommendationService.getRecommendation(recommendation.getRecono()));
     jangSoReviewService.jangSoReviewAdd(jangSoReview);
     return "redirect:recommendationList";
   }
@@ -102,6 +101,7 @@ public class RecommendationController {
   @GetMapping("jangSoReviewList")
   public void jangSoReviewList(int recono, Model model) throws Exception {
     model.addAttribute("jangSoReviews", jangSoReviewService.jangSoReviewList(recono));
+    model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
 //    model.addAttribute("jangSos", jangSoReviewService.jangSo(recono));
   }
 
