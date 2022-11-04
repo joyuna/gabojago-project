@@ -48,8 +48,9 @@ public class RecommendationController {
   @Transactional
   @PostMapping("recommendationAdd")
   public String add(
-          JangSoReview jangSoReview, Recommendation recommendation) throws Exception {
+          JangSoReview jangSoReview, Recommendation recommendation, Model model) throws Exception {
     recommendationService.recommendationAdd(recommendation);
+    model.addAttribute("recommendation", recommendationService.getRecommendation(recommendation.getRecono()));
     jangSoReviewService.jangSoReviewAdd(jangSoReview);
     return "redirect:recommendationList";
   }

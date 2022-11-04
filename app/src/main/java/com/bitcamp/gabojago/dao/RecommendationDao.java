@@ -14,6 +14,8 @@ public interface RecommendationDao {
 
   int recommendationAdd(Recommendation recommendation);
 
+  Recommendation getRecommendation(int recono);
+
 //  int delete(int recono);
 
 //  int update(Recommendation recommendation);

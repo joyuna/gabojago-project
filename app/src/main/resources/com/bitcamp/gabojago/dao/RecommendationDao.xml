@@ -42,6 +42,24 @@
         values('user8', #{title} , '2022-11-03', 9, true, true, true, true, true, 1)
     </insert>
 
+    <select id="getRecommendation" resultMap="recommendationMap">
+        select
+        recono,
+        title,
+        cnt,
+        wdate,
+        act,
+        pet,
+        frd,
+        cple,
+        fmly,
+        solo,
+        tpno
+        from
+        jang_so_recommendation
+        where recono = #{value}
+    </select>
+
     <!-- 상세보기-->
     <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->
     <!--        select  * from jang_exhibition-->

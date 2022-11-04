@@ -30,6 +30,11 @@ public class DefaultRecommendationService implements RecommendationService  {
   }
 
   @Override
+  public Recommendation getRecommendation(int recono) throws Exception {
+    return recommendationDao.getRecommendation(recono);
+  }
+
+  @Override
   public List<Recommendation> recommendationList() throws Exception {
     return recommendationDao.recommendationList();
   }

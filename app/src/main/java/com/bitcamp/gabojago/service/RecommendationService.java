@@ -14,7 +14,7 @@ public interface RecommendationService {
 
   boolean update(Recommendation recommendation) throws Exception;
 
-  //Recommendation get(int no) throws Exception;
+  Recommendation getRecommendation(int recono) throws Exception;
 
   //boolean delete(int no) throws Exception;
 
