@@ -13,35 +13,62 @@
 <body>
 
 
-<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+  <form id="join_Form" action="join" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
 
 
-  <h2>회원가입</h2>
+    <h2>회원가입</h2>
 
-  <div class="textForm">
-    <input name="loginId" type="text" class="id" placeholder="아이디">
-  </div>
-  <div class="textForm">
-    <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
-  </div>
-  <div class="textForm">
-    <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
-  </div>
-  <div class="textForm">
-    <input name="name" type="password" class="name" placeholder="이름">
-  </div>
-  <div class="textForm">
-    <input name="email" type="text" class="email" placeholder="이메일">
-  </div>
-  <div class="textForm">
-    <input name="nickname" type="text" class="nickname" placeholder="닉네임">
-  </div>
-  <div class="textForm">
-    <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
-  </div>
-  <input type="submit" class="btn" value="J O I N"/>
-</form>
+    <div class="textForm">
+      <input id="idBox" name="id" type="text" class="id" placeholder="아이디">
+    </div>
+    <span id="idCheckBox" style="display: block; position: absolute; left: 8.2%; top: 17.4%; font-size: 13px;"></span>
+    <div class="textForm">
+      <input id="password" name="password" type="password" class="pw" placeholder="비밀번호">
+    </div>
+    <div class="textForm">
+      <input  id="passwordConfirm" name="passwordConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+    </div>
+    <div class="textForm">
+      <input name="name" type="text" class="name" placeholder="이름">
+    </div>
 
 
+
+    <div class="textForm">
+      <input name="email" type="text" class="email" placeholder="이메일">
+    </div>
+    <div class="c-btn">
+      <button type="button" class="c-btn-code">이메일 인증</button>
+    </div>
+    <span id="emailCodeBox" style="display: block; position: absolute; left: 8.2%; top: 56.6%; font-size: 13px;"></span>
+
+
+    <div class="textForm">
+      <input name="code" type="text" class="code" placeholder="인증코드">
+    </div>
+    <div class="s-btn">
+      <button type="button" class="s-btn-code">인증코드확인</button>
+    </div>
+    <span id="codeConfirmBox" style="display: block; position: absolute; left: 8.2%; top: 66.4%; font-size: 13px;"></span>
+
+    <div class="textForm">
+      <input id="nickNameBox" name="nickName" type="text" class="nickName" placeholder="별명">
+    </div>
+    <span id="nickNameCheckBox" style="display: block; position: absolute; left: 8.2%; top: 76.3%; font-size: 13px;"></span>
+    <div class="textForm">
+      <input name="phoneNo" type="text" class="cellphoneNo" placeholder="전화번호">
+    </div>
+    <span id="phoneNoCheckBox" style="display: block; position: absolute; left: 8.2%; top: 86%; font-size: 13px;"></span>
+    <input id="submitBtn" type="submit" class="btn" value="J O I N"/>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="../js/auth/join.js"></script>
+  <script th:inline="javascript">
+    var checkResult = [[${checkResult}]];
+    if (checkResult != null) {
+    alert("이미 가입하신 이메일 또는 전화번호가 있습니다.");
+    }
+  </script>
 </body>
 </html>
