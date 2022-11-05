@@ -18,7 +18,7 @@
         <result column="SOLO" property="solo"/>
         <result column="TPNO" property="tpno"/>
 
-        <collection property="jangSoReview" ofType="jangSoReview">
+        <collection property="jangSoReviews" ofType="jangSoReview">
             <id column="PRVNO" property="prvno"/>
             <result column="CONT" property="cont"/>
         </collection>
@@ -35,6 +35,8 @@
         recono, title, wdate
         from
         jang_so_recommendation
+        where
+        act=true
     </select>
 
     <insert id="recommendationAdd" parameterType="recommendation">
@@ -59,6 +61,14 @@
         jang_so_recommendation
         where recono = #{value}
     </select>
+
+    <update id="disableRecommend">
+        update jang_so_recommendation set
+        act=false
+        where recono=#{recono}
+    </update>
+
+
 
     <!-- 상세보기-->
     <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->

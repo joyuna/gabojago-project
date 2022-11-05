@@ -1,16 +1,17 @@
 package com.bitcamp.gabojago.web;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-
-import com.bitcamp.gabojago.service.JangSoReviewService;
-import com.bitcamp.gabojago.service.RecommendationService;
-import com.bitcamp.gabojago.vo.JangSoReview;
 import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Member;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.servlet.ServletContext;
+
+import com.bitcamp.gabojago.service.RecommendationService;
+import com.bitcamp.gabojago.vo.JangSoReview;
 import com.bitcamp.gabojago.vo.Recommendation;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/recommendation/")
@@ -33,8 +29,6 @@ public class RecommendationController {
   ServletContext sc;
   @Autowired
   RecommendationService recommendationService;
-  @Autowired
-  JangSoReviewService jangSoReviewService;
 
   public RecommendationController() {
     System.out.println("RecommendationController() 호출됨!");
@@ -47,10 +41,42 @@ public class RecommendationController {
 
   @Transactional
   @PostMapping("recommendationAdd")
-  public String add(
-          JangSoReview jangSoReview, Recommendation recommendation, Model model) throws Exception {
+  public String add(@RequestParam("files") MultipartFile[] files, HttpSession session,
+          JangSoReview jangSoReview, Recommendation recommendation) throws Exception {
+    recommendation.setWriter((Member) session.getAttribute("loginMember"));
+
+
+
     recommendationService.recommendationAdd(recommendation);
-    jangSoReviewService.jangSoReviewAdd(jangSoReview);
+    recommendationService.jangSoReviewAdd(jangSoReview);
+    return "redirect:recommendationList";
+  }
+
+  // 민구작성메서드
+  private List<JangSoReviewAttachedFile> saveJangSoReviewAttachedFiles(MultipartFile[] files) throws Exception {
+  List<JangSoReviewAttachedFile> jangSoReviewAttachedFiles = new ArrayList<>();
+  String dirPath = sc.getRealPath("/board/files");
+
+    for (MultipartFile file : files) {
+    if (file.isEmpty()) {
+      continue;
+    }
+
+    String filename = UUID.randomUUID().toString();
+    file.transferTo(new File(dirPath + "/" + filename));
+      jangSoReviewAttachedFiles.add(new JangSoReviewAttachedFile(filename));
+  }
+    return jangSoReviewAttachedFiles;
+  }
+
+
+  // 민구작성메서드
+  @GetMapping("disableRecommend")
+  public String disableRecommend(int recono) throws Exception {
+    if (!recommendationService.disableRecommend(recono)) {
+      throw new Exception("코스추천글 삭제 실패");
+    }
+
     return "redirect:recommendationList";
   }
 
@@ -100,7 +126,7 @@ public class RecommendationController {
 
   @GetMapping("jangSoReviewList")
   public void jangSoReviewList(int recono, Model model) throws Exception {
-    model.addAttribute("jangSoReviews", jangSoReviewService.jangSoReviewList(recono));
+    model.addAttribute("jangSoReviews", recommendationService.jangSoReviewList(recono));
     model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
 //    model.addAttribute("jangSos", jangSoReviewService.jangSo(recono));
   }

@@ -1,7 +1,9 @@
 package com.bitcamp.gabojago.service;
 
+import com.bitcamp.gabojago.dao.JangSoReviewDao;
 import com.bitcamp.gabojago.dao.RecommendationDao;
 import com.bitcamp.gabojago.vo.JangSoReview;
+import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Recommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ import java.util.List;
 public class DefaultRecommendationService implements RecommendationService  {
   @Autowired
   RecommendationDao recommendationDao;
+
+  @Autowired
+  JangSoReviewDao jangSoReviewDao;
 
 
   @Override
@@ -37,6 +42,39 @@ public class DefaultRecommendationService implements RecommendationService  {
   @Override
   public List<Recommendation> recommendationList() throws Exception {
     return recommendationDao.recommendationList();
+  }
+
+  @Override
+  public boolean disableRecommend(int recono) {
+    return recommendationDao.disableRecommend(recono) > 0;
+  }
+
+  // ---------------------------------------------------------
+
+
+  @Override
+  public int jangSoReviewAdd(JangSoReview jangSoReview) throws Exception {
+    return jangSoReviewDao.jangSoReviewAdd(jangSoReview);
+  }
+
+  @Override
+  public List<JangSoReview> jangSoReviewList(int recono) throws Exception {
+    return jangSoReviewDao.jangSoReviewList(recono);
+  }
+
+//  @Override
+//  public JangSo jangSo(int recono) throws Exception {
+//    return jangSoReviewDao.jangSo(recono);
+//  }
+
+  @Override
+  public JangSoReviewAttachedFile getAttachedFile(int fileNo) throws Exception {
+    return null;
+  }
+
+  @Override
+  public boolean deleteAttachedFile(int fileNo) throws Exception {
+    return false;
   }
 
 //  @Override

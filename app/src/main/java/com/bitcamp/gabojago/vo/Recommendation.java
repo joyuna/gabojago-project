@@ -19,8 +19,9 @@ public class Recommendation {
   private int tpno; // 이동수단번호
 
   private Member writer; // 글쓴 회원정보
-  //private List<JangSoReview> jangSoReviews;
-  private JangSoReview jangSoReview;
+
+  private List<JangSoReview> jangSoReviews;
+//  private JangSoReview jangSoReview;
 
   public int getRecono() {
     return recono;
@@ -118,30 +119,30 @@ public class Recommendation {
     this.writer = writer;
   }
 
-  public JangSoReview getJangSoReview() {
-    return jangSoReview;
+  public List<JangSoReview> getJangSoReviews() {
+    return jangSoReviews;
   }
 
-  public void setJangSoReview(JangSoReview jangSoReview) {
-    this.jangSoReview = jangSoReview;
+  public void setJangSoReviews(List<JangSoReview> jangSoReviews) {
+    this.jangSoReviews = jangSoReviews;
   }
 
   @Override
   public String toString() {
     return "Recommendation{" +
-            "recono=" + recono +
-            ", title='" + title + '\'' +
-            ", wdate=" + wdate +
-            ", cnt=" + cnt +
-            ", act=" + act +
-            ", pet=" + pet +
-            ", frd=" + frd +
-            ", cple=" + cple +
-            ", fmly=" + fmly +
-            ", solo=" + solo +
-            ", tpno=" + tpno +
-            ", writer=" + writer +
-            ", jangSoReview=" + jangSoReview +
-            '}';
+        "recono=" + recono +
+        ", title='" + title + '\'' +
+        ", wdate=" + wdate +
+        ", cnt=" + cnt +
+        ", act=" + act +
+        ", pet=" + pet +
+        ", frd=" + frd +
+        ", cple=" + cple +
+        ", fmly=" + fmly +
+        ", solo=" + solo +
+        ", tpno=" + tpno +
+        ", writer=" + writer +
+        ", jangSoReviews=" + jangSoReviews +
+        '}';
   }
 }

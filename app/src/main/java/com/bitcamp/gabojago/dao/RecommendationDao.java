@@ -16,6 +16,8 @@ public interface RecommendationDao {
 
   Recommendation getRecommendation(int recono);
 
+  int disableRecommend(int recono);
+
 //  int delete(int recono);
 
 //  int update(Recommendation recommendation);
