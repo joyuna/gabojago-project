@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/auth/")
 public class AuthController {
-
+// authcontroller
   @Autowired
   MemberService memberService;
 
