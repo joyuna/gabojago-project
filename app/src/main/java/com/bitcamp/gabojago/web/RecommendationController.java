@@ -42,13 +42,22 @@ public class RecommendationController {
   @Transactional
   @PostMapping("recommendationAdd")
   public String add(@RequestParam("files") MultipartFile[] files, HttpSession session,
-          JangSoReview jangSoReview, Recommendation recommendation) throws Exception {
+           Recommendation recommendation) throws Exception {
+
     recommendation.setWriter((Member) session.getAttribute("loginMember"));
+
+    int n = 3; //tr 갯수
+    //TODO
+    JangSoReview[] jangSoReviews = new JangSoReview[n];
+
 
 
 
     recommendationService.recommendationAdd(recommendation);
-    recommendationService.jangSoReviewAdd(jangSoReview);
+
+    for(int i = 0; i < n; i ++)
+      recommendationService.jangSoReviewAdd(jangSoReviews[i]);
+
     return "redirect:recommendationList";
   }
 
