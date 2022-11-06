@@ -7,23 +7,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.bitcamp.gabojago.service.search.exhibition.ExhibitionSearchService;
 import com.bitcamp.gabojago.service.search.exhibition.ExhibitionSearchType;
+import com.bitcamp.gabojago.service.search.member.MemberSearchService;
+import com.bitcamp.gabojago.service.search.member.MemberSearchType;
 
 @Controller
 @RequestMapping("/")
 public class SearchController {
   
   @Autowired
-  ExhibitionSearchService searchService;
+  ExhibitionSearchService exhibitionSearchService;
+  
+  @Autowired
+  MemberSearchService memberSearchService;
   
   @GetMapping("search")
   public String search(Model model) throws Exception {
-    
     return "search";
   }
   
   @GetMapping("searchResult")
   public String searchResult(Model model, String keyword) throws Exception {
-    model.addAttribute("result", searchService.getDetailResult(ExhibitionSearchType.TITLE, keyword));
+    System.out.println(memberSearchService.getResult(MemberSearchType.PUBLIC, keyword));
+    model.addAttribute("exhibitionResult", exhibitionSearchService.getResult(ExhibitionSearchType.TITLE, keyword));
+    model.addAttribute("memberResult", memberSearchService.getResult(MemberSearchType.PUBLIC, keyword));
     
     return "searchResult";
   }
