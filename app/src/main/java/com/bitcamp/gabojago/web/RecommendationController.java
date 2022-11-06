@@ -42,13 +42,17 @@ public class RecommendationController {
   @Transactional
   @PostMapping("recommendationAdd")
   public String add(@RequestParam("files") MultipartFile[] files, HttpSession session,
-           Recommendation recommendation) throws Exception {
+           Recommendation recommendation, JangSoReview[] jangSoReviews) throws Exception {
 
     recommendation.setWriter((Member) session.getAttribute("loginMember"));
 
     int n = 3; //tr 갯수
     //TODO
-    JangSoReview[] jangSoReviews = new JangSoReview[n];
+    List<JangSoReview> Reviews = new ArrayList<>();
+
+    for (JangSoReview jangSoReview : jangSoReviews) {
+      
+    }
 
 
 
@@ -62,7 +66,9 @@ public class RecommendationController {
   }
 
   // 민구작성메서드
-  private List<JangSoReviewAttachedFile> saveJangSoReviewAttachedFiles(MultipartFile[] files) throws Exception {
+  private List<JangSoReviewAttachedFile> saveJangSoReviewAttachedFiles(MultipartFile[] files)
+      throws Exception {
+
   List<JangSoReviewAttachedFile> jangSoReviewAttachedFiles = new ArrayList<>();
   String dirPath = sc.getRealPath("/board/files");
 
