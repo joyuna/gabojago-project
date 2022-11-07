@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/support")
+//@RequestMapping("/support")
 public class SupportController {
 
-    @GetMapping("/")
+    //@GetMapping("/")
     public String support() {
         return "support/supportMain";
     }

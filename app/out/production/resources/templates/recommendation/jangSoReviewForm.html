@@ -40,11 +40,7 @@
     <tr class="copied-form" style="border: solid; color: red">
       <input name="files" type="file" multiple />
       <input name="cont" type="text" placeholder="해당 장소에 대하여 설명을 적어주세요." size="100"/>
-<<<<<<< HEAD
       <burron name="add-reviews" type="button">내용 등록</burron>
-=======
-      <burrㅌon name="add-reviews" type="button">내용 등록</burrㅌon>
->>>>>>> feat-recom
     </tr>
   </table>
 
@@ -55,52 +51,52 @@
 </form>
 
 <script>
-// 민구작성메서드
-var oTbl;
-//Row 추가
-function insRow() {
-  oTbl = document.getElementById("addTable");
-  var oRow = oTbl.insertRow();
-  oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-  var oCell = oRow.insertCell();
+  // 민구작성메서드
+  var oTbl;
+  //Row 추가
+  function insRow() {
+    oTbl = document.getElementById("addTable");
+    var oRow = oTbl.insertRow();
+    oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+    var oCell = oRow.insertCell();
 
-  //삽입될 Form Tag
-  var frmTag = "<input name='files' type='file' multiple />";
-  frmTag += "<input name='cont' type='text' placeholder='해당 장소에 대하여 설명을 적어주세요.' size='100'/>";
-  frmTag += "<input type=button value='삭제' onClick='removeRow()' style='cursor:hand'>";
-  oCell.innerHTML = frmTag;
-}
-//Row 삭제
-function removeRow() {
-  oTbl.deleteRow(oTbl.clickedRowIndex);
-}
+    //삽입될 Form Tag
+    var frmTag = "<input name='files' type='file' multiple />";
+    frmTag += "<input name='cont' type='text' placeholder='해당 장소에 대하여 설명을 적어주세요.' size='100'/>";
+    frmTag += "<input type=button value='삭제' onClick='removeRow()' style='cursor:hand'>";
+    oCell.innerHTML = frmTag;
+  }
+  //Row 삭제
+  function removeRow() {
+    oTbl.deleteRow(oTbl.clickedRowIndex);
+  }
 
 </script>
 
 
 
 <script>
-var doPhoneNo = function () {
-  var phoneNo = $("input.cellphoneNo").val();
-  var phoneNoCheckBox = document.getElementById("phoneNoCheckBox");
+  var doPhoneNo = function () {
+    var phoneNo = $("input.cellphoneNo").val();
+    var phoneNoCheckBox = document.getElementById("phoneNoCheckBox");
 
-  $.ajax({
-    type: "GET",
-    url: "phoneNoCheck",
-    data: { phoneNo: phoneNo},
-    success: function (result) {
-      if(result == "true") {
-        phoneNoCheckBox.innerHTML = "이 번호는 사용할 수 있어요.";
-        phoneNoCheckBox.style.color = "green";
-        window.cphoneno = 1;
-      } else if (result == "false") {
-        phoneNoCheckBox.innerHTML = "이미 사용중인 번호에요.";
-        phoneNoCheckBox.style.color = "red";
-        window.cphoneno = 0;
-      }
-    },
-  });
-};
+    $.ajax({
+      type: "GET",
+      url: "phoneNoCheck",
+      data: { phoneNo: phoneNo},
+      success: function (result) {
+        if(result == "true") {
+          phoneNoCheckBox.innerHTML = "이 번호는 사용할 수 있어요.";
+          phoneNoCheckBox.style.color = "green";
+          window.cphoneno = 1;
+        } else if (result == "false") {
+          phoneNoCheckBox.innerHTML = "이미 사용중인 번호에요.";
+          phoneNoCheckBox.style.color = "red";
+          window.cphoneno = 0;
+        }
+      },
+    });
+  };
   $(".cellphoneNo").keyup(doPhoneNo);
 
 </script>
