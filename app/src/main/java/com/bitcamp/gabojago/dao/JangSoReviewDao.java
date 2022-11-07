@@ -15,6 +15,8 @@ public interface JangSoReviewDao {
 
   int jangSoReviewAdd(JangSoReview jangSoReview);
 
+  int insertFiles(JangSoReview jangSoReview);
+
   //Recommendation recommendationSelect(int recono);
 
   //int exhibitionInsert(Recommendation recommendation);

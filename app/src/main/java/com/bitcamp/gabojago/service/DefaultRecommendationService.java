@@ -27,6 +27,12 @@ public class DefaultRecommendationService implements RecommendationService  {
     }
 
     // 2) 첨부파일 등록 나중에 생성
+    List<JangSoReview> jangSoReviewList = recommendation.getJangSoReviews();
+    for(JangSoReview jangSoReview:jangSoReviewList) {
+      if(jangSoReview.getAttachedFiles().size() > 0) {
+        jangSoReviewDao.insertFiles(jangSoReview);
+      }
+    }
   }
 
   @Override
