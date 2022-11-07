@@ -130,19 +130,19 @@ public class Recommendation {
   @Override
   public String toString() {
     return "Recommendation{" +
-        "recono=" + recono +
-        ", title='" + title + '\'' +
-        ", wdate=" + wdate +
-        ", cnt=" + cnt +
-        ", act=" + act +
-        ", pet=" + pet +
-        ", frd=" + frd +
-        ", cple=" + cple +
-        ", fmly=" + fmly +
-        ", solo=" + solo +
-        ", tpno=" + tpno +
-        ", writer=" + writer +
-        ", jangSoReviews=" + jangSoReviews +
-        '}';
+            "recono=" + recono +
+            ", title='" + title + '\'' +
+            ", wdate=" + wdate +
+            ", cnt=" + cnt +
+            ", act=" + act +
+            ", pet=" + pet +
+            ", frd=" + frd +
+            ", cple=" + cple +
+            ", fmly=" + fmly +
+            ", solo=" + solo +
+            ", tpno=" + tpno +
+            ", writer=" + writer +
+            ", jangSoReviews=" + jangSoReviews +
+            '}';
   }
 }
