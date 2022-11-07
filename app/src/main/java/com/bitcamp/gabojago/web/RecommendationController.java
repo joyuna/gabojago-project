@@ -45,7 +45,7 @@ public class RecommendationController {
                     Recommendation recommendation, JangSoReview[] jangSoReviews) throws Exception {
     // 하나의 장소리뷰에 여러개의 첨부파일 저장
     for (JangSoReview jangSoReview : jangSoReviews) {
-      jangSoReview.setAttachedFiles(saveJangSoReviewAttachedFiles(files));
+      jangSoReview.setJangSoReviewAttachedFiles(saveJangSoReviewAttachedFiles(files));
     }
 
     // 하나의 장소추천글에 여러개의 장소리뷰 저장

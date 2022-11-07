@@ -7,6 +7,7 @@ import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Recommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class DefaultRecommendationService implements RecommendationService  {
   JangSoReviewDao jangSoReviewDao;
 
 
+  @Transactional
   @Override
   public void recommendationAdd(Recommendation recommendation) throws Exception {
     // 1) 게시글 등록
@@ -29,8 +31,8 @@ public class DefaultRecommendationService implements RecommendationService  {
     // 2) 첨부파일 등록 나중에 생성
     List<JangSoReview> jangSoReviewList = recommendation.getJangSoReviews();
     for(JangSoReview jangSoReview:jangSoReviewList) {
-      if(jangSoReview.getAttachedFiles().size() > 0) {
-        jangSoReviewDao.insertFiles(jangSoReview);
+      if(jangSoReview.getJangSoReviewAttachedFiles().size() > 0) {
+        jangSoReviewDao.jangSoReviewInsertFiles(jangSoReview);
       }
     }
   }
@@ -74,8 +76,8 @@ public class DefaultRecommendationService implements RecommendationService  {
 //  }
 
   @Override
-  public JangSoReviewAttachedFile getAttachedFile(int fileNo) throws Exception {
-    return null;
+  public JangSoReviewAttachedFile getAttachedFile(int recofno) throws Exception {
+    return jangSoReviewDao.findFileByNo(recofno);
   }
 
   @Override

@@ -13,13 +13,13 @@
         <result column="PLNAME" property="plname"/>
 <!--        <result column="JANGSO" property="jangSo"/>-->
 
-        <collection property="jangSoReviewAttachedFiles" ofType="jangSoReviewAttachedFile">
+        <collection property="jangSoReviewAttachedFiles" resultMap="jangSoReviewAttachedFile">
             <id column="RECOFNO" property="recofno"/>
             <result column="FILEPATH" property="filepath"/>
         </collection>
     </resultMap>
 
-    <resultMap type="jangSoReviewAttachedFile" id="attachedFileMap">
+    <resultMap type="jangSoReviewAttachedFile" id="jangSoReviewAttachedFile">
         <id column="RECOFNO" property="recofno"/>
         <result column="FILEPATH" property="filepath"/>
         <result column="PRVNO" property="prvno"/>
@@ -35,24 +35,46 @@
             and jsr.plno = js.plno
     </select> <!-- 나중에 장소 테이블 추가해야함 -->
 
-    <insert id="jangSoReviewAdd" parameterType="jangSoReview">
+    <insert id="jangSoReviewAdd" parameterType="jangSoReview"
+            useGeneratedKeys="true" keyColumn="prvno" keyProperty="pprvno">
                 insert into jang_so_review(cont, recono, plno)
                 values
-        <foreach collection="jangSoReviewAttachedFiles" item="file" separator=",">
+        <foreach collection="jangSoReview" separator=",">
             (#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2)
         </foreach>
 
     </insert>
 
-    <insert id="jangSoReviewInsertFiles" parameterType="jangSoReview">
+    <insert id="jangSoReviewInsertFiles" parameterType="jangSoReviewAttachedFile">
         insert into jang_so_review_file(path, prvno, fname)
         values
         <foreach collection="jangSoReviewAttachedFiles" item="file" separator=",">
-            (#{file.filepath},#{prvno}, #{fname})
+            (#{jangSoReview.filepath},#{jangSoReview.prvno}, #{jangSoReview.fname})
         </foreach>
     </insert>
 
 
+    <select id="findFileByNo" resultMap="jangSoReviewAttachedFile">
+        select
+        recofno,
+        path,
+        prvno
+        from
+        jang_so_review_file
+        where
+        recofno = #{value}
+    </select>
+
+    <select id="findFilesByJangSoReview" resultMap="jangSoReviewAttachedFile">
+        select
+        recofno,
+        path,
+        prvno
+        from
+        jang_so_review_file
+        where
+        prvno = #{value}
+    </select>
 
 
 </mapper>

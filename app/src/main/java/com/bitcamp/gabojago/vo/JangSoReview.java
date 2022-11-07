@@ -1,7 +1,12 @@
 package com.bitcamp.gabojago.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class JangSoReview {
 
   private int prvno; // 장소후기번호
@@ -15,7 +20,7 @@ public class JangSoReview {
 
 
   // 첨부파일 정보를 저장할 필드
-  private List<JangSoReviewAttachedFile> attachedFiles;
+  private List<JangSoReviewAttachedFile> jangSoReviewAttachedFiles;
 
   public int getPrvno() {
     return prvno;
@@ -57,12 +62,12 @@ public class JangSoReview {
     this.plname = plname;
   }
 
-  public List<JangSoReviewAttachedFile> getAttachedFiles() {
-    return attachedFiles;
+  public List<JangSoReviewAttachedFile> getJangSoReviewAttachedFiles() {
+    return jangSoReviewAttachedFiles;
   }
 
-  public void setAttachedFiles(List<JangSoReviewAttachedFile> attachedFiles) {
-    this.attachedFiles = attachedFiles;
+  public void setJangSoReviewAttachedFiles(List<JangSoReviewAttachedFile> jangSoReviewAttachedFiles) {
+    this.jangSoReviewAttachedFiles = jangSoReviewAttachedFiles;
   }
 
   @Override
@@ -73,7 +78,7 @@ public class JangSoReview {
             ", recono=" + recono +
             ", plno=" + plno +
             ", plname='" + plname + '\'' +
-            ", attachedFiles=" + attachedFiles +
+            ", jangSoReviewAttachedFiles=" + jangSoReviewAttachedFiles +
             '}';
   }
 }
