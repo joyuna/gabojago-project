@@ -18,8 +18,6 @@ public interface RecommendationDao {
 
   int disableRecommend(int recono);
 
-//  int delete(int recono);
-
-//  int update(Recommendation recommendation);
+//  int jangSoReviewsAdd(List<JangSoReview> jangSoReviews);
 
 }

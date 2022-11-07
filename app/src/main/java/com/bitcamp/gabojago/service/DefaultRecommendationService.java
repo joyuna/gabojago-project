@@ -35,6 +35,8 @@ public class DefaultRecommendationService implements RecommendationService  {
         jangSoReviewDao.jangSoReviewInsertFiles(jangSoReview);
       }
     }
+
+    //recommendationDao.jangSoReviewsAdd(jangSoReviewList);
   }
 
   @Override

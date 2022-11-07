@@ -41,7 +41,7 @@ public class RecommendationController {
 
   @Transactional
   @PostMapping("recommendationAdd")
-  public String add(@RequestParam("files") MultipartFile[] files, HttpSession session,
+  public String add(MultipartFile[] files, HttpSession session,
                     Recommendation recommendation, JangSoReview[] jangSoReviews) throws Exception {
     // 하나의 장소리뷰에 여러개의 첨부파일 저장
     for (JangSoReview jangSoReview : jangSoReviews) {

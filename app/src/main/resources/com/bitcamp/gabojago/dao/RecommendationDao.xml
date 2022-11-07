@@ -46,10 +46,7 @@
 
     <insert id="recommendationAdd" parameterType="recommendation">
         insert into jang_so_recommendation(id, title, wdate, cnt, act, frd, cple, fmly, solo, tpno)
-        values
-        <foreach collection="jangSoReviews" separator=",">
-            ('user8', #{title} , '2022-11-03', 9, true, true, true, true, true, 1)
-        </foreach>
+        values('user8', #{title} , '2022-11-03', 9, true, true, true, true, true, 1)
     </insert>
 
     <select id="getRecommendation" resultMap="recommendationMap">

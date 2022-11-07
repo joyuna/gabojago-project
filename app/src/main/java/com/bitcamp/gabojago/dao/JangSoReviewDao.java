@@ -22,12 +22,4 @@ public interface JangSoReviewDao {
 
   List<JangSoReviewAttachedFile> findFilesByJangSoReview(int prvno);
 
-  //Recommendation recommendationSelect(int recono);
-
-  //int exhibitionInsert(Recommendation recommendation);
-
-  //int delete(int recono);
-
-  //int update(Recommendation recommendation);
-
 }
