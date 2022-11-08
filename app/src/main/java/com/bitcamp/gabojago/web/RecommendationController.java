@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -34,11 +33,11 @@ public class RecommendationController {
     System.out.println("RecommendationController() 호출됨!");
   }
 
-  // InternalResourceViewResolver 사용 후:
-  @GetMapping("jangSoReviewForm2")
+  @GetMapping("recommendationForm")
   public void form() throws Exception {
   }
 
+  // Add method 시작
   @Transactional
   @PostMapping("recommendationAdd")
   public String recommendationAdd(
@@ -88,7 +87,6 @@ public class RecommendationController {
     return jangSoReviews;
   }
 
-  // 민구작성메서드
   private List<JangSoReviewAttachedFile> saveJangSoReviewAttachedFiles(
       MultipartFile[] files)
       throws Exception {
@@ -108,9 +106,19 @@ public class RecommendationController {
   }
     return jangSoReviewAttachedFiles;
   }
+  // Add method 끝
 
+  @GetMapping("recommendationList")
+  public void recommendationList(Model model) throws Exception {
+    model.addAttribute("recommendations", recommendationService.recommendationList());
+  }
 
-  // 민구작성메서드
+  @GetMapping("recommendationDetail")
+  public void jangSoReviewList(int recono, Model model) throws Exception {
+    model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
+    model.addAttribute("jangSoReviews", recommendationService.getJangSoReviewList(recono));
+  }
+
   @GetMapping("disableRecommend")
   public String disableRecommend(int recono) throws Exception {
     if (!recommendationService.disableRecommend(recono)) {
@@ -118,22 +126,6 @@ public class RecommendationController {
     }
 
     return "redirect:recommendationList";
-  }
-
-  @GetMapping("recommendationList")
-  public void recommendationList(Model model) throws Exception {
-    model.addAttribute("recommendations", recommendationService.recommendationList());
-  }
-
-  @GetMapping("testrecom")
-  public void test() {
-
-  }
-
-  @GetMapping("jangSoReviewList")
-  public void jangSoReviewList(int recono, Model model) throws Exception {
-    model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
-    model.addAttribute("jangSoReviews", recommendationService.jangSoReviewList(recono));
   }
 
 }

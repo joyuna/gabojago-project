@@ -10,20 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface JangSoReviewDao {
-//  JangSo jangSo(int recono);
 
-  List<JangSoReview> jangSoReviewList(int recono);
-
-  int jangSoReviewAdd(JangSoReview jangSoReview);
-
-//  List<JangSoReviewAttachedFile> attachedFileList(int recono);
-
-  //Recommendation recommendationSelect(int recono);
-
-  //int exhibitionInsert(Recommendation recommendation);
-
-  //int delete(int recono);
-
-  //int update(Recommendation recommendation);
-
+  // recommendationDetail - 2
+  List<JangSoReview> getJangSoReviewList(int recono);
 }

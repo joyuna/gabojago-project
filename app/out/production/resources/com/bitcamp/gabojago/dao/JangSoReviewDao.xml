@@ -27,7 +27,7 @@
         <result column="fname" property="fname"/>
     </resultMap>
 
-    <select id="jangSoReviewList" resultMap="jangSoReviewMap">
+    <select id="getJangSoReviewList" resultMap="jangSoReviewMap">
         select
             jsr.prvno,
             jsr.cont,
@@ -43,11 +43,6 @@
         where
             jsr.recono = #{value}
     </select> <!-- 나중에 장소 테이블 추가해야함 -->
-
-    <insert id="jangSoReviewAdd" parameterType="jangSoReview">
-                insert into jang_so_review(cont, recono, plno)
-                values(#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2)
-    </insert>
 
 <!-- 상세보기-->
 <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->
