@@ -21,7 +21,6 @@ public class Recommendation {
   private Member writer; // 글쓴 회원정보
 
   private List<JangSoReview> jangSoReviews;
-//  private JangSoReview jangSoReview;
 
   public int getRecono() {
     return recono;
