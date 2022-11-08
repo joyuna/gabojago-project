@@ -1,6 +1,7 @@
 package com.bitcamp.gabojago.dao;
 
 import com.bitcamp.gabojago.vo.JangSoReview;
+import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Recommendation;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,10 +15,25 @@ public interface RecommendationDao {
 
   int recommendationAdd(Recommendation recommendation);
 
+  int jangSoReviewAdd(JangSoReview jangSoReview);
+
+  int jangSoReviewAttachedFileAdd(JangSoReviewAttachedFile jangSoReviewAttachedFile);
+
+//  int jangSoReviewAdd(Recommendation recommendation);
+
+//  int jangSoReviewAttachedFileAdd(JangSoReview jangSoReview);
+
   Recommendation getRecommendation(int recono);
 
   int disableRecommend(int recono);
 
+<<<<<<< HEAD
 //  int jangSoReviewsAdd(List<JangSoReview> jangSoReviews);
+=======
+
+//  int delete(int recono);
+
+//  int update(Recommendation recommendation);
+>>>>>>> feat-recom-gu2
 
 }

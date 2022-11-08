@@ -35,12 +35,13 @@ public class RecommendationController {
   }
 
   // InternalResourceViewResolver 사용 후:
-  @GetMapping("jangSoReviewForm")
+  @GetMapping("jangSoReviewForm2")
   public void form() throws Exception {
   }
 
   @Transactional
   @PostMapping("recommendationAdd")
+<<<<<<< HEAD
   public String add(MultipartFile[] files, HttpSession session,
                     Recommendation recommendation, JangSoReview[] jangSoReviews) throws Exception {
     // 하나의 장소리뷰에 여러개의 첨부파일 저장
@@ -54,15 +55,68 @@ public class RecommendationController {
 
     // 장소추천글에 작성자 정보 저장
     recommendation.setWriter((Member) session.getAttribute("loginMember"));
+=======
+  public String recommendationAdd(
+      MultipartFile[] files1, String cont1,
+      MultipartFile[] files2, String cont2,
+      MultipartFile[] files3, String cont3,
+      MultipartFile[] files4, String cont4,
+      MultipartFile[] files5, String cont5,
+      HttpSession session, Recommendation recommendation) throws Exception {
 
+    // 작성자정보 set하기
+    recommendation.setWriter((Member) session.getAttribute("loginMember"));
+
+    // 변수분류 저장
+    MultipartFile[][] files = {files1, files2, files3, files4, files5};
+    String[] cont = {cont1, cont2, cont3, cont4, cont5};
+
+    // recommendation에 JangSoReview List를 set하기
+    recommendation.setJangSoReviews(saveJangSoReviews(files, cont));
+
+    // recommendation add하기
     recommendationService.recommendationAdd(recommendation);
 
+    return "redirect:recommendationList";
+  }
+>>>>>>> feat-recom-gu2
+
+  private List<JangSoReview> saveJangSoReviews(MultipartFile[][] files, String[] cont)
+      throws Exception {
+
+<<<<<<< HEAD
     return "redirect:recommendationList";
   }
 
   // 민구작성메서드
   private List<JangSoReviewAttachedFile> saveJangSoReviewAttachedFiles(MultipartFile[] files)
           throws Exception {
+=======
+    // JangSoReview List 생성
+    List<JangSoReview> jangSoReviews = new ArrayList<>();
+
+    // 각각의 JangSoReview 저장
+    for (int i = 0; i < cont.length; i++) {
+      // 내용이 없다면 저장하지 않는다. (=첨부파일 유무와 관계없다)
+      if (cont[i] == null) {
+        continue;
+      }
+
+      // JangSoReview 객체 생성
+      JangSoReview jangSoReview = new JangSoReview();
+      jangSoReview.setCont(cont[i]);
+      jangSoReview.setAttachedFiles(saveJangSoReviewAttachedFiles(files[i]));
+      jangSoReviews.add(jangSoReview);
+    }
+
+    return jangSoReviews;
+  }
+
+  // 민구작성메서드
+  private List<JangSoReviewAttachedFile> saveJangSoReviewAttachedFiles(
+      MultipartFile[] files)
+      throws Exception {
+>>>>>>> feat-recom-gu2
 
     List<JangSoReviewAttachedFile> jangSoReviewAttachedFiles = new ArrayList<>();
     String dirPath = sc.getRealPath("/board/files");
@@ -72,10 +126,18 @@ public class RecommendationController {
         continue;
       }
 
+<<<<<<< HEAD
       String filename = UUID.randomUUID().toString();
       file.transferTo(new File(dirPath + "/" + filename));
       jangSoReviewAttachedFiles.add(new JangSoReviewAttachedFile(filename));
     }
+=======
+    String filepath = UUID.randomUUID().toString();
+    String filename = file.getOriginalFilename();
+    file.transferTo(new File(dirPath + "/" + filepath));
+      jangSoReviewAttachedFiles.add(new JangSoReviewAttachedFile(filepath, filename));
+  }
+>>>>>>> feat-recom-gu2
     return jangSoReviewAttachedFiles;
   }
 
@@ -90,40 +152,6 @@ public class RecommendationController {
     return "redirect:recommendationList";
   }
 
-//  private List<JangSoReviewAttachedFile> saveAttachedFiles(Part[] files)
-//      throws IOException, ServletException {
-//    List<JangSoReviewAttachedFile> attachedFiles = new ArrayList<>();
-//    String dirPath = sc.getRealPath("/jangSoReview/files");
-//
-//    for (Part part : files) {
-//      if (part.getSize() == 0) {
-//        continue;
-//      }
-//
-//      String filename = UUID.randomUUID().toString();
-//      part.write(dirPath + "/" + filename);
-//      attachedFiles.add(new JangSoReviewAttachedFile(filename));
-//    }
-//    return attachedFiles;
-//  }
-//
-//  private List<JangSoReviewAttachedFile> saveAttachedFiles(MultipartFile[] files)
-//      throws IOException, ServletException {
-//    List<JangSoReviewAttachedFile> attachedFiles = new ArrayList<>();
-//    String dirPath = sc.getRealPath("/jangSoReview/files");
-//
-//    for (MultipartFile part : files) {
-//      if (part.isEmpty()) {
-//        continue;
-//      }
-//
-//      String filename = UUID.randomUUID().toString();
-//      part.transferTo(new File(dirPath + "/" + filename));
-//      attachedFiles.add(new JangSoReviewAttachedFile(filename));
-//    }
-//    return attachedFiles;
-//  }
-
   @GetMapping("recommendationList")
   public void recommendationList(Model model) throws Exception {
     model.addAttribute("recommendations", recommendationService.recommendationList());
@@ -136,11 +164,13 @@ public class RecommendationController {
 
   @GetMapping("jangSoReviewList")
   public void jangSoReviewList(int recono, Model model) throws Exception {
-    model.addAttribute("jangSoReviews", recommendationService.jangSoReviewList(recono));
     model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
+    model.addAttribute("jangSoReviews", recommendationService.jangSoReviewList(recono));
+    model.addAttribute("attachedFiles", recommendationService.attachedFileList(recono));
 //    model.addAttribute("jangSos", jangSoReviewService.jangSo(recono));
   }
 
+<<<<<<< HEAD
 
 //  @GetMapping("detail")
 //  public Map detail(int no) throws Exception {
@@ -215,3 +245,12 @@ public class RecommendationController {
 //    return "redirect:detail?no=" + board.getNo();
 //  }
 }
+=======
+}
+
+
+
+
+
+
+>>>>>>> feat-recom-gu2
