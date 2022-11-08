@@ -1,28 +1,21 @@
 package com.bitcamp.gabojago.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class JangSoReview {
+
   private int prvno; // 장소후기번호
   private String cont; // 내용
   private int recono; // 코스추천글번호
   private int plno; // 장소번호
+
   private String plname; // 장소이름
 
   //private JangSo jangSo; // 장소 목록들
 
 
   // 첨부파일 정보를 저장할 필드
-  private List<JangSoReviewAttachedFile> jangSoReviewAttachedFiles;
+  private List<JangSoReviewAttachedFile> attachedFiles;
 
   public int getPrvno() {
     return prvno;
@@ -64,12 +57,12 @@ public class JangSoReview {
     this.plname = plname;
   }
 
-  public List<JangSoReviewAttachedFile> getJangSoReviewAttachedFiles() {
-    return jangSoReviewAttachedFiles;
+  public List<JangSoReviewAttachedFile> getAttachedFiles() {
+    return attachedFiles;
   }
 
-  public void setJangSoReviewAttachedFiles(List<JangSoReviewAttachedFile> jangSoReviewAttachedFiles) {
-    this.jangSoReviewAttachedFiles = jangSoReviewAttachedFiles;
+  public void setAttachedFiles(List<JangSoReviewAttachedFile> attachedFiles) {
+    this.attachedFiles = attachedFiles;
   }
 
   @Override
@@ -80,7 +73,7 @@ public class JangSoReview {
             ", recono=" + recono +
             ", plno=" + plno +
             ", plname='" + plname + '\'' +
-            ", jangSoReviewAttachedFiles=" + jangSoReviewAttachedFiles +
+            ", attachedFiles=" + attachedFiles +
             '}';
   }
 }

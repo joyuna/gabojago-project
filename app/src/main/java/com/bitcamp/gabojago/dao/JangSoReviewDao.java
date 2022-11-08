@@ -16,16 +16,14 @@ public interface JangSoReviewDao {
 
   int jangSoReviewAdd(JangSoReview jangSoReview);
 
-<<<<<<< HEAD
-  int jangSoReviewInsertFiles(JangSoReview jangSoReview);
-=======
   List<JangSoReviewAttachedFile> attachedFileList(int recono);
 
   //Recommendation recommendationSelect(int recono);
->>>>>>> feat-recom-gu2
 
-  JangSoReviewAttachedFile findFileByNo(int recofno);
+  //int exhibitionInsert(Recommendation recommendation);
 
-  List<JangSoReviewAttachedFile> findFilesByJangSoReview(int prvno);
+  //int delete(int recono);
+
+  //int update(Recommendation recommendation);
 
 }

@@ -7,7 +7,6 @@ import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Recommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +19,6 @@ public class DefaultRecommendationService implements RecommendationService  {
   @Autowired
   JangSoReviewDao jangSoReviewDao;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> feat-recom-gu2
   @Transactional
   @Override
   public void recommendationAdd(Recommendation recommendation) throws Exception {
@@ -32,17 +27,6 @@ public class DefaultRecommendationService implements RecommendationService  {
       throw new Exception("게시글 등록 실패!");
     }
 
-<<<<<<< HEAD
-    // 2) 첨부파일 등록 나중에 생성
-    List<JangSoReview> jangSoReviewList = recommendation.getJangSoReviews();
-    for(JangSoReview jangSoReview:jangSoReviewList) {
-      if(jangSoReview.getJangSoReviewAttachedFiles().size() > 0) {
-        jangSoReviewDao.jangSoReviewInsertFiles(jangSoReview);
-      }
-    }
-
-    //recommendationDao.jangSoReviewsAdd(jangSoReviewList);
-=======
     // 여기부터
     // 자동증가한 코스추천글 recono 받아오기
     int recono = recommendation.getRecono();
@@ -66,7 +50,7 @@ public class DefaultRecommendationService implements RecommendationService  {
 
         // 장소리뷰 첨부파일 insert하기
         recommendationDao.jangSoReviewAttachedFileAdd(
-            recommendation.getJangSoReviews().get(i).getAttachedFiles().get(j)
+                recommendation.getJangSoReviews().get(i).getAttachedFiles().get(j)
         );
       }
     }
@@ -80,7 +64,6 @@ public class DefaultRecommendationService implements RecommendationService  {
 //      // 3) 첨부파일 등록
 //      recommendationDao.jangSoReviewAttachedFileAdd(recommendation.getJangSoReviews().get(i));
 //    }
->>>>>>> feat-recom-gu2
   }
 
   @Override
@@ -127,8 +110,8 @@ public class DefaultRecommendationService implements RecommendationService  {
 //  }
 
   @Override
-  public JangSoReviewAttachedFile getAttachedFile(int recofno) throws Exception {
-    return jangSoReviewDao.findFileByNo(recofno);
+  public JangSoReviewAttachedFile getAttachedFile(int fileNo) throws Exception {
+    return null;
   }
 
   @Override

@@ -27,13 +27,9 @@ public interface RecommendationDao {
 
   int disableRecommend(int recono);
 
-<<<<<<< HEAD
-//  int jangSoReviewsAdd(List<JangSoReview> jangSoReviews);
-=======
 
 //  int delete(int recono);
 
 //  int update(Recommendation recommendation);
->>>>>>> feat-recom-gu2
 
 }
