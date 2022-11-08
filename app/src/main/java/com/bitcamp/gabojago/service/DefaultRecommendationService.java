@@ -54,21 +54,6 @@ public class DefaultRecommendationService implements RecommendationService  {
         );
       }
     }
-//    recommendationDao.jangSoReviewAdd(recommendation.getJangSoReviews().get(i));
-
-//
-//    // 2) 장소리뷰 등록
-//    recommendationDao.jangSoReviewAdd(recommendation);
-//
-//    for (int i = 0; i < recommendation.getJangSoReviews().size(); i++) {
-//      // 3) 첨부파일 등록
-//      recommendationDao.jangSoReviewAttachedFileAdd(recommendation.getJangSoReviews().get(i));
-//    }
-  }
-
-  @Override
-  public boolean update(Recommendation recommendation) throws Exception {
-    return false;
   }
 
   @Override
@@ -98,11 +83,11 @@ public class DefaultRecommendationService implements RecommendationService  {
   public List<JangSoReview> jangSoReviewList(int recono) throws Exception {
     return jangSoReviewDao.jangSoReviewList(recono);
   }
-
-  @Override
-  public List<JangSoReviewAttachedFile> attachedFileList(int recono) {
-    return jangSoReviewDao.attachedFileList(recono);
-  }
+//
+//  @Override
+//  public List<JangSoReviewAttachedFile> attachedFileList(int recono) {
+//    return jangSoReviewDao.attachedFileList(recono);
+//  }
 
 //  @Override
 //  public JangSo jangSo(int recono) throws Exception {
