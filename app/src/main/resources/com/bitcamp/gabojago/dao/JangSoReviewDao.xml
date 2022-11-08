@@ -11,20 +11,6 @@
         <result column="RECONO" property="recono"/>
         <result column="PLNO" property="plno"/>
         <result column="PLNAME" property="plname"/>
-<<<<<<< HEAD
-<!--        <result column="JANGSO" property="jangSo"/>-->
-
-        <collection property="jangSoReviewAttachedFiles" resultMap="jangSoReviewAttachedFile">
-            <id column="RECOFNO" property="recofno"/>
-            <result column="FILEPATH" property="filepath"/>
-        </collection>
-    </resultMap>
-
-    <resultMap type="jangSoReviewAttachedFile" id="jangSoReviewAttachedFile">
-        <id column="RECOFNO" property="recofno"/>
-        <result column="FILEPATH" property="filepath"/>
-        <result column="PRVNO" property="prvno"/>
-=======
 
         <collection property="attachedFiles" ofType="jangSoReviewAttachedFile">
             <id column="recofno" property="recofno"/>
@@ -39,7 +25,6 @@
         <result column="prvno" property="prvno"/>
         <result column="path" property="filepath"/>
         <result column="fname" property="fname"/>
->>>>>>> feat-recom-gu2
     </resultMap>
 
     <select id="jangSoReviewList" resultMap="jangSoReviewMap">
@@ -52,10 +37,6 @@
             and jsr.plno = js.plno
     </select> <!-- 나중에 장소 테이블 추가해야함 -->
 
-<<<<<<< HEAD
-    <insert id="jangSoReviewAdd" parameterType="jangSoReview"
-            useGeneratedKeys="true" keyColumn="prvno" keyProperty="pprvno">
-=======
     <select id="attachedFileList" resultMap="attachedFileMap">
         select
         jsr.cont, jsr.plno, js.plname
@@ -67,45 +48,52 @@
     </select>
 
     <insert id="jangSoReviewAdd" parameterType="jangSoReview">
->>>>>>> feat-recom-gu2
                 insert into jang_so_review(cont, recono, plno)
-                values
-        <foreach collection="jangSoReview" separator=",">
-            (#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2)
-        </foreach>
-
+                values(#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2)
     </insert>
 
-    <insert id="jangSoReviewInsertFiles" parameterType="jangSoReviewAttachedFile">
-        insert into jang_so_review_file(path, prvno, fname)
-        values
-        <foreach collection="jangSoReviewAttachedFiles" item="file" separator=",">
-            (#{jangSoReview.filepath},#{jangSoReview.prvno}, #{jangSoReview.fname})
-        </foreach>
-    </insert>
+<!-- 상세보기-->
+<!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->
+<!--        select  * from jang_exhibition-->
+<!--        left join jang_exhibition_file on jang_exhibition.EXNO = jang_exhibition_file.EXNO-->
+<!--        left join jang_exhibition_review on jang_exhibition.EXNO = jang_exhibition_review.EXNO-->
+<!--        left join jang_so on jang_exhibition.PLNO = jang_so.PLNO-->
+<!--        where jang_exhibition.EXNO=#{value};-->
+<!--    </select>-->
+
+<!--    <insert id="exhibitionInsert"  parameterType="exhibition"-->
+<!--            useGeneratedKeys="true" keyColumn="exno" keyProperty="exno">-->
+
+<!--        INSERT INTO jangdb.jang_exhibition (exname, cont, plno, stdate, eddate, price)-->
+<!--        values (#{exname}, #{cont}, -1, #{stdate}, #{eddate}, #{price})-->
+
+<!--    </insert>-->
+
+<!--    <delete id="delete">-->
+<!--        delete from jang_exhibition_file-->
+<!--        where jang_exhibition_file.EXNO=#{value};-->
+<!--        delete from jang_exhibition_review-->
+<!--        where jang_exhibition_review.EXNO=#{value};-->
+<!--        delete from jang_ticket-->
+<!--        where jang_ticket.EXNO=#{value};-->
+<!--        delete from jang_baguni-->
+<!--        where jang_baguni.EXNO=#{value};-->
+<!--        delete from jang_exhibition-->
+<!--        where jang_exhibition.EXNO=#{value};-->
+
+<!--  리뷰 달려있으면 삭제 못함 -->
+
+<!--    </delete>-->
 
 
-    <select id="findFileByNo" resultMap="jangSoReviewAttachedFile">
-        select
-        recofno,
-        path,
-        prvno
-        from
-        jang_so_review_file
-        where
-        recofno = #{value}
-    </select>
+<!--    <update id="update" parameterType="exhibition">-->
+<!--        update jang_exhibition set-->
+<!--        EXNAME= #{exname}, CONT= #{cont},-->
+<!--       STDATE= #{stdate}, EDDATE= #{eddate},-->
+<!--        PRICE= #{price}-->
+<!--        where jang_exhibition.EXNO= #{exno}-->
+<!--    </update>-->
 
-    <select id="findFilesByJangSoReview" resultMap="jangSoReviewAttachedFile">
-        select
-        recofno,
-        path,
-        prvno
-        from
-        jang_so_review_file
-        where
-        prvno = #{value}
-    </select>
 
 
 </mapper>

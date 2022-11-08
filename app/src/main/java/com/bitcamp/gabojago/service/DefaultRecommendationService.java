@@ -50,7 +50,7 @@ public class DefaultRecommendationService implements RecommendationService  {
 
         // 장소리뷰 첨부파일 insert하기
         recommendationDao.jangSoReviewAttachedFileAdd(
-                recommendation.getJangSoReviews().get(i).getAttachedFiles().get(j)
+            recommendation.getJangSoReviews().get(i).getAttachedFiles().get(j)
         );
       }
     }

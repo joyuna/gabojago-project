@@ -26,26 +26,22 @@
   <br>
   <br>
 
-  <input type="text" placeholder="입력하실 장소의 주소를 검색해주세요" size="60"/>
+  <input type="text" placeholder="입력하실 장소의 주소를 검색해주세요." size="60"/>
   <button type="button">검색</button>
 
   <br>
   <br>
 
-  <button id="add-form-btn" class="add-form-btn" type="button">추가</button>
+  <button id="add-form-btn" class="add-form-btn" type="button" onclick="insRow()">추가</button>
 
-  <div id="total-form-div" style="border: solid">
-    <div class="copied-form" style="border: solid; color: red">
+  <br>
+
+  <table id="addTable" style="border: solid">
+    <tr class="copied-form" style="border: solid; color: red">
       <input name="files" type="file" multiple />
-<<<<<<< HEAD
-      <input name="cont" type="text" placeholder="해당 장소에 대하여 설명을 적어주세요" size="100"/>
-    </div>
-  </div>
-=======
       <input name="cont" type="text" placeholder="해당 장소에 대하여 설명을 적어주세요." size="100"/>
     </tr>
   </table>
->>>>>>> feat-recom-gu2
 
   <p>
     <button id="add-jang-so-review-btn" type="submit">저장</button>
@@ -54,16 +50,55 @@
 </form>
 
 <script>
-  document.getElementById("add-form-btn").onclick = () => {
-    var tot = document.getElementById("total-form-div");
-    var origin = tot.innerHTML;
-    tot.innerHTML =
-            origin +
-            `      <div class="copied-form" style="border: solid; color: red;">
-      <input type="file" multiple>
-      <input type="text" placeholder="해당 장소에 대하여 설명을 적어주세요" size="100">
-    </div>`;
-  };
+  // 민구작성메서드
+  var oTbl;
+  //Row 추가
+  function insRow() {
+    oTbl = document.getElementById("addTable");
+    var oRow = oTbl.insertRow();
+    oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+    var oCell = oRow.insertCell();
+
+    //삽입될 Form Tag
+    var frmTag = "<input name='files' type='file' multiple />";
+    frmTag += "<input name='cont' type='text' placeholder='해당 장소에 대하여 설명을 적어주세요.' size='100'/>";
+    frmTag += "<input type=button value='삭제' onClick='removeRow()' style='cursor:hand'>";
+    oCell.innerHTML = frmTag;
+  }
+  //Row 삭제
+  function removeRow() {
+    oTbl.deleteRow(oTbl.clickedRowIndex);
+  }
+
 </script>
+
+
+
+<script>
+  var doPhoneNo = function () {
+    var phoneNo = $("input.cellphoneNo").val();
+    var phoneNoCheckBox = document.getElementById("phoneNoCheckBox");
+
+    $.ajax({
+      type: "GET",
+      url: "phoneNoCheck",
+      data: { phoneNo: phoneNo},
+      success: function (result) {
+        if(result == "true") {
+          phoneNoCheckBox.innerHTML = "이 번호는 사용할 수 있어요.";
+          phoneNoCheckBox.style.color = "green";
+          window.cphoneno = 1;
+        } else if (result == "false") {
+          phoneNoCheckBox.innerHTML = "이미 사용중인 번호에요.";
+          phoneNoCheckBox.style.color = "red";
+          window.cphoneno = 0;
+        }
+      },
+    });
+  };
+  $(".cellphoneNo").keyup(doPhoneNo);
+
+</script>
+
 </body>
 </html>
