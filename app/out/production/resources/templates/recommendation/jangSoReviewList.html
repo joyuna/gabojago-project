@@ -8,6 +8,9 @@
             background-color: navy;
             color: white;
         }
+        .ga-review {
+            border: 1px solid red;
+        }
     </style>
 </head>
 <body>
@@ -23,28 +26,36 @@
         <th>내용</th>
         <th>사진</th>
     </tr>
-    <tr data-th-each="jangSoReview : ${jangSoReviews}">
-        <td data-th-text="${jangSoReview.prvno}">100</td>
-        <td data-th-text="${jangSoReview.plno}">50</td>
-        <td data-th-text="${jangSoReview.plname}">50</td>
-        <td>
+    <tr >
+
+    </tr>
+
+</table>
+
+    <div class="ga-review" data-th-each="jangSoReview : ${jangSoReviews}">
             <!--            <th>장소번호</th><td data-th-text="${jangSoReview.plno == }">100</td>-->
+        <p data-th-text="${jangSoReview.prvno}">100</p>
+        <p data-th-text="${jangSoReview.plno}">50</p>
+        <p data-th-text="${jangSoReview.plname}">50</p>
+
             <textarea
                     rows="10"
                     cols="25"
                     data-th-text="${jangSoReview.cont == ''} ? '(내용없음)' : ${jangSoReview.cont}"
                     readonly></textarea>
-        </td>
-        <td data-th-each="file : ${jangSoReview.attachedFiles}">
-            <a href="files/${file.filepath}"
-               data-th-href="@{files/{path}(path=${file.filepath})}"
-               data-th-text="${file.filepath}">test.gif</a>
-            [<a href="fileDelete?no=${file.no}"
-                data-th-href="@{fileDelete(no=${file.no})}">삭제</a>]
-        </td>
-    </tr>
-
-</table>
+        <ul>
+            <li data-th-each="file : ${jangSoReview.attachedFiles}">
+                <img src="test.gif" data-th-src="@{'../board/files/' + ${file.filepath}}" alt="리뷰 그림 파일">
+            </li>
+        </ul>
+<!--        <td data-th-each="file : ${attachedFiles}" data-th-if="${file.prvno.toString().equals(jangSoReview.prvno.toString())}">-->
+<!--            <a href="files/${file.filepath}"-->
+<!--               data-th-href="@{files/{path}(path=${file.filepath})}"-->
+<!--               data-th-text="${file.filepath}">test.gif</a>-->
+<!--            [<a href="fileDelete?no=${file.prvfno}"-->
+<!--                data-th-href="@{fileDelete(no=${file.prvfno})}">삭제</a>]-->
+<!--        </td>-->
+    </div>
 <p><a href='recommendationList'>코스추천글메인으로</a></p>
 <p><a href='disableRecommend?recono=${recommendation.recono}'
       data-th-href="@{disableRecommend(recono=${recommendation.recono})}">삭제</a></p>

@@ -16,7 +16,7 @@ public interface JangSoReviewDao {
 
   int jangSoReviewAdd(JangSoReview jangSoReview);
 
-  List<JangSoReviewAttachedFile> attachedFileList(int recono);
+//  List<JangSoReviewAttachedFile> attachedFileList(int recono);
 
   //Recommendation recommendationSelect(int recono);
 

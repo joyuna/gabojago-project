@@ -23,11 +23,6 @@ public interface RecommendationService {
 
   boolean disableRecommend(int recono);
 
-  //AttachedFile getAttachedFile(int fileNo) throws Exception;
-
-  //boolean deleteAttachedFile(int fileNo) throws Exception;
-
-
   int jangSoReviewAdd(JangSoReview jangSoReview) throws Exception;
 
   List<JangSoReview> jangSoReviewList(int recono) throws Exception;
@@ -35,6 +30,4 @@ public interface RecommendationService {
   JangSoReviewAttachedFile getAttachedFile(int fileNo) throws Exception;
 
   boolean deleteAttachedFile(int fileNo) throws Exception;
-
-  List<JangSoReviewAttachedFile> attachedFileList(int recono);
 }

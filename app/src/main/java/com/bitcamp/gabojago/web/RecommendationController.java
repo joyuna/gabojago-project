@@ -74,7 +74,7 @@ public class RecommendationController {
     // 각각의 JangSoReview 저장
     for (int i = 0; i < cont.length; i++) {
       // 내용이 없다면 저장하지 않는다. (=첨부파일 유무와 관계없다)
-      if (cont[i] == null) {
+      if (cont[i].length() == 0) {
         continue;
       }
 
@@ -134,8 +134,6 @@ public class RecommendationController {
   public void jangSoReviewList(int recono, Model model) throws Exception {
     model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
     model.addAttribute("jangSoReviews", recommendationService.jangSoReviewList(recono));
-    model.addAttribute("attachedFiles", recommendationService.attachedFileList(recono));
-//    model.addAttribute("jangSos", jangSoReviewService.jangSo(recono));
   }
 
 }
