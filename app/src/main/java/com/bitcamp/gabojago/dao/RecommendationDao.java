@@ -9,27 +9,26 @@ import java.util.List;
 
 @Mapper
 public interface RecommendationDao {
-  List<Recommendation> recommendationList(); // 나중에 날짜 받기
 
-  Recommendation recommendationSelect(int recono);
-
+  // recommendationAdd - 1
   int recommendationAdd(Recommendation recommendation);
 
+  // recommendationAdd - 2
   int jangSoReviewAdd(JangSoReview jangSoReview);
 
+  // recommendationAdd - 3
   int jangSoReviewAttachedFileAdd(JangSoReviewAttachedFile jangSoReviewAttachedFile);
 
-//  int jangSoReviewAdd(Recommendation recommendation);
+  // recommendationList
+  List<Recommendation> recommendationList(); // 나중에 날짜 받기
 
-//  int jangSoReviewAttachedFileAdd(JangSoReview jangSoReview);
-
+  // recommendationDetail - 1
   Recommendation getRecommendation(int recono);
 
+  // 얘 머에요? 어따써요?
+  Recommendation recommendationSelect(int recono);
+
+  // recommendationDisable
   int disableRecommend(int recono);
-
-
-//  int delete(int recono);
-
-//  int update(Recommendation recommendation);
 
 }

@@ -27,7 +27,7 @@
         <result column="fname" property="fname"/>
     </resultMap>
 
-    <select id="jangSoReviewList" resultMap="jangSoReviewMap">
+    <select id="getJangSoReviewList" resultMap="jangSoReviewMap">
         select
             jsr.prvno,
             jsr.cont,
@@ -44,6 +44,7 @@
             jsr.recono = #{value}
     </select> <!-- 나중에 장소 테이블 추가해야함 -->
 
+<<<<<<< HEAD
     <select id="attachedFileList" resultMap="attachedFileMap">
         select
         jsr.cont, jsr.plno, js.plname
@@ -59,6 +60,8 @@
                 values(#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2)
     </insert>
 
+=======
+>>>>>>> feat-recom-gu2
 <!-- 상세보기-->
 <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->
 <!--        select  * from jang_exhibition-->
