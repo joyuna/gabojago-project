@@ -26,5 +26,7 @@ public interface RecommendationService {
   // recommendationDisable
   boolean disableRecommend(int recono);
 
+  void setCntRecommendation(int recono) throws Exception;
+
 
 }

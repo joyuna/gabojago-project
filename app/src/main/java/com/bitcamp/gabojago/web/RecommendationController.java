@@ -115,8 +115,10 @@ public class RecommendationController {
 
   @GetMapping("recommendationDetail")
   public void jangSoReviewList(int recono, Model model) throws Exception {
+    recommendationService.setCntRecommendation(recono);
     model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
     model.addAttribute("jangSoReviews", recommendationService.getJangSoReviewList(recono));
+//    recommendationService.getRecommendation(recono).setCnt(recommendationService.getRecommendation(recono).getCnt()+1);
   }
 
   @GetMapping("disableRecommend")

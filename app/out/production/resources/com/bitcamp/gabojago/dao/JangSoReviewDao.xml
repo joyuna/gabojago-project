@@ -44,24 +44,6 @@
             jsr.recono = #{value}
     </select> <!-- 나중에 장소 테이블 추가해야함 -->
 
-<<<<<<< HEAD
-    <select id="attachedFileList" resultMap="attachedFileMap">
-        select
-        jsr.cont, jsr.plno, js.plname
-        from
-        jang_so_review jsr, jang_so js
-        where
-        jsr.recono = #{value}
-        and jsr.plno = js.plno
-    </select>
-
-    <insert id="jangSoReviewAdd" parameterType="jangSoReview">
-                insert into jang_so_review(cont, recono, plno)
-                values(#{cont}, (select recono from jang_so_recommendation order by recono desc limit 1) ,2)
-    </insert>
-
-=======
->>>>>>> feat-recom-gu2
 <!-- 상세보기-->
 <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->
 <!--        select  * from jang_exhibition-->

@@ -118,9 +118,15 @@
         act=false
         where recono=#{recono}
     </update>
-
-
-
+    
+    
+    <update id="setCntRecommendation">
+        update jang_so_recommendation
+        set
+            cnt = (select cnt from jang_so_recommendation where recono = #{recono}) + 1
+        where
+            recono = #{recono}
+    </update>
     <!-- 상세보기-->
     <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->
     <!--        select  * from jang_exhibition-->

@@ -25,10 +25,9 @@ public interface RecommendationDao {
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono);
 
-  // 얘 머에요? 어따써요?
-  Recommendation recommendationSelect(int recono);
-
   // recommendationDisable
   int disableRecommend(int recono);
+
+  int setCntRecommendation(int recono);
 
 }

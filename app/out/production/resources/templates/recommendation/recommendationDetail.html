@@ -18,7 +18,12 @@
 <h1>코스추천_상세페이지_스크롤</h1>
 <h2 data-th-text="${recommendation.title}">코스추천_제목</h2>
 
+<!--<p data-th-text="조회수: ${recommendation.cnt}">조회수</p>-->
+
 <table border='1'>
+    <tr>
+        <th>조회수</th><td data-th-text="${recommendation.cnt}">조회수</td>
+    </tr>
     <tr>
         <th>번호</th>
         <th>장소후기번호</th>

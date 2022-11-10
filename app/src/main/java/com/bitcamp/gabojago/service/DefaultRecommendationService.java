@@ -78,6 +78,10 @@ public class DefaultRecommendationService implements RecommendationService  {
     return jangSoReviewDao.getJangSoReviewList(recono);
   }
 
+  public void setCntRecommendation(int recono) throws Exception {
+    recommendationDao.setCntRecommendation(recono);
+  }
+
   // recommendationDisable
   @Override
   public boolean disableRecommend(int recono) {
