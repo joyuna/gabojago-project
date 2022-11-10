@@ -137,7 +137,7 @@ public class RecommendationController {
 
   @ResponseBody  //데이터 전달 빠르게 확인 가능
   @RequestMapping("comment-select-list/{recono}")
-  public List<JangComment> jangCommentList(@PathVariable("recono") int recono, Model model) throws Exception{
+  public List<JangComment> jangCommentList(@PathVariable("recono") int recono) throws Exception{
     return jangCommentService.jangCommentList(recono);
   }
 
@@ -149,8 +149,9 @@ public class RecommendationController {
   }
 
   @GetMapping("jangCommentDelete")
-  public String jangCommentDelete(int cmno, HttpSession session, ExhibitionReview exhibitionReview) throws Exception {
+  public String jangCommentDelete(int cmno, HttpSession session, JangComment jangComment) throws Exception {
     //  checkOwner(no, session);
+    int recono = jangComment.getRecono();
     if(!jangCommentService.jangCommentDelete(cmno)) {
       throw new Exception("댓글을 삭제 할 수 없습니다.");
     }
