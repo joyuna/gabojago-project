@@ -1,7 +1,8 @@
 package com.bitcamp.gabojago.web;
 
-import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
-import com.bitcamp.gabojago.vo.Member;
+import com.bitcamp.gabojago.service.JangCommentService;
+import com.bitcamp.gabojago.vo.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +10,7 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 
 import com.bitcamp.gabojago.service.RecommendationService;
-import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.Recommendation;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +28,9 @@ public class RecommendationController {
   ServletContext sc;
   @Autowired
   RecommendationService recommendationService;
+
+  @Autowired
+  JangCommentService jangCommentService;
 
   public RecommendationController() {
     System.out.println("RecommendationController() 호출됨!");
@@ -118,6 +121,7 @@ public class RecommendationController {
     recommendationService.setCntRecommendation(recono);
     model.addAttribute("recommendation", recommendationService.getRecommendation(recono));
     model.addAttribute("jangSoReviews", recommendationService.getJangSoReviewList(recono));
+    model.addAttribute("jangComments", jangCommentService.jangCommentList(recono));
   }
 
   @GetMapping("disableRecommend")

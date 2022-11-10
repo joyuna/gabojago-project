@@ -12,7 +12,7 @@
             border: 1px solid red;
         }
         .ga-jang-comment-write {
-            border: 1px solid plum;
+            border: 1px solid palevioletred;
         }
         .ga-jang-comment {
             border: 1px solid palevioletred;
@@ -71,20 +71,18 @@
     </div>
 
     <div class="ga-jang-comment">
-
-        <form  method="post " action="add">
+        <table border="1">
             <tr>
                 <th>댓글번호</th>
                 <th>아이디</th>
                 <th>내용</th>
                 <th>작성일</th>
-
             </tr>
 
             <tr data-th-each="jangComment : ${jangComments}">
                 <td name='cmno' type='number'
                            value='1'
-                           data-th-value="${jangComment.cmno}"
+                           data-th-text="${jangComment.cmno}"
                            readonly>댓글번호</td>
 
                 <td data-th-text="${jangComment.id}">홍길동</td>
@@ -108,7 +106,7 @@
                 </td>
 
             </tr>
-        </form>
+        </table>
 
     </div>
 
