@@ -32,7 +32,7 @@
         values (#{cont}, #{id},  #{recono})
     </insert>
 
-    <delete id="jangCommentDelete">
+    <delete id="jangCommentDelete" parameterType="jangComment">
         delete from jang_comment
         where jang_comment.cmno = #{cmno};
     </delete>

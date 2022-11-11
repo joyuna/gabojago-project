@@ -156,7 +156,7 @@ public class RecommendationController {
       throw new Exception("댓글을 삭제 할 수 없습니다.");
     }
 
-    return "redirect:../recommendation/recommendationList";
+    return "redirect:../recommendation/recommendationDetail?recono="+recono;
   }
 
   @PostMapping("update")
