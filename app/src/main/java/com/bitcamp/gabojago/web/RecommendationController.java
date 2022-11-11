@@ -149,27 +149,16 @@ public class RecommendationController {
   }
 
   @GetMapping("jangCommentDelete")
-  public String jangCommentDelete(int cmno, HttpSession session, JangComment jangComment) throws Exception {
+  public String jangCommentDelete(int cmno, HttpSession session) throws Exception {
     //  checkOwner(no, session);
-    int recono = jangComment.getRecono();
+    int recono = jangCommentService.getReconoByCmno(cmno).getRecono();
+    System.out.println("recono = " + recono);
     if(!jangCommentService.jangCommentDelete(cmno)) {
       throw new Exception("댓글을 삭제 할 수 없습니다.");
     }
 
     return "redirect:../recommendation/recommendationDetail?recono="+recono;
   }
-
-  @PostMapping("update")
-  public String update(JangComment jangComment, HttpSession session) throws Exception{
-
-//  checkOwner(board.getNo(), session);
-
-    if(!jangCommentService.jangCommentUpdate(jangComment)){
-      throw new Exception("댓글을 변경 할 수 없습니다!");
-    }
-    return "redirect:../recommendation/recommendationList";
-  }
-
 
 }
 
