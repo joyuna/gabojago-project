@@ -103,20 +103,20 @@
         delete from jang_member
         where ID=#{id}
     </delete>
-
-    <update id="update" parameterType="Member">
+ <!--   pwd=sha2(#{password},256)-->
+    <update id="update" parameterType="member">
         update jang_member set
-        pwd=sha2(#{password},256)
-        nickName=#{nickName},
+
+        nname=#{nickName},
         name=#{name},
-        phoneNo=#{phoneNo},
-        birthDay=#{birthDay},
-        birthDay=#{gender},
-        birthDay=#{snsAddress},
-        birthDay=#{mbti},
-        birthDay=#{status},
+        pnum=#{phoneNo},
+        birth=#{birthDay},
+        gender=#{gender},
+        sns=#{snsAddress},
+        mbti=#{mbti},
+        status=#{status}
         where
-        id=#{id}
+        id=#{id};
     </update>
 
 

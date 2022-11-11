@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>회원 상세 정보</h1>
-<form action='detail' method="post">
+<form action='update' method="post">
   <table border='1'>
     <tr>
       <th>ID</th><td><input name='id' type='text'
@@ -37,6 +37,8 @@
 
     </tr>
 
+
+
     <!--<tr>
       <th>암호</th><td><input name='password' type='password' size='10'
                             data-th-text="${member.password}"
@@ -45,35 +47,63 @@
     <tr>
       <th>가입일</th><td data-th-text="${member.createdDate}">2022-1-1</td>
     </tr>
+
     <tr>
-      <th>전화번호</th><td data-th-text="${member.phoneNo}">0100000000</td>
+      <th>전화번호</th><td><input name='phoneNo' type='text'
+                              value='0100000000'
+                              data-th-value="${member.phoneNo}"
+                              size='60' ></td>
     </tr>
+
+
+
     <tr>
-      <th>생일</th><td data-th-text="${member.birthDay}">2022-1-1</td>
+      <th>생일</th><td><input name='birthDay' type='text'
+                            value='2022-1-1'
+                            data-th-value="${member.birthDay}"
+                            size='60' ></td>
     </tr>
 
     <tr>
-      <th>성별</th><td data-th-text="${member.gender.toString()}">성별</td>
+      <th>성별</th><td data-th-text="${member.gender}">성별</td>
     </tr>
 
     <tr>
-      <th>SNS</th><td data-th-text="${member.snsAddress}">sns</td>
+      <th>SNS</th><td><input name='snsAddress' type='text'
+                             value='sns'
+                             data-th-value="${member.snsAddress}"
+                             size='60' ></td>
     </tr>
 
     <tr>
-      <th>MBTI</th><td data-th-text="${member.mbti}">ESTJ</td>
+      <th>MBTI</th><td><input name='mbti' type='text'
+                              value='ESTJ'
+                              data-th-value="${member.mbti}"
+                              size='60' ></td>
     </tr>
-
+<!--
     <tr>
-      <th>status</th><td data-th-text="${member.status}">활성</td>
-    </tr>
+      <th>status</th><td><input name='status' type='text'
+                              value='활성'
+                              data-th-value="${member.status}"
+                              size='60' ></td>
+    </tr>-->
+
+
+
+   <select th-field="${member.status}" data-th-value="${member.status}"
+       name="status">
+        <option data-th-value="'활성'">활성</option>
+        <option data-th-value="'신고'">신고</option>
+        <option data-th-value="'탈퇴'">탈퇴</option>
+      </select>
+
   </table>
 
 
 
-
-  <p>
     <button type='submit'>변경</button>
+
     <a href='delete?id= user1'
        data-th-href="@{delete(id=${member.id})}">삭제</a>
   </p>
