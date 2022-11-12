@@ -1,13 +1,13 @@
 package com.bitcamp.gabojago.web;
 
+import com.bitcamp.gabojago.service.MemberService;
 import com.bitcamp.gabojago.service.ModifyMyPageService;
 import com.bitcamp.gabojago.vo.Member;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -22,9 +22,14 @@ public class ModifyMyPageController {
 
     private ModifyMyPageService modifyMyPageService;
 
-    public ModifyMyPageController(ServletContext sc, ModifyMyPageService modifyMyPageService) {
+    private MemberService memberService;
+
+    public ModifyMyPageController(ServletContext sc,
+                                  ModifyMyPageService modifyMyPageService,
+                                  MemberService memberService) {
         this.sc = sc;
         this.modifyMyPageService = modifyMyPageService;
+        this.memberService = memberService;
     }
 
     @GetMapping("profileDetail")
@@ -51,24 +56,41 @@ public class ModifyMyPageController {
     public String profileUpdate(
             Member member,
             @RequestParam MultipartFile file,
+            Model model,
+            RedirectAttributes redirectAttributes,
             HttpSession session) throws Exception {
 
-           String dirPath = sc.getRealPath("/board/files");
-           String filename = UUID.randomUUID().toString();
-           String profileFig = filename;
-           file.transferTo(new File(dirPath + "/" + filename));
+            Member saveMember = memberService.get(member.getId());
+            saveMember.setNickName(member.getNickName());
+            saveMember.setMbti(member.getMbti());
 
-           member.setProfileFig(profileFig);
+           if(!file.isEmpty()){
+               String dirPath = sc.getRealPath("/board/files");
+               String filename = UUID.randomUUID().toString();
+               String profileFig = filename;
+               file.transferTo(new File(dirPath + "/" + filename));
+               saveMember.setProfileFig(profileFig);
+           }
 
-           modifyMyPageService.profileUpdate(member);
+           modifyMyPageService.profileUpdate(saveMember);
 
-           return "redirect:/myPage/";
+           model.addAttribute("profileFig", saveMember.getProfileFig());
+           model.addAttribute("nickname", saveMember.getNickName());
+           model.addAttribute("mbti", saveMember.getMbti());
+           return "myPage/myPage";
     }
 
     @PostMapping ("myAccountUpdate")
     public String myAccountUpdate(Member member, HttpSession session) throws Exception {
         modifyMyPageService.myAccountUpdate(member);
         return "redirect:/myPage/";
+    }
+
+    @ResponseBody
+    @PostMapping("nickCheck")
+    public int nickCheck(String nickName) throws Exception {
+        int result = modifyMyPageService.nickCheck(nickName);
+        return result;
     }
 
 }
