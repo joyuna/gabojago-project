@@ -106,7 +106,7 @@
  <!--   pwd=sha2(#{password},256)-->
     <update id="update" parameterType="member">
         update jang_member set
-
+        <!--   pwd=sha2(#{password},256)-->
         nname=#{nickName},
         name=#{name},
         pnum=#{phoneNo},
@@ -119,6 +119,34 @@
         id=#{id};
     </update>
 
+    <select id="findId" parameterType="map" resultMap="memberMap">
+        select
+        *
+        from
+        jang_member
+        where
+        name = #{name} and
+        email= #{email}
+    </select>
 
+    <select id="findpwd" parameterType="map" resultMap="memberMap">
+        select
+        *
+        from
+        jang_member
+        where
+        id=#{id} and
+        name = #{name} and
+        email= #{email}
+    </select>
+
+    <update id="findpwdupdate" parameterType="map">
+        update jang_member set
+        pwd=sha2(#{password},256)
+        where
+        id=#{id} and
+        name = #{name} and
+        email= #{email}
+    </update>
 
 </mapper>

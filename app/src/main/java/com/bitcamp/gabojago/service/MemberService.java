@@ -1,9 +1,9 @@
 package com.bitcamp.gabojago.service;
 
-import com.bitcamp.gabojago.vo.ExhibitionReview;
 import com.bitcamp.gabojago.vo.Member;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface MemberService {
@@ -30,5 +30,11 @@ public interface MemberService {
   Member get(String id) throws Exception;
 
   boolean update(Member member) throws Exception;
+
+  Member findId(Map<String, String> map)throws Exception;
+
+  Member findpwd(Map<String, String> map)throws Exception;
+
+
 
 }

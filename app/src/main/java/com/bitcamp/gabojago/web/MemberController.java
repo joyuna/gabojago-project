@@ -1,15 +1,28 @@
 package com.bitcamp.gabojago.web;
 
 import com.bitcamp.gabojago.service.MemberService;
+import com.bitcamp.gabojago.vo.MailDto;
 import com.bitcamp.gabojago.vo.Member;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/member/")
@@ -53,4 +66,54 @@ public class MemberController {
 
     return "redirect:list";
   }
-}
+
+  @GetMapping("findid/{name}/{email}")
+  @ResponseBody
+  public String findId(@PathVariable("name") String name, @PathVariable("email") String email) throws Exception {
+    Map<String, String> map = new HashMap();
+    map.put("name", name);
+    map.put("email", email);
+
+    Member member = memberService.findId(map);
+
+    if(member ==null){
+      return "입력한 정보에 일치하는 회원이 존재하지 않습니다";
+    }
+    return member.getId() ;
+  }
+
+
+ //  비밀번호 찾기
+  @GetMapping("findpwd/{id}/{name}/{email}")
+@ResponseBody
+  public String findpwd(@PathVariable("id") String id,@PathVariable("name") String name,@PathVariable("email") String email) throws Exception {
+    Map<String, String> map = new HashMap();
+    map.put("id", id);
+    map.put("name", name);
+    map.put("email", email);
+
+    Member member = memberService.findpwd(map);
+
+    if (member == null) {
+      return "입력한 정보에 일치하는 회원이 존재하지 않습니다";
+    }
+    return member.getPassword();
+  }
+
+  @GetMapping("findpwd")
+  public void findpwd()  throws Exception {
+
+  }
+
+
+
+/* public String sendEmailPwd(@PathVariable("email") String email){
+   MailDto dto = memberService.createMailAndChangePassword(email);
+   memberService.emailSend(dto);
+   return"/member/login"
+ }*/
+
+
+
+
+  }

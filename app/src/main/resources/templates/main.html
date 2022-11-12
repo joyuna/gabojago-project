@@ -13,8 +13,11 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     />
-<!--    <script src="./script/jquery-3.6.0.js"></script>-->
-<!--    <script src="./script/script.js"></script>-->
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
 
     <!--<meta name ="google-signin-client_id"
           content="400828157542-5kee4rg9u2va7k0c5q762jqnl973c4dv.apps.googleusercontent.com">
@@ -30,6 +33,7 @@
 
     <div class="modal">
       <div class="modal_body">
+        <div class="out" style="  margin: 0 5px;  float: right;">나가기</div>
         <h2>Sign In</h2>
         <form action="auth/login" method="post">
           <p>ID</p>
@@ -46,7 +50,7 @@
 
           <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-          <script>
+        <!--  <script>
             function onSignIn(googleUser) {
               var profile = googleUser.getBasicProfile();
               console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -56,7 +60,7 @@
             }
 
           </script>
-
+-->
          <!-- <a href="#" onClick="signOut();">Sign out</a>-->
           <script>
             function signOut() {
@@ -71,7 +75,7 @@
 
           <div class="savecheck">
             <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
-            <span><a href="#">ID 찾기</a></span><span> / </span><span><a href="#">Password 찾기</a></span>
+            <span><a href="/app/member/findid">ID 찾기</a></span><span> / </span><span><a href="/app/member/findpwd">Password 찾기</a></span>
           </div>
         </form>
 
@@ -140,9 +144,10 @@
               </li>
 
 
-              <!--테스트 중-->
+              <!--어드민만 보일 수 있음-->
+              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a href='member/list'>회원 관리</a></span>
 
-              <li><a href='member/list'>회원</a></li>
 
             </ul>
           </div>
@@ -206,6 +211,12 @@
           }
         }
       });
+
+      // 장현경 : 로그인 모달 창 나가기
+      $('.out').click(function() {
+        $('.modal').removeClass('show')
+      })
+
     </script>
 
   </body>

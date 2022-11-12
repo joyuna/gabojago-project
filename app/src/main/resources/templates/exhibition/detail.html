@@ -235,11 +235,13 @@
 
   <p style="float: right;">
     <a href='updateform?exno=1'
-       data-th-href="@{updateform(exno=${exhibition.exno})}">| 게시글 변경 | </a>
+       data-th-href="@{updateform(exno=${exhibition.exno})}"
+       data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">| 게시글 변경 | </a>
 
     <a href='delete?exno=1'
-       data-th-href="@{delete(exno=${exhibition.exno})}">게시글 삭제 |</a>
-    <a href='exhibitionlist'>목록 |</a>
+       data-th-href="@{delete(exno=${exhibition.exno})}"
+       data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">게시글 삭제 |</a>
+    <a href='exhibitionlist'>| 목록 |</a>
   </p>
 </form>
 
