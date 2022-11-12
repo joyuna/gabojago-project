@@ -16,34 +16,38 @@
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="py-5 text-center">
-        <h2>profile</h2>
+        <div class="py-5 text-center">
+            <h2>profile</h2>
+        </div>
+
+    <!--    <div>-->
+          <img th:src="@{/board/files/} + ${profileFig}"/>
+    <!--    </div>-->
+
+        <div>
+          <label>nickname</label>
+          <div th:text="${nickname}"></div>
+        </div>
+
+        <div>
+          <label>MBTI</label>
+          <div th:text="${mbti}"></div>
+        </div>
+
+        <button th:onclick="|location.href='@{../}'|"
+                type="button">메인</button>
+
+        <button onclick="location.href='profileDetail.html'"
+                        th:onclick="|location.href='@{/myPage/modify/profileDetail}'|"
+                        type="button">프로필 수정</button>
+
+        <button onclick="location.href='myAccountDetail.html'"
+                th:onclick="|location.href='@{/myPage/modify/myAccountDetail}'|"
+                type="button">개인정보 수정</button>
+
     </div>
-
-<!--    <div>-->
-      <img th:src="@{/board/files/} + ${profileFig}"/>
-<!--    </div>-->
-
-    <div>
-      <label>nickname</label>
-      <div th:text="${nickname}"></div>
-    </div>
-
-    <div>
-    <label>MBTI</label>
-    <div th:text="${mbti}"></div>
-    </div>
-
-    <button onclick="location.href='profileDetail.html'"
-                    th:onclick="|location.href='@{/myPage/modify/profileDetail}'|"
-                    type="button">프로필 수정</button>
-
-    <button onclick="location.href='myAccountDetail.html'"
-            th:onclick="|location.href='@{/myPage/modify/myAccountDetail}'|"
-            type="button">개인정보 수정</button>
-
 </body>
 </html>
 
