@@ -40,6 +40,20 @@ public class AdminCheckFilter implements Filter {
       }
     }
 
+//    if (servletPath.toLowerCase().endsWith("recommendation/recommendationForm") ||
+////        servletPath.toLowerCase().endsWith("recommendation/updateform") ||
+//            servletPath.toLowerCase().endsWith("recommendation/recommendationAdd") ||
+//            servletPath.toLowerCase().endsWith("recommendation/disableRecommend") ||
+//            servletPath.toLowerCase().endsWith("recommendation/jangCommentAdd") ||
+//            servletPath.toLowerCase().endsWith("recommendation/jangCommentDelete")) {
+//      Member loginMember = (Member) httpServletRequest.getSession().getAttribute("loginMember");
+//      if (loginMember == null || // 로그인이 안됐거나
+//              !loginMember.getId().equals("admin")) { // 관리자가 아니라면
+//        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/recommendation/recommendationList");
+//        return;
+//      }
+//    }
+
     if (httpServletRequest.getServletPath().startsWith("/member")) {
       Member loginMember = (Member) httpServletRequest.getSession().getAttribute("loginMember");
       if (loginMember == null || // 로그인이 안됐거나

@@ -163,6 +163,7 @@ public class RecommendationController {
   @PostMapping("jangCommentAdd")
   public String jangCommentInsert(JangComment jangComment,
                                   HttpSession session) throws Exception {
+    jangComment.setWriter((Member) session.getAttribute("loginMember"));
     jangCommentService.jangCommentInsert(jangComment);
     return "redirect:../recommendation/recommendationDetail?recono="+jangComment.getRecono();
   }

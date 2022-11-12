@@ -62,13 +62,16 @@
     </div>
 
     <br>
+
+
+
 <!-- 댓글 입력 폼 -->
     <div class="ga-jang-comment-write">
 
         <form action='jangCommentAdd' method="post" enctype="multipart/form-data"
               style=" width: 1000px;">
             <b> [ 댓글 작성 ] </b>
-            <p><label>작성자</label> <input type="text" name="id"></p>
+<!--            <p><label>작성자</label> <input type="text" name="id" data-th-value="${loginMember.id}" readonly></p>-->
             <p><label>내용</label> <input type='text' name='cont' size='60'> </p>
             <input type='hidden' name='recono' data-th-value="${recommendation.recono}">
             <p><button type='submit'>댓글 입력</button></p>
@@ -105,9 +108,6 @@
                 <td>
                     <a href='jangCommentDelete?cmno=1'
                        data-th-href="@{/recommendation/jangCommentDelete(cmno=${jangComment.cmno})}">댓글 삭제</a>
-
-                    <a href='jangCommentUpdate?cmno=1'
-                       data-th-href="@{/recommendation/update(cmno=${jangComment.cmno})}">댓글 변경</a>
 
                 </td>
 

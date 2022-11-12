@@ -29,7 +29,7 @@
     <insert id="jangCommentInsert"  parameterType="jangComment" >
            <!-- useGeneratedKeys="true" keyColumn="rvno" keyProperty="rvno"-->
         INSERT INTO jang_comment (cont, id, recono)
-        values (#{cont}, #{id},  #{recono})
+        values (#{cont}, #{writer.id},  #{recono})
     </insert>
 
     <delete id="jangCommentDelete" parameterType="jangComment">
