@@ -14,7 +14,7 @@ public class Member implements Serializable {
   private String email;
   private String phoneNo;
   private Date birthDay;
-  private Character gender;
+  private String gender; // Character 에서 String 으로 변경
   private String snsAddress;
   private String mbti;
   private String status;
@@ -110,11 +110,11 @@ public class Member implements Serializable {
     this.birthDay = birthDay;
   }
 
-  public char getGender() {
+  public String getGender() {
     return gender;
   }
 
-  public void setGender(Character gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
 
