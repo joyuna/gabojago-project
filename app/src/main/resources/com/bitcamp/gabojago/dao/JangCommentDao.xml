@@ -38,13 +38,14 @@
     </delete>
 
 
-    <update id="jangCommentUpdate" parameterType="jangComment">
-        update jangComment set
-        cont = #{cont}
-        where jangComment.cmno= #{cmno};
-    </update>
-
-
+    <select id="getReconoByCmno" resultMap="jangCommentMap">
+        select
+            *
+        from
+            jang_comment
+        where
+            cmno=#{cmno}
+    </select>
 
 
 </mapper>

@@ -23,6 +23,7 @@ public interface MemberDao {
 
   int join(Member member);
 
+<<<<<<< HEAD
   /* 밑으로 꼉이 수정중*/
   int delete(String id);
 
@@ -31,4 +32,6 @@ public interface MemberDao {
   Member findByIdAll(String id);
 
   int update(Member member);
+=======
+>>>>>>> feat-recom-jim
 }
