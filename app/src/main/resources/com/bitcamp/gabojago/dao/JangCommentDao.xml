@@ -38,7 +38,7 @@
     </delete>
 
 
-    <select id="getReconoByCmno" resultMap="jangCommentMap">
+    <select id="getJangCommentByCmno" resultMap="jangCommentMap">
         select
             *
         from

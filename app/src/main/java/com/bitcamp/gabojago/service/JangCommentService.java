@@ -1,6 +1,5 @@
 package com.bitcamp.gabojago.service;
 
-import com.bitcamp.gabojago.vo.ExhibitionReview;
 import com.bitcamp.gabojago.vo.JangComment;
 
 import java.util.List;
@@ -14,6 +13,6 @@ public interface JangCommentService {
 
     boolean jangCommentDelete(int cmno) throws Exception;
 
-    JangComment getReconoByCmno(int cmno) throws Exception;
+    JangComment getJangCommentByCmno(int cmno) throws Exception;
 
 }

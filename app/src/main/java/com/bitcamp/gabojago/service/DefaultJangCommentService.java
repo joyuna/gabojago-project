@@ -36,8 +36,8 @@ public class DefaultJangCommentService implements JangCommentService {
   }
 
   @Override
-  public JangComment getReconoByCmno(int cmno) throws Exception {
-    return jangCommentDao.getReconoByCmno(cmno);
+  public JangComment getJangCommentByCmno(int cmno) throws Exception {
+    return jangCommentDao.getJangCommentByCmno(cmno);
   }
 
 
