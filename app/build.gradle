@@ -49,6 +49,11 @@ dependencies {
     // 적은양의 코드만을 이용해 썸네일을 제작할 수 있고 가로 세로 사이즈를 결정하면 비율에 맞게 조정해 주는 기능
     implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.11'
 
+    // 이메일 발송 테스트
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+    implementation 'javax.mail:javax.mail-api:1.6.2'
+    implementation 'javax.mail:mail:1.4.7'
+
     // implementation project(':app-common')
 }
 
