@@ -36,6 +36,7 @@ public class MyPageController {
             model.addAttribute("profileFig", member.getProfileFig());
             model.addAttribute("nickname", member.getNickName());
             model.addAttribute("mbti", member.getMbti());
+            model.addAttribute("snsAddress", member.getSnsAddress());
 
             return "myPage/myPage";
 

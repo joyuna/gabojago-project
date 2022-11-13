@@ -61,8 +61,9 @@ public class ModifyMyPageController {
             HttpSession session) throws Exception {
 
             Member saveMember = memberService.get(member.getId());
-            saveMember.setNickName(member.getNickName());
+            saveMember.setNickName(member.getNickName().trim());
             saveMember.setMbti(member.getMbti());
+            saveMember.setSnsAddress(member.getSnsAddress().trim());
 
            if(!file.isEmpty()){
                String dirPath = sc.getRealPath("/board/files");
@@ -77,6 +78,8 @@ public class ModifyMyPageController {
            model.addAttribute("profileFig", saveMember.getProfileFig());
            model.addAttribute("nickname", saveMember.getNickName());
            model.addAttribute("mbti", saveMember.getMbti());
+           model.addAttribute("snsAddress", saveMember.getSnsAddress());
+
            return "myPage/myPage";
     }
 

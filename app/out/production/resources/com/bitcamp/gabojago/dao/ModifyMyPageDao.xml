@@ -23,7 +23,8 @@
         update jang_member set
         PROFILE=#{profileFig},
         NNAME=#{nickName},
-        MBTI=#{mbti}
+        MBTI=#{mbti},
+        SNS=#{snsAddress}
         where ID=#{id}
     </update>
 

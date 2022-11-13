@@ -36,6 +36,11 @@
           <div th:text="${mbti}"></div>
         </div>
 
+        <div>
+            <label>INSTAGRAM</label>
+            <a th:href="@{https://www.instagram.com/{snsAddress}(snsAddress=${snsAddress})}">INSTAGRAM</a>
+        </div>
+
         <button th:onclick="|location.href='@{../}'|"
                 type="button">메인</button>
 
