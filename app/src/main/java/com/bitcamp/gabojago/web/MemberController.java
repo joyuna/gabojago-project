@@ -82,8 +82,14 @@ public class MemberController {
     return member.getId() ;
   }
 
+  @GetMapping("findid")
+  public void findId()  throws Exception {
 
- //  비밀번호 찾기
+  }
+
+
+
+  //  비밀번호 찾기
   @GetMapping("findpwd/{id}/{name}/{email}")
 @ResponseBody
   public String findpwd(@PathVariable("id") String id,@PathVariable("name") String name,@PathVariable("email") String email) throws Exception {

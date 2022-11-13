@@ -68,7 +68,11 @@
         where jang_exhibition_review.rvno= #{rvno};
     </update>
 
-
+    <!--게시글 삭제시 리뷰 삭제-->
+    <delete id="deleteReviewByExhibition">
+        delete from jang_exhibition_review
+        where exno=#{exno}
+    </delete>
 
 
 </mapper>

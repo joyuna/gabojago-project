@@ -172,7 +172,8 @@
 
           <!-- Product image 첨부파일 갤러리화 -->
           <img th:src="@{/board/files/}+
-                ${exhibition.getExhibitionFiles().size()>0? exhibition.exhibitionFiles.get(0).path:''}"/>
+                ${exhibition.getExhibitionFiles().size()>0? exhibition.exhibitionFiles.get(0).path:''}"
+          onerror="this.src='https://cdn.pixabay.com/photo/2015/04/21/21/12/room-733785_960_720.jpg'"/>
           <!-- 전시 제목,날짜 정렬-->
           <div class="card-body p-4">
             <div class="text-center">
@@ -203,6 +204,25 @@
   </div>
   </div>
 </section>
+
+
+<div class="container">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>
+
+    <li class="page-item" data-th-if="${count>4}">
+      <a class="page-link" data-th-href="${'?count=' + count/5*5}" >이전</a></li>
+
+    <li class="page-item active"data-th-each="num: ${#numbers.sequence(count/5*5+1,count/5*5+5<totalNumber+1? count/5*5+5:totalNumber+1)}">
+      <a class="page-link" data-th-href="${'?count=' + num}" data-th-text="${num}">1</a></li>
+
+    <li class="page-item" data-th-if="${count<totalNumber/5*5}">
+      <a class="page-link" data-th-href="${'?count=' + ((count/5+1)*5+1)}">다음</a>
+
+    <li class="page-item"><a class="page-link" data-th-href="${'?count='+(totalNumber+1)}">끝으로</a></li>
+  </ul>
+</div>
+
 
 <!--<div style="position: absolute; right: 0px; bottom: 0px;">-->
 
