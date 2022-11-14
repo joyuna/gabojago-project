@@ -163,14 +163,16 @@ public class RecommendationController {
   @PostMapping("jangCommentAdd")
   public String jangCommentInsert(JangComment jangComment,
                                   HttpSession session) throws Exception {
+    checkOwner(jangComment.getCmno(), session);
+    jangComment.setWriter((Member) session.getAttribute("loginMember"));
     jangCommentService.jangCommentInsert(jangComment);
     return "redirect:../recommendation/recommendationDetail?recono="+jangComment.getRecono();
   }
 
   @GetMapping("jangCommentDelete")
   public String jangCommentDelete(int cmno, HttpSession session, JangComment jangComment) throws Exception {
-    //  checkOwner(no, session);
-    int recono = jangComment.getRecono();
+    int recono = jangCommentService.getJangCommentByCmno(cmno).getRecono();
+    checkOwner(cmno, session);
     if(!jangCommentService.jangCommentDelete(cmno)) {
       throw new Exception("댓글을 삭제 할 수 없습니다.");
     }
@@ -178,17 +180,16 @@ public class RecommendationController {
     return "redirect:../recommendation/recommendationDetail?recono="+recono;
   }
 
-  @PostMapping("update")
-  public String update(JangComment jangComment, HttpSession session) throws Exception{
-
-//  checkOwner(board.getNo(), session);
-
-    if(!jangCommentService.jangCommentUpdate(jangComment)){
-      throw new Exception("댓글을 변경 할 수 없습니다!");
+  private void checkOwner(int cmno, HttpSession session) throws Exception {
+    Member loginMember = (Member) session.getAttribute("loginMember");
+    if(loginMember == null) {
+      throw new Exception("로그인 이용자만 가능한 기능입니다.");
     }
-    return "redirect:../recommendation/recommendationList";
+    JangComment jangComment = jangCommentService.getJangCommentByCmno(cmno);
+    if (!jangComment.getId().equals(loginMember.getId())) {
+      throw new Exception("게시글 작성자가 아닙니다.");
+    }
   }
-
 
 }
 

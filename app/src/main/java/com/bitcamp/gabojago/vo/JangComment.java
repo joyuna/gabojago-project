@@ -9,6 +9,7 @@ public class JangComment {
   private Date wdate; // 작성일
   private String id; // 아이디
   private int recono; // 전시회 번호
+  private Member writer; // 글쓴 회원정보
 
   public int getCmno() {
     return cmno;
@@ -50,6 +51,14 @@ public class JangComment {
     this.recono = recono;
   }
 
+  public Member getWriter() {
+    return writer;
+  }
+
+  public void setWriter(Member writer) {
+    this.writer = writer;
+  }
+
   @Override
   public String toString() {
     return "JangComment{" +
@@ -58,6 +67,7 @@ public class JangComment {
             ", wdate=" + wdate +
             ", id='" + id + '\'' +
             ", recono=" + recono +
+            ", writer=" + writer +
             '}';
   }
 }

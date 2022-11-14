@@ -29,7 +29,7 @@
     <insert id="jangCommentInsert"  parameterType="jangComment" >
            <!-- useGeneratedKeys="true" keyColumn="rvno" keyProperty="rvno"-->
         INSERT INTO jang_comment (cont, id, recono)
-        values (#{cont}, #{id},  #{recono})
+        values (#{cont}, #{writer.id},  #{recono})
     </insert>
 
     <delete id="jangCommentDelete" parameterType="jangComment">
@@ -38,13 +38,14 @@
     </delete>
 
 
-    <update id="jangCommentUpdate" parameterType="jangComment">
-        update jangComment set
-        cont = #{cont}
-        where jangComment.cmno= #{cmno};
-    </update>
-
-
+    <select id="getJangCommentByCmno" resultMap="jangCommentMap">
+        select
+            *
+        from
+            jang_comment
+        where
+            cmno=#{cmno}
+    </select>
 
 
 </mapper>

@@ -19,5 +19,7 @@ public interface JangCommentDao {
 
   int jangCommentUpdate(JangComment jangComment);
 
+  JangComment getJangCommentByCmno(int cmno);
+
 
 }
