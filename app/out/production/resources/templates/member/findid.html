@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gabojago</title>
+</head>
+
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+<link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.2.0/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-UkVD+zxJKGsZP3s/JuRzapi4dQrDDuEf/kHphzg8P3v8wuQ6m9RLjTkPGeFcglQU" crossorigin="anonymous">
+
+<script
+    src="https://code.jquery.com/jquery-3.6.1.js"
+    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+
+
+</head>
+<!-- Header-->
+<header class="bg-dark py-4">
+
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h2 class="display-4 fw-bolder">아이디 찾기 </h2>
+      <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
+    </div>
+  </div>
+</header>
+
+<!-- Navigation 사실상의 header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/app">가보자GO</a>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="/app/recommendation/recommendationList">코스추천</a>
+        </li>
+
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#">전시회
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/app/support/">고객지원</a>
+        </li>
+        <li class="nav-item" th:if="${session.loginMember != null}">
+          <a
+              class="nav-link"
+              href="/app/auth/logout"
+              th:text="${session.loginMember.name}+'(로그아웃)'"
+          >홍길동(로그아웃)</a
+          >
+        </li>
+        <li class="nav-item" th:if="${session.loginMember == null}">
+          <span class="nav-link btn-open-popup">로그인</span>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/app/myPage/">
+            <img src="./images/mypage.png" width="90%" height="25"
+            /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+
+
+<body >
+
+<div style="  margin: 0 auto; width: 700px;">
+  <h1></h1>
+  <br>
+
+  <div class="row mb-3">
+    <label for="name" class="col-sm-2 col-form-label">이름</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="email" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email">
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="findId" >아이디 찾기</button>
+
+  <br>
+  <br>
+  <div>회원님의 아이디는 : </div>
+  <div id="result"> </div>
+</div>
+
+
+
+<script>
+  //dictionary.js 구현
+  $(document).ready(function() { // 기본선언
+    $('#findId').click(function() { // findId 를 클릭했을때 하단 함수 호출
+
+      var name = $('#name').val()
+      var email = $('#email').val()
+
+    if(name ==''){
+      alert('이름을 입력해주세요')
+      return false
+    } // 만약 아이디가 없어
+    if(email =='') {
+      alert('이메일을 입력해주세요')
+      return false
+    }
+
+
+      $.ajax({ // 제이쿼리안에 함수 사용
+        url:'/app/member/findid/'+name+'/'+email,
+        type:'GET',
+        success: function(data){
+          $('#result').empty()
+          var html ='<h1>'+data+'</h1>'
+          $('#result').append(html)
+        }
+      })
+  /*    return true*/
+    })
+  })
+</script>
+
+</body>
+
+
+
+</html>
