@@ -61,6 +61,9 @@ public class RecommendationController {
     // recommendation에 JangSoReview List를 set하기
     recommendation.setJangSoReviews(saveJangSoReviews(files, cont, place));
 
+    // recommendation에 주 이동수단 데이터 set하기
+    recommendation.setTpname(tpname);
+
     // recommendation에 meta 데이터 set하기
     recommendation.setTpname(tpname);
     if (pet != null) {recommendation.setPet(true);} else {recommendation.setPet(false);}
@@ -142,10 +145,27 @@ public class RecommendationController {
   }
 
   @GetMapping("disableRecommend")
-  public String disableRecommend(int recono) throws Exception {
+  public String disableRecommend(int recono, HttpSession session) throws Exception {
+    // 작성자 본인인지 확인
+    if (!recommendationService.getRecommendation(recono).getWriter().getId().equals(session.getId())) {
+      return "redirect:recommendationList";
+    }
+
+    // 삭제를 가장한 비활성화
     if (!recommendationService.disableRecommend(recono)) {
       throw new Exception("코스추천글 삭제 실패");
     }
+
+    return "redirect:recommendationList";
+  }
+
+  @GetMapping("recommendationUpdate")
+  public String recommendationUpdate(int recono, HttpSession session) throws Exception {
+    // 작성자 본인인지 확인
+    if (!recommendationService.getRecommendation(recono).getWriter().getId().equals(session.getId())) {
+      return "redirect:recommendationList";
+    }
+
 
     return "redirect:recommendationList";
   }

@@ -88,19 +88,21 @@
     <!-- recommendationDetail - 1 -->
     <select id="getRecommendation" resultMap="recommendationMap">
         select
-        recono,
-        title,
-        cnt,
-        wdate,
-        act,
-        pet,
-        frd,
-        cple,
-        fmly,
-        solo,
-        tpname
+            jsrc.recono,
+            jsrc.title,
+            jsrc.cnt,
+            jsrc.wdate,
+            jsrc.act,
+            jsrc.pet,
+            jsrc.frd,
+            jsrc.fmly,
+            jsrc.solo,
+            jsrc.tpname,
+            jm.id,
+            jm.nname
         from
-        jang_so_recommendation
+            jang_so_recommendation jsrc
+        join jang_member jm on jm.id=jsrc.id
         where recono = #{value}
     </select>
 
