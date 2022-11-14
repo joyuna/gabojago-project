@@ -293,6 +293,27 @@ $(".ga-input-box3").keyup(doSearch3);
 $(".ga-input-box4").keyup(doSearch4);
 $(".ga-input-box5").keyup(doSearch5);
 
+$("#ga-files1").on('change',function(){
+  var fileName = $("#ga-files1").val();
+  $(".ga-upload-namebox").eq(0).val(fileName);
+});
+$("#ga-files2").on('change',function(){
+  var fileName = $("#ga-files2").val();
+  $(".ga-upload-namebox").eq(1).val(fileName);
+});
+$("#ga-files3").on('change',function(){
+  var fileName = $("#ga-files3").val();
+  $(".ga-upload-namebox").eq(2).val(fileName);
+});
+$("#ga-files4").on('change',function(){
+  var fileName = $("#ga-files4").val();
+  $(".ga-upload-namebox").eq(3).val(fileName);
+});
+$("#ga-files5").on('change',function(){
+  var fileName = $("#ga-files5").val();
+  $(".ga-upload-namebox").eq(4).val(fileName);
+});
+
 
 
 //// ------------------------------------
