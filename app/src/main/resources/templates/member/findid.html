@@ -21,7 +21,7 @@
 
   <div class="container px-4 px-lg-5 my-5">
     <div class="text-center text-white">
-      <h2 class="display-4 fw-bolder">아이디 찾자 </h2>
+      <h2 class="display-4 fw-bolder">아이디 찾기 </h2>
       <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
     </div>
   </div>
@@ -79,7 +79,7 @@
 <body >
 
 <div style="  margin: 0 auto; width: 700px;">
-  <h1> 아이디 찾기 </h1>
+  <h1></h1>
   <br>
 
   <div class="row mb-3">
@@ -100,7 +100,8 @@
 
   <br>
   <br>
-  <div id="result">님아이디 : </div>
+  <div>회원님의 아이디는 : </div>
+  <div id="result"> </div>
 </div>
 
 
@@ -114,11 +115,11 @@
       var email = $('#email').val()
 
     if(name ==''){
-      alert('님 조짐 ㅎ')
+      alert('이름을 입력해주세요')
       return false
     } // 만약 아이디가 없어
     if(email =='') {
-      alert('님 조짐 ㅎ')
+      alert('이메일을 입력해주세요')
       return false
     }
 

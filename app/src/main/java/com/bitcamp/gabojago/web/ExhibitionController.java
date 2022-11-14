@@ -153,7 +153,7 @@ public class ExhibitionController {
   @GetMapping("exhibitionlist") // 페이징 추가
   public void list(Integer count, Model model) throws Exception {
 //    model.addAttribute("exhibitions", exhibitionService.exhibitionList());
-    int number = 8;
+    int number = 4;
     int countInt = count!=null? (count.intValue()-1)*number:0; // 게시물 갯수
 
     Map<String, Object> map = new HashMap<String, Object>();

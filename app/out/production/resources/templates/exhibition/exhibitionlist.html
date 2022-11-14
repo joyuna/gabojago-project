@@ -139,9 +139,10 @@
     </div>
   </div>
 </nav>
+<!--width: 1150px; margin-top: 30px;-->
 
-<ul class="nav justify-content-end" style="width: 1150px; margin-top: 30px;">
-  <li class="nav-item">
+<ul class="nav justify-content-end" >
+  <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
     <h5><a class="nav-link active" aria-current="page" href="form"
        data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
        style="color: #ffffff">전시회 글쓰기</a></h5>
@@ -152,7 +153,7 @@
   <li class="nav-item">
     <a class="nav-link" href="#">Link</a>
   </li>-->
-  <li class="nav-item">
+  <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
    <h5> <a class="nav-link"  href="../"
        style="color: #ffffff; ">메인</a></h5>
   </li>
@@ -206,14 +207,15 @@
 </section>
 
 
-<div class="container">
+<div class="container d-flex justify-content-center" >
   <ul class="pagination">
     <li class="page-item"><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>
 
     <li class="page-item" data-th-if="${count>4}">
       <a class="page-link" data-th-href="${'?count=' + count/5*5}" >이전</a></li>
 
-    <li class="page-item active"data-th-each="num: ${#numbers.sequence(count/5*5+1,count/5*5+5<totalNumber+1? count/5*5+5:totalNumber+1)}">
+    <!--th:classappend="${count}+1==${num}? 'active':''" : 현재 페이지에 대한 색 처리-->
+    <li class="page-item" th:classappend="${count}+1==${num}? 'active':''" data-th-each="num: ${#numbers.sequence(count/5*5+1,count/5*5+5<totalNumber+1? count/5*5+5:totalNumber+1)}">
       <a class="page-link" data-th-href="${'?count=' + num}" data-th-text="${num}">1</a></li>
 
     <li class="page-item" data-th-if="${count<totalNumber/5*5}">
@@ -222,8 +224,8 @@
     <li class="page-item"><a class="page-link" data-th-href="${'?count='+(totalNumber+1)}">끝으로</a></li>
   </ul>
 </div>
-
-
+<br>
+<br>
 <!--<div style="position: absolute; right: 0px; bottom: 0px;">-->
 
 <div style="position: fixed; right: 10px; bottom: 280px;">

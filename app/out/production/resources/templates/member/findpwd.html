@@ -112,21 +112,21 @@
 <script>
   //dictionary.js 구현
   $(document).ready(function() { // 기본선언
-    $('#findId').click(function() { // findId 를 클릭했을때 하단 함수 호출
+    $('#findId').click(function() { // findpwd 를 클릭했을때 하단 함수 호출
       var id = $('#id').val()
       var name = $('#name').val()
       var email = $('#email').val()
 
       if(id ==''){
-        alert('님 아이디좀 ^^ ')
+        alert('아이디를 입력해주세요')
         return false
       }
       if(name ==''){
-        alert('님 이름')
+        alert('이름을 입력해주세요')
         return false
-      } // 만약 아이디가 없어
+      }
       if(email =='') {
-        alert('님 이메일 ㅎ')
+        alert('이메일을 입력해주세요')
         return false
       }
 

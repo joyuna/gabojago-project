@@ -71,7 +71,7 @@
 <style>
   label {
     font-weight: bold ;
-  }
+  } f
 </style>
 
 <body>
@@ -81,14 +81,14 @@
 
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
             th-field="${member.status}" data-th-value="${member.status}"
-            name="status"  style="width: 130px;">
+            name="status"  style="width: 120px; height:50px;">
       <option selected>status</option>
       <option data-th-value="'활성'">활성</option>
       <option data-th-value="'신고'">신고</option>
       <option data-th-value="'탈퇴'">탈퇴</option>
     </select>
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="id" class="col-sm-2 col-form-label"> ID </label>
       <div class="col-sm-10">
         <input input name='id' type='text' id="id"
@@ -99,7 +99,7 @@
     </div>
 
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="name" class="col-sm-2 col-form-label"> 이름 </label>
       <div class="col-sm-10">
         <input id="name"name='name' type='text'
@@ -110,7 +110,7 @@
     </div>
 
 
-    <div class="row mb-3">
+    <div class="row mb-3  border rounded">
       <label for="nickName" class="col-sm-2 col-form-label"> 닉네임 </label>
       <div class="col-sm-10">
         <input id="nickName" name='nickName' type='text'
@@ -121,7 +121,7 @@
     </div>
 
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="email" class="col-sm-2 col-form-label"> 이메일 </label>
       <div class="col-sm-10">
         <input id="email" name='email' type='email'
@@ -133,7 +133,7 @@
     </div>
 
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="createdDate" class="col-sm-2 col-form-label"> 가입일 </label>
       <div class="col-sm-10">
         <input  id="createdDate" name='createdDate' type='text'
@@ -151,7 +151,7 @@
     </tr>-->
 
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="outDate" class="col-sm-2 col-form-label"> 탈퇴일 </label>
       <div class="col-sm-10">
         <input  id="outDate" name='outDate' type='text'
@@ -163,7 +163,7 @@
     </div>
 
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="phoneNo" class="col-sm-2 col-form-label"> 전화번호 </label>
       <div class="col-sm-10">
         <input  id="phoneNo" name='phoneNo' type='text'
@@ -175,7 +175,7 @@
     </div>
 
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="birthDay" class="col-sm-2 col-form-label"> 생일 </label>
       <div class="col-sm-10">
         <input  id="birthDay" name='birthDay' type='text'
@@ -186,19 +186,19 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="gender" class="col-sm-2 col-form-label"> 성별 </label>
       <div class="col-sm-10">
         <input  id="gender" name='gender' type='text'
+                data-th-value="${member.gender}"
                 value='F'
-                data-th-text="${member.gender}"
                 size='60'
                 style=" border: none;">
       </div>
     </div>
 
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="snsAddress" class="col-sm-2 col-form-label"> SNS </label>
       <div class="col-sm-10">
         <input  id="snsAddress" name='snsAddress' type='text'
@@ -209,7 +209,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3 border rounded">
       <label for="mbti" class="col-sm-2 col-form-label"> MBTI </label>
       <div class="col-sm-10">
         <input  id="mbti" name='mbti' type='text'
@@ -240,13 +240,16 @@
 
   </table>
 
+<div class = "container  align-text-center g-3 p-3  " >
+  <button type="submit m-4" class="btn btn-outline-secondary">변경</button>
+  <button  class="btn btn-outline-none"></button>
 
-  <button type="submit" class="btn btn-outline-dark">변경</button>
-  <button type="button" class="btn btn-outline-danger">
+
+  <button type="button" class="btn btn-outline-primary">
     <a href='delete?id= user1'
        data-th-href="@{delete(id=${member.id})}">삭제</a></button>
 
-
+</div>
 </form>
 
 

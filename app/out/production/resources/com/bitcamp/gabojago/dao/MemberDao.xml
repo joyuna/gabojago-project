@@ -79,7 +79,7 @@
 
 
 
-    <!--자현경 작업중 -->
+    <!--장현경 작업중 -->
     <select id="findAll" resultMap="memberMap">
         select
         *
