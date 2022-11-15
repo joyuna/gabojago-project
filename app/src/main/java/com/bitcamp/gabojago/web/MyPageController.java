@@ -33,6 +33,8 @@ public class MyPageController {
 
         } else {
 
+            model.addAttribute("id", member.getId());
+            model.addAttribute("name", member.getName());
             model.addAttribute("profileFig", member.getProfileFig());
             model.addAttribute("nickname", member.getNickName());
             model.addAttribute("mbti", member.getMbti());
@@ -41,11 +43,6 @@ public class MyPageController {
             return "myPage/myPage";
 
         }
-    }
-
-    @GetMapping()
-    public void TestMyPage () {
-
     }
 }
 
