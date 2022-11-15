@@ -1,7 +1,9 @@
 package com.bitcamp.gabojago.service;
 
+import com.bitcamp.gabojago.vo.KakaoDTO;
 import com.bitcamp.gabojago.vo.Member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +36,6 @@ public interface MemberService {
   Member findId(Map<String, String> map)throws Exception;
 
   Member findpwd(Map<String, String> map)throws Exception;
-
 
 
 }

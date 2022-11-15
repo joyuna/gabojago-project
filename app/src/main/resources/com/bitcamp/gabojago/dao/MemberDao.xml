@@ -21,6 +21,10 @@
         <result column="STATUS" property="status"/>
     </resultMap>
 
+
+
+
+
     <select id="findByIdPassword" resultMap="memberMap">
         select
             ID,
@@ -148,5 +152,7 @@
         name = #{name} and
         email= #{email}
     </update>
+
+
 
 </mapper>

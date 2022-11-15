@@ -30,20 +30,22 @@
   <body class="pt-5">
     <!-- body 이름 바꿈 -->
 
-
     <div class="modal">
-      <div class="modal_body">
-        <div class="out" style="  margin: 0 5px;  float: right;">나가기</div>
-        <h2>Sign In</h2>
-        <form action="auth/login" method="post">
+      <div class="modal_body" style=" background: rgba(255,255,255,0.8); ">
+        <div class="out" style="margin: 05px;  float: right;">나가기</div>
+        <br>
+        <h2 style=" text-align: center;"> 로그인 </h2>
+
+        <form action="auth/login" method="post" >
           <p>ID</p>
           <input name="id" type="text" size="30" placeholder="ID를 입력해주세요." th:value="${id}">
-          
+          <br> <!--공백-->
           <p>Password</p>
           <input name="password" type="password" size="20" placeholder="Password를 입력해주세요.">
           <br>
-          <button class="btn_login" type="submit">Login</button>
-
+          <br> <!--공백-->
+          <button class="btn_login" type="submit"
+          style="background-color: #ffca2c">Login</button>
 
 
 <!--          <a href="http://localhost:9999/app/">구글 아이디로 로그인</a>-->
@@ -72,7 +74,6 @@
           </script>
 
 
-
           <div class="savecheck">
             <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
             <span><a href="/app/member/findid">ID 찾기</a></span><span> / </span><span><a href="/app/member/findpwd">Password 찾기</a></span>
@@ -99,7 +100,8 @@
          -->
 
         <form action="auth/register">
-          <button class="btn_signin" type="submit">회원가입</button>
+          <button class="btn_signin" type="submit"
+                  style="background-color: #ffca2c">회원가입</button>
         </form>
 
       </div>

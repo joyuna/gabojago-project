@@ -2,22 +2,14 @@ package com.bitcamp.gabojago.service;
 
 import com.bitcamp.gabojago.dao.ExhibitionReviewDao;
 import com.bitcamp.gabojago.dao.MemberDao;
-import com.bitcamp.gabojago.vo.MailDto;
 import com.bitcamp.gabojago.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -27,6 +19,7 @@ public class DefaultMemberService implements MemberService {
 
   @Autowired
   ExhibitionReviewDao exhibitionReviewDao;
+
 
 
   @Override
@@ -134,4 +127,7 @@ public class DefaultMemberService implements MemberService {
 
     return member;
   }
+
+
+
 }

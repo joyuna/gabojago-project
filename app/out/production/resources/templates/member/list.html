@@ -36,9 +36,8 @@
         </li>
 
 
-        <li class="nav-item active">
-          <a class="nav-link" href="#">전시회
-            <span class="sr-only">(current)</span>
+        <li class="nav-item">
+          <a class="nav-link" href="/app/exhibition/exhibitionlist">전시회
           </a>
         </li>
 
@@ -59,9 +58,12 @@
 
         <li class="nav-item">
           <a class="nav-link" href="/app/myPage/">
-            <img src="./images/mypage.png" width="90%" height="25"
-            /></a>
+            <img src="./images/mypage.png" width="90%" height="25"/></a>
         </li>
+        <!--어드민만 보일 수 있음-->
+        <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a href='/app/member/list'>회원 관리</a></span>
+
       </ul>
     </div>
   </div>
@@ -141,10 +143,6 @@ STYLE="width: 1700PX;">
 
 
 
-
-
-
-
 <!-- Footer-->
 <footer class="bg-dark">
   <p>Copyright &copy;가보자GO</p>
@@ -174,7 +172,6 @@ STYLE="width: 1700PX;">
     width: 1200px;
     margin: 0 auto;
   }
-
 
   a {
     text-decoration: none;
