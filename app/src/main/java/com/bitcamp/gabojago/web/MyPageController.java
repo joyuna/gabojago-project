@@ -25,7 +25,7 @@ public class MyPageController {
         Member loginMember = (Member) session.getAttribute("loginMember");
         Member member = memberService.get(loginMember.getId());
 
-        if (loginMember == null) {
+        if (member == null) {
 
             model.addAttribute("message", "로그인이 필요한 항목입니다. 회원가입 또는 로그인해 주세요.");
 
@@ -41,6 +41,11 @@ public class MyPageController {
             return "myPage/myPage";
 
         }
+    }
+
+    @GetMapping()
+    public void TestMyPage () {
+
     }
 }
 

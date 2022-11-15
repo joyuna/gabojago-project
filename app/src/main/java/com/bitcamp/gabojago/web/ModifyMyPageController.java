@@ -60,7 +60,9 @@ public class ModifyMyPageController {
             RedirectAttributes redirectAttributes,
             HttpSession session) throws Exception {
 
-            Member saveMember = memberService.get(member.getId());
+            Member loginMember = (Member) session.getAttribute("loginMember");
+
+            Member saveMember = memberService.get(loginMember.getId());
             saveMember.setNickName(member.getNickName().trim());
             saveMember.setMbti(member.getMbti());
             saveMember.setSnsAddress(member.getSnsAddress().trim());
@@ -80,7 +82,7 @@ public class ModifyMyPageController {
            model.addAttribute("mbti", saveMember.getMbti());
            model.addAttribute("snsAddress", saveMember.getSnsAddress());
 
-           return "myPage/myPage";
+           return "redirect:/myPage/";
     }
 
     @PostMapping ("myAccountUpdate")
