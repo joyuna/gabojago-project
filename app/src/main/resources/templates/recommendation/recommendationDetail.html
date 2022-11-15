@@ -140,8 +140,8 @@
 <div class="ga-content-detail">
     <div class="ga-selectbtn">
         <button><a href="recommendationList">목록</a></button>
-        <button><a href="recommendationUpdate?recono=${recommendation.recono}"
-                   data-th-href="@{recommendationUpdate(recono=${recommendation.recono})}">수정</a></button>
+        <button><a href="recommendationUpdateForm?recono=${recommendation.recono}"
+                   data-th-href="@{recommendationUpdateForm(recono=${recommendation.recono})}">수정</a></button>
         <button><a href="disableRecommend?recono=${recommendation.recono}"
                    data-th-href="@{disableRecommend(recono=${recommendation.recono})}">삭제</a></button>
     </div>
@@ -186,42 +186,47 @@
     <!-- 댓글 입력 폼 -->
     <div class="ga-jang-comment-write">
 
-        <form action='jangCommentInsert' method="post" enctype="multipart/form-data"
-              style=" width: 1000px;">
-            <b> [ 댓글 작성 ] </b>
-<!--            <p><label>작성자</label> <input type="text" name="id" data-th-value="${loginMember.id}" readonly></p>-->
-            <p><label>내용</label> <input type='text' name='cont' size='60'> </p>
+        <form action='jangCommentInsert' method="post" enctype="multipart/form-data">
+            <span class="ga-comment-write-title">[ 댓글 작성 ]</span>
+            <div class="ga-comment-write-inputbox">
+                <textarea class="ga-comment-write-input" type='text' name='cont' placeholder="댓글을 작성해 주세요."></textarea>
+            </div>
             <input type='hidden' name='recono' data-th-value="${recommendation.recono}">
-            <p><button type='submit'>댓글 입력</button></p>
+            <button class="ga-comment-write-btn" type='submit'>등록</button>
         </form>
     </div>
     <!-- 댓글 리스트 -->
     <div class="ga-jang-comment">
-        <table border="1">
+        <table class="ga-comment-list">
             <tr>
                 <th>댓글번호</th>
                 <th>아이디</th>
                 <th>내용</th>
                 <th>작성일</th>
+                <th></th>
             </tr>
 
             <tr data-th-each="jangComment : ${jangComments}">
-                <td name="cmno" type="number" value="1" data-th-text="${jangComment.cmno}" readonly>댓글번호</td>
-                <td data-th-text="${jangComment.id}">홍길동</td>
-                <td data-th-text="${jangComment.cont == ''} ? '(제목없음)' : ${jangComment.cont}">
-                    <input name="cont" type="text" value="ㅎ" data-th-value="${jangComment.cont}" size="30"/>
+                <td class="ga-comment-list-num" name="cmno" type="number" value="1" data-th-text="${jangComment.cmno}" readonly>댓글 번호</td>
+                <td class="ga-comment-list-id" data-th-text="${jangComment.writer.nickName}">홍길동</td>
+                <td class="ga-comment-list-cont" data-th-text="${jangComment.cont == ''} ? '(내용없음)' : ${jangComment.cont}">
+                    <input name="cont" type="text" value="empty" data-th-value="${jangComment.cont}" size="30"/>
                 </td>
                 <!--readonly-->
-                <td data-th-text="${jangComment.wdate}">2022-1-1</td>
-                <td>
-                    <a href="jangCommentDelete?cmno=1"
-                       data-th-href="@{/recommendation/jangCommentDelete(cmno=${jangComment.cmno})}">댓글 삭제</a>
-
-                </td>
+                <td class="ga-comment-list-date" data-th-text="${jangComment.wdate}">2022-1-1</td>
+                <td class="ga-comment-list-delete"><a href="jangCommentDelete?cmno=1"
+                    data-th-href="@{/recommendation/jangCommentDelete(cmno=${jangComment.cmno})}">삭제</a></td>
             </tr>
         </table>
     </div>
-</div>
+</div> <!-- main content 끝 -->
+
+    <!-- Footer-->
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy;가보자GO</p>
+        </div>
+    </footer>
 
     <!--login modal script-->
     <script>
