@@ -14,6 +14,9 @@
     integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
     crossorigin="anonymous"></script>
 
+<link rel="stylesheet" href="../css/main-base.css" />
+<link rel="stylesheet" href="../css/main.css" />
+<link rel="stylesheet" href="../css/main-modal.css" />
 
 </head>
 <!-- Header-->
@@ -21,7 +24,7 @@
 
   <div class="container px-4 px-lg-5 my-5">
     <div class="text-center text-white">
-      <h2 class="display-4 fw-bolder">비밀번호 찾자 </h2>
+      <h2 class="display-4 fw-bolder">비밀번호 찾기 </h2>
       <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
     </div>
   </div>
@@ -42,9 +45,8 @@
         </li>
 
 
-        <li class="nav-item active">
-          <a class="nav-link" href="#">전시회
-            <span class="sr-only">(current)</span>
+        <li class="nav-item ">
+          <a class="nav-link" href="/app/exhibition/exhibitionlist">전시회
           </a>
         </li>
 
@@ -65,13 +67,58 @@
 
         <li class="nav-item">
           <a class="nav-link" href="/app/myPage/">
-            <img src="./images/mypage.png" width="90%" height="25"
-            /></a>
+            <img src="./images/mypage.png" width="90%" height="25"/></a>
         </li>
+        <!--어드민만 보일 수 있음-->
+        <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a href='member/list'>회원 관리</a></span>
+
       </ul>
     </div>
   </div>
 </nav>
+
+<div class="modal">
+  <div class="modal_body" style=" background: rgba(255,255,255,0.9); ">
+    <div class="out" style="margin: 05px;  float: right;">나가기</div>
+    <br>
+    <h2 style=" text-align: center;"> 로그인 </h2>
+
+    <form action="auth/login" method="post" >
+      <p>ID</p>
+      <input name="id" type="text" size="30" placeholder="ID를 입력해주세요." th:value="${id}">
+      <br> <!--공백-->
+      <p>Password</p>
+      <input name="password" type="password" size="20" placeholder="Password를 입력해주세요.">
+      <br>
+      <br> <!--공백-->
+      <button class="btn_login" type="submit"
+              style="background-color: #ffca2c">Login</button>
+
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+      <script>
+        function signOut() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+            console.log('User signed out.');
+          });
+        }
+      </script>
+
+      <div class="savecheck">
+        <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
+        <span><a href="/app/member/findid">ID 찾기</a></span><span> / </span><span><a href="/app/member/findpwd">Password 찾기</a></span>
+      </div>
+    </form>
+
+    <form action="auth/register">
+      <button class="btn_signin" type="submit"
+              style="background-color: #ffca2c">회원가입</button>
+    </form>
+  </div>
+</div>
+
 <br>
 <br>
 
@@ -79,7 +126,7 @@
 <body>
 
 <div style="margin: 0 auto; width: 700px;">
-  <h1> 비밀번호 찾기 </h1>
+  <h1> </h1>
   <br>
 
   <div class="row mb-3">
@@ -90,7 +137,7 @@
   </div>
 
   <div class="row mb-3">
-    <label for="name" class="col-sm-2 col-form-label">이름</label>
+    <label for="name" class="col-sm-2 col-form-label">Name</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="name">
     </div>
@@ -103,16 +150,37 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" id="findId" >임시 비밀번호 보내기 </button>
+  <button class="btn btn-primary" id="findpwd"
+          style="float: right">임시 비밀번호 보내기 </button>
 </div>
-  <br>
 
+<br> <br> <br> <br>
+<br> <br> <br> <br> <br> <br> <br> <br> <br>
+<!-- Footer-->
+<footer class=" bg-dark" >
+  <p>Copyright &copy;가보자GO</p>
+</footer>
 
+<style>
+  footer {
+    /* footer를 aside위에 올리기 위해 사용(부유객체) */
+    position: relative;
+    height: 70px;
+    width: 100%;
+    padding: 0 25px;
+    line-height: 60px;
+    color: white;
+    border-top: 1px solid #dee5e7;
+    background-color: #343A40;
+    margin-top:auto;
+    text-align:center;
+  }
 
+</style>
 <script>
   //dictionary.js 구현
   $(document).ready(function() { // 기본선언
-    $('#findId').click(function() { // findpwd 를 클릭했을때 하단 함수 호출
+    $('#findpwd').click(function() { // findpwd 를 클릭했을때 하단 함수 호출
       var id = $('#id').val()
       var name = $('#name').val()
       var email = $('#email').val()
@@ -141,7 +209,34 @@
     })
   })
 </script>
+<script>
+  const body = document.querySelector("body");
+  const modal = document.querySelector(".modal");
+  const btnOpenPopup = document.querySelector(".btn-open-popup");
 
+  btnOpenPopup.addEventListener("click", () => {
+    modal.classList.toggle("show");
+
+    if (modal.classList.contains("show")) {
+      body.style.overflow = "hidden";
+    }
+  });
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.classList.toggle("show");
+
+      if (!modal.classList.contains("show")) {
+        body.style.overflow = "auto";
+      }
+    }
+  });
+
+  // 장현경 : 로그인 모달 창 나가기
+  $('.out').click(function() {
+    $('.modal').removeClass('show')
+  })
+</script>
 </body>
 
 </html>

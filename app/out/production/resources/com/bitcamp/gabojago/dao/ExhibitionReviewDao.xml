@@ -49,6 +49,7 @@
            <!-- useGeneratedKeys="true" keyColumn="rvno" keyProperty="rvno"-->
         INSERT INTO jang_exhibition_review (cont, id, exno)
         values (#{cont}, #{writer.id},  #{exno})
+
     </insert>
 
     <delete id="exhibitionReviewDelete">
