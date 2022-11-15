@@ -211,11 +211,11 @@ public class RecommendationController {
   }
 
   // JangComment : 코스추천글에 댓글 작성 기능
-  @ResponseBody
-  @RequestMapping("comment-select-list/{recono}")
-  public List<JangComment> jangCommentList(@PathVariable("recono") int recono) throws Exception{
-    return jangCommentService.jangCommentList(recono);
-  }
+//  @ResponseBody
+//  @RequestMapping("comment-select-list/{recono}")
+//  public List<JangComment> jangCommentList(@PathVariable("recono") int recono) throws Exception{
+//    return jangCommentService.jangCommentList(recono);
+//  }
 
   @PostMapping("jangCommentInsert")
   public String jangCommentInsert(
