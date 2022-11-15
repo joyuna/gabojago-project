@@ -44,9 +44,9 @@
 				<li class="colorlib-active"><a th:href="@{/myPage/}">About Me</a></li>
 				<li><a href="#">My Recommendation</a></li>
 				<li><a href="#">My Comment</a></li>
-<!--				<li><a href="blog.html">Blog</a></li>-->
-<!--				<li><a href="contact.html">Contact</a></li>-->
-				<br><br><br>
+				<li><a href="#">Shopping Bag</a></li>
+				<li><a href="#">My Purchase</a></li>
+				<br>
 				<li><a th:href="@{/myPage/modify/profileDetail}">My Profile</a></li>
 				<li><a th:href="@{/myPage/modify/myAccountDetail}">My Account</a></li>
 			</ul>
@@ -69,8 +69,7 @@
 						<div class="desc">
 							<h1 class="big-letter"><div th:text="${nickname}"></div></h1>
 							<h1 class="mb-4"><span><div th:text="${nickname}"></div></span></h1>
-							<p class="mb-4">I am A Photographer from America Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-							<h3 class="signature h1" th:text="${mbti}"></h3>
+							<h2 class="mb-4" style="color: grey;"><span><div th:text="${mbti}"></div></span></h2><br><br><br><br>
 							<ul class="ftco-social mt-3">
 
 								<li class="ftco-animate"><a th:href="@{https://www.instagram.com/{snsAddress}(snsAddress=${snsAddress})}"><span class="icon-instagram"></span></a></li>
