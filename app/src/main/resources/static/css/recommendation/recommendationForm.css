@@ -107,9 +107,13 @@ ul, ol {
   width: 100%;
 }
 
+.ga-inputbox-block {
+  width: 100%;
+}
+
 /* 검색란 */
 input[list=searchOptions] {
-  width: 600px;
+  width: 70%;
   margin-left: 1.3%;
 }
 
