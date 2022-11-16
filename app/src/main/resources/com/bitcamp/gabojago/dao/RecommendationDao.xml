@@ -41,7 +41,7 @@
 
         <collection property="attachedFiles" ofType="jangSoReviewAttachedFile">
             <id column="recofno" property="recofno"/>
-            <result column="filepath" property="filepath"/>
+            <result column="path" property="filepath"/>
             <result column="fname" property="fname"/>
         </collection>
 
@@ -104,6 +104,23 @@
             jang_so_recommendation jsrc
         join jang_member jm on jm.id=jsrc.id
         where recono = #{value}
+    </select>
+
+    <!-- recommendationDetail - 2 -->
+    <select id="getJangSoReviewList" resultMap="jangSoReviewMap">
+        select
+            jsr.prvno,
+            jsr.cont,
+            jsr.plname,
+            jsr.adrs,
+            jsrf.recofno,
+            jsrf.path,
+            jsrf.fname
+        from
+            jang_so_review jsr
+            left outer join jang_so_review_file jsrf on jsr.prvno = jsrf.prvno
+        where
+            jsr.recono = #{value}
     </select>
 
     <!-- recommendationDisable -->

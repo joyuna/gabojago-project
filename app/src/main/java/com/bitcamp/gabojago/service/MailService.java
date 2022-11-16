@@ -16,13 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MailService {
 
-  private JavaMailSender emailSender;
-  private SpringTemplateEngine templateEngine;
-
-  public MailService(JavaMailSender emailSender, SpringTemplateEngine templateEngine) {
-    this.emailSender = emailSender;
-    this.templateEngine = templateEngine;
-  }
+  private final JavaMailSender emailSender;
+  private final SpringTemplateEngine templateEngine;
 
   public void sendTemplateMessage(MailDto mailDto) throws MessagingException {
     MimeMessage message = emailSender.createMimeMessage();

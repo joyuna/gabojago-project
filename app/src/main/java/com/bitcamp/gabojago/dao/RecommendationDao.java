@@ -25,6 +25,9 @@ public interface RecommendationDao {
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono);
 
+  // recommendationDetail - 2
+  List<JangSoReview> getJangSoReviewList(int recono);
+
   // recommendationDisable
   int disableRecommend(int recono);
 
