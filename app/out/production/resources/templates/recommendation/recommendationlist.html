@@ -441,7 +441,7 @@
 </ul>
 
 <!--누구랑 갈지 선택-->
-<br>
+
 <a href='recommendationListForFamily'>가족</a>
 <br>
 <a href='recommendationListForFriend'>친구</a>
@@ -449,17 +449,22 @@
 <a href='recommendationListForCouple'>연인</a>
 <br>
 <a href='recommendationListForAlone'>혼자</a>
-
+<br>
+<br>
+<br>
 
 
 
 <!--리스트-->
-<br>
-<a href='#recommendationListOrderByRecent'>최신순</a>
-<br>
-<a href='#recommendationListOrderByComments'>댓글순</a>
-<br>
-<a href='#recommendationListOrderByCnt'>인기순</a>
+<div style="position: fixed; left: 10px; bottom: 280px;">
+    <br>
+    <a href='#recommendationListOrderByRecent'>최신순</a>
+    <br>
+    <a href='#recommendationListOrderByComments'>댓글순</a>
+    <br>
+    <a href='#recommendationListOrderByCnt'>인기순</a>
+    <br>
+</div>
 <br>
 <br>
 
@@ -467,7 +472,7 @@
 <a id="#recommendationListOrderByRecent">
     <h5>최신순</h5>
 </a>
-<section class="py-5 "  style=" width: 100%;">
+<section class="py-5 " id="section1"  style=" width: 100%;">
     <div class="container  px-4 px-lg-5 mt-5" >
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByRecent}">
@@ -518,7 +523,7 @@
 <a id="#recommendationListOrderByComments">
     <h5>댓글순</h5>
 </a>
-<section class="py-5 "  style=" width: 100%;">
+<section class="py-5 " id="section2" style=" width: 100%;">
 
         <div class="container  px-4 px-lg-5 mt-5" >
             <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
@@ -570,9 +575,7 @@
 <a id="#recommendationListOrderByCnt">
     <h5>인기순</h5>
 </a>
-<section class="py-5 "  style=" width: 100%;">
-
-
+<section class="py-5 " id="section3" style=" width: 100%;">
         <div class="container  px-4 px-lg-5 mt-5" >
             <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
                 <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCnt}">
@@ -583,10 +586,8 @@
                         <td data-th-text="${recommendation.recono}">100</td>
 
                         <!-- Product image 첨부파일 갤러리화 -->
-                        <img src="https://via.placeholder.com/90"/>
-                        <!--                    "@{/board/files/}+ &ndash;&gt;-->
-                        <!--                ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path:''}"-->
-                        <!--                         onerror=-->
+                        <img th:src="@{/board/files/} + ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path} : ''}"
+                                                 />
 
                         <!-- 전시 제목,날짜 정렬-->
                         <div class="card-body p-4">
@@ -647,6 +648,37 @@
     <button type="button" class="btn btn-secondary"
             id = go-top >위로</button></div>
 
+<style>
+    html {
+        overflow: hidden;
+    }
+
+    html, body {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+
+    }
+
+    .section {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .section1 {
+        background-color: aliceblue;
+    }
+
+    .section2 {
+        background-color: lightpink;
+    }
+
+    .section3 {
+        background-color: coral;
+    }
+</style>
 
 <script>
     $(document).ready(function () {
@@ -668,6 +700,29 @@
 
     });
 
+    <!--휠 이벤트 처리-->
+    window.addEventListener("wheel", function(e){
+        e.preventDefault();
+    },{passive : false});
+
+    var mHtml = $("html");
+    var page = 1;
+
+
+    mHtml.animate({scrollTop : 0},10);
+
+    $(window).on("wheel", function(e) {
+        if(mHtml.is(":animated")) return;
+        if(e.originalEvent.deltaY > 0) {
+            if(page == 3) return;
+            page++;
+        } else if(e.originalEvent.deltaY < 0) {
+            if(page == 1) return;
+            page--;
+        }
+        var posTop =(page-1) * $(window).height();
+        mHtml.animate({scrollTop : posTop});
+    })
 </script>
 
 
@@ -698,7 +753,7 @@
 
 
     .background {
-        background-image: url(https://images.pexels.com/photos/3004909/pexels-photo-3004909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+        background-image: url(https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg);
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
