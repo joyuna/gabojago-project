@@ -27,6 +27,7 @@ public class MailService {
   public void sendTemplateMessage(MailDto mailDto) throws MessagingException {
     MimeMessage message = emailSender.createMimeMessage();
     MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+    System.out.println("민구메일 전송 완료");
     //메일 제목 설정
     helper.setSubject(mailDto.getTitle());
 
