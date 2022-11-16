@@ -469,7 +469,7 @@
 <br>
 
 <!--최신순-->
-<a id="#recommendationListOrderByRecent">
+<a id="recommendationListOrderByRecent">
     <h5>최신순</h5>
 </a>
 <section class="py-5 " id="section1"  style=" width: 100%;">
@@ -520,7 +520,7 @@
 </section>
 
 <!--댓글순-->
-<a id="#recommendationListOrderByComments">
+<a id="recommendationListOrderByComments">
     <h5>댓글순</h5>
 </a>
 <section class="py-5 " id="section2" style=" width: 100%;">
@@ -572,7 +572,7 @@
 </section>
 
 <!--인기순(조회순)-->
-<a id="#recommendationListOrderByCnt">
+<a id="recommendationListOrderByCnt">
     <h5>인기순</h5>
 </a>
 <section class="py-5 " id="section3" style=" width: 100%;">
@@ -586,8 +586,7 @@
                         <td data-th-text="${recommendation.recono}">100</td>
 
                         <!-- Product image 첨부파일 갤러리화 -->
-                        <img th:src="@{/board/files/} + ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path} : ''}"
-                                                 />
+                        <img th:src="@{/board/files/} + ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path} : ''}"/>
 
                         <!-- 전시 제목,날짜 정렬-->
                         <div class="card-body p-4">
@@ -648,37 +647,6 @@
     <button type="button" class="btn btn-secondary"
             id = go-top >위로</button></div>
 
-<style>
-    html {
-        overflow: hidden;
-    }
-
-    html, body {
-        display: block;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-
-    }
-
-    .section {
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
-
-    .section1 {
-        background-color: aliceblue;
-    }
-
-    .section2 {
-        background-color: lightpink;
-    }
-
-    .section3 {
-        background-color: coral;
-    }
-</style>
 
 <script>
     $(document).ready(function () {
@@ -700,29 +668,10 @@
 
     });
 
-    <!--휠 이벤트 처리-->
     window.addEventListener("wheel", function(e){
         e.preventDefault();
     },{passive : false});
 
-    var mHtml = $("html");
-    var page = 1;
-
-
-    mHtml.animate({scrollTop : 0},10);
-
-    $(window).on("wheel", function(e) {
-        if(mHtml.is(":animated")) return;
-        if(e.originalEvent.deltaY > 0) {
-            if(page == 3) return;
-            page++;
-        } else if(e.originalEvent.deltaY < 0) {
-            if(page == 1) return;
-            page--;
-        }
-        var posTop =(page-1) * $(window).height();
-        mHtml.animate({scrollTop : posTop});
-    })
 </script>
 
 
