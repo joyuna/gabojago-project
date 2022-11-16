@@ -17,6 +17,9 @@
             background-color: navy;
             color: white;
         }
+        .recommandation-write {
+            float: right;
+        }
     </style>
 </head>
 <body class="pt-5">
@@ -147,9 +150,29 @@
 
 <div class="background_image_config">
 
-    <h1>코스추천글</h1>
+    <br>
+    <a href='recommendationListForFamily'>가족</a>
+    <br>
+    <a href='recommendationListForFriend'>친구</a>
+    <br>
+    <a href='recommendationListForCouple'>연인</a>
+    <br>
+    <a href='recommendationListForAlone'>혼자</a>
 
-    <a href='recommendationForm'>새 글</a>
+    <br>
+    <a href='recommendationForm' class="recommandation-write">글쓰기</a>
+
+    <br>
+    <a href='#recommendationListOrderByRecent'>최신순</a>
+    <br>
+    <a href='#recommendationListOrderByComments'>댓글순</a>
+    <br>
+    <a href='#recommendationListOrderByCnt'>인기순</a>
+    <br>
+
+
+    <!--최신순-->
+    <div id="#recommendationListOrderByRecent">
     <table border='1'>
         <tr>
             <th>번호</th>
@@ -157,7 +180,7 @@
             <th>등록일</th>
         </tr>
 
-        <tr data-th-each="recommendation : ${recommendations}">
+        <tr data-th-each="recommendation : ${recommendationsOrderByRecent}">
             <td data-th-text="${recommendation.recono}">100</td>
             <td>
                 <a href='recommendationDetail?recono=1'
@@ -168,6 +191,57 @@
         </tr>
 
     </table>
+    </div>
+
+    <br>
+    <br>
+
+    <!--댓글순-->
+    <div id="recommendationListOrderByComments-aside">
+    <table border='1'>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>등록일</th>
+        </tr>
+
+        <tr data-th-each="recommendation : ${recommendationsOrderByComments}">
+            <td data-th-text="${recommendation.recono}">100</td>
+            <td>
+                <a href='recommendationDetail?recono=1'
+                   data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                   data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}">제목</a>
+            </td>
+            <td data-th-text="${recommendation.wdate}">2022-1-1</td>
+        </tr>
+
+    </table>
+    </div>
+
+    <br>
+    <br>
+
+    <!--인기순(조회순)-->
+    <div id="recommendationListOrderByCnt">
+    <table border='1'>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>등록일</th>
+        </tr>
+
+        <tr data-th-each="recommendation : ${recommendationsOrderByCnt}">
+            <td data-th-text="${recommendation.recono}">100</td>
+            <td>
+                <a href='recommendationDetail?recono=1'
+                   data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                   data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}">제목</a>
+            </td>
+            <td data-th-text="${recommendation.wdate}">2022-1-1</td>
+        </tr>
+
+    </table>
+    </div>
     <p><a href='../'>메인</a></p>
 
     <!-- Footer-->

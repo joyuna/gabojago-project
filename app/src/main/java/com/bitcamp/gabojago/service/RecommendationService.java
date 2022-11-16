@@ -17,6 +17,10 @@ public interface RecommendationService {
   // recommendationList
   List<Recommendation> recommendationList() throws Exception;
 
+  List<Recommendation> recommendationListOrderByRecent() throws Exception;
+  List<Recommendation> recommendationListOrderByComments() throws Exception;
+  List<Recommendation> recommendationListOrderByCnt() throws Exception;
+
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono) throws Exception;
 

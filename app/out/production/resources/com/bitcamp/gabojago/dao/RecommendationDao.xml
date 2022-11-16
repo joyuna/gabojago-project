@@ -65,6 +65,49 @@
         act=true
     </select>
 
+    <!--최신순-->
+    <select id="recommendationListOrderByRecent" resultMap="recommendationMap">
+        select
+        *
+        from
+        jang_so_recommendation
+        where
+        act=true
+        order by wdate
+    </select>
+
+    <!--댓글순-->
+    <select id="recommendationListOrderByComments" resultMap="recommendationMap">
+        select
+        r.*
+        from
+        jang_so_recommendation r,
+        (select s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c
+        where
+        act=true and c.recono = r.recono
+        order by
+        c.cntComments desc, r.wdate
+    </select>
+
+    <!--인기순(조회순)-->
+    <select id="recommendationListOrderByCnt" resultMap="recommendationMap">
+        select
+        *
+        from
+        jang_so_recommendation
+        where
+        act=true
+        order by cnt desc, wdate;
+    </select>
+
     <!-- recommendationAdd - 1 -->
     <insert id="recommendationAdd" parameterType="recommendation"
       useGeneratedKeys="true" keyColumn="recono" keyProperty="recono">
