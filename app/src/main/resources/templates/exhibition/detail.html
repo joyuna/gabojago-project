@@ -31,65 +31,20 @@
 
 <body  class="pt-5"  >
 
-<div class="modal">
-  <div class="modal_body" style=" background: rgba(255,255,255,0.9); ">
-    <div class="out" style="margin: 05px;  float: right;">나가기</div>
-    <br>
-    <h2 style=" text-align: center;"> 로그인 </h2>
 
-    <form action="../auth/login" method="post" >
-      <p>ID</p>
-      <input name="id" type="text" size="30" placeholder="ID를 입력해주세요." th:value="${id}">
-      <br> <!--공백-->
-      <p>Password</p>
-      <input name="password" type="password" size="20" placeholder="Password를 입력해주세요.">
-      <br>
-      <br> <!--공백-->
-      <button class="btn_login" type="submit"
-              style="background-color: #ffca2c">Login</button>
-
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-      <script>
-        function signOut() {
-          var auth2 = gapi.auth2.getAuthInstance();
-          auth2.signOut().then(function () {
-            console.log('User signed out.');
-          });
-        }
-      </script>
-
-
-      <div class="savecheck">
-        <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
-        <span><a href="/app/member/findid">ID 찾기</a></span><span> / </span><span><a href="/app/member/findpwd">Password 찾기</a></span>
-      </div>
-    </form>
-
-    <form action="auth/register">
-      <button class="btn_signin" type="submit"
-              style="background-color: #ffca2c">회원가입</button>
-    </form>
-  </div>
-</div>
 <!-- Navigation 사실상의 header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/app">가보자GO</a>
-
-
     <div class="collapse navbar-collapse" id="navbarResponsive">
-
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="/app/search/searchForm">검색</a></li>
         <li class="nav-item">
           <a class="nav-link" href="/app/recommendation/recommendationList">코스추천</a>
         </li>
-
-
         <li class="nav-item active">
-          <a class="nav-link" href="exhibitionlist">전시회
+          <a class="nav-link" href="/app/exhibition/exhibitionlist">전시회
             <span class="sr-only">(current)</span>
           </a>
         </li>
@@ -101,8 +56,7 @@
           <a
               class="nav-link"
               href="/app/auth/logout"
-              th:text="${session.loginMember.name}+'(로그아웃)'"
-          >홍길동(로그아웃)</a>
+              th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
         </li>
         <li class="nav-item" th:if="${session.loginMember == null}">
           <span class="nav-link btn-open-popup">로그인</span>
@@ -110,18 +64,17 @@
 
         <li class="nav-item">
           <a class="nav-link" href="/app/myPage/">
-            <img src="./images/mypage.png" width="90%" height="25"/></a>
+            <img src="../images/mypage.png" width="90%" height="25"
+            /></a>
         </li>
         <!--어드민만 보일 수 있음-->
-        <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
-              <a href='/app/member/list'>회원 관리</a></span>
-
+        <li class="nav-item">
+              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a class="nav-link" href='/app/member/list'>회원 관리</a></span> </li>
       </ul>
     </div>
   </div>
 </nav>
-
-
 
 
 <div class="container">
@@ -171,7 +124,7 @@
              style="border: none;"  readonly>
     </div>
     <br> <!--////공백////-->
-    <div>  <!--<label for="cont"></label>-->
+    <div>
       <textarea id="cont"  name='cont' ></textarea>
     </div>
 
@@ -179,36 +132,6 @@
 
 <br> <!--///공백////-->
 
-
-  <!-- <a href='티켓?exno=1'
-      data-th-href="">| 티켓 구매 | </a>
-
-   <a href='티켓?exno=1'
-      data-th-href=""> 장바구니 추가 | </a>-->
-
-
-
-
-  <!--   삭제예정   <div style="border: 1px dashed #bdbdbd; width: 1000px; height: 100px;">
-          <th>첨부파일</th>
-          <td>
-            <ul>
-              <li data-th-each="file : ${exhibition.exhibitionFiles}">
-                <a href="files/test.gif"
-                   data-th-href="@{files/{path}(path=${file.path})}"
-                   data-th-text="${file.fname}"
-                  >test.gif</a>
-
-                &lt;!&ndash;[<a href="fileDelete?exfno=1"
-                    data-th-href="@{fileDelete(no=${file.exfno})}">삭제</a>]&ndash;&gt;
-              </li>
-            </ul>
-
-&lt;!&ndash;
-            파일 추가: <input name='files' type="file" multiple>
-&ndash;&gt;
-          </td>
-        </div>-->
 
 
   <style>
@@ -241,26 +164,22 @@
   <br> <!--////공백////-->
 
   <form action='../exhibition-review/add' method="post" enctype="multipart/form-data" >
-    <div style=" width: 1000px; height: 70px; margin: 0 auto;">
+    <div style=" width: 90%; height: 70%; margin: 0 auto;">
       <b> | 리뷰 작성 | </b>
       <div>
         <input type='text' name='cont' size='100'
-               style="height: 70px;">
+               style="height: 70px; width: 90%;">
         <input type='hidden' name='exno' data-th-value="${exhibition.exno}">
         <button type='submit' class="btn btn-dark">리뷰 저장</button>
-        <br> <!--공백-->
-        <br> <!--공백-->
         <br> <!--공백-->
         <br> <!--공백-->
       </div>
     </div>
   </form>
 
-<table style="border: 1px;  width: 1000px; height: 100px;">
+<table style="border: 1px;  width: 90%; height: 90%;">
   <br> <!--공백-->
   <br> <!--공백-->
-  <br> <!--공백-->
-
   <form  method="post " action="add" >
   <tr>
     <th>리뷰번호</th>
@@ -296,20 +215,61 @@
   </tr>
   </form>
 </table>
-
-
-
-
-
 </div><!-- /container -->
+
 <div style="position: fixed; right: 10px; bottom: 280px;">
   <button type="button" class="btn btn-secondary"
           id = go-top >UP</button></div>
+
 <br> <!--////공백////-->
+
 <!-- Footer-->
 <footer>
   <p>Copyright &copy;가보자GO</p>
 </footer>
+
+
+<!--로그인 모달 창-->
+<div class="modal">
+  <div class="modal_body" style=" background: rgba(255,255,255,0.8); ">
+    <div class="out" style="margin: 05px; float: right;">나가기</div>
+    <br>
+    <h2 style=" text-align: center;"> 로그인 </h2>
+
+    <form action="/app/auth/login" method="post" >
+      <p>ID</p>
+      <input name="id" type="text" size="30" placeholder="ID를 입력해주세요." th:value="${id}">
+      <br> <!--공백-->
+      <p>Password</p>
+      <input name="password" type="password" size="20" placeholder="Password를 입력해주세요.">
+      <br>
+      <br> <!--공백-->
+      <button class="btn_login" type="submit"
+              style="background-color: #ffca2c">Login</button>
+
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+      <script>
+        function signOut() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+            console.log('User signed out.');
+          });
+        }
+      </script>
+
+      <div class="savecheck">
+        <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
+        <span><a href="/app/member/findid">ID 찾기</a></span><span> / </span><span><a href="/app/member/findpwd">Password 찾기</a></span>
+      </div>
+    </form>
+
+    <form action="auth/register">
+      <button class="btn_signin" type="submit"
+              style="background-color: #ffca2c">회원가입</button>
+    </form>
+  </div>
+</div>
 
 <style>
   footer {
@@ -330,16 +290,11 @@
 
 <style>
   /*리뷰리스트*/
-  form {
-    width: 1000px;
-    margin: 0 auto;
-  }
   table{
-    width: 1000px;
+    width: 100%;
     margin: 0 auto;
   }
 </style>
-
 
 
 <script>
@@ -359,18 +314,8 @@
       event.preventDefault();
       $('html, body').animate({ scrollTop: 0 }, 300);
     });
-
   });
-
 </script>
-
-
-
-
-
-
-
-
 
 <script>
   $(document).ready(function() {
@@ -383,7 +328,6 @@
       maxHeight : null,
       disableDragAndDrop: true
     });
-
     $('textarea[name=cont]').summernote('disable');
     });
 </script>

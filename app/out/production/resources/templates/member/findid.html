@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="../css/main.css" />
 <link rel="stylesheet" href="../css/main-modal.css" />
 
-
 </head>
 <!-- Header-->
 
@@ -27,42 +26,34 @@
 
   <div class="container px-4 px-lg-5 my-5">
     <div class="text-center text-white">
-      <h2 class="display-4 fw-bolder">아이디 찾기 </h2>
+      <h2 class="display-4 fw-bolder">아이디 찾기</h2>
       <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
     </div>
   </div>
 </header>
-
 <!-- Navigation 사실상의 header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/app">가보자GO</a>
-
     <div class="collapse navbar-collapse" id="navbarResponsive">
-
       <ul class="navbar-nav ml-auto">
-
-        <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+        <!--   <li class="nav-item active">
+             <a class="nav-link" href="/etc">홈
+               <span class="sr-only">(current)</span>
+             </a>
+           </li>-->
+        <li class="nav-item"><a class="nav-link" href="/app/search/searchForm">검색</a></li>
         <li class="nav-item">
           <a class="nav-link" href="/app/recommendation/recommendationList">코스추천</a>
         </li>
-
-
-        <li class="nav-item ">
-          <a class="nav-link" href="/app/exhibition/exhibitionlist">전시회
-          </a>
-        </li>
-
+        <li class="nav-item"><a class="nav-link" href="/app/exhibition/exhibitionlist">전시회</a></li>
         <li class="nav-item">
           <a class="nav-link" href="/app/support/">고객지원</a>
         </li>
         <li class="nav-item" th:if="${session.loginMember != null}">
-          <a
-              class="nav-link"
-              href="/app/auth/logout"
-              th:text="${session.loginMember.name}+'(로그아웃)'"
-          >홍길동(로그아웃)</a
-          >
+          <a class="nav-link"
+             href="auth/logout"
+             th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
         </li>
         <li class="nav-item" th:if="${session.loginMember == null}">
           <span class="nav-link btn-open-popup">로그인</span>
@@ -70,12 +61,12 @@
 
         <li class="nav-item">
           <a class="nav-link" href="/app/myPage/">
-            <img src="./images/mypage.png" width="90%" height="25"/></a>
+            <img src="./images/mypage.png" width="90%" height="25"
+            /></a>
         </li>
         <!--어드민만 보일 수 있음-->
-        <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
-              <a href='/app/member/list'>회원 관리</a></span>
-
+        <li class="nav-item"  data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a href='member/list'>회원 관리</a></li>
       </ul>
     </div>
   </div>
@@ -146,11 +137,14 @@
       <input type="email" class="form-control" id="email">
     </div>
   </div>
-
-  <button class="btn btn-primary" id="findId"
-  style="float: right">아이디 찾기</button>
+  <div style="float: right">
+    <button class="btn btn-primary" id="findId"
+    >아이디 찾기</button>
+  <button class="btn btn-primary" id="findpwd"
+          onclick="location.href='/app/member/findpwd'">비밀번호 찾기</button>
+  </div>
   <br> <br> <br>
-  <div>회원님의 정보와 일치하는 아이디 목록입니다.  </div>
+  <div>회원님의 정보와 일치하는 아이디 목록입니다. </div>
   <br> <br> <br> <br>
   <div id="result"
   style="text-align:center;"> </div>
@@ -175,7 +169,6 @@
     margin-top:auto;
     text-align:center;
   }
-
 </style>
 
 
