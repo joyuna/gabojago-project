@@ -1,18 +1,14 @@
 package com.bitcamp.gabojago.service;
 
-import com.bitcamp.gabojago.vo.event.EmailMessage;
-
-import com.sun.mail.util.logging.MailHandler;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import com.bitcamp.gabojago.vo.event.EmailMessage;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -20,6 +16,10 @@ import javax.mail.internet.MimeMessage;
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
+    
+    public EmailService(JavaMailSender javaMailSender) {
+      this.javaMailSender = javaMailSender;
+    }
 
     @Value(value = "${spring.mail.username}")
     private String from;
