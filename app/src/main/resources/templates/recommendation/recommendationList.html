@@ -440,12 +440,37 @@
     </li>
 </ul>
 
+<!--누구랑 갈지 선택-->
+<br>
+<a href='recommendationListForFamily'>가족</a>
+<br>
+<a href='recommendationListForFriend'>친구</a>
+<br>
+<a href='recommendationListForCouple'>연인</a>
+<br>
+<a href='recommendationListForAlone'>혼자</a>
 
+
+
+
+<!--리스트-->
+<br>
+<a href='#recommendationListOrderByRecent'>최신순</a>
+<br>
+<a href='#recommendationListOrderByComments'>댓글순</a>
+<br>
+<a href='#recommendationListOrderByCnt'>인기순</a>
+<br>
+<br>
+
+<!--최신순-->
+<a id="#recommendationListOrderByRecent">
+    <h5>최신순</h5>
+</a>
 <section class="py-5 "  style=" width: 100%;">
-
     <div class="container  px-4 px-lg-5 mt-5" >
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
-            <div class="col mb-5" data-th-each="recommendation : ${recommendations}">
+            <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByRecent}">
 
                 <div class="card h-100"
                      style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
@@ -470,16 +495,6 @@
                                    style="word-wrap: break-word"
                                 >제목rlfldsdfasdfasdf</a>
                             </h5>
-
-<!--                            <tr data-th-each="recommendation : ${recommendationsOrderByRecent}">-->
-<!--                                <td data-th-text="${recommendation.recono}">100</td>-->
-<!--                                <td>-->
-<!--                                    <a href='recommendationDetail?recono=1'-->
-<!--                                       data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"-->
-<!--                                       data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}">제목</a>-->
-<!--                                </td>-->
-<!--                                <td data-th-text="${recommendation.wdate}">2022-1-1</td>-->
-<!--                            </tr>-->
                             <br>
                             <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
                         </div>
@@ -499,23 +514,131 @@
     </div>
 </section>
 
-<div class="container d-flex justify-content-center" >
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>
+<!--댓글순-->
+<a id="#recommendationListOrderByComments">
+    <h5>댓글순</h5>
+</a>
+<section class="py-5 "  style=" width: 100%;">
 
-        <li class="page-item" data-th-if="${count>4}">
-            <a class="page-link" data-th-href="${'?count=' + count/5*5}" >이전</a></li>
+        <div class="container  px-4 px-lg-5 mt-5" >
+            <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+                <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByComments}">
 
-        <!--th:classappend="${count}+1==${num}? 'active':''" : 현재 페이지에 대한 색 처리-->
-        <li class="page-item" th:classappend="${count}+1==${num}? 'active':''" data-th-each="num: ${#numbers.sequence(count/5*5+1,count/5*5+5<totalNumber+1? count/5*5+5:totalNumber+1)}">
-            <a class="page-link" data-th-href="${'?count=' + num}" data-th-text="${num}">1</a></li>
+                    <div class="card h-100"
+                         style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
 
-        <li class="page-item" data-th-if="${count<totalNumber/5*5}">
-            <a class="page-link" data-th-href="${'?count=' + ((count/5+1)*5+1)}">다음</a>
+                        <td data-th-text="${recommendation.recono}">100</td>
 
-        <li class="page-item"><a class="page-link" data-th-href="${'?count='+(totalNumber+1)}">끝으로</a></li>
-    </ul>
-</div>
+                        <!-- Product image 첨부파일 갤러리화 -->
+                        <img src="https://via.placeholder.com/90"/>
+                        <!--                    "@{/board/files/}+ &ndash;&gt;-->
+                        <!--                ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path:''}"-->
+                        <!--                         onerror=-->
+
+                        <!-- 전시 제목,날짜 정렬-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+
+                                <!-- 전시 name-->
+                                <h5>
+                                    <a href='recommendationDetail?recono=1'
+                                       data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                       data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
+                                       style="word-wrap: break-word"
+                                    >제목rlfldsdfasdfasdf</a>
+                                </h5>
+                                <br>
+                                <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
+                            </div>
+                        </div>
+
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                   style="color: #E0EBFF">보러가기</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<!--인기순(조회순)-->
+<a id="#recommendationListOrderByCnt">
+    <h5>인기순</h5>
+</a>
+<section class="py-5 "  style=" width: 100%;">
+
+
+        <div class="container  px-4 px-lg-5 mt-5" >
+            <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+                <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCnt}">
+
+                    <div class="card h-100"
+                         style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
+
+                        <td data-th-text="${recommendation.recono}">100</td>
+
+                        <!-- Product image 첨부파일 갤러리화 -->
+                        <img src="https://via.placeholder.com/90"/>
+                        <!--                    "@{/board/files/}+ &ndash;&gt;-->
+                        <!--                ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path:''}"-->
+                        <!--                         onerror=-->
+
+                        <!-- 전시 제목,날짜 정렬-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+
+                                <!-- 전시 name-->
+                                <h5>
+                                    <a href='recommendationDetail?recono=1'
+                                       data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                       data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
+                                       style="word-wrap: break-word"
+                                    >제목rlfldsdfasdfasdf</a>
+                                </h5>
+                                <br>
+                                <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
+                            </div>
+                        </div>
+
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                   style="color: #E0EBFF">보러가기</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</section>
+<!--코스추천글 리스트 끝-->
+
+
+<!--<div class="container d-flex justify-content-center" >-->
+<!--    <ul class="pagination">-->
+<!--        <li class="page-item"><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>-->
+
+<!--        <li class="page-item" data-th-if="${count>4}">-->
+<!--            <a class="page-link" data-th-href="${'?count=' + count/5*5}" >이전</a></li>-->
+
+<!--        &lt;!&ndash;th:classappend="${count}+1==${num}? 'active':''" : 현재 페이지에 대한 색 처리&ndash;&gt;-->
+<!--        <li class="page-item" th:classappend="${count}+1==${num}? 'active':''" data-th-each="num: ${#numbers.sequence(count/5*5+1,count/5*5+5<totalNumber+1? count/5*5+5:totalNumber+1)}">-->
+<!--            <a class="page-link" data-th-href="${'?count=' + num}" data-th-text="${num}">1</a></li>-->
+
+<!--        <li class="page-item" data-th-if="${count<totalNumber/5*5}">-->
+<!--            <a class="page-link" data-th-href="${'?count=' + ((count/5+1)*5+1)}">다음</a>-->
+
+<!--        <li class="page-item"><a class="page-link" data-th-href="${'?count='+(totalNumber+1)}">끝으로</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
 <br>
 <br>
 <!--<div style="position: absolute; right: 0px; bottom: 0px;">-->
@@ -615,7 +738,6 @@
         }
     });
 
-    // 장현경 : 로그인 모달 창 나가기
     $('.out').click(function() {
         $('.modal').removeClass('show')
     })
