@@ -32,17 +32,12 @@ public class MailController {
     return "templateMail";
   }
 
-//  @GetMapping("/templateMail")
-//  public String templateMailSend() {
-//    return "templateMail";
-//  }
-
   @ResponseBody
   @PostMapping("/mail/emailCode")
   public String sendTemplateMail(MailDto mailDto, Model model, String address) throws Exception {
     Member result = memberService.emailCheck(address);
     if (result == null) {
-    int certificateNum = new Random().nextInt(888888) + 111111;
+    int certificateNum = new Random().nextInt(88888888) + 11111111;
 
     mailDto.setTitle("가보자GO 이메일 인증 번호");
     mailDto.setAddress(address);
@@ -53,6 +48,4 @@ public class MailController {
       return "false";
     }
   }
-
-
 }

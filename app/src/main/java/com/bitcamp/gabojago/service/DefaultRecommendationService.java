@@ -1,23 +1,17 @@
 package com.bitcamp.gabojago.service;
 
-import com.bitcamp.gabojago.dao.JangSoReviewDao;
 import com.bitcamp.gabojago.dao.RecommendationDao;
 import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Recommendation;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DefaultRecommendationService implements RecommendationService  {
   @Autowired
   RecommendationDao recommendationDao;
-
-  @Autowired
-  JangSoReviewDao jangSoReviewDao;
 
   // recommendationAdd
   @Transactional
@@ -75,7 +69,7 @@ public class DefaultRecommendationService implements RecommendationService  {
   // recommendationDetail - 2
   @Override
   public List<JangSoReview> getJangSoReviewList(int recono) throws Exception {
-    return jangSoReviewDao.getJangSoReviewList(recono);
+    return recommendationDao.getJangSoReviewList(recono);
   }
 
   public void setCntRecommendation(int recono) throws Exception {
@@ -135,39 +129,5 @@ public class DefaultRecommendationService implements RecommendationService  {
         }
       }
     }
-
-    // 5) 장소리뷰 첨부파일 insert 하기
-
-    // 자동증가한 코스추천글 recono 받아오기
-//    int recono = recommendation.getRecono();
-
-    // 자동증가한 장소리뷰 번호를 받을 변수 준비
-//    int prvno;
-
-//    for (int i = 0; i < recommendation.getJangSoReviews().size(); i++) {
-//      // 각각의 장소리뷰에 코스추천글 번호 set 하기
-//      recommendation.getJangSoReviews().get(i).setRecono(recono);
-//
-//      // 2) 각각의 장소리뷰 insert 하기
-//      if (recommendationDao.jangSoReviewAdd(recommendation.getJangSoReviews().get(i)) == 0) {
-//        throw new Exception("장소리뷰 등록 실패!");
-//      }
-//
-//      // 각각의 장소리뷰를 insert 하면서 자동증가한 prvno 받아오기
-//      prvno = recommendation.getJangSoReviews().get(i).getPrvno();
-//
-//      for (int j = 0; j < recommendation.getJangSoReviews().get(i).getAttachedFiles().size(); j++) {
-//        // 장소리뷰를 insert 하면서 자동증가한 prvno를 장소리뷰 첨부파일에 set 하기
-//        recommendation.getJangSoReviews().get(i).getAttachedFiles().get(j).setPrvno(prvno);
-//
-//        // 3) 장소리뷰 첨부파일 insert 하기
-//        if (recommendationDao.jangSoReviewAttachedFileAdd(
-//            recommendation.getJangSoReviews().get(i).getAttachedFiles().get(j)
-//        ) == 0) {
-//          throw new Exception("장소리뷰첨부파일 등록 실패!");
-//        }
-//      }
-//    }
   }
-
 }

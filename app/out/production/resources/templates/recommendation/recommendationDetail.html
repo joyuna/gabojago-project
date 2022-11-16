@@ -146,10 +146,12 @@
                    data-th-href="@{disableRecommend(recono=${recommendation.recono})}">삭제</a></button>
     </div>
 
-    <div class="ga-reco-info1">
-        <h2 data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}">먹깨비가 간다!</h2>
+    <div class="ga-reco-info1-1">
         <h3 data-th-text="${recommendation.writer.nickName} +' 님'">초밥킬러 님</h3>
-        <h4 data-th-text="${recommendation.wdate}">2022-09-09</h3>
+        <h2 data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}">먹깨비가 간다!</h2>
+    </div>
+    <div class="ga-reco-info1-2">
+        <h4 data-th-text="${recommendation.wdate}">2022-09-09</h4>
     </div>
 
     <span class="ga-reco-plusdata">>> 추가정보</span>
