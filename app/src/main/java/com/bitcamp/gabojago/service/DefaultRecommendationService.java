@@ -165,4 +165,9 @@ public class DefaultRecommendationService implements RecommendationService  {
     }
   }
 
+  @Override
+  public boolean checkCorrectUser(String id) throws Exception {
+    return (memberDao.checkCorrectUser(id) == null);
+  }
+
 }

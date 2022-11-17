@@ -40,4 +40,6 @@ public interface MemberDao {
   Member findpwd(Map<String, String> map);
 
   void findpwdupdate(Map<String, String> map);
+
+  Member checkCorrectUser(String id);
 }

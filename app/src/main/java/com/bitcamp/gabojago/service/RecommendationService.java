@@ -38,4 +38,6 @@ public interface RecommendationService {
   int countReportById(String reportedId) throws Exception;
 
   void updateStatus(Member reportedUser) throws Exception;
+
+  boolean checkCorrectUser(String id) throws Exception;
 }

@@ -88,6 +88,16 @@
         id=#{id}
     </update>
 
+    <select id="checkCorrectUser" resultMap="memberMap">
+        select
+            status
+        from
+            jang_member
+        where
+            status='신고' and
+            id=#{id}
+    </select>
+
     <!--장현경 작업중 -->
     <select id="findAll" resultMap="memberMap">
         select

@@ -51,7 +51,17 @@ public class RecommendationController {
       HttpSession session, Recommendation recommendation) throws Exception {
 
     // 작성자정보 set하기
-    recommendation.setWriter((Member) session.getAttribute("loginMember"));
+    // 현재 사용자가 회원인지 확인
+    if (session.getAttribute("loginMember") == null) {
+      return "redirect:recommendationList";
+    } else {
+      Member member = (Member) session.getAttribute("loginMember");
+      // 제재받은 사용자인지 확인
+      if (!recommendationService.checkCorrectUser(member.getId())) {
+        return "redirect:recommendationList";
+      }
+      recommendation.setWriter(member);
+    }
 
     // 변수분류 저장
     MultipartFile[][] files = {files1, files2, files3, files4, files5};
@@ -145,15 +155,19 @@ public class RecommendationController {
   // Disable (not Delete)
   @GetMapping("disableRecommend")
   public String disableRecommend(int recono, HttpSession session) throws Exception {
-    // 작성자 본인인지 확인
+    // 현재 사용자가 회원인지 확인
     if (session.getAttribute("loginMember") == null) {
       return "redirect:recommendationList";
     } else {
       Member member = (Member) session.getAttribute("loginMember");
+      // 작성자 본인인지 확인
       if (!recommendationService.getRecommendation(recono).getWriter().getId()
           .equals(member.getId())) {
         return "redirect:recommendationList";
-      }
+        // 제재받은 사용자인지 확인
+      } else if (!recommendationService.checkCorrectUser(member.getId())) {
+          return "redirect:recommendationList";
+        }
     }
 
     // 삭제를 가장한 비활성화
@@ -167,13 +181,17 @@ public class RecommendationController {
   // Update - 1
   @GetMapping("recommendationUpdateForm")
   public String recommendationUpdate(int recono, HttpSession session, Model model) throws Exception {
-     // 작성자 본인인지 확인
+    // 현재 사용자가 회원인지 확인
     if (session.getAttribute("loginMember") == null) {
       return "redirect:recommendationList";
     } else {
       Member member = (Member) session.getAttribute("loginMember");
+      // 작성자 본인인지 확인
       if (!recommendationService.getRecommendation(recono).getWriter().getId()
           .equals(member.getId())) {
+        return "redirect:recommendationList";
+        // 제재받은 사용자인지 확인
+      } else if (!recommendationService.checkCorrectUser(member.getId())) {
         return "redirect:recommendationList";
       }
     }
@@ -232,6 +250,11 @@ public class RecommendationController {
     // 신고자 id 확인
     String id = ((Member) session.getAttribute("loginMember")).getId();
 
+    // 제재당한 이용자는 신고할 수 없다.
+    if (!recommendationService.checkCorrectUser(id)) {
+      return "redirect:recommendationList";
+    }
+
     // 본인 게시글은 신고할 수 없다.
     if (recommendationService.getRecommendation(recono).getWriter().getId().equals(id)) {
       return "redirect:recommendationList";
@@ -271,6 +294,10 @@ public class RecommendationController {
   public String jangCommentInsert(
       JangComment jangComment, HttpSession session) throws Exception {
     checkOwner(session);
+    // 제재당한 이용자는 댓글을 작성할 수 없다.
+    if (!recommendationService.checkCorrectUser(((Member) session.getAttribute("loginMember")).getId())) {
+      return "redirect:recommendationList";
+    }
     jangComment.setWriter((Member) session.getAttribute("loginMember"));
     jangCommentService.jangCommentInsert(jangComment);
     return "redirect:../recommendation/recommendationDetail?recono="+jangComment.getRecono();
@@ -280,6 +307,10 @@ public class RecommendationController {
   public String jangCommentDelete(int cmno, HttpSession session, JangComment jangComment) throws Exception {
     int recono = jangCommentService.getJangCommentByCmno(cmno).getRecono();
     checkOwner(jangCommentService.getJangCommentByCmno(cmno), session);
+    // 제재당한 이용자는 댓글을 삭제할 수 없다.
+    if (!recommendationService.checkCorrectUser(((Member) session.getAttribute("loginMember")).getId())) {
+      return "redirect:recommendationList";
+    }
     if(!jangCommentService.jangCommentDelete(cmno)) {
       throw new Exception("댓글을 삭제 할 수 없습니다.");
     }
