@@ -5,7 +5,7 @@
 <mapper namespace="com.bitcamp.gabojago.dao.cart.CartDao">
     
     <!-- 제목으로 검색-->
-    <select id="showCart" resultType="hashMap" parameterType="String">
+    <select id="getCartList" resultType="hashMap" parameterType="String">
 	  SELECT
 	    ba.ID,
 	    ba.CNT,

@@ -167,12 +167,30 @@
           for(let i=0; i< checkedBoxList.length; i++){
             if(checkedBoxList[i].checked == true){
               resultCount++;
-              resultPrice += document.getElementById(checkedBoxList[i].value + "Price").innerText;
+              resultPrice += parseInt(checkedBoxList[i].value);
             }
           }
 
           document.getElementById("resultCount").innerHTML = resultCount;
           document.getElementById("resultPrice").innerHTML = resultPrice;
+        }
+        
+        function getResultPrice(){
+          let resultCount = 0;
+          let checkedBoxList = document.getElementsByName("paymentBox");
+          
+          for(let i=0; i< checkedBoxList.length; i++){
+            if(checkedBoxList[i].checked == true){
+              resultCount++;
+            }
+          }
+          
+        	if(resultCount < 1){
+        		alert("한개 이상의 티켓을 선택해주세요.");
+        	}
+        	else{        		
+        		location.replace("http://localhost:9999/app/payment/paymentPage?price=" + document.getElementById("resultPrice").innerHTML);
+        	}
         }
       </script>
 
@@ -180,10 +198,11 @@
         <div class="row justify-content-between">
 
           <div class="colume align-items-center flex-fill mx-5">
+
       <!-- 전시회 폼 -->
-        <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded" style="position: relative;">
+        <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded" style="position: relative;" data-th-each="exhibition : ${cartList}">
                 <div class="payment-check" style="margin-right: 100px;">
-                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox" value="exhibition">
+                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox" th:value="${exhibition['PRICE']}">
                   <label class="check-label" for="flexCheckDefault">
                     결제
                   </label>
@@ -192,24 +211,27 @@
 
                 <h5 style="position: absolute; top: 10px; right: 10px;">
                   <a href='detail?exno=1'
-                  data-th-href="@{detail(exno=${exhibition.exno})}"
-                  data-th-text="${exhibition.exname == ''} ? '(제목없음)' : ${exhibition.exname}"
+                  data-th-href="@{detail(exno=${exhibition['EXNO']})}"
+                  data-th-text="${exhibition['EXNAME'] == ''} ? '(제목없음)' : ${exhibition['EXNAME']}"
                   style="word-wrap: break-word"
                >지킬과 하이드</a>
                 </h5>
   
-                <h5 style="position: absolute; top: 40px; right: 10px">
-                  2022-11-11 ~ 2022-12-12
+                <h5 style="position: absolute; top: 40px; right: 115px" data-th-text="${exhibition['STDATE']}">
+                  2022-11-11 ~ 
                 </h5>
 
-                <h5 style="position: absolute; top: 200px; right: 10px">
+                <h5 style="position: absolute; top: 40px; right: 10px" data-th-text="${exhibition['EDDATE']}">
+                  2022-12-12
+                </h5>
+
+                <h5 style="position: absolute; top: 200px; right: 10px" data-th-text="${exhibition['CNT']}">
                   2매
                 </h5>
               
-                <span id="exhibitionPrice" value="10000" style="position: absolute; top: 230px; right: 10px">
+                <span th:value="${exhibition['PRICE']}" style="position: absolute; top: 230px; right: 10px" data-th-text="${exhibition['PRICE']}">
                   10000
                 </span>
-
 
 			          <img style="width:200px; height:200px" src="https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009__480.jpg"
 			               alt="..." />
@@ -220,20 +242,16 @@
 
           <!-- 주문 창 -->
           <div class="shadow-lg w-25 my-5 py-4 px-4 bg-body rounded" style="position: relative; width: 280px;">
-    
-
             
             <span style="position: absolute; bottom: 160px; right: 10px; font-weight: bold;">주문 상품수</span>
             <span id="resultCount" style="position: absolute; bottom: 130px; right: 10px;"></span>
             <span style="position: absolute; bottom: 90px; right: 10px; font-weight: bold;">총 결제 금액</span>
             <span id="resultPrice" style="position: absolute; bottom: 60px; right: 10px;"></span>
-            
 
-              <button style="position: absolute; bottom: 10px; right: 10px;" type="button" class="btn btn-primary">모두 결제</button>
+              <button style="position: absolute; bottom: 10px; right: 10px;" type="button" class="btn btn-primary" onclick="getResultPrice()">모두 결제</button>
       </div>
            </div>
            </div>
-    </div>
 
     
     <!-- Footer-->
