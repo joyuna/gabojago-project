@@ -58,11 +58,35 @@
     <!-- recommendationList -->
     <select id="recommendationList" resultMap="recommendationMap">
         select
-        recono, title, wdate
+        r.*, f.*
         from
-        jang_so_recommendation
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
         where
-        act=true
+        r.act=true
+        group by
+        r.recono
+    </select>
+
+    <select id="recommendationAttachedFiles" resultMap="attachedFileMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+        order by r.recono
     </select>
 
     <!--최신순-->
@@ -100,12 +124,19 @@
     <!--인기순(조회순)-->
     <select id="recommendationListOrderByCnt" resultMap="recommendationMap">
         select
-        *
+        r.*, f.*
         from
-        jang_so_recommendation
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
         where
-        act=true
-        order by cnt desc, wdate;
+        r.act=true
+        group by
+        r.recono
+        order by cnt desc, wdate
     </select>
 
     <!-- recommendationAdd - 1 -->

@@ -578,16 +578,16 @@
 <section class="py-5 " id="section3" style=" width: 100%;">
         <div class="container  px-4 px-lg-5 mt-5" >
             <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
-                <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCnt}">
-
+                <div class="col mb-5" data-th-each=" recommendation: ${recommendationsOrderByCnt}">
                     <div class="card h-100"
                          style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
 
                         <td data-th-text="${recommendation.recono}">100</td>
 
                         <!-- Product image 첨부파일 갤러리화 -->
-                        <img th:src="@{/board/files/} + ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path} : ''}"/>
-
+<!--                        <img th:src="@{/board/files/} + ${recommendationAttachedFiles.size>0? recommendationAttachedFiles.get(0).path} : ''}"/>-->
+                            <img th:if="${recommendation.path != null}" th:src="@{'../board/files/' + ${recommendation.path}}"/>
+                            <img th:unless="${recommendation.path == null}" th:src="https://via.placeholder.com/90"/>
                         <!-- 전시 제목,날짜 정렬-->
                         <div class="card-body p-4">
                             <div class="text-center">
@@ -614,6 +614,7 @@
                         </div>
 
                     </div>
+                </div>
                 </div>
             </div>
         </div>

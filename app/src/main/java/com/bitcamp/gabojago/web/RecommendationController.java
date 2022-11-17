@@ -134,6 +134,7 @@ public class RecommendationController {
     model.addAttribute("recommendationsOrderByRecent", recommendationService.recommendationListOrderByRecent());
     model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
     model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
+//    model.addAttribute("recommendationAttachedFiles", recommendationService.recommendationAttachedFiles());
   }
 
 //  @GetMapping("recommendationListOrderByRecent")
