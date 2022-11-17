@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>profileDetail</title>
+	<meta charset="utf-8">
+	<link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+	<style>
+
+		.container {
+			max-width: 500px;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<div class="py-5 text-center">
+		<h2>My Profile</h2>
+	</div>
+
+
+		<div>
+			<label></label>
+			<input name='id' type='hidden' class="form-control"
+				   data-th-value="${myRecommendationDTO.id}">
+		</div>
+
+
+
+		<!--  <div>-->
+		<img th:src="@{/board/files/} + ${myRecommendationDTO.path}"/>
+
+		<!--  </div>-->
+
+		<div>
+			<label>nickName</label>
+			<input name='title' type='text' class="form-control" id="title"
+				   data-th-value="${myRecommendationDTO.title}"
+		</div>
+
+
+		<hr class="my-4">
+
+		<div class="row">
+
+			<div class="col">
+				<button class="w-100 btn btn-primary btn-lg" style="background-color: black; border-color: black"
+						onclick="location.href='myPage.html'"
+						th:onclick="|location.href='@{/myPage/}'|"
+						type="button">이전</button>
+			</div>
+
+			<div class="col">
+
+				<button class="w-100 btn btn-primary btn-lg"
+						style="background-color: black; border-color: black"
+						id="modifyProfileButton"
+						type="button"
+						onclick="modifyMemberInfoLogic()"
+				>등록</button>
+			</div>
+		</div>
+	</form>
+</div>
+</body>
+</html>
