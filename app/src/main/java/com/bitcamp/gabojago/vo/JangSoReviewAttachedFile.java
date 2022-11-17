@@ -3,13 +3,13 @@ package com.bitcamp.gabojago.vo;
 public class JangSoReviewAttachedFile {
   private int recofno; // 장소후기첨부파일번호
   private int prvno; // 장소후기번호
-  private String filepath; // 파일경로
+  private String path; // 파일경로
   private String fname; // 파일이름
 
   public JangSoReviewAttachedFile() {}
 
-  public JangSoReviewAttachedFile(String filepath, String filename) {
-    this.filepath = filepath;
+  public JangSoReviewAttachedFile(String path, String filename) {
+    this.path = path;
     this.fname = filename;
   }
 
@@ -29,12 +29,12 @@ public class JangSoReviewAttachedFile {
     this.prvno = prvno;
   }
 
-  public String getFilepath() {
-    return filepath;
+  public String getPath() {
+    return path;
   }
 
-  public void setFilepath(String filepath) {
-    this.filepath = filepath;
+  public void setPath(String path) {
+    this.path = path;
   }
 
   public String getFname() {
@@ -50,7 +50,7 @@ public class JangSoReviewAttachedFile {
     return "AttachedFile{" +
             "recofno=" + recofno +
             ", prvno=" + prvno +
-            ", filepath='" + filepath + '\'' +
+            ", filepath='" + path + '\'' +
             ", fname='" + fname + '\'' +
             '}';
   }
