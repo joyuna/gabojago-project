@@ -73,7 +73,7 @@
         jang_so_recommendation
         where
         act=true
-        order by wdate
+        order by wdate desc
     </select>
 
     <!--댓글순-->
