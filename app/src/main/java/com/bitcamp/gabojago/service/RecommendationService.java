@@ -2,6 +2,7 @@ package com.bitcamp.gabojago.service;
 
 import com.bitcamp.gabojago.vo.JangSoReview;
 import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
+import com.bitcamp.gabojago.vo.Member;
 import com.bitcamp.gabojago.vo.Recommendation;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,4 +32,10 @@ public interface RecommendationService {
 
   // Comment Insert
   void setCntRecommendation(int recono) throws Exception;
+
+  void recommendationReportAdd(String id, int recono, String rsn) throws Exception;
+
+  int countReportById(String reportedId) throws Exception;
+
+  void updateStatus(Member reportedUser) throws Exception;
 }

@@ -3,6 +3,7 @@ package com.bitcamp.gabojago.dao;
 import com.bitcamp.gabojago.vo.JangSoReview;
 import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Recommendation;
+import com.bitcamp.gabojago.vo.Report;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -42,4 +43,5 @@ public interface RecommendationDao {
 
   // comment Insert
   int setCntRecommendation(int recono);
+
 }

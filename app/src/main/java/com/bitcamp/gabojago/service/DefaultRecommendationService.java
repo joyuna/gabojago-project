@@ -1,8 +1,12 @@
 package com.bitcamp.gabojago.service;
 
+import com.bitcamp.gabojago.dao.MemberDao;
 import com.bitcamp.gabojago.dao.RecommendationDao;
+import com.bitcamp.gabojago.dao.ReportDao;
 import com.bitcamp.gabojago.vo.JangSoReview;
+import com.bitcamp.gabojago.vo.Member;
 import com.bitcamp.gabojago.vo.Recommendation;
+import com.bitcamp.gabojago.vo.Report;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class DefaultRecommendationService implements RecommendationService  {
   @Autowired
   RecommendationDao recommendationDao;
+
+  @Autowired
+  MemberDao memberDao;
+
+  @Autowired
+  ReportDao reportDao;
 
   // recommendationAdd
   @Transactional
@@ -130,4 +140,29 @@ public class DefaultRecommendationService implements RecommendationService  {
       }
     }
   }
+
+  // recommendationReportAdd - 신고처리
+  @Override
+  public void recommendationReportAdd(String id, int recono, String rsn) throws Exception {
+    Report report = new Report();
+    report.setId(id);
+    report.setRecono(recono);
+    report.setRsn(rsn);
+    reportDao.recommendationReportAdd(report);
+  }
+
+  // 신고당한 user의 과거행적 조회
+  @Override
+  public int countReportById(String reportedId) throws Exception {
+    return reportDao.countReportById(reportedId);
+  }
+
+  // 신고당한 유저 제재하기 위해 상태 변경
+  @Override
+  public void updateStatus(Member reportedUser) throws Exception {
+    if (memberDao.updateStatus(reportedUser) == 0) {
+      throw new Exception("유저상태 변경 실패!");
+    }
+  }
+
 }

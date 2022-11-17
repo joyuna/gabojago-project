@@ -146,9 +146,14 @@ public class RecommendationController {
   @GetMapping("disableRecommend")
   public String disableRecommend(int recono, HttpSession session) throws Exception {
     // 작성자 본인인지 확인
-    Member member = (Member) session.getAttribute("loginMember");
-    if (!recommendationService.getRecommendation(recono).getWriter().getId().equals(member.getId())) {
+    if (session.getAttribute("loginMember") == null) {
       return "redirect:recommendationList";
+    } else {
+      Member member = (Member) session.getAttribute("loginMember");
+      if (!recommendationService.getRecommendation(recono).getWriter().getId()
+          .equals(member.getId())) {
+        return "redirect:recommendationList";
+      }
     }
 
     // 삭제를 가장한 비활성화
@@ -163,9 +168,14 @@ public class RecommendationController {
   @GetMapping("recommendationUpdateForm")
   public String recommendationUpdate(int recono, HttpSession session, Model model) throws Exception {
      // 작성자 본인인지 확인
-    Member member = (Member) session.getAttribute("loginMember");
-    if (!recommendationService.getRecommendation(recono).getWriter().getId().equals(member.getId())) {
+    if (session.getAttribute("loginMember") == null) {
       return "redirect:recommendationList";
+    } else {
+      Member member = (Member) session.getAttribute("loginMember");
+      if (!recommendationService.getRecommendation(recono).getWriter().getId()
+          .equals(member.getId())) {
+        return "redirect:recommendationList";
+      }
     }
 
     // UpdateForm에 미리 입력할 데이터 담기
@@ -210,13 +220,53 @@ public class RecommendationController {
     return "redirect:recommendationList";
   }
 
-  // JangComment : 코스추천글에 댓글 작성 기능
-//  @ResponseBody
-//  @RequestMapping("comment-select-list/{recono}")
-//  public List<JangComment> jangCommentList(@PathVariable("recono") int recono) throws Exception{
-//    return jangCommentService.jangCommentList(recono);
-//  }
+  @Transactional
+  @PostMapping("recommendationReport")
+  public String recommendationReport(
+      int recono, String rsn1, String rsn2, HttpSession session) throws Exception {
+    // 신고자 로그인상태 확인
+    if (session.getAttribute("loginMember") == null) {
+      return "redirect:recommendationList";
+    }
 
+    // 신고자 id 확인
+    String id = ((Member) session.getAttribute("loginMember")).getId();
+
+    // 본인 게시글은 신고할 수 없다.
+    if (recommendationService.getRecommendation(recono).getWriter().getId().equals(id)) {
+      return "redirect:recommendationList";
+    }
+
+    // 신고사유 작성
+    switch (Integer.parseInt(rsn1)) {
+      case 0: rsn1 = "회원비난/비하";
+      case 1: rsn1 = "욕설/비속어";
+      case 2: rsn1 = "허위사실 유포";
+      case 3: rsn1 = "무단광고/홍보";
+      case 4: rsn1 = "외설적 표현물";
+      case 5: rsn1 = "불법행위";
+      case 6: rsn1 = "게시판 용도 부적절";
+      case 7: rsn1 = "이용방해 행위";
+    }
+    String rsn = "신고사유: " + rsn1 + "\n" + "상세내용: " + rsn2;
+
+    // 신고자가 현재 게시글을 신고한다.
+    recommendationService.recommendationReportAdd(id, recono, rsn);
+
+    // 현재 신고당한 게시글의 작성자를 조회한다.
+    Member reportedUser = recommendationService.getRecommendation(recono).getWriter();
+    int countReport = recommendationService.countReportById(reportedUser.getId());
+
+    // 게시글 작성자 status를 "신고"로 변경
+    if (countReport >= 5) {
+      recommendationService.updateStatus(reportedUser);
+    }
+    System.out.println("게시글 작성자 status ============ " + countReport);
+
+    return "redirect:/";
+  }
+
+  // JangComment : 코스추천글에 댓글 작성 기능
   @PostMapping("jangCommentInsert")
   public String jangCommentInsert(
       JangComment jangComment, HttpSession session) throws Exception {

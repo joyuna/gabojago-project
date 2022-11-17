@@ -81,7 +81,12 @@
         values(#{id},sha2(#{password},256),#{name},#{email},#{nickName},#{phoneNo})
     </insert>
 
-
+    <update id="updateStatus" parameterType="Member">
+        update jang_member set
+        status='신고'
+        where
+        id=#{id}
+    </update>
 
     <!--장현경 작업중 -->
     <select id="findAll" resultMap="memberMap">
