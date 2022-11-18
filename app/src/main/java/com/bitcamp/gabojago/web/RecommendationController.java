@@ -131,7 +131,26 @@ public class RecommendationController {
   @GetMapping("recommendationList")
   public void recommendationList(Model model) throws Exception {
     model.addAttribute("recommendations", recommendationService.recommendationList());
+    model.addAttribute("recommendationsOrderByRecent", recommendationService.recommendationListOrderByRecent());
+    model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
+    model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
+//    model.addAttribute("recommendationAttachedFiles", recommendationService.recommendationAttachedFiles());
   }
+
+//  @GetMapping("recommendationListOrderByRecent")
+//  public void recommendationListOrderByRecent(Model model) throws Exception {
+//    model.addAttribute("recommendationsOrderByRecent", recommendationService.recommendationListOrderByRecent());
+//  }
+//
+//  @GetMapping("recommendationListOrderByComments")
+//  public void recommendationListOrderByComments(Model model) throws Exception {
+//    model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
+//  }
+//
+//  @GetMapping("recommendationListOrderByCnt")
+//  public void recommendationListOrderByCnt(Model model) throws Exception {
+//    model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
+//  }
 
   // Detail
   @GetMapping("recommendationDetail")
@@ -209,13 +228,6 @@ public class RecommendationController {
 
     return "redirect:recommendationList";
   }
-
-  // JangComment : 코스추천글에 댓글 작성 기능
-//  @ResponseBody
-//  @RequestMapping("comment-select-list/{recono}")
-//  public List<JangComment> jangCommentList(@PathVariable("recono") int recono) throws Exception{
-//    return jangCommentService.jangCommentList(recono);
-//  }
 
   @PostMapping("jangCommentInsert")
   public String jangCommentInsert(

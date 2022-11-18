@@ -17,6 +17,7 @@
         <result column="FMLY" property="fmly"/>
         <result column="SOLO" property="solo"/>
         <result column="TPNAME" property="tpname"/>
+        <result column="PATH" property="path"/>
 
         <association property="writer" javaType="member">
             <id column="id" property="id"/>
@@ -58,11 +59,107 @@
     <!-- recommendationList -->
     <select id="recommendationList" resultMap="recommendationMap">
         select
-        recono, title, wdate
+        r.*, f.*
         from
-        jang_so_recommendation
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+    </select>
+
+    <select id="recommendationAttachedFiles" resultMap="attachedFileMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+        order by r.recono
+    </select>
+
+    <!--최신순-->
+    <select id="recommendationListOrderByRecent" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+        order by wdate desc
+    </select>
+
+    <!--댓글순-->
+    <select id="recommendationListOrderByComments" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r,
+
+        (select
+        s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
         where
         act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        group by
+        r.recono
+        order by
+        c.cntComments desc, r.wdate
+    </select>
+
+    <!--인기순(조회순)-->
+    <select id="recommendationListOrderByCnt" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+        order by cnt desc, wdate
     </select>
 
     <!-- recommendationAdd - 1 -->
@@ -82,7 +179,7 @@
     <!-- recommendationAdd - 3 -->
     <insert id="jangSoReviewAttachedFileAdd" parameterType="jangSoReviewAttachedFile">
         insert into jang_so_review_file(path,fname,prvno)
-        values(#{filepath}, #{fname}, #{prvno})
+        values(#{path}, #{fname}, #{prvno})
     </insert>
 
     <!-- recommendationDetail - 1 -->

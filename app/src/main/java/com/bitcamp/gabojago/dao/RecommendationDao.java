@@ -22,6 +22,12 @@ public interface RecommendationDao {
   // recommendationList
   List<Recommendation> recommendationList(); // 나중에 날짜 받기
 
+  List<JangSoReviewAttachedFile> recommendationAttachedFiles();
+
+  List<Recommendation> recommendationListOrderByRecent();
+  List<Recommendation> recommendationListOrderByComments();
+  List<Recommendation> recommendationListOrderByCnt();
+
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono);
 
@@ -42,4 +48,6 @@ public interface RecommendationDao {
 
   // comment Insert
   int setCntRecommendation(int recono);
+
+
 }

@@ -60,6 +60,23 @@ public class DefaultRecommendationService implements RecommendationService  {
     return recommendationDao.recommendationList();
   }
 
+  public List<JangSoReviewAttachedFile> recommendationAttachedFiles() throws Exception {
+    return recommendationDao.recommendationAttachedFiles();
+  }
+
+  @Override
+  public List<Recommendation> recommendationListOrderByRecent() throws Exception {
+    return recommendationDao.recommendationListOrderByRecent();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByComments() throws Exception{
+    return recommendationDao.recommendationListOrderByComments();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCnt() throws Exception{
+    return recommendationDao.recommendationListOrderByCnt();
+  }
+
   // recommendationDetail - 1
   @Override
   public Recommendation getRecommendation(int recono) throws Exception {

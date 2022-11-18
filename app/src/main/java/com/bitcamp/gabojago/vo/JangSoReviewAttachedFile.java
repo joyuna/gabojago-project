@@ -50,7 +50,7 @@ public class JangSoReviewAttachedFile {
     return "AttachedFile{" +
             "recofno=" + recofno +
             ", prvno=" + prvno +
-            ", filepath='" + filepath + '\'' +
+            ", path='" + filepath + '\'' +
             ", fname='" + fname + '\'' +
             '}';
   }
