@@ -73,24 +73,7 @@
         r.recono
     </select>
 
-    <select id="recommendationAttachedFiles" resultMap="attachedFileMap">
-        select
-        r.*, f.*
-        from
-        jang_so_recommendation r join
-        jang_so_review j
-        on r.recono = j.recono
-        left outer join
-        jang_so_review_file f
-        on j.prvno = f.prvno
-        where
-        r.act=true
-        group by
-        r.recono
-        order by r.recono
-    </select>
-
-    <!--최신순-->
+    <!--오리지널 최신순-->
     <select id="recommendationListOrderByRecent" resultMap="recommendationMap">
         select
         r.*, f.*
@@ -107,8 +90,7 @@
         r.recono
         order by wdate desc
     </select>
-
-    <!--댓글순-->
+    <!--오리지널 댓글순-->
     <select id="recommendationListOrderByComments" resultMap="recommendationMap">
         select
         r.*, f.*
@@ -143,8 +125,7 @@
         order by
         c.cntComments desc, r.wdate
     </select>
-
-    <!--인기순(조회순)-->
+    <!--오리지널 조회순-->
     <select id="recommendationListOrderByCnt" resultMap="recommendationMap">
         select
         r.*, f.*
@@ -157,6 +138,304 @@
         on j.prvno = f.prvno
         where
         r.act=true
+        group by
+        r.recono
+        order by cnt desc, wdate
+    </select>
+
+    <!--최신순+혼자-->
+    <select id="recommendationListOrderByRecentForAlone" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true and r.solo = 1
+        group by
+        r.recono
+        order by wdate desc
+    </select>
+
+    <!--댓글순-->
+    <select id="recommendationListOrderByCommentsForAlone" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r,
+
+        (select
+        s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
+        where
+        act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        and
+        r.solo = 1
+        group by
+        r.recono
+        order by
+        c.cntComments desc, r.wdate
+    </select>
+
+    <!--인기순(조회순)-->
+    <select id="recommendationListOrderByCntForAlone" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true and r.solo = 1
+        group by
+        r.recono
+        order by cnt desc, wdate
+    </select>
+
+    <!--최신순+커플-->
+    <select id="recommendationListOrderByRecentForCouple" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        and r.cple=1
+        group by
+        r.recono
+        order by wdate desc
+    </select>
+
+    <!--댓글순-->
+    <select id="recommendationListOrderByCommentsForCouple" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r,
+
+        (select
+        s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
+        where
+        act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        and r.cple=1
+        group by
+        r.recono
+        order by
+        c.cntComments desc, r.wdate
+    </select>
+
+    <!--인기순(조회순)-->
+    <select id="recommendationListOrderByCntForCouple" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true and r.cple=1
+        group by
+        r.recono
+        order by cnt desc, wdate
+    </select>
+
+    <!--최신순+가족-->
+    <select id="recommendationListOrderByRecentForFamily" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true and r.fmly=1
+        group by
+        r.recono
+        order by wdate desc
+    </select>
+
+    <!--댓글순-->
+    <select id="recommendationListOrderByCommentsForFamily" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r,
+
+        (select
+        s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
+        where
+        act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        and r.fmly=1
+
+        group by
+        r.recono
+        order by
+        c.cntComments desc, r.wdate
+    </select>
+
+    <!--인기순(조회순)-->
+    <select id="recommendationListOrderByCntForFamily" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        and r.fmly=1
+        group by
+        r.recono
+        order by cnt desc, wdate
+    </select>
+
+    <!--최신순+친구-->
+    <select id="recommendationListOrderByRecentForFriend" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        and r.frd=1
+        group by
+        r.recono
+        order by wdate desc
+    </select>
+
+    <!--댓글순-->
+    <select id="recommendationListOrderByCommentsForFriend" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r,
+
+        (select
+        s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
+        where
+        act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        and r.frd=1
+        group by
+        r.recono
+        order by
+        c.cntComments desc, r.wdate
+    </select>
+
+    <!--인기순(조회순)-->
+    <select id="recommendationListOrderByCntForFriend" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        and r.frd=1
         group by
         r.recono
         order by cnt desc, wdate

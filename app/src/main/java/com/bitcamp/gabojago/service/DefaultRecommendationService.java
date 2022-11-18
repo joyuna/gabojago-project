@@ -75,6 +75,7 @@ public class DefaultRecommendationService implements RecommendationService  {
     return recommendationDao.recommendationAttachedFiles();
   }
 
+  // Original
   @Override
   public List<Recommendation> recommendationListOrderByRecent() throws Exception {
     return recommendationDao.recommendationListOrderByRecent();
@@ -87,6 +88,64 @@ public class DefaultRecommendationService implements RecommendationService  {
   public List<Recommendation> recommendationListOrderByCnt() throws Exception{
     return recommendationDao.recommendationListOrderByCnt();
   }
+
+  // Alone
+  @Override
+  public List<Recommendation> recommendationListOrderByRecentForAlone() throws Exception {
+    return recommendationDao.recommendationListOrderByRecentForAlone();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCommentsForAlone() throws Exception{
+    return recommendationDao.recommendationListOrderByCommentsForAlone();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCntForAlone() throws Exception{
+    return recommendationDao.recommendationListOrderByCntForAlone();
+  }
+
+
+  // Couple
+  @Override
+  public List<Recommendation> recommendationListOrderByRecentForCouple() throws Exception {
+    return recommendationDao.recommendationListOrderByRecentForCouple();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCommentsForCouple() throws Exception{
+    return recommendationDao.recommendationListOrderByCommentsForCouple();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCntForCouple() throws Exception{
+    return recommendationDao.recommendationListOrderByCntForCouple();
+  }
+
+  // Family
+  @Override
+  public List<Recommendation> recommendationListOrderByRecentForFamily() throws Exception {
+    return recommendationDao.recommendationListOrderByRecentForFamily();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCommentsForFamily() throws Exception{
+    return recommendationDao.recommendationListOrderByCommentsForFamily();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCntForFamily() throws Exception{
+    return recommendationDao.recommendationListOrderByCntForFamily();
+  }
+
+  // Friend
+  @Override
+  public List<Recommendation> recommendationListOrderByRecentForFriend() throws Exception {
+    return recommendationDao.recommendationListOrderByRecentForFriend();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCommentsForFriend() throws Exception{
+    return recommendationDao.recommendationListOrderByCommentsForFriend();
+  }
+  @Override
+  public List<Recommendation> recommendationListOrderByCntForFriend() throws Exception{
+    return recommendationDao.recommendationListOrderByCntForFriend();
+  }
+
 
   // recommendationDetail - 1
   @Override

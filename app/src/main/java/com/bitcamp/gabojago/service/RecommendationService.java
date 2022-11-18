@@ -20,10 +20,26 @@ public interface RecommendationService {
 
   List<JangSoReviewAttachedFile> recommendationAttachedFiles() throws Exception;
 
+  // Origianl
   List<Recommendation> recommendationListOrderByRecent() throws Exception;
   List<Recommendation> recommendationListOrderByComments() throws Exception;
   List<Recommendation> recommendationListOrderByCnt() throws Exception;
-
+  // Alone
+  List<Recommendation> recommendationListOrderByRecentForAlone() throws Exception;
+  List<Recommendation> recommendationListOrderByCommentsForAlone() throws Exception;
+  List<Recommendation> recommendationListOrderByCntForAlone() throws Exception;
+  // Couple
+  List<Recommendation> recommendationListOrderByRecentForCouple() throws Exception;
+  List<Recommendation> recommendationListOrderByCommentsForCouple() throws Exception;
+  List<Recommendation> recommendationListOrderByCntForCouple() throws Exception;
+  // Family
+  List<Recommendation> recommendationListOrderByRecentForFamily() throws Exception;
+  List<Recommendation> recommendationListOrderByCommentsForFamily() throws Exception;
+  List<Recommendation> recommendationListOrderByCntForFamily() throws Exception;
+  // Friend
+  List<Recommendation> recommendationListOrderByRecentForFriend() throws Exception;
+  List<Recommendation> recommendationListOrderByCommentsForFriend() throws Exception;
+  List<Recommendation> recommendationListOrderByCntForFriend() throws Exception;
 
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono) throws Exception;

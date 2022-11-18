@@ -144,23 +144,39 @@ public class RecommendationController {
     model.addAttribute("recommendationsOrderByRecent", recommendationService.recommendationListOrderByRecent());
     model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
     model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
-//    model.addAttribute("recommendationAttachedFiles", recommendationService.recommendationAttachedFiles());
   }
 
-//  @GetMapping("recommendationListOrderByRecent")
-//  public void recommendationListOrderByRecent(Model model) throws Exception {
-//    model.addAttribute("recommendationsOrderByRecent", recommendationService.recommendationListOrderByRecent());
-//  }
-//
-//  @GetMapping("recommendationListOrderByComments")
-//  public void recommendationListOrderByComments(Model model) throws Exception {
-//    model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
-//  }
-//
-//  @GetMapping("recommendationListOrderByCnt")
-//  public void recommendationListOrderByCnt(Model model) throws Exception {
-//    model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
-//  }
+  @GetMapping("recommendationListForAlone")
+  public void recommendationListForAlone(Model model) throws Exception {
+    // alone
+    model.addAttribute("recommendationsOrderByRecentForAlone", recommendationService.recommendationListOrderByRecentForAlone());
+    model.addAttribute("recommendationsOrderByCommentsForAlone", recommendationService.recommendationListOrderByCommentsForAlone());
+    model.addAttribute("recommendationsOrderByCntForAlone", recommendationService.recommendationListOrderByCntForAlone());
+  }
+
+  @GetMapping("recommendationListForCouple")
+  public void recommendationListForCouple(Model model) throws Exception {
+    // couple
+    model.addAttribute("recommendationsOrderByRecentForCouple", recommendationService.recommendationListOrderByRecentForCouple());
+    model.addAttribute("recommendationsOrderByCommentsForCouple", recommendationService.recommendationListOrderByCommentsForCouple());
+    model.addAttribute("recommendationsOrderByCntForCouple", recommendationService.recommendationListOrderByCntForCouple());
+  }
+
+  @GetMapping("recommendationListForFamily")
+  public void recommendationListForFamily(Model model) throws Exception {
+    // family
+    model.addAttribute("recommendationsOrderByRecentForFamily", recommendationService.recommendationListOrderByRecentForFamily());
+    model.addAttribute("recommendationsOrderByCommentsForFamily", recommendationService.recommendationListOrderByCommentsForFamily());
+    model.addAttribute("recommendationsOrderByCntForFamily", recommendationService.recommendationListOrderByCntForFamily());
+  }
+
+  @GetMapping("recommendationListForFriend")
+  public void recommendationListForFriend(Model model) throws Exception {
+    // family
+    model.addAttribute("recommendationsOrderByRecentForFriend", recommendationService.recommendationListOrderByRecentForFriend());
+    model.addAttribute("recommendationsOrderByCommentsForFriend", recommendationService.recommendationListOrderByCommentsForFriend());
+    model.addAttribute("recommendationsOrderByCntForFriend", recommendationService.recommendationListOrderByCntForFriend());
+  }
 
   // Detail
   @GetMapping("recommendationDetail")

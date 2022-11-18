@@ -101,12 +101,9 @@
                     <a class="nav-link" href="/app/support/">고객지원</a>
                 </li>
                 <li class="nav-item" th:if="${session.loginMember != null}">
-                    <a
-                            class="nav-link"
+                    <a class="nav-link"
                             href="/app/auth/logout"
-                            th:text="${session.loginMember.name}+'(로그아웃)'"
-                    >홍길동(로그아웃)</a
-                    >
+                            th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
                 </li>
                 <li class="nav-item" th:if="${session.loginMember == null}">
                     <span class="nav-link btn-open-popup">로그인</span>

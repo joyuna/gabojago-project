@@ -29,6 +29,26 @@ public interface RecommendationDao {
   List<Recommendation> recommendationListOrderByComments();
   List<Recommendation> recommendationListOrderByCnt();
 
+  // 혼자
+  List<Recommendation> recommendationListOrderByRecentForAlone();
+  List<Recommendation> recommendationListOrderByCommentsForAlone();
+  List<Recommendation> recommendationListOrderByCntForAlone();
+
+  // 커플
+  List<Recommendation> recommendationListOrderByRecentForCouple();
+  List<Recommendation> recommendationListOrderByCommentsForCouple();
+  List<Recommendation> recommendationListOrderByCntForCouple();
+
+  // 가족
+  List<Recommendation> recommendationListOrderByRecentForFamily();
+  List<Recommendation> recommendationListOrderByCommentsForFamily();
+  List<Recommendation> recommendationListOrderByCntForFamily();
+
+  // 친구
+  List<Recommendation> recommendationListOrderByRecentForFriend();
+  List<Recommendation> recommendationListOrderByCommentsForFriend();
+  List<Recommendation> recommendationListOrderByCntForFriend();
+
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono);
 
