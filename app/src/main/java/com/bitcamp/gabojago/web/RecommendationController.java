@@ -284,7 +284,6 @@ public class RecommendationController {
     if (countReport >= 5) {
       recommendationService.updateStatus(reportedUser);
     }
-    System.out.println("게시글 작성자 status ============ " + countReport);
 
     return "redirect:/";
   }
