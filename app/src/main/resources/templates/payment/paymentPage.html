@@ -106,7 +106,31 @@
     
     </div>
 
+    <script>
+      let paymentType;
 
+      function getPayType(payType){
+        paymentType = payType;
+      }
+
+      function doPayment(){
+        if(paymentType == "accountTransfer"){
+          alert("계좌");
+        }
+        else if(paymentType == "depositWithoutBankbook"){
+          alert("무통");
+        }
+        else if(paymentType == "kakao"){
+          alert("카카오");
+        }
+        else if(paymentType == "mobilePayment"){
+          alert("휴대폰");
+        }
+        else{
+          alert("결제 방식을 선택해 주세요.");
+        }
+      }
+    </script>
 
     <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
       <h4 style="text-align: center; padding-bottom: 30px;"><b>결제 수단</b></h4>
@@ -117,7 +141,7 @@
             <div class="card-header">계좌이체</div>
             <div class="card-body nav justify-content-center">
               <input type="radio" class="btn-check" name="options-outlined" id="accountTransfer" autocomplete="off" checked>
-              <label class="btn btn-outline-success" for="accountTransfer">선택</label>
+              <label onclick="getPayType('accountTransfer')" class="btn btn-outline-success" for="accountTransfer">선택</label>
             </div>
           </div>
         </li>
@@ -126,7 +150,7 @@
             <div class="card-header">무통장입금</div>
             <div class="card-body nav justify-content-center">
               <input type="radio" class="btn-check" name="options-outlined" id="depositWithoutBankbook" autocomplete="off" checked>
-              <label class="btn btn-outline-success" for="depositWithoutBankbook">선택</label>
+              <label onclick="getPayType('depositWithoutBankbook')" class="btn btn-outline-success" for="depositWithoutBankbook">선택</label>
             </div>
           </div>
         </li>
@@ -135,7 +159,7 @@
             <div class="card-header">카카오페이</div>
             <div class="card-body nav justify-content-center">
               <input type="radio" class="btn-check" name="options-outlined" id="kakao" autocomplete="off" checked>
-              <label class="btn btn-outline-success" for="kakao">선택</label>
+              <label onclick="getPayType('kakao')" class="btn btn-outline-success" for="kakao">선택</label>
             </div>
           </div>
         </li>
@@ -144,7 +168,7 @@
             <div class="card-header">휴대폰 소액결제</div>
             <div class="card-body nav justify-content-center">
               <input type="radio" class="btn-check" name="options-outlined" id="mobilePayment" autocomplete="off" checked>
-              <label class="btn btn-outline-success" for="mobilePayment">선택</label>
+              <label onclick="getPayType('mobilePayment')" class="btn btn-outline-success" for="mobilePayment">선택</label>
             </div>
           </div>
         </li>
@@ -154,29 +178,15 @@
 
     <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
       <h4 style="text-align: center; padding-bottom: 20px;"><b>총 결제 금액</b></h4>
-      <h2 style="text-align: center; padding-bottom: 30px;"><b>40000 원</b></h2>
+      <h2 th:text="${price}" style="text-align: center; padding-bottom: 30px;"><b>40000 원</b></h2>
 
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">바로 결제</button>
+        <button onclick="doPayment()" class="btn btn-primary" type="button">바로 결제</button>
       </div>
     </div>
   </div>
 
-    <div class = "container  align-text-center g-3 p-3 "  style="float: right;">
-    <button type="submit m-4" class="btn btn-outline-primary"
-            style="float: right;"><a href='/app/member/list'> 목록 </a></button>
 
-    <button  class="btn btn-outline-none"  style="float: right;"  ></button>
-
-    <button type="submit m-4" class="btn btn-outline-primary"
-            style="float: right;">변경</button>
-      <button  class="btn btn-outline-none"  style="float: right;"  ></button>
-
-    <button type="button" class="btn btn-outline-secondary"
-            style="float: right;">
-      <a href='delete?id= user1'
-         data-th-href="@{delete(id=${member.id})}">삭제</a></button>
-    </div>
 
 <!-- Footer-->
 <footer class="bg-dark" >
