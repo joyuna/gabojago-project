@@ -27,7 +27,7 @@ public class MyPageController {
 
         if (member == null) {
 
-            model.addAttribute("message", "로그인이 필요한 항목입니다. 회원가입 또는 로그인해 주세요.");
+            model.addAttribute("myPageFailMessage", "로그인이 필요한 항목입니다. 회원가입 또는 로그인해 주세요.");
 
             return "myPage/myPageFail";
 

@@ -23,8 +23,8 @@ public class MyCommentsController {
 
     @GetMapping("myRecommendationCommentsList")
     public void myRecommendationCommentsList(JangComment jangComment,
-                               HttpSession session,
-                               Model model) throws Exception {
+                                             HttpSession session,
+                                             Model model) throws Exception {
 
         jangComment.setWriter((Member) session.getAttribute("loginMember"));
         model.addAttribute("jangComments", myCommentsService.myRecommendationCommentsList(jangComment.getWriter().getId()));
