@@ -3,15 +3,30 @@
 <head>
     <title>가보자Go!!</title>
     <meta charset="utf-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-            href="../css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <style>
-        .container {
-            max-width: 700px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
 
+    <link rel="stylesheet" href="../../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/animate.css">
+
+    <link rel="stylesheet" href="../../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../../css/aos.css">
+
+    <link rel="stylesheet" href="../../css/ionicons.min.css">
+
+    <link rel="stylesheet" href="../../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../../css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="../../css/flaticon.css">
+    <link rel="stylesheet" href="../../css/icomoon.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 
@@ -97,6 +112,39 @@
                 </div> <!-- .col-md-8 -->
 
             </div><!-- END COL -->
+            <!-- QnA Answer 보기(유민) -->
+
+            <hr class="my-4">
+            <h3 style="font-weight: bold">Answer:</h3>
+
+            <h5><div class="answer" input name='answerContent'
+                 data-th-text='${qnaBoard.answerContent}' readonly></div></h5>
+            <span type="text" name="answerDate"
+                  data-th-text="'답변일 | ' + ${qnaBoard.answerDate}"></span>
+            <input type="hidden" name="answerDate"
+                   value="2022-11-11"
+                   data-th-value="${qnaBoard.answerDate}" readonly>
+
+
+            <hr class="my-4">
+
+            <!-- QnA Comments 작성 양식(유민) -->
+            <div class="qnaAnswerCard my-4">
+                <h6 class="qnaAnswerCardHeader">Leave a Answer:</h6>
+                <div class="qnaAnswerCardBody">
+                    <form name="qnaAnswerForm" th:action="@{/support/qna/qnaAnswerUpdate}" method="post" autocomplete="off">
+                        <div class="answerGroup">
+                            <input type="hidden" name="no" th:value="${qnaBoard.no}">
+
+                            <div>
+                                <textarea name="answerContent" class="form-control" rows="3"></textarea>
+                            </div>
+
+                        </div><br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </section>
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
@@ -147,48 +195,5 @@
 <script src="../../js/google-map.js"></script>
 <script src="../../js/main.js"></script>
 
-        <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg"
-                    onclick="location.href='list.html'"
-                    th:onclick="|location.href='@{/support/qna/list}'|"
-                    type="button">목록으로</button>
-        </div>
-
-    </div>
-
-    <!-- QnA Answer 보기(유민) -->
-    <br>
-    <h3 style="font-weight: bold">Answer:</h3>
-
-    <hr class="my-4">
-
-    <div class="answer" input name='answerContent'
-           data-th-text='${qnaBoard.answerContent}' readonly></div>
-        <input type="text" name="answerDate"
-               value="2022-11-11"
-               data-th-value="${qnaBoard.answerDate}" readonly>
-
-
-    <hr class="my-4">
-
-    <!-- QnA Comments 작성 양식(유민) -->
-    <div class="qnaAnswerCard my-4">
-        <h6 class="qnaAnswerCardHeader">Leave a Answer:</h6>
-        <div class="qnaAnswerCardBody">
-            <form name="qnaAnswerForm" th:action="@{/support/qna/qnaAnswerUpdate}" method="post" autocomplete="off">
-                <div class="answerGroup">
-                    <input type="hidden" name="no" th:value="${qnaBoard.no}">
-
-                    <div>
-                    <textarea name="answerContent" class="form-control" rows="3"></textarea>
-                    </div>
-
-                </div><br>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-    </div>
-
-</div> <!-- /container -->
 </body>
 </html>
