@@ -4,6 +4,7 @@ import com.bitcamp.gabojago.dao.MemberDao;
 import com.bitcamp.gabojago.dao.RecommendationDao;
 import com.bitcamp.gabojago.dao.ReportDao;
 import com.bitcamp.gabojago.vo.JangSoReview;
+import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
 import com.bitcamp.gabojago.vo.Member;
 import com.bitcamp.gabojago.vo.Recommendation;
 import com.bitcamp.gabojago.vo.Report;
