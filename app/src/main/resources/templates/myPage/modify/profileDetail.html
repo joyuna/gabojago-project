@@ -88,7 +88,7 @@
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
-			<h1 id="colorlib-logo"><span class="img" style="background-image: url(../../images/suzy.jpeg);"></span><div th:text="${member.nickName}"></div></a></h1>
+			<h1 id="colorlib-logo"><span class="img" style="background-image: url(../../images/suzy.jpeg);"></span><div th:text="${nickname}"></div></a></h1>
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul class="p-0">
 					<li><a th:href="@{../../}">Main</a></li>
@@ -106,8 +106,8 @@
 		</aside> <!-- END COLORLIB-ASIDE -->
 		<div id="colorlib-main">
 			<section class="ftco-section ftco-bread">
-				<div class="container">
-					<div class="row no-gutters slider-text justify-content-center align-items-center">
+				<div class="container pl-1">
+					<div class="slider-text justify-content-center align-items-center">
 	          <div class="col-md-11 ftco-animate">
 	            <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/myPage/}">About Me</a></span> <span>My Profile</span></p>
 	            <h1 class="bread">My Profile</h1>
