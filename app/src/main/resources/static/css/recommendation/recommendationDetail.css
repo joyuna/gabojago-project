@@ -55,6 +55,13 @@ ul, ol {
   font-size: 37px;
 }
 
+.reportBtn-open-popup {
+  border: none;
+  font-size: 14px;
+  color: gray;
+  background-color: #f5f5f5;
+}
+
 /* 작성자 */
 .ga-reco-info1-1 > h3 {
   font-weight: 500;
@@ -98,7 +105,7 @@ ul, ol {
   display: none;
   position: absolute;
   left: 19vw;
-  top: 33vh;
+  top: 35.5vh;
   z-index: 1;
 
   background-color: white;
