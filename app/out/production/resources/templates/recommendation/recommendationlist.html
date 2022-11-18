@@ -188,10 +188,12 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <img src="https://via.placeholder.com/90"/>
-<!--                    "@{/board/files/}+ &ndash;&gt;-->
-<!--                ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path:''}"-->
-<!--                         onerror=-->
+                    <span th:if="${recommendation.path != null}">
+                            <img src="@{/board/files/}+ ${recommendation.path}"/>
+                        </span>
+                    <span th:if="${recommendation.path == null}">
+                            <img src="https://via.placeholder.com/90"/>
+                        </span>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
@@ -240,10 +242,12 @@
                         <td data-th-text="${recommendation.recono}">100</td>
 
                         <!-- Product image 첨부파일 갤러리화 -->
-                        <img src="https://via.placeholder.com/90"/>
-                        <!--                    "@{/board/files/}+ &ndash;&gt;-->
-                        <!--                ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path:''}"-->
-                        <!--                         onerror=-->
+                        <span th:if="${recommendation.path != null}">
+                            <img src="@{/board/files/}+ ${recommendation.path}"/>
+                        </span>
+                        <span th:if="${recommendation.path == null}">
+                            <img src="https://via.placeholder.com/90"/>
+                        </span>
 
                         <!-- 전시 제목,날짜 정렬-->
                         <div class="card-body p-4">
@@ -410,7 +414,7 @@
 
 
     .background {
-        background-image: url(https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg);
+        /*background-image: url(https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg);*/
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;

@@ -51,7 +51,7 @@
     <resultMap type="jangSoReviewAttachedFile" id="attachedFileMap">
         <id column="recofno" property="recofno"/>
         <result column="prvno" property="prvno"/>
-        <result column="path" property="path"/>
+        <result column="path" property="filepath"/>
         <result column="fname" property="fname"/>
     </resultMap>
     <!-- resultMap 끝 -->
@@ -93,21 +93,30 @@
     <!--최신순-->
     <select id="recommendationListOrderByRecent" resultMap="recommendationMap">
         select
-        *
+        r.*, f.*
         from
-        jang_so_recommendation
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
         where
-        act=true
+        r.act=true
+        group by
+        r.recono
         order by wdate desc
     </select>
 
     <!--댓글순-->
     <select id="recommendationListOrderByComments" resultMap="recommendationMap">
         select
-        r.*
+        r.*, f.*
         from
         jang_so_recommendation r,
-        (select s.recono, count(c.cmno) cntComments
+
+        (select
+        s.recono, count(c.cmno) cntComments
         from
         jang_comment c
         right outer join
@@ -115,9 +124,22 @@
         on
         c.recono = s.recono
         group by
-        s.recono) c
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
         where
-        act=true and c.recono = r.recono
+        act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        group by
+        r.recono
         order by
         c.cntComments desc, r.wdate
     </select>
