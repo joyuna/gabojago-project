@@ -188,10 +188,12 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <img src="https://via.placeholder.com/90"/>
-                    <!--                    "@{/board/files/}+ &ndash;&gt;-->
-                    <!--                ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path:''}"-->
-                    <!--                         onerror=-->
+                    <span th:if="${recommendation.path != null}">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"/>
+                        </span>
+                    <span th:if="${recommendation.path == null}">
+                            <img src="https://via.placeholder.com/90"/>
+                        </span>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
@@ -240,10 +242,12 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <img src="https://via.placeholder.com/90"/>
-                    <!--                    "@{/board/files/}+ &ndash;&gt;-->
-                    <!--                ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path:''}"-->
-                    <!--                         onerror=-->
+                    <span th:if="${recommendation.path != null}">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"/>
+                        </span>
+                    <span th:if="${recommendation.path == null}">
+                            <img src="https://via.placeholder.com/90"/>
+                        </span>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
@@ -291,7 +295,12 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <img th:src="@{/board/files/} + ${recommendation.jangSoReviews.get(0).attachedFiles.size>0? recommendation.jangSoReviews.get(0).attachedFiles.get(0).path} : ''}"/>
+                    <span th:if="${recommendation.path != null}">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"/>
+                        </span>
+                    <span th:if="${recommendation.path == null}">
+                            <img src="https://via.placeholder.com/90"/>
+                        </span>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
@@ -326,24 +335,6 @@
 </section>
 <!--코스추천글 리스트 끝-->
 
-
-<!--<div class="container d-flex justify-content-center" >-->
-<!--    <ul class="pagination">-->
-<!--        <li class="page-item"><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>-->
-
-<!--        <li class="page-item" data-th-if="${count>4}">-->
-<!--            <a class="page-link" data-th-href="${'?count=' + count/5*5}" >이전</a></li>-->
-
-<!--        &lt;!&ndash;th:classappend="${count}+1==${num}? 'active':''" : 현재 페이지에 대한 색 처리&ndash;&gt;-->
-<!--        <li class="page-item" th:classappend="${count}+1==${num}? 'active':''" data-th-each="num: ${#numbers.sequence(count/5*5+1,count/5*5+5<totalNumber+1? count/5*5+5:totalNumber+1)}">-->
-<!--            <a class="page-link" data-th-href="${'?count=' + num}" data-th-text="${num}">1</a></li>-->
-
-<!--        <li class="page-item" data-th-if="${count<totalNumber/5*5}">-->
-<!--            <a class="page-link" data-th-href="${'?count=' + ((count/5+1)*5+1)}">다음</a>-->
-
-<!--        <li class="page-item"><a class="page-link" data-th-href="${'?count='+(totalNumber+1)}">끝으로</a></li>-->
-<!--    </ul>-->
-<!--</div>-->
 <br>
 <br>
 <!--<div style="position: absolute; right: 0px; bottom: 0px;">-->
@@ -372,10 +363,6 @@
         });
 
     });
-
-    window.addEventListener("wheel", function(e){
-        e.preventDefault();
-    },{passive : false});
 
 </script>
 
@@ -407,7 +394,8 @@
 
 
     .background {
-        background-image: url(https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg);
+        background-color: white;
+        /*background-image: url(https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg);*/
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
