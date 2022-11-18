@@ -81,32 +81,30 @@
 
   <div class="py-5 text-center">
 
-<h2>전시회 상세 정보</h2>
   </div>
 
 <form action='update' method="post" enctype="multipart/form-data" style=" width: 1000px;
     margin: 0 auto;">
   <table border='1'>
+    <div>
+      <label>No. </label>
+      <input name='exno' type='number'  value='1'
+             data-th-value="${exhibition.exno}" readonly
+             style="border: none;">
+    </div>
 
+
+    <div>
+      <input readonly name='exname' type='text'
+             id="exname"  class="form-control"  value=' 제목 '
+             data-th-value='${exhibition.exname}'>
+    </div>
     <div style="float: right;">
       <label>등록일 : </label>
       <label data-th-text="${exhibition.wdate}">2022-1-1</label>
     </div>
 
-    <div>
-      <label>No. </label>
-      <input name='exno' type='number'  value='1'
-              data-th-value="${exhibition.exno}" readonly
-      style="border: none;">
 
-    </div>
-    <br> <!--////공백////-->
-
-    <div>
-      <input readonly name='exname' type='text'
-        id="exname"  class="form-control"  value=' 제목 '
-        data-th-value='${exhibition.exname}'>
-    </div>
     <br> <!--////공백////-->
 
     <div>
@@ -145,16 +143,24 @@
   </style>
 
 
+  <button type="button" class="btn btn-outline-success">장바구니</button>
+  <button type="button" class="btn btn-outline-info">티켓</button>
 
   <p style="float: right;">
+    <button type='submit' class="btn btn-outline-secondary"
+            data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
     <a href='updateform?exno=1'
        data-th-href="@{updateform(exno=${exhibition.exno})}"
-       data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">| 게시글 변경 | </a>
-
+       > 변경  </a>
+    </button>
+    <button type='submit' class="btn  btn-outline-secondary"
+            data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
     <a href='delete?exno=1'
        data-th-href="@{delete(exno=${exhibition.exno})}"
-       data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">게시글 삭제 </a>
-    <a href='exhibitionlist'>| 목록 |</a>
+      > 삭제 </a>
+    </button>
+    <button type='submit' class="btn btn-outline-secondary">
+    <a href='exhibitionlist'> 목록 </a> </button>
   </p>
   <br> <!--///공백////-->
 </form>
@@ -168,7 +174,7 @@
       <b> | 리뷰 작성 | </b>
       <div>
         <input type='text' name='cont' size='100'
-               style="height: 70px; width: 90%;">
+               style="height: 70px; width: 90%;" >
         <input type='hidden' name='exno' data-th-value="${exhibition.exno}">
         <button type='submit' class="btn btn-dark">리뷰 저장</button>
         <br> <!--공백-->
@@ -180,12 +186,13 @@
 <table style="border: 1px;  width: 90%; height: 90%;">
   <br> <!--공백-->
   <br> <!--공백-->
-  <form  method="post " action="add" >
+  <form  method="post " action="add"
+         class="text-center">
   <tr>
     <th>리뷰번호</th>
     <th>아이디</th>
-    <th>내용</th>
-    <th>작성일</th>
+    <th class="text-center">내용</th>
+    <th class="text-right">작성일</th>
   </tr>
 
   <tr data-th-each="exhibitionReview : ${exhibitionReviews}">
@@ -195,27 +202,38 @@
                size="50"
                style="border: none; width: 50px; text-align: center"   readonly></td>
 
-    <td data-th-text="${exhibitionReview.id}" style="width: 100px">홍길동</td>
+    <td data-th-text="${exhibitionReview.id}" >홍길동</td>
 
-    <td data-th-text="${exhibitionReview.cont == ''} ? '(제목없음)' : ${exhibitionReview.cont}">
+    <td data-th-text="${exhibitionReview.cont == ''} ? '(제목없음)' : ${exhibitionReview.cont}"
+        class="text-center">
       <input name='cont' type='text'
              value='리뷰내용'
              data-th-value="${exhibitionReview.cont}"
              size='20'
-             style="border: none; width: 400px"></td>
+             style="border: none; "></td>
 
-    <td data-th-text="${exhibitionReview.wdate}" style="width: 150px">2022-1-1</td>
-    <td>
+    <td data-th-text="${exhibitionReview.wdate}"
+        class="text-right">2022-1-1</td>
+
+
+    <td class="text-right" >
+      <button type='' class="btn  btn-outline-secondary" style="margin-bottom: 10px;"
+      id="reviewdelete">
       <a href='exhibitionReviewDelete?rvno=1'
-         data-th-href="@{/exhibition-review/delete(rvno=${exhibitionReview.rvno})}">| 리뷰 삭제 |</a>
+         data-th-href="@{/exhibition-review/delete(rvno=${exhibitionReview.rvno})}"> 리뷰 삭제 </a> </button>
+    </td>
 
      <!-- <a href='exhibitionReviewUpdate?rvno=1'
          data-th-href="@{/exhibition-review/update(rvno=${exhibitionReview.rvno})}"> 리뷰 변경 |</a>-->
-    </td>
+
+
   </tr>
   </form>
 </table>
 </div><!-- /container -->
+
+
+
 
 <div style="position: fixed; right: 10px; bottom: 280px;">
   <button type="button" class="btn btn-secondary"
@@ -232,7 +250,7 @@
 <!--로그인 모달 창-->
 <div class="modal">
   <div class="modal_body" style=" background: rgba(255,255,255,0.8); ">
-    <div class="out" style="margin: 05px; float: right;">나가기</div>
+    <div class="out" style="margin: 05px; float: right;"><img src = "/app/images/X.png"></div>
     <br>
     <h2 style=" text-align: center;"> 로그인 </h2>
 
@@ -324,6 +342,8 @@
     $('textarea[name=cont]').summernote({
       toolbar:false,
       height: 900,
+      width:1000,
+      maxWidth: null,
       minHeight : null,
       maxHeight : null,
       disableDragAndDrop: true
