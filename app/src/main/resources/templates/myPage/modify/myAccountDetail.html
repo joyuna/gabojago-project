@@ -65,12 +65,16 @@
 			  document.querySelector("#myAccountModifyForm").submit();
 		  }
 
+		  // function memberDeleteConfirm() {
+			//   alert('회원탈퇴하시겠습니까?')
+		  // }
 	  </script>
   </head>
 
   <body>
 
 	<div id="colorlib-page">
+
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
 			<h1 id="colorlib-logo"><span class="img" style="background-image: url(../../images/suzy.jpeg);"></span><div th:text="${member.nickName}"></div></a></h1>
@@ -91,8 +95,8 @@
 		</aside> <!-- END COLORLIB-ASIDE -->
 		<div id="colorlib-main">
 			<section class="ftco-section ftco-bread">
-				<div class="container">
-					<div class="row no-gutters slider-text justify-content-center align-items-center">
+				<div class="container pl-1" >
+					<div class="slider-text justify-content-center align-items-center">
 	          <div class="col-md-11 ftco-animate">
 	            <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/myPage/}">About Me</a></span> <span>My Account</span></p>
 	            <h1 class="bread">My Account</h1>
@@ -121,6 +125,7 @@
 	                <input name='password' id='password' type='password' class="form-control"
 						   value='password'
 						   data-th-value='${member.password}'
+						   placeholder="비밀번호를 입력해 주세요."
 						   onchange='checkPassword()'>
 				  </div>
 
@@ -129,6 +134,7 @@
 					  <input name='confirmPassword' id='confirmPassword' type='password' class="form-control"
 							 value='confirmPassword'
 							 data-th-value='${member.password}'
+							 placeholder="비밀번호를 다시 입력해 주세요."
 							 onchange='checkPassword()'><span id="confirm"></span>
 				  </div>
 
@@ -179,6 +185,14 @@
 						    type="button"
 						    onclick="identifyPassword()"
 						    >modify</button>
+				  </div><br>
+
+				  <div>
+					<button class="w-25 btn btn-secondary btn-lg"
+							style="background-color: black; border-color: black"
+							type="button"
+							th:onclick="|location.href='@{/myPage/modify/memberDeleteForm}'|"
+					        >탈퇴</button>
 				  </div>
 
 	            </form>
