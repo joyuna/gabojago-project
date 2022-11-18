@@ -185,12 +185,17 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <span th:if="${recommendation.path != null}">
-                        <img data-th-src="${'../board/files/'+ recommendation.path}"/>
-                        </span>
-                    <span th:if="${recommendation.path == null}">
-                            <img src="https://via.placeholder.com/90"/>
-                        </span>
+                    <div th:if="${recommendation.path != null}" style="text-align : center;">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"
+                             width="230"
+                             height="230"/>
+                    </div>
+                    <div th:if="${recommendation.path == null}" style="text-align : center;">
+                            <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
+                                width="230"
+                                 height="230"
+                            />
+                        </div>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
@@ -239,12 +244,17 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <span th:if="${recommendation.path != null}">
-                        <img data-th-src="${'../board/files/'+ recommendation.path}"/>
-                        </span>
-                    <span th:if="${recommendation.path == null}">
-                            <img src="https://via.placeholder.com/90"/>
-                        </span>
+                    <div th:if="${recommendation.path != null}" style="text-align : center;">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"
+                             width="230"
+                             height="230"/>
+                    </div>
+                    <div th:if="${recommendation.path == null}" style="text-align : center;">
+                        <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
+                             width="230"
+                             height="230"
+                        />
+                    </div>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
@@ -292,12 +302,17 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <span th:if="${recommendation.path != null}">
-                        <img data-th-src="${'../board/files/'+ recommendation.path}"/>
-                        </span>
-                    <span th:if="${recommendation.path == null}">
-                            <img src="https://via.placeholder.com/90"/>
-                        </span>
+                    <div th:if="${recommendation.path != null}" style="text-align : center;">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"
+                             width="230"
+                             height="230"/>
+                    </div>
+                    <div th:if="${recommendation.path == null}" style="text-align : center;">
+                        <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
+                             width="230"
+                             height="230"
+                        />
+                    </div>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
