@@ -18,6 +18,9 @@
 <link rel="stylesheet" href="../css/main.css" />
 <link rel="stylesheet" href="../css/main-modal.css" />
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 </head>
 <!-- Header-->
 
@@ -31,17 +34,14 @@
     </div>
   </div>
 </header>
+
 <!-- Navigation 사실상의 header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/app">가보자GO</a>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <!--   <li class="nav-item active">
-             <a class="nav-link" href="/etc">홈
-               <span class="sr-only">(current)</span>
-             </a>
-           </li>-->
+
         <li class="nav-item"><a class="nav-link" href="/app/search/searchForm">검색</a></li>
         <li class="nav-item">
           <a class="nav-link" href="/app/recommendation/recommendationList">코스추천</a>
@@ -51,9 +51,10 @@
           <a class="nav-link" href="/app/support/">고객지원</a>
         </li>
         <li class="nav-item" th:if="${session.loginMember != null}">
-          <a class="nav-link"
-             href="auth/logout"
-             th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
+          <a
+              class="nav-link"
+              href="/app/auth/logout"
+              th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
         </li>
         <li class="nav-item" th:if="${session.loginMember == null}">
           <span class="nav-link btn-open-popup">로그인</span>
@@ -61,12 +62,14 @@
 
         <li class="nav-item">
           <a class="nav-link" href="/app/myPage/">
-            <img src="./images/mypage.png" width="90%" height="25"
+            <img src="/app/images/mypage.png" width="90%" height="25"
             /></a>
         </li>
+
         <!--어드민만 보일 수 있음-->
-        <li class="nav-item"  data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
-              <a href='member/list'>회원 관리</a></li>
+        <li class="nav-item">
+              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a class="nav-link" href='/app/member/list'>회원 관리</a></span> </li>
       </ul>
     </div>
   </div>
@@ -74,7 +77,7 @@
 
 <div class="modal">
   <div class="modal_body" style=" background: rgba(255,255,255,0.9); ">
-    <div class="out" style="margin: 05px;  float: right;">나가기</div>
+    <div class="out" style="margin: 05px;  float: right;"><img src = "/app/images/X.png"></div>
     <br>
     <h2 style=" text-align: center;"> 로그인 </h2>
 
@@ -90,6 +93,7 @@
               style="background-color: #ffca2c">Login</button>
 
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
 
       <script>
         function signOut() {
@@ -119,9 +123,8 @@
 
 
 <body>
+<div style="margin: 0 auto; width: 700px;">
 
-<div style="  margin: 0 auto; width: 700px;">
-  <h1></h1>
   <br>
 
   <div class="row mb-3">
@@ -138,17 +141,17 @@
     </div>
   </div>
   <div style="float: right">
-    <button class="btn btn-primary" id="findId"
-    >아이디 찾기</button>
+    <button class="btn btn-primary" id="findId">아이디 찾기</button>
   <button class="btn btn-primary" id="findpwd"
           onclick="location.href='/app/member/findpwd'">비밀번호 찾기</button>
   </div>
   <br> <br> <br>
   <div>회원님의 정보와 일치하는 아이디 목록입니다. </div>
-  <br> <br> <br> <br>
+  <br> <br> <br>
   <div id="result"
   style="text-align:center;"> </div>
 </div>
+
 <br> <br> <br> <br> <br> <br> <br> <br> <br>
 <!-- Footer-->
 <footer class=" bg-dark" >
@@ -181,11 +184,11 @@
       var email = $('#email').val()
 
     if(name ==''){
-      alert('이름을 입력해주세요')
+      swal("", '이름을 입력해주세요' ,"warning")
       return false
     } // 만약 아이디가 없어
     if(email =='') {
-      alert('이메일을 입력해주세요')
+      swal("",'이메일을 입력해주세요' ,"warning")
       return false
     }
 
@@ -195,7 +198,7 @@
         type:'GET',
         success: function(data){
           $('#result').empty()
-          var html ='<h1>'+data+'</h1>'
+          var html ='<h4>'+data+'</h4>'
           $('#result').append(html)
         }
       })

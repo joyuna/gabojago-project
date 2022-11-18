@@ -21,18 +21,16 @@
 </head>
 
 <!-- Header-->
-<header class="bg-dark py-4">
-
-  <div class="container px-4 px-lg-5 my-5">
+<header class="bg-dark py-2">
+  <div class="container px-3 px-lg-5 my-5">
     <div class="text-center text-white">
-      <h1 class="display-4 fw-bolder">가보자GO 전시회</h1>
+      <h2 class="display-5 fw-bolder">가보자GO 전시회</h2>
     </div>
   </div>
 </header>
 
 
 <body class="background">  <!--class="pt-5"-->
-
 <!-- Navigation 사실상의 header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
@@ -78,21 +76,21 @@
 </nav>
 
 <ul class="nav justify-content-end" >
-  <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
-    <h5><a class="nav-link active" aria-current="page" href="form"
-       data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
-       style="color: #ffffff">전시회 글쓰기</a></h5>
-  </li>
+  <div class="nav-item" style="float: right; margin-top: 20px; width: 15%;">
+    <button type='submit' class="btn btn-outline-secondary"
+            data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+      <a class="nav-link active" aria-current="page" href="form"
+       style="color: #ffffff">전시회 글쓰기</a></button>
+  </div>
 
-  <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
-   <h5> <a class="nav-link"  href="../"
-       style="color: #ffffff; ">메인</a></h5>
-
-  </li>
+  <div class="nav-item" style="float: right; margin-top: 20px; width: 15%;">
+   <button type='submit' class="btn btn-outline-secondary">
+     <a class="nav-link"  href="/app" style="color: #ffffff; ">메인</a></button>
+  </div>
 </ul>
 
 
-<section class="py-5 "  style=" width: 100%;">
+<section class="py-5 " style=" width: 100%;">
 
   <div class="container  px-4 px-lg-5 mt-5" >
     <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
@@ -106,7 +104,8 @@
           <!--  첨부파일 갤러리화 -->
           <img th:src="@{/board/files/}+
                 ${exhibition.getExhibitionFiles().size()>0? exhibition.exhibitionFiles.get(0).path:''}"
-          onerror="this.src='https://cdn.pixabay.com/photo/2015/04/21/21/12/room-733785_960_720.jpg'"/>
+          onerror="this.src='https://cdn.pixabay.com/photo/2015/04/21/21/12/room-733785_960_720.jpg'"
+          style="height: 155px;"/>
           <!-- 전시 제목,날짜 정렬-->
           <div class="card-body p-4">
             <div class="text-center">
@@ -139,9 +138,9 @@
   </div>
 </section>
 
-<div class="container d-flex justify-content-center" >
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>
+<div class="container d-flex justify-content-center">
+  <ul class="pagination"  >
+    <li class="page-item " ><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>
 
     <li class="page-item" data-th-if="${count>4}">
       <a class="page-link" data-th-href="${'?count=' + count/5*5}" >이전</a></li>
@@ -156,11 +155,14 @@
     <li class="page-item"><a class="page-link" data-th-href="${'?count='+(totalNumber+1)}">끝으로</a></li>
   </ul>
 </div>
+
+
+
 <br>
 <br>
 <div style="position: fixed; right: 10px; bottom: 280px;">
-<button type="button" class="btn btn-secondary"
-        id = go-top >위로</button></div>
+<button type="button" class="btn btn-outline-secondary"
+        id = go-top >UP</button></div>
 
   <!-- Footer-->
   <footer>
@@ -203,7 +205,7 @@
 <!--로그인 모달 창-->
 <div class="modal">
   <div class="modal_body" style=" background: rgba(255,255,255,0.8); ">
-    <div class="out" style="margin: 05px; float: right;">나가기</div>
+    <div class="out" style="margin: 05px; float: right;"><img src = "/app/images/X.png"></div>
     <br>
     <h2 style=" text-align: center;"> 로그인 </h2>
 
@@ -305,6 +307,30 @@ function signOut() {
 
   });
 </script>
+
+<style>
+  /*페이징 색상 변경*/
+  .page-link {
+    color: #999;
+    background-color: #000;
+    border-color: #444;
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #ccc;
+    font-weight:bold;
+    background-color: #333;
+    border-color: #444;
+
+  }
+
+  .page-link:focus, .page-link:hover {
+    color: #ccc;
+    background-color: #222;
+    border-color: #444;
+  }
+</style>
 </body>
 </html>
 
