@@ -144,13 +144,13 @@
 
 <!--누구랑 갈지 선택-->
 
-<a href='recommendationListForFamily'>가족</a>
+<a class="reco-family" href='recommendationListForFamily'>가족</a>
 <br>
-<a href='recommendationListForFriend'>친구</a>
+<a class="reco-friend" href='recommendationListForFriend'>친구</a>
 <br>
-<a href='recommendationListForCouple'>연인</a>
+<a class="reco-couple" href='recommendationListForCouple'>연인</a>
 <br>
-<a href='recommendationListForAlone'>혼자</a>
+<a class="reco-alone" href='recommendationListForAlone'>혼자</a>
 <br>
 <br>
 <br>
@@ -370,6 +370,11 @@
 </footer>
 
 <style>
+    .reco-friend {
+        font-weight: bold;
+        font-size: large;
+    }
+
     footer {
         /* footer를 aside위에 올리기 위해 사용(부유객체) */
         position: relative;
