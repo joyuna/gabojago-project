@@ -146,6 +146,17 @@ public class DefaultRecommendationService implements RecommendationService  {
     return recommendationDao.recommendationListOrderByCntForFriend();
   }
 
+  // 전체보기용
+  public List<Recommendation> recommendationListOrderByRecentAll() throws Exception {
+    return recommendationDao.recommendationListOrderByRecentAll();
+  }
+  public List<Recommendation> recommendationListOrderByCommentsAll() throws Exception {
+    return recommendationDao.recommendationListOrderByCommentsAll();
+  }
+  public List<Recommendation> recommendationListOrderByCntAll() throws Exception {
+    return recommendationDao.recommendationListOrderByCntAll();
+  }
+
 
   // recommendationDetail - 1
   @Override

@@ -89,6 +89,7 @@
         group by
         r.recono
         order by wdate desc
+        limit 4
     </select>
     <!--오리지널 댓글순-->
     <select id="recommendationListOrderByComments" resultMap="recommendationMap">
@@ -124,6 +125,7 @@
         r.recono
         order by
         c.cntComments desc, r.wdate
+        limit 4
     </select>
     <!--오리지널 조회순-->
     <select id="recommendationListOrderByCnt" resultMap="recommendationMap">
@@ -141,6 +143,7 @@
         group by
         r.recono
         order by cnt desc, wdate
+        limit 4
     </select>
 
     <!--최신순+혼자-->
@@ -159,6 +162,7 @@
         group by
         r.recono
         order by wdate desc
+        limit 4
     </select>
 
     <!--댓글순-->
@@ -197,6 +201,7 @@
         r.recono
         order by
         c.cntComments desc, r.wdate
+        limit 4
     </select>
 
     <!--인기순(조회순)-->
@@ -215,6 +220,7 @@
         group by
         r.recono
         order by cnt desc, wdate
+        limit 4
     </select>
 
     <!--최신순+커플-->
@@ -234,6 +240,7 @@
         group by
         r.recono
         order by wdate desc
+        limit 4
     </select>
 
     <!--댓글순-->
@@ -271,6 +278,7 @@
         r.recono
         order by
         c.cntComments desc, r.wdate
+        limit 4
     </select>
 
     <!--인기순(조회순)-->
@@ -289,6 +297,7 @@
         group by
         r.recono
         order by cnt desc, wdate
+        limit 4
     </select>
 
     <!--최신순+가족-->
@@ -307,6 +316,7 @@
         group by
         r.recono
         order by wdate desc
+        limit 4
     </select>
 
     <!--댓글순-->
@@ -345,6 +355,7 @@
         r.recono
         order by
         c.cntComments desc, r.wdate
+        limit 4
     </select>
 
     <!--인기순(조회순)-->
@@ -364,6 +375,7 @@
         group by
         r.recono
         order by cnt desc, wdate
+        limit 4
     </select>
 
     <!--최신순+친구-->
@@ -383,6 +395,7 @@
         group by
         r.recono
         order by wdate desc
+        limit 4
     </select>
 
     <!--댓글순-->
@@ -420,6 +433,7 @@
         r.recono
         order by
         c.cntComments desc, r.wdate
+        limit 4
     </select>
 
     <!--인기순(조회순)-->
@@ -436,6 +450,78 @@
         where
         r.act=true
         and r.frd=1
+        group by
+        r.recono
+        order by cnt desc, wdate
+        limit 4
+    </select>
+
+    <!--전체보기용-->
+    <!--오리지널 최신순-->
+    <select id="recommendationListOrderByRecentAll" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+        order by wdate desc
+    </select>
+    <!--오리지널 댓글순-->
+    <select id="recommendationListOrderByCommentsAll" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r,
+
+        (select
+        s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
+        where
+        act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        group by
+        r.recono
+        order by
+        c.cntComments desc, r.wdate
+    </select>
+    <!--오리지널 조회순-->
+    <select id="recommendationListOrderByCntAll" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
         group by
         r.recono
         order by cnt desc, wdate

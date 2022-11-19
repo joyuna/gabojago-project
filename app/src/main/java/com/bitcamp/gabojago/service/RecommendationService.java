@@ -41,6 +41,11 @@ public interface RecommendationService {
   List<Recommendation> recommendationListOrderByCommentsForFriend() throws Exception;
   List<Recommendation> recommendationListOrderByCntForFriend() throws Exception;
 
+  // 전체보기용
+  List<Recommendation> recommendationListOrderByRecentAll() throws Exception;
+  List<Recommendation> recommendationListOrderByCommentsAll() throws Exception;
+  List<Recommendation> recommendationListOrderByCntAll() throws Exception;
+
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono) throws Exception;
 

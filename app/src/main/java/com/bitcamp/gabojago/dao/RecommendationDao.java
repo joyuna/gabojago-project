@@ -49,6 +49,11 @@ public interface RecommendationDao {
   List<Recommendation> recommendationListOrderByCommentsForFriend();
   List<Recommendation> recommendationListOrderByCntForFriend();
 
+  // 전체보기용
+  List<Recommendation> recommendationListOrderByRecentAll();
+  List<Recommendation> recommendationListOrderByCommentsAll();
+  List<Recommendation> recommendationListOrderByCntAll();
+
   // recommendationDetail - 1
   Recommendation getRecommendation(int recono);
 

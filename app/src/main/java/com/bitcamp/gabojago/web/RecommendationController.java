@@ -180,16 +180,16 @@ public class RecommendationController {
 
   @GetMapping("recommendationListOrderByRecentAll")
   public void recommendationListOrderByRecentAll(Model model) throws Exception {
-    model.addAttribute("recommendationListOrderByRecent", recommendationService.recommendationListOrderByRecent());
+    model.addAttribute("recommendationListOrderByRecent", recommendationService.recommendationListOrderByRecentAll());
   }
   @GetMapping("recommendationListOrderByCommentsAll")
   public void recommendationListOrderByCommentsAll(Model model) throws Exception {
-    model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
+    model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByCommentsAll());
   }
 
   @GetMapping("recommendationListOrderByCntAll")
   public void recommendationListOrderByCntAll(Model model) throws Exception {
-    model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
+    model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCntAll());
   }
 
   // Detail
