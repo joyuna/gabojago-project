@@ -211,3 +211,7 @@ html-exam/
 package-lock.json
 # Ignore Gradle build output directory
 build
+
+
+# Mingu: IntelliJ class file directory
+out/

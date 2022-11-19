@@ -39,12 +39,12 @@ public class DefaultMemberService implements MemberService {
 
   @Override
   public boolean join(String email, String phoneNo, Member member) throws Exception {
-    if(memberDao.findByEmail(email) != null || memberDao.findByPhoneNo(phoneNo) != null) {
+    if (memberDao.findByEmail(email) != null
+        || memberDao.findByPhoneNo(phoneNo) != null) {
       return false;
-    } else {
-      memberDao.join(member);
-      return true;
     }
+    memberDao.join(member);
+    return true;
   }
 
   @Override
