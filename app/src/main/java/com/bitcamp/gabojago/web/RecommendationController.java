@@ -178,6 +178,20 @@ public class RecommendationController {
     model.addAttribute("recommendationsOrderByCntForFriend", recommendationService.recommendationListOrderByCntForFriend());
   }
 
+  @GetMapping("recommendationListOrderByRecentAll")
+  public void recommendationListOrderByRecentAll(Model model) throws Exception {
+    model.addAttribute("recommendationListOrderByRecent", recommendationService.recommendationListOrderByRecent());
+  }
+  @GetMapping("recommendationListOrderByCommentsAll")
+  public void recommendationListOrderByCommentsAll(Model model) throws Exception {
+    model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
+  }
+
+  @GetMapping("recommendationListOrderByCntAll")
+  public void recommendationListOrderByCntAll(Model model) throws Exception {
+    model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
+  }
+
   // Detail
   @GetMapping("recommendationDetail")
   public void jangSoReviewList(int recono, Model model) throws Exception {
