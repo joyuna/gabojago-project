@@ -16,6 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
+    
+    public EmailService(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
 
     @Value(value = "${spring.mail.username}")
     private String from;

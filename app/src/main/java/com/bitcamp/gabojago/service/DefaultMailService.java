@@ -18,6 +18,11 @@ public class DefaultMailService {
 
   private final JavaMailSender emailSender;
   private final SpringTemplateEngine templateEngine;
+  
+  public DefaultMailService(JavaMailSender emailSender, SpringTemplateEngine templateEngine) {
+	this.emailSender = emailSender;
+	this.templateEngine = templateEngine;
+  }
 
   public void sendTemplateMessage(MailDto mailDto) throws MessagingException {
     MimeMessage message = emailSender.createMimeMessage();
