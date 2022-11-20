@@ -40,6 +40,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public boolean delete(int no) throws Exception {
+        System.out.println("EventServiceImpl delete : " + no);
+        int deleteFileResult = eventItemDao.deleteFileByEventNo(no);
+        System.out.println("EventServiceImpl delete deleteFileResult : " + deleteFileResult);
+        int deleteItemResult = eventItemDao.deleteItemByEventNo(no);
+        System.out.println("EventServiceImpl delete deleteItemResult : " + deleteItemResult);
+        int deleteJoinResult = eventDao.deleteJoinByEventNo(no);
+        System.out.println("EventServiceImpl delete deleteJoinResult : " + deleteJoinResult);
         return eventDao.deleteByNo(no) > 0;
     }
 
