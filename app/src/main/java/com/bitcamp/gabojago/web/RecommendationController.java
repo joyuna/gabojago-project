@@ -268,6 +268,12 @@ public class RecommendationController {
       return "recommendation/recommendationReportFail";
     }
 
+    // 이미 신고를 5회 받은 게시글은 신고할 수 없다.
+    if (recommendationService.countRecommendationReport(recono) >= 5) {
+      session.setAttribute("reportResult", "overflow");
+      return "recommendation/recommendationReportFail";
+    }
+
     // 신고사유 작성
     switch (Integer.parseInt(rsn1)) {
       case 0: rsn1 = "회원비난/비하";

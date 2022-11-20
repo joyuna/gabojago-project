@@ -15,9 +15,10 @@
       case "empty": {alert("신고하기 위해서는 로그인이 필요합니다.");} break;
       case "incorrect": {alert("제재당한 이용자는 사용할 수 없는 기능입니다.");} break;
       case "self": {alert("자신의 게시물은 신고할 수 없습니다.");} break;
+      case "overflow": {alert("이미 신고처리가 진행중인 게시물입니다.");} break;
     }
 
-    window.location = '/app';
+    window.location = '/app/recommendation/recommendationList';
   </script>
 
 </body>

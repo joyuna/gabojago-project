@@ -47,4 +47,6 @@ public interface RecommendationService {
   void updateStatus(Member reportedUser) throws Exception;
 
   boolean checkCorrectUser(String id) throws Exception;
+
+  int countRecommendationReport(int recono);
 }

@@ -183,6 +183,12 @@ public class DefaultRecommendationService implements RecommendationService  {
     }
   }
 
+  // 이미 신고를 5회 받은 게시글은 신고할 수 없다.
+  @Override
+  public int countRecommendationReport(int recono) {
+    return reportDao.countRecommendationReport(recono);
+  }
+
   @Override
   public boolean checkCorrectUser(String id) throws Exception {
     return (memberDao.checkCorrectUser(id) == null);
