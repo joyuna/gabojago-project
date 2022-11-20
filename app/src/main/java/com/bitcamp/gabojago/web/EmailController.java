@@ -1,3 +1,4 @@
+/*
 package com.bitcamp.gabojago.web;
 
 import org.springframework.http.HttpStatus;
@@ -31,3 +32,4 @@ public class EmailController {
     }
 }
 
+*/
