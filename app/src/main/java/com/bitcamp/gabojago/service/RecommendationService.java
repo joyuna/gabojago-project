@@ -1,9 +1,6 @@
 package com.bitcamp.gabojago.service;
 
-import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
-import com.bitcamp.gabojago.vo.Member;
-import com.bitcamp.gabojago.vo.Recommendation;
+import com.bitcamp.gabojago.vo.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -68,4 +65,9 @@ public interface RecommendationService {
   void updateStatus(Member reportedUser) throws Exception;
 
   boolean checkCorrectUser(String id) throws Exception;
+
+  //paging
+  int getTotal();
+
+  List<Recommendation> recommendationListPage(int displayPost, int postNum) throws Exception;
 }

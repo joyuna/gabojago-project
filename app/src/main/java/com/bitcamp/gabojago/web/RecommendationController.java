@@ -26,9 +26,10 @@ public class RecommendationController {
   ServletContext sc;
   @Autowired
   RecommendationService recommendationService;
-
   @Autowired
   JangCommentService jangCommentService;
+
+  private int PAGE_CORRECTION = 1;
 
   public RecommendationController() {
     System.out.println("RecommendationController() 호출됨!");
@@ -179,8 +180,20 @@ public class RecommendationController {
   }
 
   @GetMapping("recommendationListOrderByRecentAll")
-  public void recommendationListOrderByRecentAll(Model model) throws Exception {
-    model.addAttribute("recommendationListOrderByRecent", recommendationService.recommendationListOrderByRecentAll());
+  public void recommendationListOrderByRecentAll(Model model, @RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "3") Integer size) throws Exception {
+    int total = recommendationService.getTotal();
+    page -= PAGE_CORRECTION;
+    List<Recommendation> recommendationList = recommendationService.recommendationListPage((page) * size, size);
+
+    PageMakerDTO pageMakerDTO = new PageMakerDTO(page, size, total, recommendationList);
+
+    model.addAttribute("recommendationListOrderByRecent", pageMakerDTO.getDtoList());
+    model.addAttribute("pages", pageMakerDTO.getPage());
+    model.addAttribute("pageNum", pageMakerDTO.getTotal());
+    model.addAttribute("pageStart", pageMakerDTO.getStart());
+    model.addAttribute("pageEnd", pageMakerDTO.getEnd());
+    model.addAttribute("prev", pageMakerDTO.isPrev());
+    model.addAttribute("next", pageMakerDTO.isNext());
   }
   @GetMapping("recommendationListOrderByCommentsAll")
   public void recommendationListOrderByCommentsAll(Model model) throws Exception {

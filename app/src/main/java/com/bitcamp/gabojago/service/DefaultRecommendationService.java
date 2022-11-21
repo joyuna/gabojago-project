@@ -3,11 +3,10 @@ package com.bitcamp.gabojago.service;
 import com.bitcamp.gabojago.dao.MemberDao;
 import com.bitcamp.gabojago.dao.RecommendationDao;
 import com.bitcamp.gabojago.dao.ReportDao;
-import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
-import com.bitcamp.gabojago.vo.Member;
-import com.bitcamp.gabojago.vo.Recommendation;
-import com.bitcamp.gabojago.vo.Report;
+import com.bitcamp.gabojago.vo.*;
+
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -256,6 +255,16 @@ public class DefaultRecommendationService implements RecommendationService  {
   @Override
   public boolean checkCorrectUser(String id) throws Exception {
     return (memberDao.checkCorrectUser(id) == null);
+  }
+
+  @Override
+  public int getTotal() {
+    return recommendationDao.getTotal();
+  }
+
+  @Override
+  public List<Recommendation> recommendationListPage(int displayPost, int size) throws Exception{
+    return recommendationDao.recommendationListPage(displayPost, size);
   }
 
 }

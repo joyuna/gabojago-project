@@ -634,48 +634,32 @@
         where
             recono = #{recono}
     </update>
-    <!-- 상세보기-->
-    <!--    <select id="exhibitionSelect"  resultMap="exhibitionMap">-->
-    <!--        select  * from jang_exhibition-->
-    <!--        left join jang_exhibition_file on jang_exhibition.EXNO = jang_exhibition_file.EXNO-->
-    <!--        left join jang_exhibition_review on jang_exhibition.EXNO = jang_exhibition_review.EXNO-->
-    <!--        left join jang_so on jang_exhibition.PLNO = jang_so.PLNO-->
-    <!--        where jang_exhibition.EXNO=#{value};-->
-    <!--    </select>-->
-
-    <!--    <insert id="exhibitionInsert"  parameterType="exhibition"-->
-    <!--            useGeneratedKeys="true" keyColumn="exno" keyProperty="exno">-->
-
-    <!--        INSERT INTO jangdb.jang_exhibition (exname, cont, plno, stdate, eddate, price)-->
-    <!--        values (#{exname}, #{cont}, -1, #{stdate}, #{eddate}, #{price})-->
-
-    <!--    </insert>-->
-
-    <!--    <delete id="delete">-->
-    <!--        delete from jang_exhibition_file-->
-    <!--        where jang_exhibition_file.EXNO=#{value};-->
-    <!--        delete from jang_exhibition_review-->
-    <!--        where jang_exhibition_review.EXNO=#{value};-->
-    <!--        delete from jang_ticket-->
-    <!--        where jang_ticket.EXNO=#{value};-->
-    <!--        delete from jang_baguni-->
-    <!--        where jang_baguni.EXNO=#{value};-->
-    <!--        delete from jang_exhibition-->
-    <!--        where jang_exhibition.EXNO=#{value};-->
-
-    <!--  리뷰 달려있으면 삭제 못함 -->
-
-    <!--    </delete>-->
 
 
-    <!--    <update id="update" parameterType="exhibition">-->
-    <!--        update jang_exhibition set-->
-    <!--        EXNAME= #{exname}, CONT= #{cont},-->
-    <!--       STDATE= #{stdate}, EDDATE= #{eddate},-->
-    <!--        PRICE= #{price}-->
-    <!--        where jang_exhibition.EXNO= #{exno}-->
-    <!--    </update>-->
+    <!--paging-->
+    <select id="getTotal" resultType="int">
+        select count(recono) from jang_so_recommendation
+    </select>
 
+
+    <!-- 게시물 목록(페이징) -->
+<!--    <select id="recommendationListPage" resultType="recommendationMap">-->
+<!--        select-->
+<!--        r.*, f.*-->
+<!--        from-->
+<!--        jang_so_recommendation r join-->
+<!--        jang_so_review j-->
+<!--        on r.recono = j.recono-->
+<!--        left outer join-->
+<!--        jang_so_review_file f-->
+<!--        on j.prvno = f.prvno-->
+<!--        where-->
+<!--        r.act=true-->
+<!--        group by-->
+<!--        r.recono-->
+<!--        order by wdate desc-->
+<!--        limit #{size} offset #{postNum}-->
+<!--    </select>-->
 
 
 </mapper>

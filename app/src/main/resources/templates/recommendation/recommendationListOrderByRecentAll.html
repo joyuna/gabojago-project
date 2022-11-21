@@ -18,31 +18,6 @@
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
             crossorigin="anonymous"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/animate.css">
-
-    <link rel="stylesheet" href="../../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../../css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../../css/magnific-popup.css">
-
-    <link rel="stylesheet" href="../../css/aos.css">
-
-    <link rel="stylesheet" href="../../css/ionicons.min.css">
-
-    <link rel="stylesheet" href="../../css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../../css/jquery.timepicker.css">
-
-
-    <link rel="stylesheet" href="../../css/flaticon.css">
-    <link rel="stylesheet" href="../../css/icomoon.css">
-    <link rel="stylesheet" href="../../css/style.css">
-
-
-
 </head>
 
 <!-- Header-->
@@ -223,30 +198,42 @@
             </div>
         </div>
     </div>
+
+    <br>
+    <br>
+    <!--코스추천글 페이징 시작-->
+    <span>
+        <a th:if="${prev}==true"
+             data-th-href="@{recommendationListOrderByRecent(page=${pageStart - 1})}"
+             th:text="'<'">1
+        </a>
+    </span>
+
+    <th:block class="page-item" data-th-each="pageNum : ${#numbers.sequence(pageStart, pageEnd)}">
+            <span>
+                <a data-th-href="@{recommendationListOrderByRecent(page=${pageNum})}"
+                     th:text="${pageNum}">1
+                </a>
+            </span>
+    </th:block>
+
+    <span>
+        <a th:if="${next}==true"
+             data-th-href="@{recommendationListOrderByRecent(page=${pageEnd + 1})}"
+             th:text="'>'">1
+        </a>
+    </span>
+
 </section>
 
 <!--코스추천글 리스트 끝-->
 
-<br>
-<br>
 
-<section class="ftco-section ">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <div class="block-27">
-                <ul>
-                    <li><a href="#">&lt;</a></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<style>
+    .block-27 > ul > li {
+        display: inline-block;
+    }
+</style>
 
 
 <div style="position: fixed; right: 10px; bottom: 280px;">
@@ -351,23 +338,6 @@
 
 </script>
 
-<script src="../../js/jquery.min.js"></script>
-<script src="../../js/jquery-migrate-3.0.1.min.js"></script>
-<script src="../../js/popper.min.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/jquery.easing.1.3.js"></script>
-<script src="../../js/jquery.waypoints.min.js"></script>
-<script src="../../js/jquery.stellar.min.js"></script>
-<script src="../../js/owl.carousel.min.js"></script>
-<script src="../../js/jquery.magnific-popup.min.js"></script>
-<script src="../../js/aos.js"></script>
-<script src="../../js/jquery.animateNumber.min.js"></script>
-<script src="../../js/bootstrap-datepicker.js"></script>
-<script src="../../js/jquery.timepicker.min.js"></script>
-<script src="../../js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="../../js/google-map.js"></script>
-<script src="../../js/main.js"></script>
 
 </body>
 </html>

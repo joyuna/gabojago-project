@@ -1,10 +1,8 @@
 package com.bitcamp.gabojago.dao;
 
-import com.bitcamp.gabojago.vo.JangSoReview;
-import com.bitcamp.gabojago.vo.JangSoReviewAttachedFile;
-import com.bitcamp.gabojago.vo.Recommendation;
-import com.bitcamp.gabojago.vo.Report;
+import com.bitcamp.gabojago.vo.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -74,5 +72,10 @@ public interface RecommendationDao {
 
   // comment Insert
   int setCntRecommendation(int recono);
+
+  int getTotal();
+
+  /* 게시판 목록(페이징 적용) */
+  List<Recommendation> recommendationListPage(@Param("displayPost") int displayPost, @Param("size") int size);
 
 }
