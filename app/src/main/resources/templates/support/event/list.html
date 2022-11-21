@@ -86,6 +86,7 @@
                                             <span data-th-text="${event.eventCode}">선착순or차등지급</span>
                                         </p>
                                         <p class="meta">
+<!--                                            <span data-th-text="${#temporals.format(event.startDate, 'yyyy-MM-dd hh:mm')}+' ~ '+${#temporals.format(event.endDate, 'yyyy-MM-dd hh:mm')}">2022-12-01~2022-12-31</span>-->
                                             <span data-th-text="${event.startDate}+' ~ '+${event.endDate}">2022-12-01~2022-12-31</span>
                                         </p>
                                     </div>
