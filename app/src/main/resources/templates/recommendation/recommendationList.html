@@ -171,15 +171,15 @@
 <br>
 
 <!--최신순-->
-<a id="recommendationListOrderByRecent">
-    <h5>최신순</h5>
-</a>
+
 <div style="float:right; margin-right: 40px">
     <a href='recommendationListOrderByRecentAll?page=1'>전체보기</a>
 </div>
 <section class="py-5 " id="section1"  style=" width: 100%;">
     <div class="container  px-4 px-lg-5 mt-5" >
-        <h5 style="color: black;">최신순</h5>
+        <a id="recommendationListOrderByRecent">
+            <h5 style="color: black;">최신순</h5>
+        </a>
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByRecent}">
 
@@ -233,15 +233,16 @@
 </section>
 
 <!--댓글순-->
-<a id="recommendationListOrderByComments">
-    <h5>댓글순</h5>
-</a>
+
 <div style="float:right; margin-right: 40px">
     <a href='recommendationListOrderByCommentsAll?page=1'>전체보기</a>
 </div>
 <section class="py-5 " id="section2" style=" width: 100%;">
 
     <div class="container  px-4 px-lg-5 mt-5" >
+        <a id="recommendationListOrderByComments">
+            <h5 style="color: black">댓글순</h5>
+        </a>
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByComments}">
 
@@ -295,14 +296,15 @@
 </section>
 
 <!--인기순(조회순)-->
-<a id="recommendationListOrderByCnt">
-    <h5>인기순</h5>
-</a>
+
 <div style="float:right; margin-right: 40px">
     <a href='recommendationListOrderByCntAll?page=1'>전체보기</a>
 </div>
 <section class="py-5 " id="section3" style=" width: 100%;">
     <div class="container  px-4 px-lg-5 mt-5" >
+        <a id="recommendationListOrderByCnt">
+            <h5 style="color: black">인기순</h5>
+        </a>
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCnt}">
 
