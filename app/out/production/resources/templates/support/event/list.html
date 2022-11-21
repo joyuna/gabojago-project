@@ -31,7 +31,6 @@
 <body>
 
 <div id="colorlib-page">
-    <a href="javascript" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <h1 id="colorlib-logo"><a href="/app/support/"><span class="img"></span>고객지원</a></h1>
         <nav id="colorlib-main-menu" role="navigation">
@@ -45,70 +44,70 @@
             </ul>
         </nav>
     </aside> <!-- END COLORLIB-ASIDE -->
+
     <div id="colorlib-main">
-        <section class="ftco-bread">
+        <section class="ftco-bread py-6">
             <div class="container">
                 <div class="slider-text justify-content-center align-items-center">
                     <div class="col-md-11 ftco-animate">
                         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Support</a></span>
-                            <span>QnA</span></p>
-                        <h1 class="bread">QnA 수정</h1>
+                            <span>Event</span></p>
+                        <h1 class="bread">Event</h1>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="ftco-section contact-section">
+
+        <div class="row">
+            <div class="col-md-11 col-md-1 text-right">
+                <button class="btn btn-primary float-end"
+                        th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
+                        th:onclick="|location.href='@{/support/event/addForm}'|"
+                        type="button">새 글
+                </button>
+            </div>
+        </div>
+
+        <section class="ftco-section ">
             <div class="container">
-
-                <div class="row block-9">
-                    <div class="col-md-12 d-flex">
-                        <form action="update" method="post" enctype="multipart/form-data" class="contact-form"
-                              onsubmit="return loginStatus();">
-                            <div class="form-group">
-                                <p>
-                                    <span data-th-text="'No. '+${qnaBoard.no}">100</span>
-                                    <input type="hidden" id="no" name="no" data-th-value="${qnaBoard.no}"/>
-                                </p>
-                            </div>
-                            <div class="meta-wrap">
-                                <p class="meta">
-                                    <input type="hidden" id="id" name="id" data-th-value="${qnaBoard.id}"></input>
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <div>
-                                    <label for="title">제목</label>
-                                    <input type="text" id="title" name="title" class="form-control"
-                                           data-th-value='${qnaBoard.title}'>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text text-2">
+                                <div data-th-each="event : ${events}">
+                                    <span data-th-text="'No. '+${event.no}">100</span>
+                                    <h3 class="mb-12">
+                                        <a href='detail?no=1'
+                                           data-th-href="@{detail(no=${event.no})}"
+                                           data-th-text="${event.title == ''} ? '(제목없음)' : ${event.title}">제목</a>
+                                    </h3>
+                                    <div class="meta-wrap">
+                                        <p class="meta">
+                                            <span data-th-text="${event.eventCode}">선착순or차등지급</span>
+                                        </p>
+                                        <p class="meta">
+                                            <span data-th-text="${event.startDate}+' ~ '+${event.endDate}">2022-12-01~2022-12-31</span>
+                                        </p>
+                                    </div>
+                                    <hr class="my-4">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div>
-                                    <label for="questionContent">내용</label>
-                                    <textarea input type="text" id="questionContent" name="questionContent"
-                                              class="form-control" rows='10' cols='30'
-                                              data-th-text='${qnaBoard.questionContent}'></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="disclosure" class="form-check-label">비공개</label>
-                                <input type="checkbox" id="disclosure" name="disclosure"
-                                       data-th-checked='${qnaBoard.disclosure == true}'>
-                                <input type="hidden" name="_disclosure" value="on"/>
-                            </div>
-
-                            <div class="form-group text-center">
-                                <span class="col">
-                                    <button class="btn btn-primary py-3 px-5" type="submit">등록</button>
-                                </span>
-                                <span class="col">
-                                    <button class="btn btn-secondary py-3 px-5"
-                                            onclick="location.href='list.html'"
-                                            th:onclick="|location.href='@{/support/qna/list}'|"
-                                            type="button">취소</button>
-                                </span>
-                            </div>
-                        </form>
+                        </div>
+                    </div>
+                </div><!-- END-->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="block-27">
+                            <ul>
+                                <li><a href="#">&lt;</a></li>
+                                <li class="active"><span>1</span></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&gt;</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,15 +115,17 @@
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
                 <div class="row mb-5">
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                            All rights reserved | This template is made with <i class="icon-heart"
-                                                                                aria-hidden="true"></i> by <a
-                                    href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                All rights reserved | This template is made with <i class="icon-heart"
+                                                                                    aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,6 +141,7 @@
                 stroke="#F96D00"/>
     </svg>
 </div>
+
 
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/jquery-migrate-3.0.1.min.js"></script>
@@ -158,7 +160,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="../../js/google-map.js"></script>
 <script src="../../js/main.js"></script>
-
 
 </body>
 </html>
