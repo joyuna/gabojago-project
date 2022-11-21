@@ -200,4 +200,5 @@
     <select id="selectKakaoId" parameterType="long" resultMap="memberMap">
         SELECT * FROM jang_member WHERE KAKAOID = #{value}
     </select>
+
 </mapper>

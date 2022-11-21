@@ -1,4 +1,3 @@
-/*
 package com.bitcamp.gabojago.service;
 
 import javax.mail.MessagingException;
@@ -40,4 +39,4 @@ public class EmailService {
             throw new RuntimeException(e);
         }
     }
-}*/
+}
