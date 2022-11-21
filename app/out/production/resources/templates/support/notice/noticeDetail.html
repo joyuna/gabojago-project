@@ -31,12 +31,13 @@
 <body>
 
 <div id="colorlib-page">
+    <a href="javascript" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <h1 id="colorlib-logo"><a href="/app/support/"><span class="img"></span>고객지원</a></h1>
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
                 <li><a onclick="location.href='list.html'"
-                       th:onclick="|location.href='@{/support/notice/noticeList}'|">Notice</a></li>
+                       th:onclick="|location.href='@{/support/notice/noticeListPage?page=1}'|">Notice</a></li>
                 <li><a onclick="location.href='list.html'"
                        th:onclick="|location.href='@{/support/qna/list}'|">QnA</a></li>
                 <li><a onclick="location.href='list.html'"
@@ -45,69 +46,69 @@
         </nav>
     </aside> <!-- END COLORLIB-ASIDE -->
 
+
     <div id="colorlib-main">
-        <section class="ftco-bread py-6">
+        <section class="ftco-bread">
             <div class="container">
                 <div class="slider-text justify-content-center align-items-center">
                     <div class="col-md-11 ftco-animate">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Support</a></span>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="/app/support/">Support</a></span>
                             <span>Notice</span></p>
-                        <h1 class="bread">Notice</h1>
+                        <h1 class="bread">Notice 내용</h1>
                     </div>
                 </div>
             </div>
         </section>
-
-        <div class="row">
-            <div class="col-md-11 col-md-1 text-right">
-                <button class="btn btn-primary float-end"
-                        onclick="location.href='noticeForm.html'"
-                        th:onclick="|location.href='@{/support/notice/noticeForm}'|"
-                        type="button">새 글
-                </button>
-            </div>
-        </div>
-
-        <section class="ftco-section ">
+        <section class="ftco-section contact-section">
             <div class="container">
-                <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="text text-2">
-                                <div data-th-each="notice : ${notices}">
-                                    <span data-th-text="'No. '+${notice.no}">100</span>
-                                    <h3 class="mb-12">
-                                        <a href='detail?no=1'
-                                           data-th-href="@{noticeDetail(no=${notice.no})}"
-                                           data-th-text="${notice.title == ''} ? '(제목없음)' : ${notice.title}">제목</a>
-                                    </h3>
-                                    <div class="meta-wrap">
-                                        <p class="meta">
-                                            <span data-th-text="${notice.createdDate}">2022-1-1</span>
-                                        </p>
-                                    </div>
-                                    <hr class="my-4">
-                                </div>
-                            </div>
+                <div class="contact-form">
+                    <div class="col-md-12 ftco-animate">
+                        <h6 class="mb-12">
+                            <p class="meta">
+                                <span>No.</span>
+                                <span data-th-text="${notice.no}">100</span>
+                            <p class="meta">
+                        </h6>
+                        <div class="meta-wrap mt-3 text-left">
+                            <p class="meta">
+                                <span data-th-text="${notice.createdDate}">2022-1-1</span>
+                                <span class="col-12" data-th-text="'조회수  ' + ${notice.hits}">100</span>
+                            </p>
+                        </div>
+
+                        <h2 class="font-weight-bold" data-th-text='${notice.title}'>
+                            제목
+                        </h2>
+
+                        <div>
+                            <h5 class="mb-3 mt-5 font-weight-bold"
+                                data-th-text="${notice.content}">내용
+                            </h5>
+                        </div>
+
+                        <div class="form-group text-center mb-5 mt-5">
+                                <span class="col">
+                                    <button class="btn btn-secondary py-3 px-5" style="background-color: black; border-color: black"
+                                            th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
+                                            th:onclick="|location.href='@{/support/notice/noticeEditDetail(no=${notice.no})}'|"
+                                            type="button">수정</button>
+                                </span>
+                            <span class="col">
+                                    <button class="btn btn-secondary py-3 px-5" style="background-color: black; border-color: black"
+                                            th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
+                                            th:onclick="|location.href='@{noticeDelete(no=${notice.no})}'|"
+                                            type="button">삭제</button>
+                                </span>
+                            <span class="col">
+                                    <button class="btn btn-secondary py-3 px-5"
+                                            th:onclick="|location.href='@{/support/notice/noticeListPage?page=1}'|"
+                                            type="button">이전</button>
+                                </span>
                         </div>
                     </div>
-                </div><!-- END-->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li><a href="#">&lt;</a></li>
-                                <li class="active"><span>1</span></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&gt;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </div> <!-- .col-md-8 -->
+
+            </div><!-- END COL -->
         </section>
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
@@ -127,8 +128,9 @@
                 </div>
             </div>
         </footer>
-    </div><!-- END COLORLIB-MAIN -->
-</div><!-- END COLORLIB-PAGE -->
+    </div>
+</div>
+
 
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">
@@ -138,7 +140,6 @@
                 stroke="#F96D00"/>
     </svg>
 </div>
-
 
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/jquery-migrate-3.0.1.min.js"></script>
