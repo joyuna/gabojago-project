@@ -644,23 +644,23 @@
 
 
     <!-- 게시물 목록(페이징) -->
-<!--    <select id="recommendationListPage" resultType="recommendationMap">-->
-<!--        select-->
-<!--        r.*, f.*-->
-<!--        from-->
-<!--        jang_so_recommendation r join-->
-<!--        jang_so_review j-->
-<!--        on r.recono = j.recono-->
-<!--        left outer join-->
-<!--        jang_so_review_file f-->
-<!--        on j.prvno = f.prvno-->
-<!--        where-->
-<!--        r.act=true-->
-<!--        group by-->
-<!--        r.recono-->
-<!--        order by wdate desc-->
-<!--        limit #{size} offset #{postNum}-->
-<!--    </select>-->
+    <select id="recommendationListPage" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+        order by wdate desc
+        limit #{size} offset #{displayPost}
+    </select>
 
 
 </mapper>

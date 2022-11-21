@@ -180,7 +180,7 @@ public class RecommendationController {
   }
 
   @GetMapping("recommendationListOrderByRecentAll")
-  public void recommendationListOrderByRecentAll(Model model, @RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "3") Integer size) throws Exception {
+  public void recommendationListOrderByRecentAll(Model model, @RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "4") Integer size) throws Exception {
     int total = recommendationService.getTotal();
     page -= PAGE_CORRECTION;
     List<Recommendation> recommendationList = recommendationService.recommendationListPage((page) * size, size);

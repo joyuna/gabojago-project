@@ -202,28 +202,35 @@
     <br>
     <br>
     <!--코스추천글 페이징 시작-->
-    <span>
-        <a th:if="${prev}==true"
-             data-th-href="@{recommendationListOrderByRecent(page=${pageStart - 1})}"
-             th:text="'<'">1
-        </a>
-    </span>
+    <section class="ftco-section ">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="block-27">
+                    <span>
+                        <a th:if="${prev}==true"
+                             data-th-href="@{recommendationListOrderByRecentAll(page=${pageStart - 1})}"
+                             th:text="'<'">1
+                        </a>
+                    </span>
 
-    <th:block class="page-item" data-th-each="pageNum : ${#numbers.sequence(pageStart, pageEnd)}">
-            <span>
-                <a data-th-href="@{recommendationListOrderByRecent(page=${pageNum})}"
-                     th:text="${pageNum}">1
-                </a>
-            </span>
-    </th:block>
+                    <th:block class="page-item" data-th-each="pNum : ${#numbers.sequence(pageStart, pageEnd)}">
+                            <span>
+                                <a data-th-href="@{recommendationListOrderByRecentAll(page=${pNum})}"
+                                     th:text="${pNum}">1
+                                </a>
+                            </span>
+                    </th:block>
 
-    <span>
-        <a th:if="${next}==true"
-             data-th-href="@{recommendationListOrderByRecent(page=${pageEnd + 1})}"
-             th:text="'>'">1
-        </a>
-    </span>
-
+                    <span>
+                        <a th:if="${next}==true"
+                             data-th-href="@{recommendationListOrderByRecentAll(page=${pageEnd + 1})}"
+                             th:text="'>'">1
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
 </section>
 
 <!--코스추천글 리스트 끝-->
