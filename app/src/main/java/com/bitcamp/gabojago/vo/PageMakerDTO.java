@@ -13,7 +13,7 @@ public class PageMakerDTO {
     int end;
     boolean prev;
     boolean next;
-    int total; // 총 페이지
+    int total; // 총 페이지 수
 
     List<Recommendation> dtoList;
 
@@ -22,7 +22,7 @@ public class PageMakerDTO {
     public PageMakerDTO(int page, int size, int total, List<Recommendation> dtoList) {
         int lastPage = (int) Math.ceil(((double) total / (double) size));
         this.page = page;
-        this.size = size;
+        this.size = size; // 한페이지에 보여줄 전체 코스 추천글 게시글 갯수
         this.total = total;
         this.dtoList = dtoList;
 

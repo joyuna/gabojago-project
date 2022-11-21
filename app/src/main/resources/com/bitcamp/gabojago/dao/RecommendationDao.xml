@@ -643,8 +643,8 @@
     </select>
 
 
-    <!-- 게시물 목록(페이징) -->
-    <select id="recommendationListPage" resultMap="recommendationMap">
+    <!-- 오리지널 게시물 목록(페이징) 최신순버전-->
+    <select id="recommendationListPageOrderByRecent" resultMap="recommendationMap">
         select
         r.*, f.*
         from
@@ -661,6 +661,59 @@
         order by wdate desc
         limit #{size} offset #{displayPost}
     </select>
+    <!--오리지널 게시물 목록(페이징) 댓글순-->
+    <select id="recommendationListPageOrderByComments" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r,
 
+        (select
+        s.recono, count(c.cmno) cntComments
+        from
+        jang_comment c
+        right outer join
+        jang_so_recommendation s
+        on
+        c.recono = s.recono
+        group by
+        s.recono) c,
+
+        jang_so_review j left outer join
+
+        jang_so_review_file f
+
+        on j.prvno = f.prvno
+
+        where
+        act=true
+        and
+        c.recono = r.recono
+        and
+        r.recono = j.recono
+        group by
+        r.recono
+        order by
+        c.cntComments desc, r.wdate
+        limit #{size} offset #{displayPost}
+    </select>
+    <!--오리지널 게시물 목록(페이징) 조회순-->
+    <select id="recommendationListPageOrderByCnt" resultMap="recommendationMap">
+        select
+        r.*, f.*
+        from
+        jang_so_recommendation r join
+        jang_so_review j
+        on r.recono = j.recono
+        left outer join
+        jang_so_review_file f
+        on j.prvno = f.prvno
+        where
+        r.act=true
+        group by
+        r.recono
+        order by cnt desc, wdate
+        limit #{size} offset #{displayPost}
+    </select>
 
 </mapper>

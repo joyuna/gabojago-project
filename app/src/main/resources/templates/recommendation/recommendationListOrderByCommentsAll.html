@@ -197,12 +197,44 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+
+    <!--코스추천글 페이징 시작-->
+    <section class="ftco-section ">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="block-27">
+                    <span>
+                        <a th:if="${prev}==true"
+                           data-th-href="@{recommendationListOrderByCommentsAll(page=${pageStart - 1})}"
+                           th:text="'<'">1
+                        </a>
+                    </span>
+
+                    <th:block class="page-item" data-th-each="pNum : ${#numbers.sequence(pageStart, pageEnd)}">
+                            <span>
+                                <a data-th-href="@{recommendationListOrderByCommentsAll(page=${pNum})}"
+                                   th:text="${pNum}">1
+                                </a>
+                            </span>
+                    </th:block>
+
+                    <span>
+                        <a th:if="${next}==true"
+                           data-th-href="@{recommendationListOrderByCommentsAll(page=${pageEnd + 1})}"
+                           th:text="'>'">1
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
 </section>
 
 <!--코스추천글 리스트 끝-->
 
-<br>
-<br>
+
 <!--<div style="position: absolute; right: 0px; bottom: 0px;">-->
 
 <div style="position: fixed; right: 10px; bottom: 280px;">
