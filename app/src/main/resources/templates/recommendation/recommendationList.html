@@ -101,12 +101,9 @@
                     <a class="nav-link" href="/app/support/">고객지원</a>
                 </li>
                 <li class="nav-item" th:if="${session.loginMember != null}">
-                    <a
-                            class="nav-link"
+                    <a class="nav-link"
                             href="/app/auth/logout"
-                            th:text="${session.loginMember.name}+'(로그아웃)'"
-                    >홍길동(로그아웃)</a
-                    >
+                            th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
                 </li>
                 <li class="nav-item" th:if="${session.loginMember == null}">
                     <span class="nav-link btn-open-popup">로그인</span>
@@ -174,7 +171,12 @@
 <br>
 
 <!--최신순-->
-<span id="recommendationListOrderByRecent"></span>
+<a id="recommendationListOrderByRecent">
+    <h5>최신순</h5>
+</a>
+<div style="float:right; margin-right: 40px">
+    <a href='recommendationListOrderByRecentAll?page=1'>전체보기</a>
+</div>
 <section class="py-5 " id="section1"  style=" width: 100%;">
     <div class="container  px-4 px-lg-5 mt-5" >
         <h5 style="color: black;">최신순</h5>
@@ -187,12 +189,17 @@
                     <td data-th-text="${recommendation.recono}">100</td>
 
                     <!-- Product image 첨부파일 갤러리화 -->
-                    <span th:if="${recommendation.path != null}">
-                            <img src="@{/board/files/}+ ${recommendation.path}"/>
-                        </span>
-                    <span th:if="${recommendation.path == null}">
-                            <img src="https://via.placeholder.com/90"/>
-                        </span>
+                    <div th:if="${recommendation.path != null}" style="text-align : center;">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"
+                             width="230"
+                             height="230"/>
+                    </div>
+                    <div th:if="${recommendation.path == null}" style="text-align : center;">
+                        <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
+                             width="230"
+                             height="230"
+                        />
+                    </div>
 
                     <!-- 전시 제목,날짜 정렬-->
                     <div class="card-body p-4">
@@ -226,130 +233,130 @@
 </section>
 
 <!--댓글순-->
-<span id="recommendationListOrderByComments"></span>
+<a id="recommendationListOrderByComments">
+    <h5>댓글순</h5>
+</a>
+<div style="float:right; margin-right: 40px">
+    <a href='recommendationListOrderByCommentsAll'>전체보기</a>
+</div>
 <section class="py-5 " id="section2" style=" width: 100%;">
 
-        <div class="container  px-4 px-lg-5 mt-5" >
-            <h5 style="color: black;">댓글순</h5>
-            <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
-                <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByComments}">
+    <div class="container  px-4 px-lg-5 mt-5" >
+        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+            <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByComments}">
 
-                    <div class="card h-100"
-                         style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
+                <div class="card h-100"
+                     style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
 
-                        <td data-th-text="${recommendation.recono}">100</td>
+                    <td data-th-text="${recommendation.recono}">100</td>
 
-                        <!-- Product image 첨부파일 갤러리화 -->
-                        <span th:if="${recommendation.path != null}">
-                            <img src="@{/board/files/}+ ${recommendation.path}"/>
-                        </span>
-                        <span th:if="${recommendation.path == null}">
-                            <img src="https://via.placeholder.com/90"/>
-                        </span>
-
-                        <!-- 전시 제목,날짜 정렬-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-
-                                <!-- 전시 name-->
-                                <h5>
-                                    <a href='recommendationDetail?recono=1'
-                                       data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
-                                       data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
-                                       style="word-wrap: break-word"
-                                    >제목rlfldsdfasdfasdf</a>
-                                </h5>
-                                <br>
-                                <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
-                            </div>
-                        </div>
-
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
-                                   style="color: #E0EBFF">보러가기</a>
-                            </div>
-                        </div>
-
+                    <!-- Product image 첨부파일 갤러리화 -->
+                    <div th:if="${recommendation.path != null}" style="text-align : center;">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"
+                             width="230"
+                             height="230"/>
                     </div>
+                    <div th:if="${recommendation.path == null}" style="text-align : center;">
+                        <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
+                             width="230"
+                             height="230"
+                        />
+                    </div>
+
+                    <!-- 전시 제목,날짜 정렬-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+
+                            <!-- 전시 name-->
+                            <h5>
+                                <a href='recommendationDetail?recono=1'
+                                   data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                   data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
+                                   style="word-wrap: break-word"
+                                >제목rlfldsdfasdfasdf</a>
+                            </h5>
+                            <br>
+                            <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
+                        </div>
+                    </div>
+
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                               style="color: #E0EBFF">보러가기</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 <!--인기순(조회순)-->
-<span id="recommendationListOrderByCnt"></span>
+<a id="recommendationListOrderByCnt">
+    <h5>인기순</h5>
+</a>
+<div style="float:right; margin-right: 40px">
+    <a href='recommendationListOrderByCntAll'>전체보기</a>
+</div>
 <section class="py-5 " id="section3" style=" width: 100%;">
+    <div class="container  px-4 px-lg-5 mt-5" >
+        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+            <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCnt}">
 
-        <div class="container  px-4 px-lg-5 mt-5" >
-            <h5 style="color: black;">인기순</h5>
-            <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+                <div class="card h-100"
+                     style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
 
-                <div class="col mb-5" data-th-each=" recommendation: ${recommendationsOrderByCnt}">
-                    <div class="card h-100"
-                         style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
+                    <td data-th-text="${recommendation.recono}">100</td>
 
-                        <td data-th-text="${recommendation.recono}">100</td>
-
-                        <span th:if="${recommendation.path != null}">
-                            <img src="@{/board/files/}+ ${recommendation.path}"/>
-                        </span>
-                        <span th:if="${recommendation.path == null}">
-                            <img src="https://via.placeholder.com/90"/>
-                        </span>
-                        <!-- 전시 제목,날짜 정렬-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-
-                                <!-- 전시 name-->
-                                <h5>
-                                    <a href='recommendationDetail?recono=1'
-                                       data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
-                                       data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
-                                       style="word-wrap: break-word"
-                                    >제목rlfldsdfasdfasdf</a>
-                                </h5>
-                                <br>
-                                <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
-                            </div>
-                        </div>
-
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
-                                   style="color: #E0EBFF">보러가기</a>
-                            </div>
-                        </div>
-
+                    <!-- Product image 첨부파일 갤러리화 -->
+                    <div th:if="${recommendation.path != null}" style="text-align : center;">
+                        <img data-th-src="${'../board/files/'+ recommendation.path}"
+                             width="230"
+                             height="230"/>
                     </div>
-                </div>
+                    <div th:if="${recommendation.path == null}" style="text-align : center;">
+                        <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
+                             width="230"
+                             height="230"
+                        />
+                    </div>
+
+                    <!-- 전시 제목,날짜 정렬-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+
+                            <!-- 전시 name-->
+                            <h5>
+                                <a href='recommendationDetail?recono=1'
+                                   data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                   data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
+                                   style="word-wrap: break-word"
+                                >제목rlfldsdfasdfasdf</a>
+                            </h5>
+                            <br>
+                            <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
+                        </div>
+                    </div>
+
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                               style="color: #E0EBFF">보러가기</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
 
 </section>
 <!--코스추천글 리스트 끝-->
 
-
-<!--<div class="container d-flex justify-content-center" >-->
-<!--    <ul class="pagination">-->
-<!--        <li class="page-item"><a class="page-link" data-th-href="${'?count=1'}">처음으로</a></li>-->
-
-<!--        <li class="page-item" data-th-if="${count>4}">-->
-<!--            <a class="page-link" data-th-href="${'?count=' + count/5*5}" >이전</a></li>-->
-
-<!--        &lt;!&ndash;th:classappend="${count}+1==${num}? 'active':''" : 현재 페이지에 대한 색 처리&ndash;&gt;-->
-<!--        <li class="page-item" th:classappend="${count}+1==${num}? 'active':''" data-th-each="num: ${#numbers.sequence(count/5*5+1,count/5*5+5<totalNumber+1? count/5*5+5:totalNumber+1)}">-->
-<!--            <a class="page-link" data-th-href="${'?count=' + num}" data-th-text="${num}">1</a></li>-->
-
-<!--        <li class="page-item" data-th-if="${count<totalNumber/5*5}">-->
-<!--            <a class="page-link" data-th-href="${'?count=' + ((count/5+1)*5+1)}">다음</a>-->
-
-<!--        <li class="page-item"><a class="page-link" data-th-href="${'?count='+(totalNumber+1)}">끝으로</a></li>-->
-<!--    </ul>-->
-<!--</div>-->
 <br>
 <br>
 <!--<div style="position: absolute; right: 0px; bottom: 0px;">-->
@@ -378,10 +385,6 @@
         });
 
     });
-
-<!--    window.addEventListener("wheel", function(e){-->
-<!--        e.preventDefault();-->
-<!--    },{passive : false});-->
 
 </script>
 
@@ -413,6 +416,7 @@
 
 
     .background {
+        background-color: white;
         /*background-image: url(https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg);*/
         background-attachment: fixed;
         background-repeat: no-repeat;

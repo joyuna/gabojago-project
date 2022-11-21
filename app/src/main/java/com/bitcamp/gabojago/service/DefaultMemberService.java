@@ -3,6 +3,7 @@ package com.bitcamp.gabojago.service;
 import com.bitcamp.gabojago.dao.ExhibitionReviewDao;
 import com.bitcamp.gabojago.dao.MemberDao;
 import com.bitcamp.gabojago.vo.Member;
+import com.bitcamp.gabojago.vo.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -128,6 +129,16 @@ public class DefaultMemberService implements MemberService {
     return member;
   }
 
+  @Override
+  public Report findByIdReport(String id) throws Exception {
+    return memberDao.findByIdReport(id);
+  }
+  @Override
+  public List<Report> findAllReport(String id) throws Exception {
+    return memberDao.findAllReport(id);
+  }
 
-
+  public Member selectKakaoId(long kakaoId) {
+    return memberDao.selectKakaoId(kakaoId);
+  }
 }

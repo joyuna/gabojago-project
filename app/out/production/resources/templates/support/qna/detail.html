@@ -92,12 +92,13 @@
                                 <span class="col">
                                     <button class="btn btn-primary py-3 px-5"
                                             onclick="location.href='editForm.html'"
+                                            th:if="${session.loginMember} != null and ${session.loginMember.id} == ${qnaBoard.id}"
                                             th:onclick="|location.href='@{/support/qna/editForm(no=${qnaBoard.no})}'|"
                                             type="button">수정</button>
                                 </span>
                             <span class="col">
                                     <button class="btn btn-info py-3 px-5"
-                                            onclick="location.href='list.html'"
+                                            th:if="${session.loginMember} != null and ((${session.loginMember.id} == ${qnaBoard.id}) or (${session.loginMember.id} == 'admin'))"
                                             th:onclick="|location.href='@{delete(no=${qnaBoard.no})}'|"
                                             type="submit">삭제</button>
                                 </span>
@@ -117,10 +118,12 @@
             <hr class="my-4">
             <h3 style="font-weight: bold">Answer:</h3>
 
-            <h5><div class="answer" input name='answerContent'
-                 data-th-text='${qnaBoard.answerContent}' readonly></div></h5>
+            <h5>
+                <div class="answer" input name='answerContent'
+                     data-th-text='${qnaBoard.answerContent}' readonly></div>
+            </h5>
             <span type="text" name="answerDate"
-                  data-th-text="'답변일 | ' + ${qnaBoard.answerDate}"></span>
+                  data-th-text="${qnaBoard.answerDate == null} ? '' : '답변일 | ' + ${qnaBoard.answerDate}">답변일</span>
             <input type="hidden" name="answerDate"
                    value="2022-11-11"
                    data-th-value="${qnaBoard.answerDate}" readonly>
@@ -132,7 +135,8 @@
             <div class="qnaAnswerCard my-4">
                 <h6 class="qnaAnswerCardHeader">Leave a Answer:</h6>
                 <div class="qnaAnswerCardBody">
-                    <form name="qnaAnswerForm" th:action="@{/support/qna/qnaAnswerUpdate}" method="post" autocomplete="off">
+                    <form name="qnaAnswerForm" th:action="@{/support/qna/qnaAnswerUpdate}" method="post"
+                          autocomplete="off">
                         <div class="answerGroup">
                             <input type="hidden" name="no" th:value="${qnaBoard.no}">
 
@@ -140,7 +144,8 @@
                                 <textarea name="answerContent" class="form-control" rows="3"></textarea>
                             </div>
 
-                        </div><br>
+                        </div>
+                        <br>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
@@ -194,6 +199,19 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="../../js/google-map.js"></script>
 <script src="../../js/main.js"></script>
+
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let isPass = [[${isPass}]];
+    /*]]*/
+    document.addEventListener("DOMContentLoaded", function(){
+        if(!isPass) {
+            window.location = '/app/support/qna/list';
+        }
+    });
+</script>
 
 </body>
 </html>

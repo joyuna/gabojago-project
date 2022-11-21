@@ -26,9 +26,10 @@ public class RecommendationController {
   ServletContext sc;
   @Autowired
   RecommendationService recommendationService;
-
   @Autowired
   JangCommentService jangCommentService;
+
+  private int PAGE_CORRECTION = 1;
 
   public RecommendationController() {
     System.out.println("RecommendationController() 호출됨!");
@@ -144,7 +145,64 @@ public class RecommendationController {
     model.addAttribute("recommendationsOrderByRecent", recommendationService.recommendationListOrderByRecent());
     model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByComments());
     model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCnt());
-//    model.addAttribute("recommendationAttachedFiles", recommendationService.recommendationAttachedFiles());
+  }
+
+  @GetMapping("recommendationListForAlone")
+  public void recommendationListForAlone(Model model) throws Exception {
+    // alone
+    model.addAttribute("recommendationsOrderByRecentForAlone", recommendationService.recommendationListOrderByRecentForAlone());
+    model.addAttribute("recommendationsOrderByCommentsForAlone", recommendationService.recommendationListOrderByCommentsForAlone());
+    model.addAttribute("recommendationsOrderByCntForAlone", recommendationService.recommendationListOrderByCntForAlone());
+  }
+
+  @GetMapping("recommendationListForCouple")
+  public void recommendationListForCouple(Model model) throws Exception {
+    // couple
+    model.addAttribute("recommendationsOrderByRecentForCouple", recommendationService.recommendationListOrderByRecentForCouple());
+    model.addAttribute("recommendationsOrderByCommentsForCouple", recommendationService.recommendationListOrderByCommentsForCouple());
+    model.addAttribute("recommendationsOrderByCntForCouple", recommendationService.recommendationListOrderByCntForCouple());
+  }
+
+  @GetMapping("recommendationListForFamily")
+  public void recommendationListForFamily(Model model) throws Exception {
+    // family
+    model.addAttribute("recommendationsOrderByRecentForFamily", recommendationService.recommendationListOrderByRecentForFamily());
+    model.addAttribute("recommendationsOrderByCommentsForFamily", recommendationService.recommendationListOrderByCommentsForFamily());
+    model.addAttribute("recommendationsOrderByCntForFamily", recommendationService.recommendationListOrderByCntForFamily());
+  }
+
+  @GetMapping("recommendationListForFriend")
+  public void recommendationListForFriend(Model model) throws Exception {
+    // family
+    model.addAttribute("recommendationsOrderByRecentForFriend", recommendationService.recommendationListOrderByRecentForFriend());
+    model.addAttribute("recommendationsOrderByCommentsForFriend", recommendationService.recommendationListOrderByCommentsForFriend());
+    model.addAttribute("recommendationsOrderByCntForFriend", recommendationService.recommendationListOrderByCntForFriend());
+  }
+
+  @GetMapping("recommendationListOrderByRecentAll")
+  public void recommendationListOrderByRecentAll(Model model, @RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "3") Integer size) throws Exception {
+    int total = recommendationService.getTotal();
+    page -= PAGE_CORRECTION;
+    List<Recommendation> recommendationList = recommendationService.recommendationListPage((page) * size, size);
+
+    PageMakerDTO pageMakerDTO = new PageMakerDTO(page, size, total, recommendationList);
+
+    model.addAttribute("recommendationListOrderByRecent", pageMakerDTO.getDtoList());
+    model.addAttribute("pages", pageMakerDTO.getPage());
+    model.addAttribute("pageNum", pageMakerDTO.getTotal());
+    model.addAttribute("pageStart", pageMakerDTO.getStart());
+    model.addAttribute("pageEnd", pageMakerDTO.getEnd());
+    model.addAttribute("prev", pageMakerDTO.isPrev());
+    model.addAttribute("next", pageMakerDTO.isNext());
+  }
+  @GetMapping("recommendationListOrderByCommentsAll")
+  public void recommendationListOrderByCommentsAll(Model model) throws Exception {
+    model.addAttribute("recommendationsOrderByComments", recommendationService.recommendationListOrderByCommentsAll());
+  }
+
+  @GetMapping("recommendationListOrderByCntAll")
+  public void recommendationListOrderByCntAll(Model model) throws Exception {
+    model.addAttribute("recommendationsOrderByCnt", recommendationService.recommendationListOrderByCntAll());
   }
 
   // Detail
@@ -265,6 +323,12 @@ public class RecommendationController {
     // 본인 게시글은 신고할 수 없다.
     if (recommendationService.getRecommendation(recono).getWriter().getId().equals(id)) {
       session.setAttribute("reportResult", "self");
+      return "recommendation/recommendationReportFail";
+    }
+
+    // 이미 신고를 5회 받은 게시글은 신고할 수 없다.
+    if (recommendationService.countRecommendationReport(recono) >= 5) {
+      session.setAttribute("reportResult", "overflow");
       return "recommendation/recommendationReportFail";
     }
 

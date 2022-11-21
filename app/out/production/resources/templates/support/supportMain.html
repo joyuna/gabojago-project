@@ -37,7 +37,7 @@
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
                 <li><a onclick="location.href='list.html'"
-                       th:onclick="|location.href='@{/support/notice/noticeList}'|">Notice</a></li>
+                       th:onclick="|location.href='@{/support/notice/noticeListPage?page=1}'|">Notice</a></li>
                 <li><a onclick="location.href='list.html'"
                        th:onclick="|location.href='@{/support/qna/list}'|">QnA</a></li>
                 <li><a onclick="location.href='list.html'"
@@ -83,8 +83,6 @@
         </section>
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
-                <div class="row mb-5">
-                </div>
                 <div class="row">
                     <div class="col-md-12">
 

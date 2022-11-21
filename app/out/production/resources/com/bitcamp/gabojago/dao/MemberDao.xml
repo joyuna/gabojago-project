@@ -21,10 +21,6 @@
         <result column="STATUS" property="status"/>
     </resultMap>
 
-
-
-
-
     <select id="findByIdPassword" resultMap="memberMap">
         select
             ID,
@@ -38,6 +34,7 @@
             jang_member
         where
             ID=#{id} and PWD=sha2(#{password},256)
+            and STATUS = 'A'
     </select>
 
     <select id="findById" resultMap="memberMap">
