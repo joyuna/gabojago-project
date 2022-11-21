@@ -88,13 +88,13 @@
 
                         <div class="form-group text-center mb-5 mt-5">
                                 <span class="col">
-                                    <button class="w-100 btn btn-primary btn-lg" style="background-color: black; border-color: black"
+                                    <button class="btn btn-secondary py-3 px-5" style="background-color: black; border-color: black"
                                             th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
                                             th:onclick="|location.href='@{/support/notice/noticeEditDetail(no=${notice.no})}'|"
                                             type="button">수정</button>
                                 </span>
                             <span class="col">
-                                    <button class="w-100 btn btn-primary btn-lg" style="background-color: black; border-color: black"
+                                    <button class="btn btn-secondary py-3 px-5" style="background-color: black; border-color: black"
                                             th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
                                             th:onclick="|location.href='@{noticeDelete(no=${notice.no})}'|"
                                             type="button">삭제</button>
