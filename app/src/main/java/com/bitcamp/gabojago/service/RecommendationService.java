@@ -66,6 +66,8 @@ public interface RecommendationService {
 
   boolean checkCorrectUser(String id) throws Exception;
 
+  int countRecommendationReport(int recono);
+
   //paging
   int getTotal();
 

@@ -214,4 +214,6 @@ build
 
 
 # Mingu: IntelliJ class file directory
-app/out/
+app/out/.idea/
+.idea/
+out/
