@@ -60,7 +60,8 @@
 
         <div class="row">
             <div class="col-md-11 col-md-1 text-right">
-                <button class="btn btn-primary float-end"
+                <button class="btn btn-primary btn-lg" style="background-color: black; border-color: black"
+                        th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'"
                         onclick="location.href='noticeForm.html'"
                         th:onclick="|location.href='@{/support/notice/noticeForm}'|"
                         type="button">새 글
@@ -93,21 +94,45 @@
                         </div>
                     </div>
                 </div><!-- END-->
-
-                        <span><a th:if="${prev}==true"
+                <div class="row">
+                    <div class="col-md-12 text-center
+">
+                        <div class="block-27">
+                            <ul>
+                        <li class="bt-color"><a th:if="${prev}==true"
                                  data-th-href="@{noticeListPage(page=${pageStart - 1})}"
-                                 th:text="'<'">1</a></span>
+                                 th:text="'<'">1</a></li>
 
-                    <th:block class="page-item"
+                    <li><th:block class="page-item"
                         data-th-each="pageNum : ${#numbers.sequence(pageStart, pageEnd)}">
-                        <span><a data-th-href="@{noticeListPage(page=${pageNum})}"
-                                 th:text="${pageNum}">1</a></span>
+                        <a data-th-href="@{noticeListPage(page=${pageNum})}"
+                                 th:text="${pageNum}">1</a>
 
-                    </th:block>
+                    </th:block></li>
 
-                        <span><a th:if="${next}==true"
+                        <li><a th:if="${next}==true"
                                  data-th-href="@{noticeListPage(page=${pageEnd + 1})}"
-                                 th:text="'>'">1</a></span>
+                                 th:text="'>'">1</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+<!--                <div class="row">-->
+<!--                    <div class="col-md-12 text-center">-->
+<!--                        <div class="block-27">-->
+<!--                            <ul>-->
+<!--                                <li><a href="#">&lt;</a></li>-->
+<!--                                <li class="active"><span>1</span></li>-->
+<!--                                <li><a href="#">2</a></li>-->
+<!--                                <li><a href="#">3</a></li>-->
+<!--                                <li><a href="#">4</a></li>-->
+<!--                                <li><a href="#">5</a></li>-->
+<!--                                <li><a href="#">&gt;</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
             </div>
         </section>
