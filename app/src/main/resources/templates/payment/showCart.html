@@ -158,55 +158,23 @@
         </div>
       </header>
 
-      <script>
+      <script th:inline="javascript">
         function clickedCheckbox(){
-          let resultPrice = 0;
           let resultCount = 0;
+          let str = new String();
           let checkedBoxList = document.getElementsByName("paymentBox");
 
           for(let i=0; i< checkedBoxList.length; i++){
             if(checkedBoxList[i].checked == true){
               resultCount++;
-              resultPrice += parseInt(checkedBoxList[i].value);
+              str += checkedBoxList[i].value + ",";
             }
           }
 
-          for(let i = 0; i < resultCount; i++){
-            let orderDetail = [
-              {
-                name:'EXNAME',
-                value:document.getElementById('EXNAME').innerHTML
-              },
-              {
-                name:"STDATE",
-                value:document.getElementById('STDATE').innerHTML
-              },
-              {
-                name:"EDDATE",
-                value:document.getElementById('EDDATE').innerHTML
-              },
-              {
-                name:"CNT",
-                value:document.getElementById('CNT').innerHTML
-              },
-              {
-                name:"PRICE",
-                value:document.getElementById('PRICE').innerHTML
-              }
-
-            ]
-
-            sessionStorage.setItem('exhibition_' + i, JSON.stringify(orderDetail));
-          }
-
-          sessionStorage.setItem('resultCount', resultCount);
-
           document.getElementById("resultCount").innerHTML = resultCount;
-          document.getElementById("resultPrice").innerHTML = resultPrice;
         }
         
         function doPayment(){
-          let resultPrice = document.getElementById("resultPrice").innerHTML;
           let resultCount = document.getElementById("resultCount").innerHTML;
 
         	if(resultCount < 1){
@@ -224,10 +192,10 @@
           <div class="colume align-items-center flex-fill mx-5">
 
       <!-- 전시회 폼 -->
-        <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded" style="position: relative;" data-th-each="exhibition : ${cartList}">
+        <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded" style="position: relative;" th:each="exhibition : ${cartList}">
                 <div class="payment-check" style="margin-right: 100px;">
-                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox" th:value="${exhibition['PRICE']}">
-                  <label class="check-label" for="flexCheckDefault">
+                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox">
+                  <label class="check-label" for="flexCheckDefault" th:value="${exhibition['EXNO']}">
                     결제
                   </label>
                 </div>
@@ -236,7 +204,7 @@
 
                 <h5 style="position: absolute; top: 10px; right: 10px;">
                   <a href='detail?exno=1'
-                  id="EXNAME"
+                  name="EXNAME"
                   th:value="${exhibition['EXNAME']}"
                   data-th-href="@{detail(exno=${exhibition['EXNO']})}"
                   data-th-text="${exhibition['EXNAME'] == ''} ? '(제목없음)' : ${exhibition['EXNAME']}"
@@ -244,21 +212,21 @@
                >지킬과 하이드</a>
                 </h5>
   
-                <h5 id="STDATE" style="position: absolute; top: 40px; right: 115px" data-th-text="${exhibition['STDATE']}" th:value="${exhibition['STDATE']}">
+                <h5 name="STDATE" style="position: absolute; top: 40px; right: 115px" data-th-text="${exhibition['STDATE']}" th:value="${exhibition['STDATE']}">
                   2022-11-11 ~ 
                 </h5>
 
-                <h5 id="EDDATE" style="position: absolute; top: 40px; right: 10px" data-th-text="${exhibition['EDDATE']}" th:value="${exhibition['EDDATE']}">
+                <h5 name="EDDATE" style="position: absolute; top: 40px; right: 10px" data-th-text="${exhibition['EDDATE']}" th:value="${exhibition['EDDATE']}">
                   2022-12-12
                 </h5>
 
-                <h5 id="CNT" style="position: absolute; top: 200px; right: 10px" data-th-text="${exhibition['CNT']}" th:value="${exhibition['CNT']}">
+                <h5 name="CNT" style="position: absolute; top: 200px; right: 10px" data-th-text="${exhibition['CNT']}" th:value="${exhibition['CNT']}">
                   2매
                 </h5>
               
-                <span id="PRICE" style="position: absolute; top: 230px; right: 10px" data-th-text="${exhibition['PRICE']}" th:value="${exhibition['PRICE']}">
+                <h5 name="PRICE" style="position: absolute; top: 230px; right: 10px" data-th-text="${exhibition['PRICE']}" th:value="${exhibition['PRICE']}">
                   10000
-                </span>
+                </h5>
 
 			          <img style="width:200px; height:200px" src="https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009__480.jpg"
 			               alt="..." />
