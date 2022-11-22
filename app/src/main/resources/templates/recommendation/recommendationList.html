@@ -239,14 +239,29 @@
 
 <!--최신순-->
 
-<div style="float:right; margin-right: 40px">
-    <a href='recommendationListOrderByRecentAll?page=1'>전체보기</a>
-</div>
+<!--<div style="float:right; margin-right: 40px">-->
+<!--    <a href='recommendationListOrderByRecentAll?page=1'>전체보기</a>-->
+<!--</div>-->
 <section class="py-5 " id="recommendationListOrderByRecent"  style=" width: 100%;">
     <div class="container  px-4 px-lg-5 mt-5" >
-        <a>
-            <h5 style="color: black;">최신순</h5>
-        </a>
+<!--        <a>-->
+<!--            <h5 style="color: black;">최신순</h5>-->
+<!--        </a>-->
+
+        <section class="ftco-bread py-6">
+            <div class="container">
+                <div class="slider-text justify-content-center align-items-center">
+                    <div class="col-md-11 ftco-animate">
+                        <p class="breadcrumbs">
+<!--                            <span>최신순</span>-->
+                            <span class="mr-2"><a href="recommendationListOrderByRecentAll?page=1">전체보기</a></span>
+                        </p>
+                        <h1 class="bread">최신순</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByRecent}">
 
