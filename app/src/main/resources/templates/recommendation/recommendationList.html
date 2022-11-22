@@ -42,19 +42,6 @@
 
 </head>
 
-<!-- Header-->
-<!--<header class="bg-dark py-4">-->
-
-<!--    <div class="container px-4 px-lg-5 my-5">-->
-<!--        <div class="text-center text-white">-->
-<!--            <h1 class="display-4 fw-bolder" style="color: white">가보자GO 코스추천글</h1>-->
-<!--            &lt;!&ndash;  <p class="lead fw-normal text-white-50 mb-0">?</p>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</header>-->
-
-
-<!--<body class="background">-->
 <body class="pt-5">
 <div class="modal">
     <div class="modal_body" style=" background: rgba(255,255,255,0.9); ">
@@ -83,7 +70,6 @@
                     });
                 }
             </script>
-
 
             <div class="savecheck">
                 <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
@@ -143,15 +129,6 @@
         </div>
     </div>
 </nav>
-<!--width: 1150px; margin-top: 30px;-->
-
-<!--<ul class="nav justify-content-end" >-->
-<!--    <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">-->
-<!--        <h5><a class="nav-link active" aria-current="page" href="recommendationForm"-->
-<!--               data-th-if="${session.loginMember} != null"-->
-<!--               style="color: black">코스추천 글쓰기</a></h5>-->
-<!--    </li>-->
-<!--</ul>-->
 
 <!--누구랑 갈지 선택-->
 <div id="colorlib-page">
@@ -159,7 +136,7 @@
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <h1 id="colorlib-logo"><a href="/app/recommendation/recommendationList"><span class="img"></span>코스추천메인</a></h1>
         <nav id="colorlib-main-menu" role="navigation">
-<!--<div style="position: absolute; left: 10px; font-size: large">-->
+
             <ul>
                 <li><a onclick="location.href='list.html'"
                        th:onclick="|location.href='recommendationListForFamily'|">가족</a></li>
@@ -226,8 +203,6 @@
                 </div>
             </div>
         </section>
-<!--    </div>&lt;!&ndash; END COLORLIB-MAIN &ndash;&gt;-->
-<!--</div>&lt;!&ndash; END COLORLIB-PAGE &ndash;&gt;-->
 
 <ul class="nav justify-content-end" >
     <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
@@ -239,21 +214,14 @@
 
 <!--최신순-->
 
-<!--<div style="float:right; margin-right: 40px">-->
-<!--    <a href='recommendationListOrderByRecentAll?page=1'>전체보기</a>-->
-<!--</div>-->
 <section class="py-5 " id="recommendationListOrderByRecent"  style=" width: 100%;">
     <div class="container  px-4 px-lg-5 mt-5" >
-<!--        <a>-->
-<!--            <h5 style="color: black;">최신순</h5>-->
-<!--        </a>-->
 
         <section class="ftco-bread py-6">
             <div class="container">
                 <div class="slider-text justify-content-center align-items-center">
                     <div class="col-md-11 ftco-animate">
                         <p class="breadcrumbs">
-<!--                            <span>최신순</span>-->
                             <span class="mr-2">
                                 <a href="recommendationListOrderByRecentAll?page=1">전체보기</a>
                             </span>
@@ -263,7 +231,6 @@
                 </div>
             </div>
         </section>
-
 
         <!--최신순 List 시작-->
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
@@ -321,9 +288,6 @@
 
 <!--댓글순-->
 
-<!--<div style="float:right; margin-right: 40px">-->
-<!--    <a href='recommendationListOrderByCommentsAll?page=1'>전체보기</a>-->
-<!--</div>-->
 <section class="py-5 " id="recommendationListOrderByComments" style=" width: 100%;">
 
     <div class="container  px-4 px-lg-5 mt-5" >
@@ -332,7 +296,6 @@
                 <div class="slider-text justify-content-center align-items-center">
                     <div class="col-md-11 ftco-animate">
                         <p class="breadcrumbs">
-                            <!--                            <span>최신순</span>-->
                             <span class="mr-2">
                                 <a href="recommendationListOrderByCommentsAll?page=1">전체보기</a>
                             </span>
@@ -347,7 +310,7 @@
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByComments}">
 
                 <div class="card h-100"
-                     style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
+                     style= "background: rgba(0,0,0,0.7); ">
 
                     <td data-th-text="${recommendation.recono}">100</td>
 
@@ -471,7 +434,6 @@
 
 <br>
 <br>
-<!--<div style="position: absolute; right: 0px; bottom: 0px;">-->
 
 <div style="position: fixed; right: 70px; bottom: 103px;">
     <button type="button" class="btn btn-secondary"
@@ -521,15 +483,9 @@
         text-align:center;
     }
 
-    /* // 백그라운드배경
-    https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg)
-    https://images.pexels.com/photos/2425012/pexels-photo-2425012.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2
-    */
-
 
     .pt-5 {
         background-color: white;
-        /*background-image: url(https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg);*/
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
