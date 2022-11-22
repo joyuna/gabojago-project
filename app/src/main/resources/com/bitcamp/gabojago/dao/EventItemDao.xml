@@ -10,6 +10,11 @@
         <id column="CNT" property="stock"/>
         <id column="EVTNO" property="eventNo"/>
         <id column="RANK" property="ranking"/>
+        <result column="ITFNO" property="eventAttachedFile.fileNo"/>
+        <result column="PATH" property="eventAttachedFile.filePath"/>
+        <result column="FNAME" property="eventAttachedFile.fileName"/>
+        <result column="ITMNO" property="eventAttachedFile.itemNo"/>
+
     </resultMap>
 
     <resultMap type="eventAttachedFile" id="eventAttachedFileMap">
@@ -20,7 +25,7 @@
     </resultMap>
 
     <insert id="insert" parameterType="eventItem"
-            useGeneratedKeys="true" keyColumn="itemno" keyProperty="itemNo">
+            useGeneratedKeys="true" keyColumn="itmno" keyProperty="itemNo">
         insert into jang_item(NAME,CNT,EVTNO,RANK)
         values (#{name},#{stock},#{eventNo},#{ranking})
     </insert>
@@ -42,12 +47,17 @@
 
     <select id="getItemListByEventNo" resultMap="eventItemMap" parameterType="int">
         select
-            ITMNO,
-            NAME,
-            CNT,
-            EVTNO,
-            RANK
-        from jang_item
+            itm.ITMNO,
+            itm.NAME,
+            itm.CNT,
+            itm.EVTNO,
+            itm.RANK,
+            itmf.ITMNO,
+            itmf.PATH,
+            itmf.FNAME
+        from jang_item itm
+        left outer join jang_event_file itmf
+            on itm.ITMNO = itmf.ITMNO
         where EVTNO=#{eventNo}
     </select>
 
@@ -61,7 +71,7 @@
         where ITMNO in (select ITMNO from jang_item where EVTNO=#{eventNo})
     </delete>
 
-    <insert id="insertEventFile" parameterType="eventAttachedFile">
+    <insert id="insertEventFile" parameterType="eventAttachedFile"
             useGeneratedKeys="true" keyColumn="fileNo" keyProperty="fileNo">
         insert into jang_event_file(PATH, FNAME, ITMNO)
         values (#{filePath},#{fileName},#{itemNo})

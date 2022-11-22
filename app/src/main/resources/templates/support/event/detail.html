@@ -146,9 +146,9 @@
                                 <div class="photography w-33"  data-th-each="eventItem : ${eventItems}">
 
                                         <div class="card ftco-animate">
-                                            <a href="../../images/image_1.jpg"
+                                            <a th:href="@{/event/files/} + ${eventItem.eventAttachedFile.fileName}"
                                                class="photography-entry img image-popup d-flex justify-content-start align-items-end"
-                                               style="background-image: url(../../images/starbucks.jpg);">
+                                               th:style="'background-image: url('+@{/event/files/} + ${eventItem.eventAttachedFile.fileName}+');'">
                                                 <div class="overlay"></div>
                                                 <div class="text ml-4 mb-4">
                                                     <h3>

@@ -112,9 +112,10 @@ public class EventController {
         String fileName = UUID.randomUUID().toString();
         System.out.println("new file name : " + fileName);
         System.out.println("new file path before : " + (dirPath + "/"));
-        file.transferTo(new File(dirPath + "/" + fileName));
+        System.out.println("new file path before : " + file.getContentType());
+        file.transferTo(new File(dirPath + "/" + fileName + "." + file.getContentType().split("/")[1]));
         System.out.println("new file path after : " + (dirPath + "/"));
-        eventAttachedFile.setFileName(fileName);
+        eventAttachedFile.setFileName(fileName + "." + file.getContentType().split("/")[1]);
         eventAttachedFile.setFilePath(dirPath+"/");
         return eventAttachedFile;
     }
