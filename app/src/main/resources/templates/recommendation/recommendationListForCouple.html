@@ -133,19 +133,6 @@
     </div>
 </nav>
 
-<ul class="nav justify-content-end" >
-    <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
-        <h5><a class="nav-link active" aria-current="page" href="recommendationForm"
-               data-th-if="${session.loginMember} != null"
-               style="color: black">코스추천 글쓰기</a></h5>
-    </li>
-
-    <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
-        <h5> <a class="nav-link"  href="../"
-                style="color: black; ">메인</a></h5>
-
-    </li>
-</ul>
 
 <!--누구랑 갈지 선택-->
 <div id="colorlib-page">
@@ -165,8 +152,6 @@
                        th:onclick="|location.href='recommendationListForAlone'|">혼자</a></li>
             </ul>
             <br>
-            <br>
-            <br>
             <ul>
                 <li><a onclick="location.href='list.html'"
                        th:onclick="|location.href='#recommendationListOrderByRecent'|">최신순</a></li>
@@ -174,6 +159,15 @@
                        th:onclick="|location.href='#recommendationListOrderByComments'|">댓글순</a></li>
                 <li><a onclick="location.href='list.html'"
                        th:onclick="|location.href='#recommendationListOrderByCnt'|">인기순</a></li>
+            </ul>
+            <br>
+            <br>
+            <ul>
+                <li>
+                    <a onclick="location.href='list.html'"
+                       th:onclick="|location.href='recommendationForm'|"
+                       data-th-if="${session.loginMember} != null">코스추천 글쓰기</a>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -220,15 +214,6 @@
                 </div>
             </div>
         </section>
-
-        <ul class="nav justify-content-end" >
-            <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
-                <h5><a class="nav-link active" aria-current="page" href="recommendationForm"
-                       data-th-if="${session.loginMember} != null"
-                       style="color: grey; font-weight: bold;">코스추천 글쓰기</a></h5>
-            </li>
-        </ul>
-
 <!--최신순-->
 
         <section class="py-5 " id="recommendationListOrderByRecent"  style=" width: 100%;">
@@ -323,7 +308,7 @@
                 </section>
 
                 <!--댓글순 리스트 시작-->
-        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCommentsForCouple}">
 
                 <div class="card h-100"
@@ -395,7 +380,7 @@
                     </div>
                 </section>
                 <!--인기순List 시작!-->
-        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCntForCouple}">
 
                 <div class="card h-100"
