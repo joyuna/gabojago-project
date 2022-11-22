@@ -152,7 +152,6 @@
 <!--최신순-->
         <section class="py-5 " id="recommendationListOrderByRecent"  style=" width: 100%;">
             <div class="container  px-4 px-lg-5 mt-5" >
-
                 <section class="ftco-bread py-6">
                     <div class="container">
                         <div class="slider-text justify-content-center align-items-center">
@@ -173,59 +172,60 @@
                         </div>
                     </div>
                 </section>
+            </div>
 
                 <!--최신순 List 시작-->
+            <div class="container  px-4 px-lg-5 mt-5" >
+                    <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+                        <div class="col mb-5" data-th-each="recommendation : ${recommendationListOrderByRecent}">
 
-        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
-            <div class="col mb-5" data-th-each="recommendation : ${recommendationListOrderByRecent}">
-
-                <div class="card h-100"
-                     style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
+                            <div class="card h-100"
+                                 style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
 
 
-                    <!-- Product image 첨부파일 갤러리화 -->
-                    <div th:if="${recommendation.path != null}" style="text-align : center;">
-                        <img data-th-src="${'../board/files/'+ recommendation.path}"
-                             width="230"
-                             height="230"/>
-                    </div>
-                    <div th:if="${recommendation.path == null}" style="text-align : center;">
-                        <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
-                             width="230"
-                             height="230"
-                        />
-                    </div>
+                                <!-- Product image 첨부파일 갤러리화 -->
+                                <div th:if="${recommendation.path != null}" style="text-align : center;">
+                                    <img data-th-src="${'../board/files/'+ recommendation.path}"
+                                         width="230"
+                                         height="230"/>
+                                </div>
+                                <div th:if="${recommendation.path == null}" style="text-align : center;">
+                                    <img src="https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg" alt="서울 사진"
+                                         width="230"
+                                         height="230"
+                                    />
+                                </div>
 
-                    <!-- 전시 제목,날짜 정렬-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
+                                <!-- 전시 제목,날짜 정렬-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
 
-                            <!-- 전시 name-->
-                            <h5>
-                                <a href='recommendationDetail?recono=1'
-                                   data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
-                                   data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
-                                   style="word-wrap: break-word"
-                                >제목rlfldsdfasdfasdf</a>
-                            </h5>
-                            <br>
-                            <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
+                                        <!-- 전시 name-->
+                                        <h5>
+                                            <a href='recommendationDetail?recono=1'
+                                               data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                               data-th-text="${recommendation.title == ''} ? '(제목없음)' : ${recommendation.title}"
+                                               style="word-wrap: break-word"
+                                            >제목rlfldsdfasdfasdf</a>
+                                        </h5>
+                                        <br>
+                                        <td data-th-text="${recommendation.wdate}"  >2022-1-1</td>
+                                    </div>
+                                </div>
+
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
+                                           style="color: #E0EBFF">보러가기</a>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto"  data-th-href="@{recommendationDetail(recono=${recommendation.recono})}"
-                               style="color: #E0EBFF">보러가기</a>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </div>
-    </div>
-
+        </section>
     <br>
     <br>
     <!--코스추천글 페이징 시작-->
@@ -257,7 +257,7 @@
                 </div>
             </div>
         </div>
-    </section>
+
 </section>
 
 <!--코스추천글 리스트 끝-->
