@@ -26,9 +26,16 @@ public class PageMakerDTO {
         this.total = total;
         this.dtoList = dtoList;
 
-        this.start = (((page / 2) * 2) + 1);
-        this.end = Math.min(lastPage, (start + 1));
-        this.prev = start !=1;
-        this.next = lastPage > end;
+//        this.end = Math.min(lastPage, (start + 1));
+        this.end = (int)(Math.ceil((page+1)/3.0))*3;
+        this.start = this.end - 2;
+
+
+        if(lastPage < this.end) {
+            this.end = lastPage;
+        }
+
+        this.prev = start > 1;
+        this.next = lastPage > this.end;
     }
 }
