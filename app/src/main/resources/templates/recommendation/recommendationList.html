@@ -43,15 +43,15 @@
 </head>
 
 <!-- Header-->
-<header class="bg-dark py-4">
+<!--<header class="bg-dark py-4">-->
 
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder" style="color: white">가보자GO 코스추천글</h1>
-            <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
-        </div>
-    </div>
-</header>
+<!--    <div class="container px-4 px-lg-5 my-5">-->
+<!--        <div class="text-center text-white">-->
+<!--            <h1 class="display-4 fw-bolder" style="color: white">가보자GO 코스추천글</h1>-->
+<!--            &lt;!&ndash;  <p class="lead fw-normal text-white-50 mb-0">?</p>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</header>-->
 
 
 <!--<body class="background">-->
@@ -145,51 +145,96 @@
 </nav>
 <!--width: 1150px; margin-top: 30px;-->
 
+<!--<ul class="nav justify-content-end" >-->
+<!--    <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">-->
+<!--        <h5><a class="nav-link active" aria-current="page" href="recommendationForm"-->
+<!--               data-th-if="${session.loginMember} != null"-->
+<!--               style="color: black">코스추천 글쓰기</a></h5>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<!--누구랑 갈지 선택-->
+<div id="colorlib-page">
+    <a href="javascript" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+        <h1 id="colorlib-logo"><a href="/app/recommendation/recommendationList"><span class="img"></span>코스추천메인</a></h1>
+        <nav id="colorlib-main-menu" role="navigation">
+<!--<div style="position: absolute; left: 10px; font-size: large">-->
+            <ul>
+                <li><a onclick="location.href='list.html'"
+                       th:onclick="|location.href='recommendationListForFamily'|">가족</a></li>
+                <li><a onclick="location.href='list.html'"
+                       th:onclick="|location.href='recommendationListForFriend'|">친구</a></li>
+                <li><a onclick="location.href='list.html'"
+                       th:onclick="|location.href='recommendationListForCouple'|">연인</a></li>
+                <li><a onclick="location.href='list.html'"
+                       th:onclick="|location.href='recommendationListForAlone'|">혼자</a></li>
+            </ul>
+            <br>
+            <br>
+            <br>
+            <ul>
+                <li><a onclick="location.href='list.html'"
+                       th:onclick="|location.href='#recommendationListOrderByRecent'|">최신순</a></li>
+                <li><a onclick="location.href='list.html'"
+                       th:onclick="|location.href='#recommendationListOrderByComments'|">댓글순</a></li>
+                <li><a onclick="location.href='list.html'"
+                       th:onclick="|location.href='#recommendationListOrderByCnt'|">인기순</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <div id="colorlib-main">
+        <section class="ftco-section-no-padding bg-light">
+            <div class="hero-wrap">
+                <div class="overlay"></div>
+                <div class="d-flex align-items-center js-fullheight">
+                    <div class="author-image text img d-flex">
+                        <section class="home-slider js-fullheight owl-carousel">
+                            <div class="slider-item js-fullheight"
+                                 style="background-image:
+                                 url(../images/reco1.jpeg);
+                                    ">
+                            </div>
+
+                            <div class="slider-item js-fullheight"
+                                 style="background-image:
+                                 url(../images/reco2.jpeg);
+                                 ">
+                            </div>
+
+                            <div class="slider-item js-fullheight"
+                                 style="background-image:url(../images/reco3.jpeg);
+                                 ">
+                            </div>
+
+                            <div class="slider-item js-fullheight"
+                                 style="background-image:url(../images/reco4.jpeg);
+                                 ">
+                            </div>
+                        </section>
+                    </div>
+                    <div class="author-info text p-3 p-md-5">
+                        <div class="desc">
+                            <span class="subheading">안녕하세요.</span>
+                            <h1 class="big-letter">가보자Go!</h1>
+                            <h1 class="mb-4"><span>가보자Go!</span> <br> 코스추천글 메인 페이지 입니다.</span></h1>
+                            <p class="mb-4">여러분만의 코스를 공유해봐요:)</p>
+                            <h3 class="signature h1">by Dingadung</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
 <ul class="nav justify-content-end" >
     <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
         <h5><a class="nav-link active" aria-current="page" href="recommendationForm"
                data-th-if="${session.loginMember} != null"
                style="color: black">코스추천 글쓰기</a></h5>
     </li>
-    <!--  <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>-->
-    <li class="nav-item" style="float: right; margin-top: 30px; width: 200px;">
-        <h5> <a class="nav-link"  href="../"
-                style="color: black; ">메인</a></h5>
-
-    </li>
 </ul>
-
-<!--누구랑 갈지 선택-->
-<div style="position: absolute; left: 10px; font-size: large">
-    <a href='recommendationListForFamily'>가족</a>
-    <br>
-    <a href='recommendationListForFriend'>친구</a>
-    <br>
-    <a href='recommendationListForCouple'>연인</a>
-    <br>
-    <a href='recommendationListForAlone'>혼자</a>
-</div>
-<br>
-<br>
-<br>
-
-<!--리스트-->
-<div style="position: fixed; left: 10px; bottom: 280px;">
-    <br>
-    <a href='#recommendationListOrderByRecent'>최신순</a>
-    <br>
-    <a href='#recommendationListOrderByComments'>댓글순</a>
-    <br>
-    <a href='#recommendationListOrderByCnt'>인기순</a>
-    <br>
-</div>
-<br>
-<br>
 
 <!--최신순-->
 
@@ -485,6 +530,24 @@
     })
 
 </script>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.easing.1.3.js"></script>
+<script src="../js/jquery.waypoints.min.js"></script>
+<script src="../js/jquery.stellar.min.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/jquery.magnific-popup.min.js"></script>
+<script src="../js/aos.js"></script>
+<script src="../js/jquery.animateNumber.min.js"></script>
+<script src="../js/bootstrap-datepicker.js"></script>
+<script src="../js/jquery.timepicker.min.js"></script>
+<script src="../js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="../js/google-map.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
 
