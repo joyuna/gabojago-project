@@ -17,18 +17,6 @@
         <result column="VCNT" property="viewCount"/>
     </resultMap>
 
-    <select id="findAll" resultMap="eventMap">
-        select
-            EVTNO,
-            TITLE,
-            STDATE,
-            EDDATE,
-            EVCODE,
-            VCNT
-        from jang_event
-        order by EVTNO desc;
-    </select>
-
     <select id="findByNo" resultMap="eventMap" parameterType="int">
         select
             EVTNO,
@@ -79,5 +67,23 @@
         where EVTNO = #{no}
     </update>
 
+    <select id="eventPostCount" resultType="int">
+        select
+            count(EVTNO)
+        from jang_event
+    </select>
+
+    <select id="findAll" parameterType="int" resultMap="eventMap">
+        select
+            EVTNO,
+            TITLE,
+            STDATE,
+            EDDATE,
+            EVCODE,
+            VCNT
+        from jang_event
+        order by EVTNO desc
+        limit #{size} offset #{displayPost}
+    </select>
 
 </mapper>

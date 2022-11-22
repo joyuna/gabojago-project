@@ -19,12 +19,6 @@ public class EventServiceImpl implements EventService {
     @Autowired
     EventItemDao eventItemDao;
 
-    @Transactional
-    @Override
-    public List<Event> list() throws Exception {
-        return eventDao.findAll();
-    }
-
     @Override
     public void add(Event event) throws Exception {
         System.out.println("EventServiceImple : " + event.toString());
@@ -93,5 +87,16 @@ public class EventServiceImpl implements EventService {
     @Override
     public void addViewCount(int no) throws Exception {
         eventDao.addViewCount(no);
+    }
+
+    @Override
+    public int eventPostCount() throws Exception {
+        return eventDao.eventPostCount();
+    }
+
+    @Transactional
+    @Override
+    public List<Event> list(int displayPost, int size) throws Exception {
+        return eventDao.findAll(displayPost, size);
     }
 }
