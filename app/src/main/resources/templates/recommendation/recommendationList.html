@@ -236,8 +236,8 @@
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByRecent}">
 
                 <div class="card h-100"
-                     style= "background: rgba(0,0,0,0.7); ">
-
+                     style= "background: rgba(0,0,0,0.7); border-radius: 13px;">
+                    <h3></h3>
                     <!-- Product image 첨부파일 갤러리화 -->
                     <div th:if="${recommendation.path != null}" style="text-align : center;">
                         <img data-th-src="${'../board/files/'+ recommendation.path}"
@@ -306,7 +306,8 @@
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByComments}">
 
                 <div class="card h-100"
-                     style= "background: rgba(0,0,0,0.7); ">
+                     style= "background: rgba(0,0,0,0.7); border-radius: 13px;">
+                    <h3></h3>
 
                     <!-- Product image 첨부파일 갤러리화 -->
                     <div th:if="${recommendation.path != null}" style="text-align : center;">
@@ -375,7 +376,8 @@
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCnt}">
 
                 <div class="card h-100"
-                     style= "background: rgba(0,0,0,0.7); "><!--#FFFFFF50-->
+                     style= "background: rgba(0,0,0,0.7); border-radius: 13px;"><!--#FFFFFF50-->
+                    <h3></h3>
 
                     <!-- Product image 첨부파일 갤러리화 -->
                     <div th:if="${recommendation.path != null}" style="text-align : center;">
