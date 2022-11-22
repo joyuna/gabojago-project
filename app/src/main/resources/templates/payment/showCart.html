@@ -158,7 +158,9 @@
         </div>
       </header>
 
-      <script th:inline="javascript">
+      <script>
+        let queryString = new String();
+
         function clickedCheckbox(){
           let resultCount = 0;
           let str = new String();
@@ -170,8 +172,10 @@
               str += checkedBoxList[i].value + ",";
             }
           }
+          queryString = str;
 
           document.getElementById("resultCount").innerHTML = resultCount;
+          
         }
         
         function doPayment(){
@@ -181,7 +185,7 @@
         		alert("한개 이상의 티켓을 선택해주세요.");
         	}
         	else{
-            location.replace("http://localhost:9999/app/payment/paymentPage");
+            location.replace("http://localhost:9999/app/payment/paymentPage?exno=" + queryString);
           }
         }
       </script>
@@ -194,8 +198,8 @@
       <!-- 전시회 폼 -->
         <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded" style="position: relative;" th:each="exhibition : ${cartList}">
                 <div class="payment-check" style="margin-right: 100px;">
-                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox">
-                  <label class="check-label" for="flexCheckDefault" th:value="${exhibition['EXNO']}">
+                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox" th:value="${exhibition['EXNO']}">
+                  <label class="check-label" for="flexCheckDefault">
                     결제
                   </label>
                 </div>
