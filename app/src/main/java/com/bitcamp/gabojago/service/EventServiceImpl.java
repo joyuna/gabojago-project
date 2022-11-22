@@ -89,4 +89,9 @@ public class EventServiceImpl implements EventService {
         System.out.println("itemListByEventNo : " + itemListByEventNo.toString());
         return itemListByEventNo;
     }
+
+    @Override
+    public void addViewCount(int no) throws Exception {
+        eventDao.addViewCount(no);
+    }
 }

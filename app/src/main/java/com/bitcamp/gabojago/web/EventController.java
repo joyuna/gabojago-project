@@ -60,6 +60,7 @@ public class EventController {
     public void detail(int no, Model model) throws Exception {
         model.addAttribute("event", eventService.get(no));
         model.addAttribute("eventItems", eventService.itemList(no));
+        eventService.addViewCount(no);
     }
 
     @GetMapping("delete")

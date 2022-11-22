@@ -20,4 +20,6 @@ public interface EventService {
     void itemAdd(EventItem eventItem) throws Exception;
 
     List<EventItem> itemList(int no) throws Exception;
+
+    void addViewCount(int no) throws Exception;
 }

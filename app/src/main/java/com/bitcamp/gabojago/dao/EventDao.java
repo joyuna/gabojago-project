@@ -18,4 +18,6 @@ public interface EventDao {
     int update(Event event);
 
     int deleteJoinByEventNo(int eventNo);
+
+    int addViewCount(int no);
 }
