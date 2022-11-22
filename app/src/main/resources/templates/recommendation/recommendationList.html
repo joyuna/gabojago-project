@@ -321,16 +321,29 @@
 
 <!--댓글순-->
 
-<div style="float:right; margin-right: 40px">
-    <a href='recommendationListOrderByCommentsAll?page=1'>전체보기</a>
-</div>
+<!--<div style="float:right; margin-right: 40px">-->
+<!--    <a href='recommendationListOrderByCommentsAll?page=1'>전체보기</a>-->
+<!--</div>-->
 <section class="py-5 " id="recommendationListOrderByComments" style=" width: 100%;">
 
     <div class="container  px-4 px-lg-5 mt-5" >
-        <a>
-            <h5 style="color: black">댓글순</h5>
-        </a>
-        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+        <section class="ftco-bread py-6">
+            <div class="container">
+                <div class="slider-text justify-content-center align-items-center">
+                    <div class="col-md-11 ftco-animate">
+                        <p class="breadcrumbs">
+                            <!--                            <span>최신순</span>-->
+                            <span class="mr-2">
+                                <a href="recommendationListOrderByCommentsAll?page=1">전체보기</a>
+                            </span>
+                        </p>
+                        <h1 class="bread">댓글순</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByComments}">
 
                 <div class="card h-100"
@@ -385,15 +398,24 @@
 
 <!--인기순(조회순)-->
 
-<div style="float:right; margin-right: 40px">
-    <a href='recommendationListOrderByCntAll?page=1'>전체보기</a>
-</div>
 <section class="py-5 " id="recommendationListOrderByCnt" style=" width: 100%;">
     <div class="container  px-4 px-lg-5 mt-5" >
-        <a>
-            <h5 style="color: black">인기순</h5>
-        </a>
-        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+        <section class="ftco-bread py-6">
+            <div class="container">
+                <div class="slider-text justify-content-center align-items-center">
+                    <div class="col-md-11 ftco-animate">
+                        <p class="breadcrumbs">
+                            <!--                            <span>최신순</span>-->
+                            <span class="mr-2">
+                                <a href="recommendationListOrderByCntAll?page=1">전체보기</a>
+                            </span>
+                        </p>
+                        <h1 class="bread">인기순</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
             <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCnt}">
 
                 <div class="card h-100"
