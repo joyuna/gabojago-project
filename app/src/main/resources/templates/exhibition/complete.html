@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>가보자GO</title>
     <meta name="description" content="초기 메인페이지" />
-    <meta http-equiv="refresh" content="3 url=http://localhost:9999/app/myPage/" />
+    <meta http-equiv="refresh" content="3 url=http://localhost:9999/app/exhibition/exhibitionlist/" />
     <link rel="stylesheet" href="./css/main-base.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/main-modal.css" />
@@ -63,30 +63,16 @@
     </nav>
       <!-- Navigation 사실상의 header 끝 -->
 
-      <!-- Header-->
-<header class="bg-dark py-4">
-    <div class="container px-4 px-lg-5 my-5">
-      <div class="text-center text-white">
-        <h2 class="display-4 fw-bolder">결제</h2>
-        <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
-      </div>
-    </div>
-  </header>
-
 
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center">
-            <h4 class="display-4 fw-bolder">결제가 정상적으로 완료되었습니다!</h4>
+            <h4 class="display-4 fw-bolder">장바구니에 티켓이 추가되었습니다!</h4>
         </div>
     </div>
 
 
   <div class="container w-100">
-    <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
-        <h4 style="text-align: center; padding-bottom: 20px;"><b>총 결제 금액</b></h4>
-        <h2 th:text="${totalPrice}" style="text-align: center; padding-bottom: 30px;"><b>40000 원</b></h2>
-        <h4 style="text-align: center; padding-bottom: 30px;"><b>3초 후 마이페이지로 이동합니다.</b></h2>
-    </div>
+        <h4 style="text-align: center; padding-bottom: 30px;"><b>3초 후 전시회 페이지로 이동합니다.</b></h2>
   </div>
       <!-- Footer-->
     <footer class="py-4 bg-dark">

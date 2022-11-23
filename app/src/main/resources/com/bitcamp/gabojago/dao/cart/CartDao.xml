@@ -75,12 +75,16 @@
     SELECT
       *
     FROM
-      jang_baguni
+      jang_ticket
     WHERE ID = #{value};
     </select>
     
     <insert id="insertOrderingInfo"  useGeneratedKeys="true" parameterType="OrderingInformation">
           INSERT INTO jang_ticket(ID, EXNO, CNT, PURDATE, PAYMENT, CCDATE) VALUES(#{id}, #{exno}, #{cnt}, #{purdate}, #{payment}, #{ccdate});
+    </insert>
+    
+    <insert id="addExhibition" parameterType="baguni">
+          INSERT INTO jang_baguni(ID, EXNO, CNT, ACT) VALUES (#{id}, #{exno}, #{cnt}, #{act});
     </insert>
     
 </mapper>

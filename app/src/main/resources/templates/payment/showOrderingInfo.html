@@ -112,40 +112,35 @@
           <a class="navbar-brand" href="/app">가보자GO</a>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/etc"
-                  >홈
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="../">Search</a></li>
+
+              <li class="nav-item"><a class="nav-link" href="/app/search/searchForm">검색</a></li>
               <li class="nav-item">
-                <a class="nav-link" href="#">코스추천</a>
+                <a class="nav-link" href="/app/recommendation/recommendationList">코스추천</a>
               </li>
-              <li class="nav-item"><a class="nav-link" href="exhibition/exhibitionlist">전시회</a></li>
+              <li class="nav-item"><a class="nav-link" href="/app/exhibition/exhibitionlist">전시회</a></li>
               <li class="nav-item">
-                <a class="nav-link" href="#">고객지원</a>
+                <a class="nav-link" href="/app/support/">고객지원</a>
               </li>
               <li class="nav-item" th:if="${session.loginMember != null}">
                 <a
                   class="nav-link"
-                  href="auth/logout"
-                  th:text="${session.loginMember.name}+'(로그아웃)'"
-                  >홍길동(로그아웃)</a
-                >
+                  href="/app/auth/logout"
+                  th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
               </li>
               <li class="nav-item" th:if="${session.loginMember == null}">
                 <span class="nav-link btn-open-popup">로그인</span>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="auth/register">회원가입</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <img src="./images/mypage.png" width="90%" height="25"
+                <a class="nav-link" href="/app/myPage/">
+                  <img src="/app/images/mypage.png" width="90%" height="25"
                 /></a>
               </li>
+
+              <!--어드민만 보일 수 있음-->
+              <li class="nav-item">
+              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a class="nav-link" href='/app/member/list'>회원 관리</a></span> </li>
             </ul>
           </div>
         </div>
@@ -183,7 +178,7 @@
                 <th scope="row" th:text="${infoListStat.count}">1</th>
                 <td th:text = "${infoList.cnt}">Mark</td>
                 <td th:text = "${infoList.purdate}">Otto</td>
-                <td th:text = "${infoList.payment}">@mdo</td>
+                <td name = "payment" th:text = "${infoList.payment}">@mdo</td>
                 <td th:text = "${infoList.ccdate}">Otto</td>
                 <td th:text = "${infoList.crdate}">@mdo</td>
               </tr>
@@ -193,6 +188,33 @@
           </div>
            </div>
 
+          <script>
+          function dataMapping(){
+            let paymentList = document.getElementsByName('payment');
+  
+            for(let payment of paymentList){
+              switch(payment.innerHTML){
+                case 'depositWithoutBankbook':
+                  payment.innerHTML = '무통장 입금';
+                break;
+
+                case 'kakao':
+                  payment.innerHTML = '카카오 페이';
+                break;
+
+                case 'accountTransfer':
+                  payment.innerHTML = '계좌이체';
+                break;
+
+                case 'mobilePayment':
+                  payment.innerHTML = '휴대폰 소액결제';
+                break;
+              }
+            }
+          }
+  
+          dataMapping();
+        </script>
     
     <!-- Footer-->
     <footer class="py-4 bg-dark">
