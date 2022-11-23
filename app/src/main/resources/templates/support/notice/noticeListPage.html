@@ -157,12 +157,12 @@
                                  data-th-href="@{noticeListPage(page=${pageStart - 1})}"
                                  th:text="'<'">1</a></li>
 
-                    <li><th:block class="page-item"
-                        data-th-each="pageNum : ${#numbers.sequence(pageStart, pageEnd)}">
-                        <a data-th-href="@{noticeListPage(page=${pageNum})}"
-                                 th:text="${pageNum}">1</a>
-
-                    </th:block></li>
+                        <li><th:block class="page-item"
+                                      th:if="${pageTotal > 0}"
+                                      data-th-each="pageNum : ${#numbers.sequence(pageStart, pageEnd)}">
+                                      <a data-th-href="@{noticeListPage(page=${pageNum})}"
+                                      th:text="${pageNum}">1</a>
+                        </th:block></li>
 
                         <li><a th:if="${next}==true"
                                  data-th-href="@{noticeListPage(page=${pageEnd + 1})}"
