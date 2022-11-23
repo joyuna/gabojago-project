@@ -27,74 +27,74 @@ public class MyCommentsController {
         this.memberService = memberService;
     }
 
-    // 코스추천 댓글
-    @GetMapping("myRecommendationCommentsList")
-    public void myRecommendationCommentsList(JangComment jangComment,
-                                             HttpSession session,
-                                             Model model) throws Exception {
+    // 코스추천 댓글 (게시물 목록 + paging)
+    @GetMapping("myRecommendationCommentListPage")
+    public void myRecommendationCommentsListPage(JangComment jangComment,
+                                                 HttpSession session,
+                                                 Model model,
+                                                 @RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "3") Integer size) throws Exception {
+
 
         Member loginMember = (Member) session.getAttribute("loginMember");
+        Member member = memberService.get(loginMember.getId());
 
-        if (loginMember == null) {
+        model.addAttribute("id", member.getId());
+        model.addAttribute("name", member.getName());
+        model.addAttribute("profileFig", member.getProfileFig());
+        model.addAttribute("nickName", member.getNickName());
+        model.addAttribute("mbti", member.getMbti());
+        model.addAttribute("snsAddress", member.getSnsAddress());
 
-            model.addAttribute("myPageFailMessage", "로그인이 필요한 항목입니다. 회원가입 또는 로그인해 주세요.");
+        // 게시물 총개수
+        int total = myCommentsService.myRecommendationCommentCount(loginMember.getId());
+        System.out.println("myRecommendationCommentCount 호출됨");
 
-//            return "myPage/myPageFail";
-
-        } else {
-            Member member = memberService.get(loginMember.getId());
-
-            model.addAttribute("id", member.getId());
-            model.addAttribute("name", member.getName());
-            model.addAttribute("profileFig", member.getProfileFig());
-            model.addAttribute("nickName", member.getNickName());
-            model.addAttribute("mbti", member.getMbti());
-            model.addAttribute("snsAddress", member.getSnsAddress());
-
-        }
+        page -= PAGE_CORRECTION;
 
         jangComment.setWriter((Member) session.getAttribute("loginMember"));
-        model.addAttribute("jangComments", myCommentsService.myRecommendationCommentsList(jangComment.getWriter().getId()));
+        List<JangComment> recommendationCommentList = myCommentsService.myRecommendationCommentListPage((page) * size, size, jangComment.getWriter().getId());
+        PageResponseDto<JangComment> pageResponseDto = new PageResponseDto<>(page, size, total, recommendationCommentList);
+
+        model.addAttribute("myRecommendationComments", pageResponseDto.getDtoList());
+        model.addAttribute("pages", pageResponseDto.getPage());
+        model.addAttribute("pageTotal", pageResponseDto.getTotal());
+        model.addAttribute("pageStart", pageResponseDto.getStart());
+        model.addAttribute("pageEnd", pageResponseDto.getEnd());
+        model.addAttribute("prev", pageResponseDto.isPrev());
+        model.addAttribute("next", pageResponseDto.isNext());
+
     }
 
     // 전시회 댓글 (게시물 목록 + paging)
     @GetMapping("myExhibitionReviewListPage")
     public void myExhibitionReviewListPage(ExhibitionReview exhibitionReview,
-                                         HttpSession session,
-                                         Model model,
-                                         @RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "3") Integer size) throws Exception {
+                                           HttpSession session,
+                                           Model model,
+                                           @RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "3") Integer size) throws Exception {
 
         Member loginMember = (Member) session.getAttribute("loginMember");
+        Member member = memberService.get(loginMember.getId());
 
-        if (loginMember == null) {
+        model.addAttribute("id", member.getId());
+        model.addAttribute("name", member.getName());
+        model.addAttribute("profileFig", member.getProfileFig());
+        model.addAttribute("nickName", member.getNickName());
+        model.addAttribute("mbti", member.getMbti());
+        model.addAttribute("snsAddress", member.getSnsAddress());
 
-            model.addAttribute("myPageFailMessage", "로그인이 필요한 항목입니다. 회원가입 또는 로그인해 주세요.");
-
-//            return "myPage/myPageFail";
-
-        } else {
-            Member member = memberService.get(loginMember.getId());
-
-            model.addAttribute("id", member.getId());
-            model.addAttribute("name", member.getName());
-            model.addAttribute("profileFig", member.getProfileFig());
-            model.addAttribute("nickName", member.getNickName());
-            model.addAttribute("mbti", member.getMbti());
-            model.addAttribute("snsAddress", member.getSnsAddress());
-
-        }
 
         // 게시물 총개수
-        int total = myCommentsService.count();
+        int total = myCommentsService.count(loginMember.getId());
 
         page -= PAGE_CORRECTION;
+
         exhibitionReview.setWriter((Member) session.getAttribute("loginMember"));
-        List<ExhibitionReview> ExhibitionReviewList = myCommentsService.myExhibitionReviewListPage((page) * size, size, exhibitionReview.getWriter().getId());
-        PageResponseDto<ExhibitionReview> pageResponseDto = new PageResponseDto<>(page, size, total, ExhibitionReviewList);
+        List<ExhibitionReview> exhibitionReviewList = myCommentsService.myExhibitionReviewListPage((page) * size, size, exhibitionReview.getWriter().getId());
+        PageResponseDto<ExhibitionReview> pageResponseDto = new PageResponseDto<>(page, size, total, exhibitionReviewList);
 
         model.addAttribute("myExhibitionReviews", pageResponseDto.getDtoList());
         model.addAttribute("pages", pageResponseDto.getPage());
-        model.addAttribute("pageNum", pageResponseDto.getTotal());
+        model.addAttribute("pageTotal", pageResponseDto.getTotal());
         model.addAttribute("pageStart", pageResponseDto.getStart());
         model.addAttribute("pageEnd", pageResponseDto.getEnd());
         model.addAttribute("prev", pageResponseDto.isPrev());

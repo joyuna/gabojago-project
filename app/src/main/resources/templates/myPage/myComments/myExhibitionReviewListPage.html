@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>myExhibitionComments</title>
+    <title>myExhibitionReviewListPage</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link th:href="@{/css/bootstrap.min.css}"
@@ -114,8 +114,8 @@
     <nav id="colorlib-main-menu" role="navigation">
         <ul class="pt-4 pl-0 pr-0">
             <li><a th:href="@{/myPage/}">About Me</a></li>
-            <li><a th:href="@{/myPage/myRecommendation/myRecommendationList}">My Recommendation</a></li>
-            <li class="colorlib-active"><a th:href="@{/myPage/myComments/myRecommendationCommentsList}">My Comments</a></li>
+            <li><a th:href="@{/myPage/myRecommendation/myRecommendationListPage?page=1}">My Recommendation</a></li>
+            <li class="colorlib-active"><a th:href="@{/myPage/myComments/myRecommendationCommentListPage?page=1}">My Comments</a></li>
             <li><a href="#">Shopping Bag</a></li>
             <li><a href="#">My Purchase</a></li>
             <br>
@@ -129,7 +129,7 @@
         <div class="container pt-4">
             <div class="slider-text justify-content-center align-items-center">
                 <div class="col-md-11 ftco-animate">
-                    <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/myPage/myComments/myRecommendationCommentsList}">Recommendation</a></span> <span>Exhibition</span></p>
+                    <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/myPage/myComments/myRecommendationCommentListPage?page=1}">Recommendation</a></span> <span>Exhibition</span></p>
                     <h1 class="bread">My Exhibition Comments</h1>
                 </div>
             </div>
@@ -142,7 +142,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="text text-2">
-                                <div data-th-each="exhibitionReview : ${exhibitionReviews}">
+                                <div data-th-each="exhibitionReview : ${myExhibitionReviews}">
                                     <h5 class="mb-12" >
                                         <span><a href='detail?exno=1' style="color: black;"
                                                  data-th-href="@{../../exhibition/detail(exno=${exhibitionReview.exno})}"
@@ -164,8 +164,7 @@
                 </div><!-- END-->
 
                 <div class="row">
-                    <div class="col-md-12 text-center
-">
+                    <div class="col-md-12 text-left">
                         <div class="block-27">
                             <ul>
                                 <li class="bt-color"><a th:if="${prev}==true"
