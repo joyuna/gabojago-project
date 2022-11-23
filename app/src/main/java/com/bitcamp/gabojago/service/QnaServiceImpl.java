@@ -25,11 +25,6 @@ public class QnaServiceImpl implements QnaService {
     }
 
     @Override
-    public List<QnaBoard> list() throws Exception {
-        return qnaDao.findAll();
-    }
-
-    @Override
     public QnaBoard get(int no) throws Exception {
         return qnaDao.findByNo(no);
     }
@@ -46,5 +41,16 @@ public class QnaServiceImpl implements QnaService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int qnaPostCount() throws Exception {
+        return qnaDao.qnaPostCount();
+    }
+
+    @Transactional
+    @Override
+    public List<QnaBoard> list(int displayPost, int size) throws Exception {
+        return qnaDao.findAll(displayPost, size);
     }
 }
