@@ -1417,8 +1417,8 @@ EXNO</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="422" parent="354" name="EXNO">
-      <AutoIncrement>44</AutoIncrement>
+    <column id="421" parent="353" name="EXNO">
+      <AutoIncrement>43</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1478,8 +1478,8 @@ EXNO</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="434" parent="355" name="EXFNO">
-      <AutoIncrement>13</AutoIncrement>
+    <column id="433" parent="354" name="EXFNO">
+      <AutoIncrement>12</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
