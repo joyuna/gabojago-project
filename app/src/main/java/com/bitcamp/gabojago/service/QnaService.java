@@ -8,12 +8,14 @@ public interface QnaService {
 
     void add(QnaBoard qnaBoard) throws Exception;
 
-    List<QnaBoard> list() throws Exception;
-
     QnaBoard get(int no) throws Exception;
 
     Boolean delete(int no) throws Exception;
 
     boolean update(QnaBoard qnaBoard) throws Exception;
 
+    int qnaPostCount() throws Exception;
+
+
+    List<QnaBoard> list(int displayPost, int size) throws Exception;
 }

@@ -19,12 +19,6 @@ public class EventServiceImpl implements EventService {
     @Autowired
     EventItemDao eventItemDao;
 
-    @Transactional
-    @Override
-    public List<Event> list() throws Exception {
-        return eventDao.findAll();
-    }
-
     @Override
     public void add(Event event) throws Exception {
         System.out.println("EventServiceImple : " + event.toString());
@@ -78,7 +72,7 @@ public class EventServiceImpl implements EventService {
         }
 
         EventAttachedFile eventAttachedFile = eventItem.getEventAttachedFile();
-        eventAttachedFile.setItemNo(newItemNo);
+        eventAttachedFile.setItemNo(eventItem.getItemNo());
         eventItemDao.insertEventFile(eventAttachedFile);
     }
 
@@ -88,5 +82,21 @@ public class EventServiceImpl implements EventService {
         List<EventItem> itemListByEventNo = eventItemDao.getItemListByEventNo(no);
         System.out.println("itemListByEventNo : " + itemListByEventNo.toString());
         return itemListByEventNo;
+    }
+
+    @Override
+    public void addViewCount(int no) throws Exception {
+        eventDao.addViewCount(no);
+    }
+
+    @Override
+    public int eventPostCount() throws Exception {
+        return eventDao.eventPostCount();
+    }
+
+    @Transactional
+    @Override
+    public List<Event> list(int displayPost, int size) throws Exception {
+        return eventDao.findAll(displayPost, size);
     }
 }
