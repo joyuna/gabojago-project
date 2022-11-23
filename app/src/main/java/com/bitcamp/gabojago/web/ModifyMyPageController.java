@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.*;
@@ -102,30 +101,6 @@ public class ModifyMyPageController {
         return result;
     }
 
-
-//   @GetMapping("memberDeleteForm")
-//    public Map memberDeleteForm(HttpSession session) throws Exception {
-//        Member loginMember = (Member) session.getAttribute("loginMember");
-//        Member member = modifyMyPageService.get(loginMember.getId());
-//
-//        Map map = new HashMap();
-//        map.put("member", member);
-//        return map;
-//    }
-//
-//    // 회원 탈퇴를 위한 비밀번호 확인
-//    @ResponseBody
-//    @PostMapping("passwordCheck")
-//    public int passwordCheck(Member member) throws Exception {
-//        int result = modifyMyPageService.passwordCheck(member);
-//        return result;
-//    }
-//
-//    @PostMapping("memberDelete")
-//    public String memberDelete(Member member) throws Exception {
-//        modifyMyPageService.memberDelete(member);
-//        return "redirect:../";
-//    }
     @GetMapping("resignmemberform")
     public ModelAndView resignMemberForm(HttpSession session) throws Exception {
         Member member = (Member)session.getAttribute("loginMember");

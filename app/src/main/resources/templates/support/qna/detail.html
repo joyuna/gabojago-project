@@ -83,7 +83,7 @@
                         </h2>
 
                         <div>
-                            <h5 class="mb-3 mt-5 font-weight-bold"
+                            <h5 class="mb-3 mt-5 font-weight-bold" style="white-space: pre;"
                                 data-th-text='${qnaBoard.questionContent}'>문의내용
                             </h5>
                         </div>
@@ -113,15 +113,17 @@
                 </div> <!-- .col-md-8 -->
 
             </div><!-- END COL -->
-            <!-- QnA Answer 보기(유민) -->
+
+            <!-- QnA Answer 보기-->
 
             <hr class="my-4">
             <h3 style="font-weight: bold">Answer:</h3>
 
-            <h5>
+            <h6>
                 <div class="answer" input name='answerContent'
+                     style="white-space: pre; color: black"
                      data-th-text='${qnaBoard.answerContent}' readonly></div>
-            </h5>
+            </h6>
             <span type="text" name="answerDate"
                   data-th-text="${qnaBoard.answerDate == null} ? '' : '답변일 | ' + ${qnaBoard.answerDate}">답변일</span>
             <input type="hidden" name="answerDate"
@@ -131,9 +133,10 @@
 
             <hr class="my-4">
 
-            <!-- QnA Comments 작성 양식(유민) -->
-            <div class="qnaAnswerCard my-4">
-                <h6 class="qnaAnswerCardHeader">Leave a Answer:</h6>
+            <!-- QnA Answer 작성 양식(관리자만 작성란 확인 및 작성 가능) -->
+            <div class="qnaAnswerCard my-4"
+                 th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+                <h6 class="qnaAnswerCardHeader">Leave an Answer:</h6>
                 <div class="qnaAnswerCardBody">
                     <form name="qnaAnswerForm" th:action="@{/support/qna/qnaAnswerUpdate}" method="post"
                           autocomplete="off">
