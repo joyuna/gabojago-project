@@ -17,16 +17,10 @@ public class QnaServiceImpl implements QnaService {
     @Transactional
     @Override
     public void add(QnaBoard qnaBoard) throws  Exception {
-        System.out.println("QnaServiceImpl : " + qnaBoard.toString());
 
         if (qnaDao.insert(qnaBoard) == 0) {
             throw new Exception("게시글 등록 실패!!");
         }
-    }
-
-    @Override
-    public List<QnaBoard> list() throws Exception {
-        return qnaDao.findAll();
     }
 
     @Override
@@ -41,10 +35,20 @@ public class QnaServiceImpl implements QnaService {
 
     @Override
     public boolean update(QnaBoard qnaBoard) throws Exception {
-        System.out.println("QnaServiceImplUpdate : " + qnaBoard.toString());
         if (qnaDao.update(qnaBoard) == 0) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int qnaPostCount() throws Exception {
+        return qnaDao.qnaPostCount();
+    }
+
+    @Transactional
+    @Override
+    public List<QnaBoard> list(int displayPost, int size) throws Exception {
+        return qnaDao.findAll(displayPost, size);
     }
 }

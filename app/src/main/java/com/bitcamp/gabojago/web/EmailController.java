@@ -14,11 +14,6 @@ public class EmailController {
 
     private final EmailService emailService;
     
-    public EmailController(EmailService emailService) {
-		this.emailService = emailService;
-	}
-
-
     @GetMapping("/send-mail")
     public ResponseEntity sendMail() {
         System.out.println("sendMail Controller");

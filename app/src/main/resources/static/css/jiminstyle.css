@@ -7414,13 +7414,14 @@ h1, h2, h3, h4, h5,
   padding-right: 3em;
   width: 22%;
   position: fixed;
+  float: left;
   bottom: 0;
   top: 0;
   left: 0;
   right: 0;
   overflow-y: hidden;
-  z-index: 1001;
-  /*background: #ffffff;*/
+  /*z-index: 1001;*/
+  background: #ffffff;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
@@ -8265,7 +8266,7 @@ h1, h2, h3, h4, h5,
 
 .form-control {
   height: 52px !important;
-  background: #fff;
+  background: #fff !important;
   color: #000000 !important;
   font-size: 18px;
   border-radius: 0px;
@@ -8311,8 +8312,7 @@ textarea.form-control {
   padding-left: 1.8em;
   padding-right: 1.8em;
   padding-bottom: 5em;
-  padding: 1.8em;
-  padding-bottom: 15em ;
+  /*padding: 5em 1.8em;*/
   position: relative; }
   @media (max-width: 991.98px) {
     .ftco-section {

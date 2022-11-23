@@ -37,11 +37,11 @@
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
                 <li><a onclick="location.href='list.html'"
-                       th:onclick="|location.href='@{/support/notice/noticeList}'|">Notice</a></li>
+                       th:onclick="|location.href='@{/support/notice/noticeListPage?page=1}'|">Notice</a></li>
                 <li><a onclick="location.href='list.html'"
-                       th:onclick="|location.href='@{/support/qna/list}'|">QnA</a></li>
+                       th:onclick="|location.href='@{/support/qna/list?page=1}'|">QnA</a></li>
                 <li><a onclick="location.href='list.html'"
-                       th:onclick="|location.href='@{/support/event/list}'|">Event</a></li>
+                       th:onclick="|location.href='@{/support/event/list?page=1}'|">Event</a></li>
             </ul>
         </nav>
     </aside> <!-- END COLORLIB-ASIDE -->
@@ -52,7 +52,7 @@
             <div class="container">
                 <div class="slider-text justify-content-center align-items-center">
                     <div class="col-md-11 ftco-animate">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Support</a></span>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="/app/support/">Support</a></span>
                             <span>QnA</span></p>
                         <h1 class="bread">QnA 문의 내용</h1>
                     </div>
@@ -83,7 +83,7 @@
                         </h2>
 
                         <div>
-                            <h5 class="mb-3 mt-5 font-weight-bold"
+                            <h5 class="mb-3 mt-5 font-weight-bold" style="white-space: pre;"
                                 data-th-text='${qnaBoard.questionContent}'>문의내용
                             </h5>
                         </div>
@@ -105,7 +105,7 @@
                             <span class="col">
                                     <button class="btn btn-secondary py-3 px-5"
                                             onclick="location.href='list.html'"
-                                            th:onclick="|location.href='@{/support/qna/list}'|"
+                                            th:onclick="|location.href='@{/support/qna/list?page=1}'|"
                                             type="button">이전</button>
                                 </span>
                         </div>
@@ -113,15 +113,17 @@
                 </div> <!-- .col-md-8 -->
 
             </div><!-- END COL -->
-            <!-- QnA Answer 보기(유민) -->
+
+            <!-- QnA Answer 보기-->
 
             <hr class="my-4">
             <h3 style="font-weight: bold">Answer:</h3>
 
-            <h5>
+            <h6>
                 <div class="answer" input name='answerContent'
+                     style="white-space: pre; color: black"
                      data-th-text='${qnaBoard.answerContent}' readonly></div>
-            </h5>
+            </h6>
             <span type="text" name="answerDate"
                   data-th-text="${qnaBoard.answerDate == null} ? '' : '답변일 | ' + ${qnaBoard.answerDate}">답변일</span>
             <input type="hidden" name="answerDate"
@@ -131,9 +133,10 @@
 
             <hr class="my-4">
 
-            <!-- QnA Comments 작성 양식(유민) -->
-            <div class="qnaAnswerCard my-4">
-                <h6 class="qnaAnswerCardHeader">Leave a Answer:</h6>
+            <!-- QnA Answer 작성 양식(관리자만 작성란 확인 및 작성 가능) -->
+            <div class="qnaAnswerCard my-4"
+                 th:if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+                <h6 class="qnaAnswerCardHeader">Leave an Answer:</h6>
                 <div class="qnaAnswerCardBody">
                     <form name="qnaAnswerForm" th:action="@{/support/qna/qnaAnswerUpdate}" method="post"
                           autocomplete="off">
@@ -181,7 +184,10 @@
                 stroke="#F96D00"/>
     </svg>
 </div>
-
+<script
+        src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/jquery-migrate-3.0.1.min.js"></script>
 <script src="../../js/popper.min.js"></script>
@@ -201,14 +207,13 @@
 <script src="../../js/main.js"></script>
 
 
-
 <script th:inline="javascript">
     /*<![CDATA[*/
     let isPass = [[${isPass}]];
     /*]]*/
-    document.addEventListener("DOMContentLoaded", function(){
-        if(!isPass) {
-            window.location = '/app/support/qna/list';
+    document.addEventListener("DOMContentLoaded", function () {
+        if (!isPass) {
+            window.location = '/app/support/qna/list?page=1';
         }
     });
 </script>
