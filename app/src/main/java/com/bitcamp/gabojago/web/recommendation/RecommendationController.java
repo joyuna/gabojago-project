@@ -1,4 +1,4 @@
-package com.bitcamp.gabojago.web;
+package com.bitcamp.gabojago.web.recommendation;
 
 import com.bitcamp.gabojago.service.JangCommentService;
 import com.bitcamp.gabojago.vo.*;

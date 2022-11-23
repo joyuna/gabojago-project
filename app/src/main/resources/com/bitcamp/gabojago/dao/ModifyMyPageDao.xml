@@ -34,7 +34,8 @@
         PWD=sha2(#{password},256),
         EMAIL=#{email},
         PNUM=#{phoneNo},
-        GENDER=#{gender}
+        GENDER=#{gender},
+        BIRTH=#{birthDay}
         where
         ID=#{id}
     </update>
