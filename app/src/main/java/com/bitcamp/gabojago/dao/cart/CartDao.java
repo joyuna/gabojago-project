@@ -13,7 +13,9 @@ public interface CartDao {
 	
   List<Map<String, String>> getCheckedCartList( @Param("id") String id, @Param("array") String [] exno);
   
-  List<OrderingInformation> getOrderingInformation(@Param("array") String [] exno);
+  List<OrderingInformation> getOrderingInfo(@Param("array") String [] exno);
   
-  void insertOrderingInformation(OrderingInformation info);
+  void insertOrderingInfo(OrderingInformation info);
+  
+  List<OrderingInformation> getOrderingInfoVo(String id);
 }

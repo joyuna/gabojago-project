@@ -28,15 +28,20 @@ public class PaymentService {
   }
   
   @Transactional
-  public void insertOrderingInformation (String paymentType, Member member, String exno) {
-    List<OrderingInformation> infoList = cartDao.getOrderingInformation(exno.split(","));
+  public void insertOrderingInfo (String paymentType, Member member, String exno) {
+    List<OrderingInformation> infoList = cartDao.getOrderingInfo(exno.split(","));
     
     for(OrderingInformation info : infoList) {      
       info.setId(member.getId());
       info.setPayment(paymentType);
-      info.setPurDate(new SimpleDateFormat ("yyyy-MM-dd").format(new Date()));
+      info.setPurdate(new SimpleDateFormat ("yyyy-MM-dd").format(new Date()));
     
-      cartDao.insertOrderingInformation(info);
+      cartDao.insertOrderingInfo(info);
     }
+  }
+  
+  @Transactional
+  public List<OrderingInformation> getOrderingInfo(Member member) {
+    return cartDao.getOrderingInfoVo(member.getId());
   }
 }

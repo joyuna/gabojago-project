@@ -55,7 +55,7 @@
         </trim>
     </select>
     
-    <select id="getOrderingInformation" resultType="OrderingInformation" parameterType="String">
+    <select id="getOrderingInfo" resultType="OrderingInformation" parameterType="String">
     SELECT
       *
     FROM
@@ -71,8 +71,16 @@
         </trim>
     </select>
     
-    <insert id="insertOrderingInformation" parameterType="OrderingInformation">
-          INSERT INTO jang_ticket(ID, EXNO, CNT, PURDATE, PAYMENT, CCDATE) VALUES(#{id}, #{exno}, #{cnt}, #{purDate}, #{payment}, #{ccDate});
+  <select id="getOrderingInfoVo" resultType="OrderingInformation" parameterType="String">
+    SELECT
+      *
+    FROM
+      jang_baguni
+    WHERE ID = #{value};
+    </select>
+    
+    <insert id="insertOrderingInfo"  useGeneratedKeys="true" parameterType="OrderingInformation">
+          INSERT INTO jang_ticket(ID, EXNO, CNT, PURDATE, PAYMENT, CCDATE) VALUES(#{id}, #{exno}, #{cnt}, #{purdate}, #{payment}, #{ccdate});
     </insert>
     
 </mapper>

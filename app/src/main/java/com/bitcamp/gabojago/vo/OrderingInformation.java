@@ -1,7 +1,5 @@
 package com.bitcamp.gabojago.vo;
 
-import java.util.Date;
-
 public class OrderingInformation {
   
   int extkno;
@@ -12,14 +10,24 @@ public class OrderingInformation {
   
   int cnt;
   
-  String purDate;
+  String purdate;
   
   String payment;
   
-  Date ccDate;
+  String ccdate;
+  
+  String crdate;
   
   public int getExtkno() {
     return extkno;
+  }
+
+  public String getCrDate() {
+    return crdate;
+  }
+
+  public void setCrDate(String crDate) {
+    this.crdate = crDate;
   }
 
   public void setExtkno(int extkno) {
@@ -50,12 +58,12 @@ public class OrderingInformation {
     this.cnt = cnt;
   }
 
-  public String getPurDate() {
-    return purDate;
+  public String getPurdate() {
+    return purdate;
   }
 
-  public void setPurDate(String purDate) {
-    this.purDate = purDate;
+  public void setPurdate(String purDate) {
+    this.purdate = purDate;
   }
 
   public String getPayment() {
@@ -66,11 +74,11 @@ public class OrderingInformation {
     this.payment = payment;
   }
 
-  public Date getCcDate() {
-    return ccDate;
+  public String getCcdate() {
+    return ccdate;
   }
 
-  public void setCcDate(Date ccDate) {
-    this.ccDate = ccDate;
+  public void setCcdate(String ccDate) {
+    this.ccdate = ccDate;
   }
 }
