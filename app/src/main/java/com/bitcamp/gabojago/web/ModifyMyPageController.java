@@ -96,9 +96,11 @@ public class ModifyMyPageController {
         Member saveMember = memberService.get(loginMember.getId());
         saveMember.setPassword(member.getPassword().trim());
         saveMember.setPhoneNo(member.getPhoneNo());
+
         try {
             saveMember.setBirthDay(Date.valueOf(birthDay2));
         } catch (Exception e) {}
+
         saveMember.setGender(member.getGender());
         modifyMyPageService.myAccountUpdate(member);
 
