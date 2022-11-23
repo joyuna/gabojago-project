@@ -30,10 +30,14 @@ public class PageMakerDTO {
         this.end = (int)(Math.ceil((page+1)/3.0))*3;
         this.start = this.end - 2;
 
+        if(total == 0) {
+            lastPage =1;
+        }
 
         if(lastPage < this.end) {
             this.end = lastPage;
         }
+
 
         this.prev = start > 1;
         this.next = lastPage > this.end;
