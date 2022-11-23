@@ -121,11 +121,14 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="/app/myPage/">
-                        <img src="./images/mypage.png" width="90%" height="25"/></a>
+                        <img src="/app/images/mypage.png" width="90%" height="25"
+                        /></a>
                 </li>
+
                 <!--어드민만 보일 수 있음-->
-                <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
-              <a href='/app/member/list'>회원 관리</a></span>
+                <li class="nav-item">
+              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a class="nav-link" href='/app/member/list'>회원 관리</a></span> </li>
 
             </ul>
         </div>
@@ -237,7 +240,8 @@
                 <!--최신순 List 시작-->
 
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
-            <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByRecentForFriend}">
+            <div style="padding: 10px"
+                 data-th-each="recommendation : ${recommendationsOrderByRecentForFriend}">
 
                 <div class="card h-100"
                      style= "background: rgba(0,0,0,0.7); border-radius: 13px;"><!--#FFFFFF50-->
@@ -310,7 +314,8 @@
 
                 <!--댓글순 리스트 시작-->
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
-            <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCommentsForFriend}">
+            <div style="padding: 10px"
+                 data-th-each="recommendation : ${recommendationsOrderByCommentsForFriend}">
 
                 <div class="card h-100"
                      style= "background: rgba(0,0,0,0.7); border-radius: 13px;"><!--#FFFFFF50-->
@@ -381,7 +386,8 @@
             </section>
             <!--인기순List 시작!-->
         <div class="row  gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 pl-5">
-            <div class="col mb-5" data-th-each="recommendation : ${recommendationsOrderByCntForFriend}">
+            <div style="padding: 10px"
+                 data-th-each="recommendation : ${recommendationsOrderByCntForFriend}">
 
                 <div class="card h-100"
                      style= "background: rgba(0,0,0,0.7); border-radius: 13px;"><!--#FFFFFF50-->
