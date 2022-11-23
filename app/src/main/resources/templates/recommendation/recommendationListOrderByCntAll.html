@@ -135,11 +135,14 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="/app/myPage/">
-                        <img src="./images/mypage.png" width="90%" height="25"/></a>
+                        <img src="/app/images/mypage.png" width="90%" height="25"
+                        /></a>
                 </li>
+
                 <!--어드민만 보일 수 있음-->
-                <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
-              <a href='/app/member/list'>회원 관리</a></span>
+                <li class="nav-item">
+              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
+              <a class="nav-link" href='/app/member/list'>회원 관리</a></span> </li>
 
             </ul>
         </div>
