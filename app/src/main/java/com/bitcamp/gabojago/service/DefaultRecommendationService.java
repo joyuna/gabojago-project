@@ -1,12 +1,10 @@
 package com.bitcamp.gabojago.service;
 
 import com.bitcamp.gabojago.dao.MemberDao;
-import com.bitcamp.gabojago.dao.RecommendationDao;
-import com.bitcamp.gabojago.dao.ReportDao;
+import com.bitcamp.gabojago.dao.recommendation.RecommendationDao;
+import com.bitcamp.gabojago.dao.recommendation.ReportDao;
 import com.bitcamp.gabojago.vo.*;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
