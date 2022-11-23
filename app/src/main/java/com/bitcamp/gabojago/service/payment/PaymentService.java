@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.bitcamp.gabojago.dao.cart.CartDao;
+import com.bitcamp.gabojago.vo.Baguni;
 import com.bitcamp.gabojago.vo.Member;
 import com.bitcamp.gabojago.vo.OrderingInformation;
 
@@ -37,6 +38,17 @@ public class PaymentService {
       info.setPurdate(new SimpleDateFormat ("yyyy-MM-dd").format(new Date()));
     
       cartDao.insertOrderingInfo(info);
+    }
+  }
+  
+  @Transactional
+  public boolean addExhibition(Member member, Baguni baguni) {
+    if(member.getId().equals(baguni.getId())) {      
+      cartDao.addExhibition(baguni);
+      return true;
+    }
+    else {
+      return false;
     }
   }
   

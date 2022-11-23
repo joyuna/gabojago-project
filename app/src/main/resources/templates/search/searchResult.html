@@ -165,6 +165,11 @@
 			  </div>
 			</header>
 
+      <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
+        <div class="text-center">
+          <h5 class="display-4 fw-bolder"><b>전시회 검색결과</b></h5>
+          </div>
+
 			<section class="py-5 " style=" width: 100%;">
 			  <!--justify-content-center-->
 			  <div class="container px-4 px-lg-5 mt-5">
@@ -189,7 +194,7 @@
 			              <h5>
 			                <a href='detail?exno=1'
 			                   th:href="@{../app/exhibition/detail(exno=${exhibition['EXNO']})}"
-			                   th:text="${exhibition['EXNAME'] == ''} ? '(제목없음)' : ${exhibition['EXNO']}"
+			                   th:text="${exhibition['EXNAME'] == ''} ? '(제목없음)' : ${exhibition['EXNAME']}"
 			                   style="word-wrap: break-word"
 			                >제목rlfldsdfasdfasdf</a>
 			              </h5>
@@ -212,7 +217,11 @@
 			     </div>
         </div>
 			</section>
-
+    </div>
+      <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
+        <div class="text-center">
+          <h5 class="display-4 fw-bolder"><b>회원 검색결과</b></h5>
+      </div>
       <table class="table table-success table-striped">
         <thead>
           <tr>
@@ -238,6 +247,7 @@
           </tr>
         </tbody>
       </table>
+    </div>
 
     </div>
     <!-- Footer-->
