@@ -61,7 +61,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/app/support/">고객지원</a>
                 </li>
-                <li class="nav-item active" th:if="${session.loginMember != null}">
+                <li class="nav-item" th:if="${session.loginMember != null}">
                     <a
                             class="nav-link"
                             href="/app/auth/logout"
