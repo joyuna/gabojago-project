@@ -89,17 +89,16 @@ public class ModifyMyPageController {
     }
 
     @PostMapping("myAccountUpdate")
-    public String myAccountUpdate(Member member, Date birthDay, HttpSession session) throws Exception {
+    public String myAccountUpdate(Member member, String birthDay2, HttpSession session) throws Exception {
 
         Member loginMember = (Member) session.getAttribute("loginMember");
 
         Member saveMember = memberService.get(loginMember.getId());
         saveMember.setPassword(member.getPassword().trim());
         saveMember.setPhoneNo(member.getPhoneNo());
-        if (birthDay.toString().length() < 9) {
-            birthDay = Date.valueOf("1900-01-01");
-        }
-        saveMember.setBirthDay(Date.valueOf(birthDay.toLocalDate()));
+        try {
+            saveMember.setBirthDay(Date.valueOf(birthDay2));
+        } catch (Exception e) {}
         saveMember.setGender(member.getGender());
         modifyMyPageService.myAccountUpdate(member);
 
