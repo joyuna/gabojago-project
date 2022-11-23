@@ -104,10 +104,16 @@ public class RecommendationController {
       JangSoReview jangSoReview = new JangSoReview();
       // 해당 리뷰글 set
       jangSoReview.setCont(cont[i]);
-      // 장소명 parsing 및 set
-      jangSoReview.setPlname(place[i].split(", ")[0]);
-      // 장소주소 parsing 및 set
-      jangSoReview.setAdrs(place[i].split(", ")[1]);
+
+      // 장소 parsing
+      if (place[i].contains(", ")) {
+        // 장소명 parsing 및 set
+        jangSoReview.setPlname(place[i].split(", ")[0]);
+        // 장소주소 parsing 및 set
+        jangSoReview.setAdrs(place[i].split(", ")[1]);
+      } else {
+        jangSoReview.setPlname(place[i]);
+      }
       // 첨부파일 저장 및 set
       jangSoReview.setAttachedFiles(saveJangSoReviewAttachedFiles(files[i]));
       // JangSoReview List에 처리가 끝난 JangSoReview add
