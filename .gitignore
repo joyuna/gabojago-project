@@ -217,4 +217,4 @@ build
 app/out/.idea/
 .idea/
 out/
-files/
+files/*
