@@ -96,9 +96,9 @@
                 <li><a onclick="location.href='list.html'"
                        th:onclick="|location.href='@{/support/notice/noticeListPage?page=1}'|">Notice</a></li>
                 <li><a onclick="location.href='list.html'"
-                       th:onclick="|location.href='@{/support/qna/list}'|">QnA</a></li>
+                       th:onclick="|location.href='@{/support/qna/list?page=1}'|">QnA</a></li>
                 <li><a onclick="location.href='list.html'"
-                       th:onclick="|location.href='@{/support/event/list}'|">Event</a></li>
+                       th:onclick="|location.href='@{/support/event/list?page=1}'|">Event</a></li>
             </ul>
         </nav>
     </aside> <!-- END COLORLIB-ASIDE -->
@@ -138,7 +138,7 @@
                         </h2>
 
                         <div>
-                            <h5 class="mb-3 mt-5 font-weight-bold"
+                            <h5 class="mb-3 mt-5 font-weight-bold" style="white-space: pre;"
                                 data-th-text="${notice.content}">내용
                             </h5>
                         </div>
