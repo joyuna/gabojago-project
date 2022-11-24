@@ -71,21 +71,61 @@
         </trim>
     </select>
     
-  <select id="getOrderingInfoVo" resultType="OrderingInformation" parameterType="String">
-    SELECT
-      *
-    FROM
-      jang_ticket
-    WHERE ID = #{value};
-    </select>
-    
     <insert id="insertOrderingInfo"  useGeneratedKeys="true" parameterType="OrderingInformation">
           INSERT INTO jang_ticket(ID, EXNO, CNT, PURDATE, PAYMENT, CCDATE) VALUES(#{id}, #{exno}, #{cnt}, #{purdate}, #{payment}, #{ccdate});
     </insert>
     
-    <insert id="addExhibition" parameterType="baguni">
+    <insert id="addBaguni" parameterType="baguni">
           INSERT INTO jang_baguni(ID, EXNO, CNT, ACT) VALUES (#{id}, #{exno}, #{cnt}, #{act});
     </insert>
+    
+    <select id="getTicket" resultType="hashMap" parameterType="String">
+          SELECT
+      ex.EXNAME,
+      ex.PRICE * ti.CNT AS PRICE,
+      ti.PURDATE,
+      ti.PAYMENT,
+      ti.CCDATE,
+      ti.CRDATE
+    FROM
+      jang_exhibition as ex
+      INNER JOIN
+      jang_ticket as ti
+    ON
+      ex.EXNO = ti.EXNO
+    WHERE
+      ti.ID = #{value};
+    </select>
+    
+        <select id="getTicketDetail" resultType="hashMap" parameterType="String">
+          SELECT
+      ex.EXNAME,
+      ex.PRICE * ti.CNT AS PRICE,
+      ti.PURDATE,
+      ti.PAYMENT,
+      ti.CCDATE,
+      ti.CRDATE
+    FROM
+      jang_exhibition as ex
+      INNER JOIN
+      jang_ticket as ti
+    ON
+      ex.EXNO = ti.EXNO
+    WHERE
+      ti.ID = #{id} AND ti.EXNO = #{exno};
+    </select>
+    
+  <delete id="deleteBaguni" parameterType="String">
+    DELETE FROM jang_baguni WHERE (
+    <trim prefixOverrides="OR">
+          <foreach item="exno" collection="array">
+              <trim prefix="OR">
+                  ID = #{id} AND EXNO = #{exno}
+              </trim>
+          </foreach>
+          );
+        </trim>
+  </delete>
     
 </mapper>
 

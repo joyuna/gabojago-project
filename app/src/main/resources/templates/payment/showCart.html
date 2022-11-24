@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="./css/main-modal.css" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
     <script src="./script/jquery-3.6.0.js"></script>
     <script src="./script/script.js"></script>
 
@@ -64,12 +64,6 @@
           </script>
 
           <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-
-
-
-
-
-
 
           <div class="savecheck">
             <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
@@ -184,7 +178,7 @@
         		alert("한개 이상의 티켓을 선택해주세요.");
         	}
         	else{
-            location.replace("http://localhost:9999/app/payment/paymentPage?exno=" + queryString);
+            location.replace("paymentPage?exno=" + queryString);
           }
         }
       </script>
@@ -195,13 +189,11 @@
           <div class="colume align-items-center flex-fill mx-5">
 
       <!-- 전시회 폼 -->
-        <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded" style="position: relative;" th:each="exhibition : ${cartList}">
-                <div class="payment-check" style="margin-right: 100px;">
-                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox" th:value="${exhibition['EXNO']}">
+        <div id="form" class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded" style="position: relative;" th:each="exhibition : ${cartList}">
+                  <input onclick="clickedCheckbox()" class="check-input" type="checkbox" name="paymentBox" th:value="${exhibition['EXNO']}"></input>
                   <label class="check-label" for="flexCheckDefault">
                     결제
                   </label>
-                </div>
 
                 <section id="exhibitionForm">
 
@@ -223,11 +215,15 @@
                   2022-12-12
                 </h5>
 
-                <h5 name="CNT" style="position: absolute; top: 200px; right: 10px" data-th-text="${exhibition['CNT']}" th:value="${exhibition['CNT']}">
-                  2매
+                <h5 name="CNT" style="position: absolute; top: 200px; right: 30px" data-th-text="${exhibition['CNT']}" th:value="${exhibition['CNT']}">
+                  2
                 </h5>
               
-                <h5 name="PRICE" style="position: absolute; top: 230px; right: 30px" data-th-text="${exhibition['PRICE']}" th:value="${exhibition['PRICE']}">
+                <h5 style="position: absolute; top: 200px; right: 10px">
+                  매
+                </h5>
+
+                <h5 id="PRICE" style="position: absolute; top: 230px; right: 30px" data-th-text="${exhibition['PRICE']}" th:value="${exhibition['PRICE']}">
                   10000
                 </h5>
 
@@ -254,7 +250,17 @@
            </div>
            </div>
 
-    
+           <script>
+            function isEmpty(){
+              if(!document.getElementById('PRICE')){
+                location.replace("emptyShowCart");
+              }else{
+              }
+            }
+
+            isEmpty();
+          </script>
+
     <!-- Footer-->
     <footer class="py-4 bg-dark">
       <div class="container">

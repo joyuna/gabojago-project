@@ -170,7 +170,7 @@
           <h5 class="display-4 fw-bolder"><b>전시회 검색결과</b></h5>
           </div>
 
-			<section class="py-5 " style=" width: 100%;">
+			<section id="exhibition" class="py-5 " style=" width: 100%;">
 			  <!--justify-content-center-->
 			  <div class="container px-4 px-lg-5 mt-5">
 			    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
@@ -234,7 +234,7 @@
             <th scope="col">MBTI</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id = "member">
           <tr th:each="result : ${memberResult}">
             <td th:text="${result['ID']}">1</td>
             <td th:text="${result['NNAME']}">2</td>
@@ -247,9 +247,21 @@
           </tr>
         </tbody>
       </table>
+
     </div>
 
     </div>
+
+    <script>
+      if(!document.getElementById('exihibition')){
+        var jbBtn = document.createElement( 'h4' );
+        jbBtn.className = "text-center"
+        var jbBtnText = document.createTextNode( '전시회 검색 결과가 없습니다.' );
+        jbBtn.appendChild( jbBtnText );
+        document.getElementById('exhibition').appendChild( jbBtn );
+      }
+    </script>
+
     <!-- Footer-->
     <footer class="py-4 bg-dark">
       <div class="container">

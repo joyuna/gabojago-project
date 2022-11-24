@@ -150,6 +150,30 @@
   <button onclick="doInsert()" type="button" class="btn btn-outline-success">장바구니</button>
   <!-- <button type="button" class="btn btn-outline-info">바로구매</button> -->
 
+  
+
+
+<div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+  <button onclick="count('minus')" type="button" class="btn btn-outline-dark">-</button>
+  <button id = "ticketCount">1</button>
+  <button onclick="count('plus')" type="button" class="btn btn-outline-dark">+</button>
+</div>
+
+<script>
+  let ticketCount = parseInt(document.getElementById('ticketCount').innerHTML);
+  
+  function count(type){
+    if(type == 'plus'){
+      ticketCount++;
+    }
+    else if(type == 'minus' && ticketCount != 1){
+      ticketCount--;
+    }
+
+    document.getElementById('ticketCount').innerHTML = ticketCount;
+  }
+</script>
+
   <p style="float: right;">
     <button type='submit' class="btn btn-outline-secondary"
             data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
@@ -206,7 +230,7 @@
                size="50"
                style="border: none; width: 50px; text-align: center"   readonly></td>
 
-    <td id = 'id' data-th-text="${exhibitionReview.id}" >홍길동</td>
+    <td id data-th-text="${exhibitionReview.id}" >홍길동</td>
 
     <td data-th-text="${exhibitionReview.cont == ''} ? '(제목없음)' : ${exhibitionReview.cont}"
         class="text-center">
@@ -327,10 +351,9 @@
 <script>
   function doInsert(){
     let exno = document.getElementById('exno').value;
-    let id = document.getElementById('id').innerHTML;
-   let cnt = 2;
+    let cnt = document.getElementById('ticketCount').innerHTML;
 
-    location.replace("http://localhost:9999/app/exhibition/complete?" + "exno=" + exno + "&id=" + id + "&cnt=" + cnt);
+    location.replace("complete?" + "exno=" + exno + "&cnt=" + cnt);
   }
 
   $(document).ready(function () {

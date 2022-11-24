@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.2.0/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-UkVD+zxJKGsZP3s/JuRzapi4dQrDDuEf/kHphzg8P3v8wuQ6m9RLjTkPGeFcglQU" crossorigin="anonymous">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="3 url=../exhibition/exhibitionlist" />
     <title>가보자GO</title>
     <meta name="description" content="초기 메인페이지" />
     <link rel="stylesheet" href="./css/main-base.css" />
@@ -14,8 +12,8 @@
     <link rel="stylesheet" href="./css/main-modal.css" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
     <script src="./script/jquery-3.6.0.js"></script>
     <script src="./script/script.js"></script>
 
@@ -68,12 +66,6 @@
 
           <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 
-
-
-
-
-
-
           <div class="savecheck">
             <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
             <span><a href="#">ID 찾기</a></span><span> / </span><span><a href="#">Password 찾기</a></span>
@@ -112,35 +104,40 @@
           <a class="navbar-brand" href="/app">가보자GO</a>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
-              <li class="nav-item"><a class="nav-link" href="/app/search/searchForm">검색</a></li>
-              <li class="nav-item">
-                <a class="nav-link" href="/app/recommendation/recommendationList">코스추천</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="/etc"
+                  >홈
+                  <span class="sr-only">(current)</span>
+                </a>
               </li>
-              <li class="nav-item"><a class="nav-link" href="/app/exhibition/exhibitionlist">전시회</a></li>
+              <li class="nav-item"><a class="nav-link" href="../">Search</a></li>
               <li class="nav-item">
-                <a class="nav-link" href="/app/support/">고객지원</a>
+                <a class="nav-link" href="#">코스추천</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="exhibition/exhibitionlist">전시회</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">고객지원</a>
               </li>
               <li class="nav-item" th:if="${session.loginMember != null}">
                 <a
                   class="nav-link"
-                  href="/app/auth/logout"
-                  th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
+                  href="auth/logout"
+                  th:text="${session.loginMember.name}+'(로그아웃)'"
+                  >홍길동(로그아웃)</a
+                >
               </li>
               <li class="nav-item" th:if="${session.loginMember == null}">
                 <span class="nav-link btn-open-popup">로그인</span>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="/app/myPage/">
-                  <img src="/app/images/mypage.png" width="90%" height="25"
+                <a class="nav-link" href="auth/register">회원가입</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <img src="./images/mypage.png" width="90%" height="25"
                 /></a>
               </li>
-
-              <!--어드민만 보일 수 있음-->
-              <li class="nav-item">
-              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
-              <a class="nav-link" href='/app/member/list'>회원 관리</a></span> </li>
             </ul>
           </div>
         </div>
@@ -150,83 +147,54 @@
       
         <div class="container px-4 px-lg-5 my-5">
           <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">주문 내역(관리자)</h1>
+            <h1 class="display-4 fw-bolder">장바구니</h1>
           <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
           </div>
         </div>
       </header>
 
+      <script>
+        let queryString = new String();
+
+        function clickedCheckbox(){
+          let resultCount = 0;
+          let str = new String();
+          let checkedBoxList = document.getElementsByName("paymentBox");
+
+          for(let i=0; i< checkedBoxList.length; i++){
+            if(checkedBoxList[i].checked == true){
+              resultCount++;
+              str += checkedBoxList[i].value + ",";
+            }
+          }
+          queryString = str;
+
+          document.getElementById("resultCount").innerHTML = resultCount;
+        }
+        
+        function doPayment(){
+          let resultCount = document.getElementById("resultCount").innerHTML;
+
+        	if(resultCount < 1){
+        		alert("한개 이상의 티켓을 선택해주세요.");
+        	}
+        	else{
+            location.replace("paymentPage?exno=" + queryString);
+          }
+        }
+      </script>
+
       <div class="container mx-auto my-auto">
-
-        <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
-          
-          <div class="text-center my-3"><h2><b> 주문 내역(관리자) </b></h2></div>
-
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">전시회 제목</th>
-                <th scope="col">총 가격</th>
-                <th scope="col">구매일</th>
-                <th scope="col">결제수단</th>
-                <th scope="col">취소일</th>
-                <th scope="col">취소 요청일</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="infoList : ${orderingInfoList}">
-                <th scope="row" th:text="${infoListStat.count}">1</th>
-                <td th:text = "${infoList['EXNAME']}">haha ga</td>
-                <td th:text = "${infoList['PRICE']}">Mark</td>
-                <td th:text = "${infoList['PURDATE']}">Otto</td>
-                <td name = "payment" th:text = "${infoList['PAYMENT']}">@mdo</td>
-                <td th:text = "${infoList['CCDATE']}">Otto</td>
-                <td th:text = "${infoList['CRDATE']}">@mdo</td>
-              </tr>
-            </tbody>
-          </table>
-
+      
+        <div class="container w-100">
+          <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
+              <h4 style="text-align: center; padding-bottom: 20px;"><b>장바구니가 비어있어요! 전시회 페이지에서 마음에 드는 전시회를 담아주세요.</b></h4>
+              <h5 style="text-align: center; padding-bottom: 30px;"><b>3초 후 전시회 페이지로 이동합니다.</b></h5>
           </div>
+        </div>
+          
            </div>
-
-          <script>
-          function dataMapping(){
-            let paymentList = document.getElementsByName('payment');
-  
-            for(let payment of paymentList){
-              switch(payment.innerHTML){
-                case 'depositWithoutBankbook':
-                  payment.innerHTML = '무통장 입금';
-                break;
-
-                case 'kakao':
-                  payment.innerHTML = '카카오 페이';
-                break;
-
-                case 'accountTransfer':
-                  payment.innerHTML = '계좌이체';
-                break;
-
-                case 'mobilePayment':
-                  payment.innerHTML = '휴대폰 소액결제';
-                break;
-              }
-            }
-          }
-  
-          dataMapping();
-
-          function change(exno){
-            var result = confirm("정말 해당 결제를 취소하시겠습니까?");
-
-            if(result){
-                alert(exno);
-            }else{
-                alert("아니오");
-            }
-          }
-        </script>
+           </div>
     
     <!-- Footer-->
     <footer class="py-4 bg-dark">

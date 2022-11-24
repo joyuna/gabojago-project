@@ -1,5 +1,6 @@
 package com.bitcamp.gabojago.web.payment;
 
+import java.util.Objects;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,12 @@ public class PaymentController {
     Member member = (Member) session.getAttribute("loginMember");
     model.addAttribute("cartList", paymentService.getCartList(member));
     
-    return "payment/showCart";
+    if(Objects.isNull(model.getAttribute("cartList"))) {      
+      return "payment/showCart";
+    }
+    else {
+      return "payment/emptyShowCart";
+    }
   }
   
   @GetMapping("paymentPage")
@@ -39,6 +45,7 @@ public class PaymentController {
     Member member = (Member) session.getAttribute("loginMember");
     
     paymentService.insertOrderingInfo(paymentType, member, exno);
+    paymentService.deleteBaguni(member, exno);
     
     model.addAttribute("totalPrice", totalPrice);
     
@@ -56,5 +63,14 @@ public class PaymentController {
     } else {
       return "payment/showOrderingInfo";
     }
+  }
+  
+  @GetMapping("showOrderInfoDetail")
+  public String showOrderInfoDetail(Model model, HttpSession session, String exno) {
+    Member member = (Member) session.getAttribute("loginMember");
+    
+    model.addAttribute("orderingInfo", paymentService.getOrderingInfoDetail(member, exno));
+    
+    return null;
   }
 }
