@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="3 url=../exhibition/exhibitionlist" />
     <title>가보자GO</title>
     <meta name="description" content="초기 메인페이지" />
     <link rel="stylesheet" href="./css/main-base.css" />
@@ -11,8 +12,8 @@
     <link rel="stylesheet" href="./css/main-modal.css" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
     <script src="./script/jquery-3.6.0.js"></script>
     <script src="./script/script.js"></script>
 
@@ -40,11 +41,6 @@
           <br>
           <button class="btn_login" type="submit">Login</button>
 
-
-
-
-
-
           <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
           <script>
@@ -69,12 +65,6 @@
           </script>
 
           <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-
-
-
-
-
-
 
           <div class="savecheck">
             <input id="savecheckbox" type="checkbox" name="saveEmail"><label for="savecheckbox">&nbsp;ID 저장</label>
@@ -109,155 +99,103 @@
     </div>
 
       <!-- Navigation 사실상의 header -->
-      <!-- Navigation 사실상의 header -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
           <a class="navbar-brand" href="/app">가보자GO</a>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
-              <li class="nav-item"><a class="nav-link" href="/app/search/searchForm">검색</a></li>
-              <li class="nav-item">
-                <a class="nav-link" href="/app/recommendation/recommendationList">코스추천</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="/etc"
+                  >홈
+                  <span class="sr-only">(current)</span>
+                </a>
               </li>
-              <li class="nav-item"><a class="nav-link" href="/app/exhibition/exhibitionlist">전시회</a></li>
+              <li class="nav-item"><a class="nav-link" href="../">Search</a></li>
               <li class="nav-item">
-                <a class="nav-link" href="/app/support/">고객지원</a>
+                <a class="nav-link" href="#">코스추천</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="exhibition/exhibitionlist">전시회</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">고객지원</a>
               </li>
               <li class="nav-item" th:if="${session.loginMember != null}">
                 <a
                   class="nav-link"
-                  href="/app/auth/logout"
-                  th:text="${session.loginMember.name}+'(로그아웃)'">홍길동(로그아웃)</a>
+                  href="auth/logout"
+                  th:text="${session.loginMember.name}+'(로그아웃)'"
+                  >홍길동(로그아웃)</a
+                >
               </li>
               <li class="nav-item" th:if="${session.loginMember == null}">
                 <span class="nav-link btn-open-popup">로그인</span>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="/app/myPage/">
-                  <img src="/app/images/mypage.png" width="90%" height="25"
+                <a class="nav-link" href="auth/register">회원가입</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <img src="./images/mypage.png" width="90%" height="25"
                 /></a>
               </li>
-
-              <!--어드민만 보일 수 있음-->
-              <li class="nav-item">
-              <span data-th-if="${session.loginMember} != null and ${session.loginMember.id} == 'admin'">
-              <a class="nav-link" href='/app/member/list'>회원 관리</a></span> </li>
             </ul>
           </div>
         </div>
       </nav>
 
-
-      <!-- Header-->
-			<header class="bg-dark py-4">
-			
-			  <div class="container px-4 px-lg-5 my-5">
-			    <div class="text-center text-white">
-			      <h1 class="display-4 fw-bolder">가보자GO 전시회</h1>
-			    <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
-			    </div>
-			  </div>
-			</header>
-
-      <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
-        <div class="text-center">
-          <h5 class="display-4 fw-bolder"><b>전시회 검색결과</b></h5>
+      <header class="bg-dark py-4">
+      
+        <div class="container px-4 px-lg-5 my-5">
+          <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">장바구니</h1>
+          <!--  <p class="lead fw-normal text-white-50 mb-0">?</p>-->
           </div>
-
-			<section id="exhibition" class="py-5 " style=" width: 100%;">
-			  <!--justify-content-center-->
-			  <div class="container px-4 px-lg-5 mt-5">
-			    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
-			      <div class="col mb-5" data-th-each="exhibition : ${exhibitionResult}">
-			        <div class="card h-100">
-			
-			          <td th:text="${exhibition['EXNO']}">100</td>
-			
-			          <!-- Product image 첨부파일 갤러리화 -->
-			         <!-- class="card-img-top"-->
-			          <img  src="https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009__480.jpg"
-			               alt="..." />
-			
-			          <!-- 전시 제목,날짜 정렬-->
-			          <div class="card-body p-4">
-			            <div class="text-center">
-			
-			
-			              <!-- 전시 name-->
-			
-			              <h5>
-			                <a href='detail?exno=1'
-			                   th:href="@{../exhibition/detail(exno=${exhibition['EXNO']})}"
-			                   th:text="${exhibition['EXNAME'] == ''} ? '(제목없음)' : ${exhibition['EXNAME']}"
-			                   style="word-wrap: break-word"
-			                >제목rlfldsdfasdfasdf</a>
-			              </h5>
-			
-			
-			                <td th:text="${exhibition['STDATE']}">2022-1-1</td>
-			              <td th:text="${exhibition['EDDATE']}">2022-1-1</td>
-			
-			            </div>
-			          </div>
-			
-			          <!-- Product actions-->
-			
-			          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-			            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">보러가기</a></div>
-			          </div>
-			          
-			         </div>
-			       </div>
-			     </div>
         </div>
-			</section>
-    </div>
-      <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
-        <div class="text-center">
-          <h5 class="display-4 fw-bolder"><b>회원 검색결과</b></h5>
-      </div>
-      <table class="table table-success table-striped">
-        <thead>
-          <tr>
-            <th scope="col">아이디</th>
-            <th scope="col">닉네임</th>
-            <th scope="col">프로필 사진</th>
-            <th scope="col">이메일</th>
-            <th scope="col">성별</th>
-            <th scope="col">SNS</th>
-            <th scope="col">MBTI</th>
-          </tr>
-        </thead>
-        <tbody id = "member">
-          <tr th:each="result : ${memberResult}">
-            <td th:text="${result['ID']}">1</td>
-            <td th:text="${result['NNAME']}">2</td>
-            <td th:text="${result['PROFILE']}">3</td>
-            <td th:text="${result['EMAIL']}">4</td>
-            <td th:text="${result['GENDER']}">3</td>
-            <td th:text="${result['SNS']}">4</td>
-            <td th:text="${result['MBTI']}">4</td>
-            <hr>
-          </tr>
-        </tbody>
-      </table>
+      </header>
 
-    </div>
+      <script>
+        let queryString = new String();
 
-    </div>
+        function clickedCheckbox(){
+          let resultCount = 0;
+          let str = new String();
+          let checkedBoxList = document.getElementsByName("paymentBox");
 
-    <script>
-      // if(!document.getElementById('exihibition')){
-      //   var jbBtn = document.createElement( 'h4' );
-      //   jbBtn.className = "text-center"
-      //   var jbBtnText = document.createTextNode( '전시회 검색 결과가 없습니다.' );
-      //   jbBtn.appendChild( jbBtnText );
-      //   document.getElementById('exhibition').appendChild( jbBtn );
-      // }
-    </script>
+          for(let i=0; i< checkedBoxList.length; i++){
+            if(checkedBoxList[i].checked == true){
+              resultCount++;
+              str += checkedBoxList[i].value + ",";
+            }
+          }
+          queryString = str;
 
+          document.getElementById("resultCount").innerHTML = resultCount;
+        }
+        
+        function doPayment(){
+          let resultCount = document.getElementById("resultCount").innerHTML;
+
+        	if(resultCount < 1){
+        		alert("한개 이상의 티켓을 선택해주세요.");
+        	}
+        	else{
+            location.replace("paymentPage?exno=" + queryString);
+          }
+        }
+      </script>
+
+      <div class="container mx-auto my-auto">
+      
+        <div class="container w-100">
+          <div class="shadow-lg w-100 my-5 py-4 px-4 bg-body rounded">
+              <h4 style="text-align: center; padding-bottom: 20px;"><b>장바구니가 비어있어요! 전시회 페이지에서 마음에 드는 전시회를 담아주세요.</b></h4>
+              <h5 style="text-align: center; padding-bottom: 30px;"><b>3초 후 전시회 페이지로 이동합니다.</b></h5>
+          </div>
+        </div>
+          
+           </div>
+           </div>
+    
     <!-- Footer-->
     <footer class="py-4 bg-dark">
       <div class="container">

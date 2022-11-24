@@ -1,5 +1,7 @@
 package com.bitcamp.gabojago.web.payment;
 
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +21,20 @@ public class PaymentController {
   @GetMapping("showCart")
   public String showCart(Model model, HttpSession session) throws Exception {
     Member member = (Member) session.getAttribute("loginMember");
-    model.addAttribute("cartList", paymentService.getCartList(member));
+    List<Map<String, String>> cartList = paymentService.getCartList(member);
     
-    return "payment/showCart";
+    
+    if(cartList.isEmpty()) {      
+      return "payment/emptyShowCart";
+    }
+    else {
+      model.addAttribute("cartList", paymentService.getCartList(member));
+      return "payment/showCart";
+    }
   }
   
   @GetMapping("paymentPage")
-  public String paymentPage (Model model,  HttpSession session, String exno) throws Exception {
+  public String paymentPage (Model model, HttpSession session, String exno) throws Exception {
     Member member = (Member) session.getAttribute("loginMember");
     
     model.addAttribute("cartList", paymentService.getCheckedCartList(member, exno));
@@ -39,6 +48,7 @@ public class PaymentController {
     Member member = (Member) session.getAttribute("loginMember");
     
     paymentService.insertOrderingInfo(paymentType, member, exno);
+    paymentService.deleteBaguni(member, exno);
     
     model.addAttribute("totalPrice", totalPrice);
     
@@ -56,5 +66,14 @@ public class PaymentController {
     } else {
       return "payment/showOrderingInfo";
     }
+  }
+  
+  @GetMapping("showOrderInfoDetail")
+  public String showOrderInfoDetail(Model model, HttpSession session, String exno) {
+    Member member = (Member) session.getAttribute("loginMember");
+    
+    model.addAttribute("orderingInfo", paymentService.getOrderingInfoDetail(member, exno));
+    
+    return null;
   }
 }

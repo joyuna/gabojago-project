@@ -181,15 +181,15 @@ public class ExhibitionController {
 
 
   @GetMapping("complete")
-  public void complete(Model model, HttpSession session, Integer exno, String id, Integer cnt) {
+  public void complete(Model model, HttpSession session, Integer exno, Integer cnt) {
     Member member = (Member) session.getAttribute("loginMember");
     Baguni baguni = new Baguni();
     
     baguni.setCnt(cnt);
     baguni.setExno(exno);
-    baguni.setId(id);
+    baguni.setId(member.getId());
     
-    paymentService.addExhibition(member, baguni);
+    paymentService.addBaguni(baguni);
   }
 
 

@@ -166,7 +166,8 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">구매 수량</th>
+                <th scope="col">전시회 제목</th>
+                <th scope="col">총 가격</th>
                 <th scope="col">구매일</th>
                 <th scope="col">결제수단</th>
                 <th scope="col">취소일</th>
@@ -176,11 +177,12 @@
             <tbody>
               <tr th:each="infoList : ${orderingInfoList}">
                 <th scope="row" th:text="${infoListStat.count}">1</th>
-                <td th:text = "${infoList.cnt}">Mark</td>
-                <td th:text = "${infoList.purdate}">Otto</td>
-                <td name = "payment" th:text = "${infoList.payment}">@mdo</td>
-                <td th:text = "${infoList.ccdate}">Otto</td>
-                <td th:text = "${infoList.crdate}">@mdo</td>
+                <td th:text = "${infoList['EXNAME']}"><a href="showOrderInfoDetail?&">Mark</a></td>
+                <td th:text = "${infoList['PRICE']}">Mark</td>
+                <td th:text = "${infoList['PURDATE']}">Otto</td>
+                <td name = "payment" th:text = "${infoList['PAYMENT']}">@mdo</td>
+                <td th:text = "${infoList['CCDATE']}">Otto</td>
+                <td th:text = "${infoList['CRDATE']}">@mdo</td>
               </tr>
             </tbody>
           </table>
@@ -214,6 +216,7 @@
           }
   
           dataMapping();
+
         </script>
     
     <!-- Footer-->

@@ -42,18 +42,22 @@ public class PaymentService {
   }
   
   @Transactional
-  public boolean addExhibition(Member member, Baguni baguni) {
-    if(member.getId().equals(baguni.getId())) {      
-      cartDao.addExhibition(baguni);
-      return true;
-    }
-    else {
-      return false;
-    }
+  public void addBaguni(Baguni baguni) {
+    cartDao.addBaguni(baguni);
   }
   
   @Transactional
-  public List<OrderingInformation> getOrderingInfo(Member member) {
-    return cartDao.getOrderingInfoVo(member.getId());
+  public List<Map<String, String>> getOrderingInfo(Member member) {
+    return cartDao.getTicket(member.getId());
+  }
+  
+  @Transactional
+  public List<Map<String, String>> getOrderingInfoDetail(Member member, String exno) {
+    return cartDao.getTicketDetail(member.getId(), exno);
+  }
+  
+  @Transactional
+  public void deleteBaguni(Member member, String exno) {
+    cartDao.deleteBaguni(member.getId(), exno.split(","));
   }
 }
