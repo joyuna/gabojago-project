@@ -17,6 +17,7 @@
         <result column="SNS" property="snsAddress"/>
         <result column="MBTI" property="mbti"/>
         <result column="STATUS" property="status"/>
+        <result column="OUTDATE" property="outDate"/>
 
     </resultMap>
 
@@ -95,7 +96,8 @@
 
     <update id="resignMemberStatus" parameterType="String">
         update jang_member set
-        STATUS='탈퇴'
+        STATUS='탈퇴',
+        OUTDATE=now()
         where ID=#{id} and PWD=sha2(#{password},256)
     </update>
 
