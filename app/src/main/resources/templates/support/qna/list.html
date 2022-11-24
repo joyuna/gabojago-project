@@ -153,6 +153,7 @@
 
                                 <li>
                                     <th:block class="page-item"
+                                              th:if="${pageTotal > 0}"
                                               data-th-each="pageNum : ${#numbers.sequence(pageStart, pageEnd)}">
                                         <a data-th-href="@{list(page=${pageNum})}"
                                            th:text="${pageNum}">1</a>

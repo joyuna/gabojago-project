@@ -50,7 +50,7 @@ public class EventController {
 
         model.addAttribute("events", eventPageResponseDto.getDtoList());
         model.addAttribute("pages", eventPageResponseDto.getPage());
-        model.addAttribute("pageNum", eventPageResponseDto.getPage());
+        model.addAttribute("pageTotal", eventPageResponseDto.getTotal());
         model.addAttribute("pageStart", eventPageResponseDto.getStart());
         model.addAttribute("pageEnd", eventPageResponseDto.getEnd());
         model.addAttribute("prev", eventPageResponseDto.isPrev());
