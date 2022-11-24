@@ -101,6 +101,11 @@
 
           <td data-th-text="${exhibition.exno}">100</td>
 
+          <!--  첨부파일 갤러리화 -->
+          <img th:src="@{/board/files/}+
+                ${exhibition.getExhibitionFiles().size()>0? exhibition.exhibitionFiles.get(0).path:''}"
+          onerror="this.src='https://cdn.pixabay.com/photo/2015/04/21/21/12/room-733785_960_720.jpg'"
+          style="height: 155px;"/>
           
           <!-- 전시 제목,날짜 정렬-->
           <div class="card-body p-4">
