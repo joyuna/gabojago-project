@@ -1,6 +1,7 @@
 package com.bitcamp.gabojago.web.payment;
 
-import java.util.Objects;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,18 +21,20 @@ public class PaymentController {
   @GetMapping("showCart")
   public String showCart(Model model, HttpSession session) throws Exception {
     Member member = (Member) session.getAttribute("loginMember");
-    model.addAttribute("cartList", paymentService.getCartList(member));
+    List<Map<String, String>> cartList = paymentService.getCartList(member);
     
-    if(Objects.isNull(model.getAttribute("cartList"))) {      
-      return "payment/showCart";
+    
+    if(cartList.isEmpty()) {      
+      return "payment/emptyShowCart";
     }
     else {
-      return "payment/emptyShowCart";
+      model.addAttribute("cartList", paymentService.getCartList(member));
+      return "payment/showCart";
     }
   }
   
   @GetMapping("paymentPage")
-  public String paymentPage (Model model,  HttpSession session, String exno) throws Exception {
+  public String paymentPage (Model model, HttpSession session, String exno) throws Exception {
     Member member = (Member) session.getAttribute("loginMember");
     
     model.addAttribute("cartList", paymentService.getCheckedCartList(member, exno));

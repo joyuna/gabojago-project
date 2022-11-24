@@ -12,7 +12,7 @@
 	    ex.EXNAME,
 	    ex.STDATE,
 	    ex.EDDATE,
-    	ex.PRICE,
+    	ex.PRICE * ex.EXNO AS PRICE,
     	ex_file.PATH
 	  FROM
 	    jang_baguni AS ba
@@ -34,7 +34,7 @@
       ex.EXNAME,
       ex.STDATE,
       ex.EDDATE,
-      ex.PRICE,
+      ex.PRICE * ex.EXNO AS PRICE,
       ex_file.PATH
     FROM
       jang_baguni AS ba
