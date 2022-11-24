@@ -77,25 +77,29 @@
 		  }
 
 		  function checkBirthDay() {
+
 			  var birthDay = document.getElementById('birthDay').value;
 
-			  if (birthDay.length <= 0 && birthDay.length < 8) {
+			  if (birthDay.length === 0) {
 
 				  swal({
 
-					  title: "생일을 입력해 주세요",
-					  icon: 'info'
+						  title: "생일을 입력해 주세요",
+						  icon: 'info'
 
-				  });
+					  });
 
-				  return;
-			  }
+					  return false;
+				  }
+
+			  return true;
 		  }
 
 		  // 비밀번호 입력 확인
 		  function identifyPassword() {
 			  var password = document.getElementById('password').value;
 			  var confirmPassword = document.getElementById('confirmPassword').value;
+
 			  if(password.length <= 0 || confirmPassword.length <= 0) {
 
 				  swal({
@@ -104,8 +108,9 @@
 					  icon : 'info'
 
 				      });
-				  return;
+				  return false;
 			  }
+
 			  if(password !== confirmPassword) {
 
 				  swal({
@@ -114,8 +119,14 @@
 					  icon : 'warning'
 
 				  });
-				  return;
+				  return false;
 			  }
+			  return true;
+		  }
+
+		  function modifyButtonLogic() {
+			  if (!identifyPassword()) return;
+			  if (!checkBirthDay()) return;
 			  document.querySelector("#myAccountModifyForm").submit();
 		  }
 
@@ -216,7 +227,7 @@
 							  <input name='password' id='password' type='password' class="form-control"
 									 value='password'
 									 data-th-value='${member.password}'
-									 placeholder="비밀번호를 입력해 주세요." th:required
+									 placeholder="비밀번호를 입력해 주세요."
 									 onchange='checkPassword()'>
 						  </div>
 
@@ -225,7 +236,7 @@
 							  <input name='confirmPassword' id='confirmPassword' type='password' class="form-control"
 									 value='confirmPassword'
 									 data-th-value='${member.password}'
-									 placeholder="비밀번호를 다시 입력해 주세요." th:required
+									 placeholder="비밀번호를 다시 입력해 주세요."
 									 onchange='checkPassword()'><span id="confirm"></span>
 						  </div>
 
@@ -256,7 +267,7 @@
 						  <div class="form-group">
 							  <label>생일 (필수)</label>
 							  <input id="birthDay" name='birthDay' type='date' class="form-control"
-									 value='birthDay' required
+									 value='birthDay'
 									 data-th-value='${member.birthDay}'>
 						  </div>
 
@@ -273,7 +284,7 @@
 				            <span><button class="w-25 btn btn-primary btn-lg"
 								          style="background-color: black; border-color: black"
 								          type="button"
-										  onclick="identifyPassword(); checkBirthDay();"
+										  onclick="modifyButtonLogic();"
 					                      >modify</button>
 				            </span>
 
