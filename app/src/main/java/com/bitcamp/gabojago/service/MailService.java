@@ -14,10 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DefaultMailService {
+public class MailService {
 
-  private final JavaMailSender emailSender = null;
-  private final SpringTemplateEngine templateEngine = null;
+  private final JavaMailSender emailSender;
+  private final SpringTemplateEngine templateEngine;
 
   public void sendTemplateMessage(MailDto mailDto) throws MessagingException {
     MimeMessage message = emailSender.createMimeMessage();
