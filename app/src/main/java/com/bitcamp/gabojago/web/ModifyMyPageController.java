@@ -89,17 +89,16 @@ public class ModifyMyPageController {
     }
 
     @PostMapping("myAccountUpdate")
-    public String myAccountUpdate(Member member, String birthDay2, HttpSession session) throws Exception {
+    public String myAccountUpdate(Member member, HttpSession session) throws Exception {
 
         Member loginMember = (Member) session.getAttribute("loginMember");
 
         Member saveMember = memberService.get(loginMember.getId());
         saveMember.setPassword(member.getPassword().trim());
         saveMember.setPhoneNo(member.getPhoneNo());
-        try {
-            saveMember.setBirthDay(Date.valueOf(birthDay2));
-        } catch (Exception e) {}
+        saveMember.setBirthDay(member.getBirthDay());
         saveMember.setGender(member.getGender());
+
         modifyMyPageService.myAccountUpdate(member);
 
         return "redirect:/myPage/";

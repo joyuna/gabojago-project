@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>My Profile</title>
+    <title>ProfileDetail</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet"
@@ -67,7 +68,7 @@
 
 	  function nickNameDuplicate() {
 		  $.ajax({
-			  url : 'http://localhost:9999/app/myPage/modify/nickCheck',
+			  url : '/app/myPage/modify/nickCheck',
 			  type : 'POST',
 			  dataType :'JSON',
 			  data : {'nickName': $('#nickName').val()},
@@ -302,6 +303,7 @@
   <script src="../../../app/js/jquery.timepicker.min.js"></script>
   <script src="../../../app/js/scrollax.min.js"></script>
   <script src="../../../app/js/main.js"></script>
-    
+
+
   </body>
 </html>
