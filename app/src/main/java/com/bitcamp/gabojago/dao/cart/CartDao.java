@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import com.bitcamp.gabojago.vo.Baguni;
 import com.bitcamp.gabojago.vo.OrderingInformation;
 
 @Mapper
@@ -17,5 +18,11 @@ public interface CartDao {
   
   void insertOrderingInfo(OrderingInformation info);
   
-  List<OrderingInformation> getOrderingInfoVo(String id);
+  void addBaguni(Baguni baguni);
+  
+  void deleteBaguni( @Param("id") String id, @Param("array") String [] exno);
+  
+  List<Map<String, String>> getTicket(String id);
+  
+  List<Map<String, String>> getTicketDetail( @Param("id") String id, @Param("exno") String exno);
 }

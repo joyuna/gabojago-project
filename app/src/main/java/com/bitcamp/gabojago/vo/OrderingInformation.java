@@ -18,6 +18,14 @@ public class OrderingInformation {
   
   String crdate;
   
+  public String getCrdate() {
+    return crdate;
+  }
+
+  public void setCrdate(String crdate) {
+    this.crdate = crdate;
+  }
+
   public int getExtkno() {
     return extkno;
   }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.bitcamp.gabojago.dao.cart.CartDao;
+import com.bitcamp.gabojago.vo.Baguni;
 import com.bitcamp.gabojago.vo.Member;
 import com.bitcamp.gabojago.vo.OrderingInformation;
 
@@ -41,7 +42,22 @@ public class PaymentService {
   }
   
   @Transactional
-  public List<OrderingInformation> getOrderingInfo(Member member) {
-    return cartDao.getOrderingInfoVo(member.getId());
+  public void addBaguni(Baguni baguni) {
+    cartDao.addBaguni(baguni);
+  }
+  
+  @Transactional
+  public List<Map<String, String>> getOrderingInfo(Member member) {
+    return cartDao.getTicket(member.getId());
+  }
+  
+  @Transactional
+  public List<Map<String, String>> getOrderingInfoDetail(Member member, String exno) {
+    return cartDao.getTicketDetail(member.getId(), exno);
+  }
+  
+  @Transactional
+  public void deleteBaguni(Member member, String exno) {
+    cartDao.deleteBaguni(member.getId(), exno.split(","));
   }
 }
