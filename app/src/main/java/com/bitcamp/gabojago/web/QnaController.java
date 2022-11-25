@@ -36,7 +36,7 @@ public class QnaController {
 
         model.addAttribute("qnaBoards", qnaBoardPageResponseDto.getDtoList());
         model.addAttribute("pages", qnaBoardPageResponseDto.getPage());
-        model.addAttribute("pageNum", qnaBoardPageResponseDto.getPage());
+        model.addAttribute("pageTotal", qnaBoardPageResponseDto.getTotal());
         model.addAttribute("pageStart", qnaBoardPageResponseDto.getStart());
         model.addAttribute("pageEnd", qnaBoardPageResponseDto.getEnd());
         model.addAttribute("prev", qnaBoardPageResponseDto.isPrev());

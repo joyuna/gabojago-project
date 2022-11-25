@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>myRecommendationComments</title>
+    <title>myRecommendationCommentListPage</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link th:href="@{/css/bootstrap.min.css}"
@@ -164,10 +164,10 @@
                                                         th:text="'<'">1</a></li>
 
                                 <li><th:block class="page-item"
+                                              th:if="${pageTotal > 0}"
                                               data-th-each="pageNum : ${#numbers.sequence(pageStart, pageEnd)}">
                                     <a data-th-href="@{myRecommendationCommentListPage(page=${pageNum})}"
                                        th:text="${pageNum}">1</a>
-
                                 </th:block></li>
 
                                 <li><a th:if="${next}==true"
